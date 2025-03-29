@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffd700">
+    <title>Products - Bazar Dor</title>
+    <link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="lib/bootstrap-icons/bootstrap-icons.min.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pagination.css">
+    <link rel="stylesheet" href="css/time-update.css">
+    <link rel="stylesheet" href="css/category-pills.css">
+    <link rel="stylesheet" href="css/product-cards.css">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+</head>
+<body class="bg-light">
+    <header class="app-header bg-primary">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center py-2">
+                <button class="btn text-white p-0" onclick="history.back()">
+                    <i class="bi bi-arrow-left fs-4"></i>
+                </button>
+                <h5 class="text-white mb-0">Products</h5>
+                <button class="btn text-white p-0" id="search-toggle">
+                    <i class="bi bi-search fs-4"></i>
+                </button>
+            </div>
+            
+            <!-- Search bar (initially hidden) - Mobile Optimized -->
+            <div id="search-bar" class="bg-white rounded-pill d-flex align-items-center px-3 py-2 mb-2 shadow-sm" style="display: none;">
+                <i class="bi bi-search text-primary me-2 fs-5"></i>
+                <input type="text" class="form-control border-0 py-1 bg-transparent" id="products-search" placeholder="Search products...">
+                <button class="btn p-1 touch-action" id="search-close">
+                    <i class="bi bi-x-circle text-muted fs-5"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mt-3 mb-5 pb-5">
+        <!-- Filter Pills - Mobile Optimized -->
+        <div class="filter-pills mb-3 sticky-top bg-light pt-2" style="top: 56px; z-index: 1000;">
+            <div class="d-flex overflow-auto pb-2 hide-scrollbar snap-scroll">
+                <button type="button" class="btn btn-md btn-primary rounded-pill me-2 px-4 py-2 touch-action active" data-filter="all" style="--bs-btn-bg: var(--primary-color); --bs-btn-border-color: var(--primary-color); min-width: 70px;">All</button>
+                <button type="button" class="btn btn-md btn-outline-primary rounded-pill me-2 px-4 py-2 touch-action" data-filter="vegetables" style="--bs-btn-color: var(--primary-color); --bs-btn-border-color: var(--primary-color); --bs-btn-hover-bg: var(--primary-color); min-width: 110px;">Vegetables</button>
+                <button type="button" class="btn btn-md btn-outline-primary rounded-pill me-2 px-4 py-2 touch-action" data-filter="fruits" style="--bs-btn-color: var(--primary-color); --bs-btn-border-color: var(--primary-color); --bs-btn-hover-bg: var(--primary-color); min-width: 80px;">Fruits</button>
+                <button type="button" class="btn btn-md btn-outline-primary rounded-pill me-2 px-4 py-2 touch-action" data-filter="meat" style="--bs-btn-color: var(--primary-color); --bs-btn-border-color: var(--primary-color); --bs-btn-hover-bg: var(--primary-color); min-width: 80px;">Meat</button>
+                <button type="button" class="btn btn-md btn-outline-primary rounded-pill me-2 px-4 py-2 touch-action" data-filter="fish" style="--bs-btn-color: var(--primary-color); --bs-btn-border-color: var(--primary-color); --bs-btn-hover-bg: var(--primary-color); min-width: 80px;">Fish</button>
+                <button type="button" class="btn btn-md btn-outline-primary rounded-pill me-2 px-4 py-2 touch-action" data-filter="spices" style="--bs-btn-color: var(--primary-color); --bs-btn-border-color: var(--primary-color); --bs-btn-hover-bg: var(--primary-color); min-width: 80px;">Spices</button>
+            </div>
+        </div>
+
+        <!-- Products List -->
+        <div id="products-list" class="row g-2 mb-5">
+            <!-- Product Card Template - Mobile Optimized -->
+            <div class="col-12 col-md-6 col-lg-4 mb-3" data-product-type="vegetables">
+                <div class="card product-card border-0 shadow-sm rounded-4 h-100 touch-action" data-product-id="1">
+                    <div class="row g-0 h-100">
+                        <div class="col-4">
+                            <div class="position-relative h-100">
+                                <img src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?q=80&w=400&auto=format&fit=crop" 
+                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Fresh Tomatoes" loading="lazy">
+                                <button class="btn position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-2 favorite-btn">
+                                    <i class="bi bi-heart text-danger fs-5"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <h5 class="card-title mb-0 fs-6 fw-bold text-truncate">Fresh Tomatoes</h5>
+                                    <span class="badge bg-success ms-1 flex-shrink-0"><i class="bi bi-arrow-down-short"></i>৳5</span>
+                                </div>
+                                <p class="card-subtitle text-muted small mb-2 text-truncate">Vegetables</p>
+                                <div class="d-flex justify-content-between align-items-center mt-auto">
+                                    <div>
+                                        <span class="fw-bold text-primary fs-5">৳80</span>
+                                        <span class="small text-muted">/ kg</span>
+                                    </div>
+                                    <span class="small text-muted time-update"><span class="update-icon">🔄</span>Updated 2h ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fruits Card - Mobile Optimized -->
+            <div class="col-12 col-md-6 col-lg-4 mb-3" data-product-type="fruits">
+                <div class="card product-card border-0 shadow-sm rounded-4 h-100 touch-action" data-product-id="2">
+                    <div class="row g-0 h-100">
+                        <div class="col-4">
+                            <div class="position-relative h-100">
+                                <img src="https://images.unsplash.com/photo-1553279768-865429fa0078?q=80&w=400&auto=format&fit=crop" 
+                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Sweet Mango" loading="lazy">
+                                <button class="btn position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-2 favorite-btn">
+                                    <i class="bi bi-heart text-danger fs-5"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <h5 class="card-title mb-0 fs-6 fw-bold text-truncate">Sweet Mango</h5>
+                                    <span class="badge bg-danger ms-1 flex-shrink-0"><i class="bi bi-arrow-up-short"></i>৳10</span>
+                                </div>
+                                <p class="card-subtitle text-muted small mb-2 text-truncate">Fruits</p>
+                                <div class="d-flex justify-content-between align-items-center mt-auto">
+                                    <div>
+                                        <span class="fw-bold text-primary fs-5">৳120</span>
+                                        <span class="small text-muted">/ kg</span>
+                                    </div>
+                                    <span class="small text-muted time-update"><span class="update-icon">🔄</span>Updated 1h ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- More Vegetables Card - Mobile Optimized -->
+            <div class="col-12 col-md-6 col-lg-4 mb-3" data-product-type="vegetables">
+                <div class="card product-card border-0 shadow-sm rounded-4 h-100 touch-action" data-product-id="6">
+                    <div class="row g-0 h-100">
+                        <div class="col-4">
+                            <div class="position-relative h-100">
+                                <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?q=80&w=400&auto=format&fit=crop" 
+                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Fresh Potatoes" loading="lazy">
+                                <button class="btn position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-2 favorite-btn">
+                                    <i class="bi bi-heart text-danger fs-5"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <h5 class="card-title mb-0 fs-6 fw-bold text-truncate">Fresh Potatoes</h5>
+                                    <span class="badge bg-success ms-1 flex-shrink-0"><i class="bi bi-arrow-down-short"></i>৳3</span>
+                                </div>
+                                <p class="card-subtitle text-muted small mb-2 text-truncate">Vegetables</p>
+                                <div class="d-flex justify-content-between align-items-center mt-auto">
+                                    <div>
+                                        <span class="fw-bold text-primary fs-5">৳45</span>
+                                        <span class="small text-muted">/ kg</span>
+                                    </div>
+                                    <span class="small text-muted time-update"><span class="update-icon">🔄</span>Updated 10m ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- More Fruits Card - Mobile Optimized -->
+            <div class="col-12 col-md-6 col-lg-4 mb-3" data-product-type="fruits">
+                <div class="card product-card border-0 shadow-sm rounded-4 h-100 touch-action" data-product-id="7">
+                    <div class="row g-0 h-100">
+                        <div class="col-4">
+                            <div class="position-relative h-100">
+                                <img src="https://images.unsplash.com/photo-1603833665858-e61d17a86224?q=80&w=400&auto=format&fit=crop" 
+                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Ripe Bananas" loading="lazy">
+                                <button class="btn position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-2 favorite-btn">
+                                    <i class="bi bi-heart text-danger fs-5"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <h5 class="card-title mb-0 fs-6 fw-bold text-truncate">Ripe Bananas</h5>
+                                    <span class="badge bg-success ms-1 flex-shrink-0"><i class="bi bi-arrow-down-short"></i>৳5</span>
+                                </div>
+                                <p class="card-subtitle text-muted small mb-2 text-truncate">Fruits</p>
+                                <div class="d-flex justify-content-between align-items-center mt-auto">
+                                    <div>
+                                        <span class="fw-bold text-primary fs-5">৳65</span>
+                                        <span class="small text-muted">/ dozen</span>
+                                    </div>
+                                    <span class="small text-muted time-update"><span class="update-icon">🔄</span>Updated 25m ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- More Meat Card - Mobile Optimized -->
+            <div class="col-12 col-md-6 col-lg-4 mb-3" data-product-type="meat">
+                <div class="card product-card border-0 shadow-sm rounded-4 h-100 touch-action" data-product-id="8">
+                    <div class="row g-0 h-100">
+                        <div class="col-4">
+                            <div class="position-relative h-100">
+                                <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?q=80&w=400&auto=format&fit=crop" 
+                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Beef" loading="lazy">
+                                <button class="btn position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-2 favorite-btn">
+                                    <i class="bi bi-heart text-danger fs-5"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <h5 class="card-title mb-0 fs-6 fw-bold text-truncate">Premium Beef</h5>
+                                    <span class="badge bg-danger ms-1 flex-shrink-0"><i class="bi bi-arrow-up-short"></i>৳25</span>
+                                </div>
+                                <p class="card-subtitle text-muted small mb-2 text-truncate">Meat</p>
+                                <div class="d-flex justify-content-between align-items-center mt-auto">
+                                    <div>
+                                        <span class="fw-bold text-primary fs-5">৳850</span>
+                                        <span class="small text-muted">/ kg</span>
+                                    </div>
+                                    <span class="small text-muted time-update"><span class="update-icon">🔄</span>Updated 5m ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- More Fish Card - Mobile Optimized -->
+            <div class="col-12 col-md-6 col-lg-4 mb-3" data-product-type="fish">
+                <div class="card product-card border-0 shadow-sm rounded-4 h-100 touch-action" data-product-id="9">
+                    <div class="row g-0 h-100">
+                        <div class="col-4">
+                            <div class="position-relative h-100">
+                                <img src="https://images.unsplash.com/photo-1534948216015-843149f72be3?q=80&w=400&auto=format&fit=crop" 
+                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Hilsa Fish" loading="lazy">
+                                <button class="btn position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-2 favorite-btn">
+                                    <i class="bi bi-heart text-danger fs-5"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <h5 class="card-title mb-0 fs-6 fw-bold text-truncate">Fresh Hilsa</h5>
+                                    <span class="badge bg-danger ms-1 flex-shrink-0"><i class="bi bi-arrow-up-short"></i>৳30</span>
+                                </div>
+                                <p class="card-subtitle text-muted small mb-2 text-truncate">Fish</p>
+                                <div class="d-flex justify-content-between align-items-center mt-auto">
+                                    <div>
+                                        <span class="fw-bold text-primary fs-5">৳1200</span>
+                                        <span class="small text-muted">/ kg</span>
+                                    </div>
+                                    <span class="small text-muted time-update"><span class="update-icon">🔄</span>Updated 20m ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- More Spices Card -->
+            <div class="col-12 col-md-6 col-lg-4 mb-3" data-product-type="spices">
+                <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="10">
+                    <div class="row g-0 h-100">
+                        <div class="col-4">
+                            <div class="position-relative h-100">
+                                <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=80&w=400&auto=format&fit=crop" 
+                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Black Pepper">
+                                <button class="btn btn-sm position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-1 favorite-btn">
+                                    <i class="bi bi-heart text-danger"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <h5 class="card-title mb-0 fs-6 text-truncate">Black Pepper</h5>
+                                    <span class="badge bg-success small ms-1 flex-shrink-0"><i class="bi bi-arrow-down-short"></i>৳12</span>
+                                </div>
+                                <p class="card-subtitle text-muted small mb-1 text-truncate">Spices</p>
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <div>
+                                        <span class="fw-bold text-primary">৳250</span>
+                                        <span class="small text-muted">/ kg</span>
+                                    </div>
+                                    <span class="small text-muted time-update"><span class="update-icon">🔄</span>Updated 40m ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vegetables Card -->
+            <div class="col-12 col-md-6 col-lg-4 mb-3" data-product-type="vegetables">
+                <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="11">
+                    <div class="row g-0 h-100">
+                        <div class="col-4">
+                            <div class="position-relative h-100">
+                                <img src="https://images.unsplash.com/photo-1447175008436-054170c2e979?q=80&w=400&auto=format&fit=crop" 
+                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Fresh Carrots">
+                                <button class="btn btn-sm position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-1 favorite-btn">
+                                    <i class="bi bi-heart text-danger"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <h5 class="card-title mb-0 fs-6 text-truncate">Fresh Carrots</h5>
+                                    <span class="badge bg-success small ms-1 flex-shrink-0"><i class="bi bi-arrow-down-short"></i>৳8</span>
+                                </div>
+                                <p class="card-subtitle text-muted small mb-1 text-truncate">Vegetables</p>
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <div>
+                                        <span class="fw-bold text-primary">৳55</span>
+                                        <span class="small text-muted">/ kg</span>
+                                    </div>
+                                    <span class="small text-muted time-update"><span class="update-icon">🔄</span>Updated 15m ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fish Card -->
+            <div class="col-12 col-md-6 col-lg-4 mb-3" data-product-type="fish">
+                <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="12">
+                    <div class="row g-0 h-100">
+                        <div class="col-4">
+                            <div class="position-relative h-100">
+                                <img src="https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?q=80&w=400&auto=format&fit=crop" 
+                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Fresh Salmon">
+                                <button class="btn btn-sm position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-1 favorite-btn">
+                                    <i class="bi bi-heart text-danger"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <h5 class="card-title mb-0 fs-6 text-truncate">Fresh Salmon</h5>
+                                    <span class="badge bg-danger small ms-1 flex-shrink-0"><i class="bi bi-arrow-up-short"></i>৳20</span>
+                                </div>
+                                <p class="card-subtitle text-muted small mb-1 text-truncate">Fish</p>
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <div>
+                                        <span class="fw-bold text-primary">৳950</span>
+                                        <span class="small text-muted">/ kg</span>
+                                    </div>
+                                    <span class="small text-muted time-update"><span class="update-icon">🔄</span>Updated 30m ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Meat Card -->
+            <div class="col-12 col-md-6 col-lg-4 mb-3" data-product-type="meat">
+                <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="13">
+                    <div class="row g-0 h-100">
+                        <div class="col-4">
+                            <div class="position-relative h-100">
+                                <img src="https://images.unsplash.com/photo-1560781290-7dc94c0f8f4f?q=80&w=400&auto=format&fit=crop" 
+                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Chicken Breast">
+                                <button class="btn btn-sm position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-1 favorite-btn">
+                                    <i class="bi bi-heart text-danger"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <h5 class="card-title mb-0 fs-6 text-truncate">Chicken Breast</h5>
+                                    <span class="badge bg-success small ms-1 flex-shrink-0"><i class="bi bi-arrow-down-short"></i>৳15</span>
+                                </div>
+                                <p class="card-subtitle text-muted small mb-1 text-truncate">Meat</p>
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <div>
+                                        <span class="fw-bold text-primary">৳380</span>
+                                        <span class="small text-muted">/ kg</span>
+                                    </div>
+                                    <span class="small text-muted time-update"><span class="update-icon">🔄</span>Updated 45m ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- More Fruits Card -->
+            <div class="col-12 col-md-6 col-lg-4 mb-3" data-product-type="fruits">
+                <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="15">
+                    <div class="row g-0 h-100">
+                        <div class="col-4">
+                            <div class="position-relative h-100">
+                                <img src="https://images.unsplash.com/photo-1464965911861-746a04b4bca6?q=80&w=400&auto=format&fit=crop" 
+                                    class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Fresh Strawberries">
+                                <button class="btn btn-sm position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-1 favorite-btn">
+                                    <i class="bi bi-heart text-danger"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <h5 class="card-title mb-0 fs-6 text-truncate">Fresh Strawberries</h5>
+                                    <span class="badge bg-danger small ms-1 flex-shrink-0"><i class="bi bi-arrow-up-short"></i>৳10</span>
+                                </div>
+                                <p class="card-subtitle text-muted small mb-1 text-truncate">Fruits</p>
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <div>
+                                        <span class="fw-bold text-primary">৳220</span>
+                                        <span class="small text-muted">/ kg</span>
+                                    </div>
+                                    <span class="small text-muted time-update"><span class="update-icon">🔄</span>Updated 15m ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fish Card -->
+            <div class="col-12 col-md-6 col-lg-4 mb-3" data-product-type="fish">
+                <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="14">
+                    <div class="row g-0 h-100">
+                        <div class="col-4">
+                            <div class="position-relative h-100">
+                                <img src="https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?q=80&w=400&auto=format&fit=crop" 
+                                    class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Fresh Fish">
+                                <button class="btn btn-sm position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-1 favorite-btn">
+                                    <i class="bi bi-heart text-danger"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <h5 class="card-title mb-0 fs-6 text-truncate">Fresh Tuna</h5>
+                                    <span class="badge bg-danger small ms-1 flex-shrink-0"><i class="bi bi-arrow-up-short"></i>৳15</span>
+                                </div>
+                                <p class="card-subtitle text-muted small mb-1 text-truncate">Fish</p>
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <div>
+                                        <span class="fw-bold text-primary">৳850</span>
+                                        <span class="small text-muted">/ kg</span>
+                                    </div>
+                                    <span class="small text-muted time-update"><span class="update-icon">🔄</span>Updated 35m ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination - Mobile Optimized -->
+            <nav aria-label="Product navigation" class="my-4">
+                <ul class="pagination pagination-lg justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link rounded-circle mx-1 shadow-sm d-flex align-items-center justify-content-center" href="#" aria-label="Previous" style="width: 45px; height: 45px;">
+                            <i class="bi bi-chevron-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link rounded-circle mx-1 shadow-sm d-flex align-items-center justify-content-center" href="#" style="width: 45px; height: 45px;">1</a></li>
+                    <li class="page-item"><a class="page-link rounded-circle mx-1 shadow-sm d-flex align-items-center justify-content-center" href="#" style="width: 45px; height: 45px;">2</a></li>
+                    <li class="page-item"><a class="page-link rounded-circle mx-1 shadow-sm d-flex align-items-center justify-content-center" href="#" style="width: 45px; height: 45px;">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link rounded-circle mx-1 shadow-sm d-flex align-items-center justify-content-center" href="#" aria-label="Next" style="width: 45px; height: 45px;">
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        
+    </div>
+
+    <nav class="navbar fixed-bottom navbar-dark">
+        <div class="container-fluid justify-content-center p-0">
+            <ul class="navbar-nav flex-row bottom-nav">
+                <li class="nav-item mx-0">
+                    <a class="nav-link d-flex flex-column align-items-center py-2" href="index.html">
+                        <i class="bi bi-house fs-4 mb-1"></i>
+                        <div class="nav-label small fw-medium">Home</div>
+                    </a>
+                </li>
+                <li class="nav-item mx-0">
+                    <a class="nav-link d-flex flex-column align-items-center py-2" href="markets.html">
+                        <i class="bi bi-shop fs-4 mb-1"></i>
+                        <div class="nav-label small fw-medium">Markets</div>
+                    </a>
+                </li>
+                <li class="nav-item mx-0">
+                    <a class="nav-link d-flex flex-column align-items-center py-2" href="favorites.html">
+                        <i class="bi bi-heart fs-4 mb-1"></i>
+                        <div class="nav-label small fw-medium">Favorites</div>
+                    </a>
+                </li>
+                <li class="nav-item mx-0">
+                    <a class="nav-link d-flex flex-column align-items-center py-2" href="profile.html">
+                        <i class="bi bi-person fs-4 mb-1"></i>
+                        <div class="nav-label small fw-medium">Profile</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Mobile Optimization Styles -->
+    <style>
+        /* Hide scrollbars but keep functionality */
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        
+        /* Snap scrolling for filter pills */
+        .snap-scroll {
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .snap-scroll .btn {
+            scroll-snap-align: center;
+        }
+        
+        /* Touch action improvements */
+        .touch-action {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+        
+        /* Card highlight effect on tap */
+        .card-highlight {
+            transform: scale(0.98);
+            transition: transform 0.15s ease-in-out;
+            box-shadow: 0 0 0 3px var(--primary-color-light) !important;
+        }
+        
+        /* Improve object fit for images */
+        .object-fit-cover {
+            object-fit: cover;
+        }
+        
+        /* Improve bottom nav for mobile */
+        .bottom-nav {
+            padding: 0.5rem;
+        }
+        
+        .bottom-nav .nav-item {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .bottom-nav .nav-link {
+            padding: 0.5rem 0;
+            border-radius: 0.5rem;
+        }
+        
+        .bottom-nav .nav-link.active {
+            background-color: var(--primary-color-light);
+            color: var(--primary-color);
+        }
+        
+        /* Improve favorite button tap area */
+        .favorite-btn {
+            transition: transform 0.15s ease;
+        }
+        
+        .favorite-btn:active {
+            transform: scale(0.9);
+        }
+    </style>
+    
+    <script src="js/app.js"></script>
+    <script>
+        // DOM Elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchToggle = document.getElementById('search-toggle');
+            const searchBar = document.getElementById('search-bar');
+            const searchClose = document.getElementById('search-close');
+            const productsSearch = document.getElementById('products-search');
+            const filterButtons = document.querySelectorAll('[data-filter]');
+            const productsList = document.getElementById('products-list');
+            const favoriteButtons = document.querySelectorAll('.favorite-btn');
+
+            // Toggle search bar visibility
+            searchToggle.addEventListener('click', () => {
+                searchBar.style.display = 'flex';
+                productsSearch.focus();
+            });
+
+            searchClose.addEventListener('click', () => {
+                searchBar.style.display = 'none';
+                productsSearch.value = '';
+                filterProducts();
+            });
+
+            // Filter products based on search input
+            productsSearch.addEventListener('input', filterProducts);
+
+            function filterProducts() {
+                const searchTerm = productsSearch.value.toLowerCase();
+                const activeFilter = document.querySelector('[data-filter].active').getAttribute('data-filter');
+                const productCards = document.querySelectorAll('.product-card');
+                
+                productCards.forEach(card => {
+                    const productTitle = card.querySelector('.card-title').textContent.toLowerCase();
+                    const productType = card.closest('[data-product-type]').getAttribute('data-product-type');
+                    const matchesSearch = productTitle.includes(searchTerm);
+                    const matchesFilter = activeFilter === 'all' || productType === activeFilter;
+                    
+                    card.closest('[data-product-type]').style.display = (matchesSearch && matchesFilter) ? 'block' : 'none';
+                });
+            }
+
+            // Handle filter button clicks
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    // Filter products
+                    filterProducts();
+                    
+                    // Scroll button into view (for mobile)
+                    button.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                });
+            });
+
+            // Handle favorite button clicks
+            favoriteButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent card click
+                    const icon = button.querySelector('i');
+                    
+                    if (icon.classList.contains('bi-heart')) {
+                        icon.classList.remove('bi-heart');
+                        icon.classList.add('bi-heart-fill');
+                    } else {
+                        icon.classList.remove('bi-heart-fill');
+                        icon.classList.add('bi-heart');
+                    }
+                    
+                    // Here you would typically save to localStorage or send to server
+                    const productId = button.closest('[data-product-id]').getAttribute('data-product-id');
+                    console.log(`Product ${productId} favorite status changed`);
+                });
+            });
+
+            // Add touch feedback to product cards
+            const productCards = document.querySelectorAll('.product-card');
+            productCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    // Add a subtle highlight effect
+                    card.classList.add('card-highlight');
+                    
+                    // Remove it after animation completes
+                    setTimeout(() => {
+                        card.classList.remove('card-highlight');
+                        // Here you would typically navigate to product detail page
+                        console.log(`Navigating to product ${card.getAttribute('data-product-id')} details`);
+                    }, 150);
+                });
+            });
+
+            // Add snap scrolling behavior for filter pills
+            const filterPills = document.querySelector('.filter-pills .hide-scrollbar');
+            if (filterPills) {
+                // When a filter button is clicked, ensure it's visible in the scroll area
+                filterButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const scrollLeft = filterPills.scrollLeft;
+                        const buttonLeft = button.offsetLeft;
+                        const containerWidth = filterPills.clientWidth;
+                        
+                        // Center the button in the visible area
+                        filterPills.scrollTo({
+                            left: buttonLeft - (containerWidth / 2) + (button.clientWidth / 2),
+                            behavior: 'smooth'
+                        });
+                    });
+                });
+            }
+
+            // Add lazy loading for images that come into viewport
+            const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+            
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.src; // Trigger load if needed
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                });
+                
+                lazyImages.forEach(img => imageObserver.observe(img));
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffd700">
+    <title>Favorites - Bazar Dor</title>
+    <link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="lib/bootstrap-icons/bootstrap-icons.min.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/favorites-responsive.css">
+    <link rel="stylesheet" href="css/pagination.css">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+</head>
+<body class="bg-light">
+    <header class="app-header bg-primary">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center py-2">
+                <button class="btn text-white p-0" onclick="history.back()">
+                    <i class="bi bi-arrow-left fs-4"></i>
+                </button>
+                <h5 class="text-white mb-0">Favorites</h5>
+                <button class="btn text-white p-0" id="search-toggle">
+                    <i class="bi bi-search fs-4"></i>
+                </button>
+            </div>
+            
+            <!-- Search bar (initially hidden) -->
+            <div id="search-bar" class="bg-white rounded-pill d-flex align-items-center px-3 py-2 mb-2 shadow-sm" style="display: none;">
+                <i class="bi bi-search text-primary me-2"></i>
+                <input type="text" class="form-control border-0 p-0 bg-transparent" id="favorites-search" placeholder="Search favorites...">
+                <button class="btn p-0 touch-action" id="search-close">
+                    <i class="bi bi-x-circle text-muted"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mt-3 mb-5 pb-5">
+        <!-- Filter Pills -->
+        <div class="filter-pills mb-3">
+            <div class="d-flex overflow-auto pb-1 hide-scrollbar">
+                <button type="button" class="btn btn-sm btn-primary rounded-pill me-2 px-3 active" data-filter="all">All</button>
+                <button type="button" class="btn btn-sm btn-outline-primary rounded-pill me-2 px-3" data-filter="markets">Markets</button>
+                <button type="button" class="btn btn-sm btn-outline-primary rounded-pill me-2 px-3" data-filter="items">Items</button>
+            </div>
+        </div>
+
+        <!-- Empty state (shown when no favorites) -->
+        <div id="empty-favorites" class="text-center py-5" style="display: none;">
+            <div class="empty-state-icon mb-3">
+                <i class="bi bi-heart text-muted" style="font-size: 3rem;"></i>
+            </div>
+            <h5 class="text-muted">No favorites yet</h5>
+            <p class="text-muted small mb-4">Start adding markets and items to your favorites</p>
+            <a href="markets.html" class="btn btn-primary rounded-pill px-4 touch-action">
+                <i class="bi bi-shop me-2"></i>Browse Markets
+            </a>
+        </div>
+
+        <!-- Favorites List -->
+        <div id="favorites-list" class="row g-3 mb-5">
+            <!-- Favorite Market Card -->
+            <div class="col-12 col-md-6 col-lg-4 mb-3" data-favorite-type="market">
+                <div class="card market-card border-0 shadow-sm rounded-4 h-100" data-market-id="1">
+                    <div class="row g-0 h-100">
+                        <div class="col-4">
+                            <div class="position-relative h-100">
+                                <img src="https://images.unsplash.com/photo-1506484381205-f7945653044d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Market Image">
+                                <button class="btn btn-sm position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-1 favorite-btn active">
+                                    <i class="bi bi-heart-fill text-danger"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <h5 class="card-title mb-0 fs-6 text-truncate">Mirpur 11 Kacha Bazar</h5>
+                                    <span class="badge bg-success small ms-1 flex-shrink-0">Open</span>
+                                </div>
+                                <p class="card-subtitle text-muted small mb-2 text-truncate">Mirpur 11, Block C</p>
+                                <div class="d-flex justify-content-between small mb-1">
+                                    <span class="text-muted"><i class="bi bi-geo-alt me-1"></i>1.2 km</span>
+                                    <span class="text-muted"><i class="bi bi-star-fill text-warning me-1"></i>4.5</span>
+                                </div>
+                                <div class="mt-auto pt-1">
+                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 touch-action">
+                                        <i class="bi bi-eye me-1"></i>View Market
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Favorite Item Card -->
+            <div class="col-12 col-md-6 col-lg-4 mb-3" data-favorite-type="item">
+                <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="1">
+                    <div class="row g-0 h-100">
+                        <div class="col-4">
+                            <div class="position-relative h-100">
+                                <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Product Image">
+                                <button class="btn btn-sm position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-1 favorite-btn active">
+                                    <i class="bi bi-heart-fill text-danger"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <h5 class="card-title mb-0 fs-6 text-truncate">Fresh Tomatoes</h5>
+                                    <span class="badge bg-success small ms-1 flex-shrink-0"><i class="bi bi-arrow-down-short"></i>৳10</span>
+                                </div>
+                                <p class="card-subtitle text-muted small mb-1 text-truncate">Vegetables</p>
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <div>
+                                        <span class="fw-bold text-primary">৳ 80</span>
+                                        <span class="small text-muted">/ kg</span>
+                                    </div>
+                                    <span class="small text-muted"><i class="bi bi-shop me-1"></i>5 markets</span>
+                                </div>
+                                <div class="mt-auto pt-1">
+                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 touch-action">
+                                        <i class="bi bi-eye me-1"></i>View Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Favorite Market Card -->
+            <div class="col-12 col-md-6 col-lg-4 mb-3" data-favorite-type="market">
+                <div class="card market-card border-0 shadow-sm rounded-4 h-100" data-market-id="2">
+                    <div class="row g-0 h-100">
+                        <div class="col-4">
+                            <div class="position-relative h-100">
+                                <img src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Market Image">
+                                <button class="btn btn-sm position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-1 favorite-btn active">
+                                    <i class="bi bi-heart-fill text-danger"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <h5 class="card-title mb-0 fs-6 text-truncate">Dhanmondi Farmers Market</h5>
+                                    <span class="badge bg-success small ms-1 flex-shrink-0">Open</span>
+                                </div>
+                                <p class="card-subtitle text-muted small mb-2 text-truncate">Dhanmondi, Road 27</p>
+                                <div class="d-flex justify-content-between small mb-1">
+                                    <span class="text-muted"><i class="bi bi-geo-alt me-1"></i>2.5 km</span>
+                                    <span class="text-muted"><i class="bi bi-star-fill text-warning me-1"></i>4.7</span>
+                                </div>
+                                <div class="mt-auto pt-1">
+                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 touch-action">
+                                        <i class="bi bi-eye me-1"></i>View Market
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Favorite Item Card -->
+            <div class="col-12 col-md-6 col-lg-4 mb-3" data-favorite-type="item">
+                <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="2">
+                    <div class="row g-0 h-100">
+                        <div class="col-4">
+                            <div class="position-relative h-100">
+                                <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Product Image">
+                                <button class="btn btn-sm position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-1 favorite-btn active">
+                                    <i class="bi bi-heart-fill text-danger"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <h5 class="card-title mb-0 fs-6 text-truncate">Organic Carrots</h5>
+                                    <span class="badge bg-danger small ms-1 flex-shrink-0"><i class="bi bi-arrow-up-short"></i>৳5</span>
+                                </div>
+                                <p class="card-subtitle text-muted small mb-1 text-truncate">Vegetables</p>
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <div>
+                                        <span class="fw-bold text-primary">৳ 65</span>
+                                        <span class="small text-muted">/ kg</span>
+                                    </div>
+                                    <span class="small text-muted"><i class="bi bi-shop me-1"></i>3 markets</span>
+                                </div>
+                                <div class="mt-auto pt-1">
+                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 touch-action">
+                                        <i class="bi bi-eye me-1"></i>View Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Favorite Market Card -->
+            <div class="col-12 col-md-6 col-lg-4 mb-3" data-favorite-type="market">
+                <div class="card market-card border-0 shadow-sm rounded-4 h-100" data-market-id="3">
+                    <div class="row g-0 h-100">
+                        <div class="col-4">
+                            <div class="position-relative h-100">
+                                <img src="https://images.unsplash.com/photo-1573246123716-6b1782bfc499?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Market Image">
+                                <button class="btn btn-sm position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-1 favorite-btn active">
+                                    <i class="bi bi-heart-fill text-danger"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <h5 class="card-title mb-0 fs-6 text-truncate">Gulshan Fresh Market</h5>
+                                    <span class="badge bg-success small ms-1 flex-shrink-0">Open</span>
+                                </div>
+                                <p class="card-subtitle text-muted small mb-2 text-truncate">Gulshan Avenue, Block F</p>
+                                <div class="d-flex justify-content-between small mb-1">
+                                    <span class="text-muted"><i class="bi bi-geo-alt me-1"></i>3.8 km</span>
+                                    <span class="text-muted"><i class="bi bi-star-fill text-warning me-1"></i>4.2</span>
+                                </div>
+                                <div class="mt-auto pt-1">
+                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 touch-action">
+                                        <i class="bi bi-eye me-1"></i>View Market
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Favorite Item Card -->
+            <div class="col-12 col-md-6 col-lg-4 mb-3" data-favorite-type="item">
+                <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="3">
+                    <div class="row g-0 h-100">
+                        <div class="col-4">
+                            <div class="position-relative h-100">
+                                <img src="https://images.unsplash.com/photo-1550989460-0adf9ea622e2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Product Image">
+                                <button class="btn btn-sm position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-1 favorite-btn active">
+                                    <i class="bi bi-heart-fill text-danger"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <h5 class="card-title mb-0 fs-6 text-truncate">Fresh Potatoes</h5>
+                                    <span class="badge bg-success small ms-1 flex-shrink-0"><i class="bi bi-arrow-down-short"></i>৳8</span>
+                                </div>
+                                <p class="card-subtitle text-muted small mb-1 text-truncate">Vegetables</p>
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <div>
+                                        <span class="fw-bold text-primary">৳ 55</span>
+                                        <span class="small text-muted">/ kg</span>
+                                    </div>
+                                    <span class="small text-muted"><i class="bi bi-shop me-1"></i>6 markets</span>
+                                </div>
+                                <div class="mt-auto pt-1">
+                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 touch-action">
+                                        <i class="bi bi-eye me-1"></i>View Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Favorite Item Card -->
+            <div class="col-12 col-md-6 col-lg-4 mb-3" data-favorite-type="item">
+                <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="4">
+                    <div class="row g-0 h-100">
+                        <div class="col-4">
+                            <div class="position-relative h-100">
+                                <img src="https://images.unsplash.com/photo-1587049352851-8d4e89133924?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Product Image">
+                                <button class="btn btn-sm position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-1 favorite-btn active">
+                                    <i class="bi bi-heart-fill text-danger"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <h5 class="card-title mb-0 fs-6 text-truncate">Premium Rice</h5>
+                                    <span class="badge bg-success small ms-1 flex-shrink-0"><i class="bi bi-arrow-down-short"></i>৳15</span>
+                                </div>
+                                <p class="card-subtitle text-muted small mb-1 text-truncate">Grains</p>
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <div>
+                                        <span class="fw-bold text-primary">৳ 120</span>
+                                        <span class="small text-muted">/ kg</span>
+                                    </div>
+                                    <span class="small text-muted"><i class="bi bi-shop me-1"></i>4 markets</span>
+                                </div>
+                                <div class="mt-auto pt-1">
+                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 touch-action">
+                                        <i class="bi bi-eye me-1"></i>View Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Favorite Market Card -->
+            <div class="col-12 col-md-6 col-lg-4 mb-3" data-favorite-type="market">
+                <div class="card market-card border-0 shadow-sm rounded-4 h-100" data-market-id="4">
+                    <div class="row g-0 h-100">
+                        <div class="col-4">
+                            <div class="position-relative h-100">
+                                <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Market Image">
+                                <button class="btn btn-sm position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-1 favorite-btn active">
+                                    <i class="bi bi-heart-fill text-danger"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <h5 class="card-title mb-0 fs-6 text-truncate">Banani Organic Market</h5>
+                                    <span class="badge bg-danger small ms-1 flex-shrink-0">Closed</span>
+                                </div>
+                                <p class="card-subtitle text-muted small mb-2 text-truncate">Banani, Road 12</p>
+                                <div class="d-flex justify-content-between small mb-1">
+                                    <span class="text-muted"><i class="bi bi-geo-alt me-1"></i>4.2 km</span>
+                                    <span class="text-muted"><i class="bi bi-star-fill text-warning me-1"></i>4.8</span>
+                                </div>
+                                <div class="mt-auto pt-1">
+                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 touch-action">
+                                        <i class="bi bi-eye me-1"></i>View Market
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Favorite Item Card -->
+            <div class="col-12 col-md-6 col-lg-4 mb-3" data-favorite-type="item">
+                <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="5">
+                    <div class="row g-0 h-100">
+                        <div class="col-4">
+                            <div class="position-relative h-100">
+                                <img src="https://images.unsplash.com/photo-1559181567-c3190ca9959b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Product Image">
+                                <button class="btn btn-sm position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-1 favorite-btn active">
+                                    <i class="bi bi-heart-fill text-danger"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <h5 class="card-title mb-0 fs-6 text-truncate">Fresh Mangoes</h5>
+                                    <span class="badge bg-danger small ms-1 flex-shrink-0"><i class="bi bi-arrow-up-short"></i>৳20</span>
+                                </div>
+                                <p class="card-subtitle text-muted small mb-1 text-truncate">Fruits</p>
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <div>
+                                        <span class="fw-bold text-primary">৳ 150</span>
+                                        <span class="small text-muted">/ kg</span>
+                                    </div>
+                                    <span class="small text-muted"><i class="bi bi-shop me-1"></i>7 markets</span>
+                                </div>
+                                <div class="mt-auto pt-1">
+                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 touch-action">
+                                        <i class="bi bi-eye me-1"></i>View Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Favorite Market Card -->
+            <div class="col-12 col-md-6 col-lg-4 mb-3" data-favorite-type="market">
+                <div class="card market-card border-0 shadow-sm rounded-4 h-100" data-market-id="5">
+                    <div class="row g-0 h-100">
+                        <div class="col-4">
+                            <div class="position-relative h-100">
+                                <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Market Image">
+                                <button class="btn btn-sm position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-1 favorite-btn active">
+                                    <i class="bi bi-heart-fill text-danger"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <h5 class="card-title mb-0 fs-6 text-truncate">Uttara Fish Market</h5>
+                                    <span class="badge bg-success small ms-1 flex-shrink-0">Open</span>
+                                </div>
+                                <p class="card-subtitle text-muted small mb-2 text-truncate">Uttara, Sector 7</p>
+                                <div class="d-flex justify-content-between small mb-1">
+                                    <span class="text-muted"><i class="bi bi-geo-alt me-1"></i>5.7 km</span>
+                                    <span class="text-muted"><i class="bi bi-star-fill text-warning me-1"></i>4.3</span>
+                                </div>
+                                <div class="mt-auto pt-1">
+                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 touch-action">
+                                        <i class="bi bi-eye me-1"></i>View Market
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pagination Controls -->
+        <div id="pagination-container" class="mt-4 mb-3"></div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="navbar fixed-bottom navbar-dark">
+        <div class="container-fluid justify-content-center p-0">
+            <ul class="navbar-nav flex-row bottom-nav">
+                <li class="nav-item mx-0">
+                    <a class="nav-link" href="index.html">
+                        <i class="bi bi-house"></i>
+                        <div class="nav-label small">Home</div>
+                    </a>
+                </li>
+                <li class="nav-item mx-0">
+                    <a class="nav-link" href="markets.html">
+                        <i class="bi bi-shop"></i>
+                        <div class="nav-label small">Markets</div>
+                    </a>
+                </li>
+                <li class="nav-item mx-0">
+                    <a class="nav-link active" href="favorites.html">
+                        <i class="bi bi-heart"></i>
+                        <div class="nav-label small">Favorites</div>
+                    </a>
+                </li>
+                <li class="nav-item mx-0">
+                    <a class="nav-link" href="profile.html">
+                        <i class="bi bi-person"></i>
+                        <div class="nav-label small">Profile</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <style>
+        /* Custom styles for mobile optimization */
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .object-fit-cover {
+            object-fit: cover;
+        }
+        
+        .empty-state-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: rgba(var(--bs-primary-rgb), 0.1);
+            margin: 0 auto;
+        }
+
+        /* Custom styles for filter pills */
+        .btn-outline-primary {
+            --bs-btn-color: var(--primary-color);
+            --bs-btn-border-color: var(--primary-color);
+            --bs-btn-hover-color: #fff;
+            --bs-btn-hover-bg: var(--primary-color);
+            --bs-btn-hover-border-color: var(--primary-color);
+            --bs-btn-active-color: #fff;
+            --bs-btn-active-bg: var(--primary-color);
+            --bs-btn-active-border-color: var(--primary-color);
+        }
+
+        .btn-primary {
+            --bs-btn-bg: var(--primary-color);
+            --bs-btn-border-color: var(--primary-color);
+            --bs-btn-hover-bg: var(--primary-color);
+            --bs-btn-hover-border-color: var(--primary-color);
+            --bs-btn-active-bg: var(--primary-color);
+            --bs-btn-active-border-color: var(--primary-color);
+        }
+    </style>
+
+    <!-- JavaScript -->
+    <script src="lib/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="js/pagination.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Search toggle functionality
+            const searchToggle = document.getElementById('search-toggle');
+            const searchBar = document.getElementById('search-bar');
+            const searchClose = document.getElementById('search-close');
+            const favoritesSearch = document.getElementById('favorites-search');
+            const filterButtons = document.querySelectorAll('[data-filter]');
+            const favoriteItems = document.querySelectorAll('[data-favorite-type]');
+            const emptyFavorites = document.getElementById('empty-favorites');
+            
+            // Search toggle functionality
+            if (searchToggle && searchBar && searchClose) {
+                searchToggle.addEventListener('click', function() {
+                    searchBar.style.display = 'flex';
+                    favoritesSearch.focus();
+                });
+                
+                searchClose.addEventListener('click', function() {
+                    searchBar.style.display = 'none';
+                    favoritesSearch.value = '';
+                    filterAndSearchItems(); // Reset search results
+                });
+            }
+            
+            // Function to handle both filtering and searching
+            function filterAndSearchItems() {
+                const searchTerm = favoritesSearch.value.toLowerCase();
+                const activeFilter = document.querySelector('[data-filter].active').getAttribute('data-filter');
+                let visibleCount = 0;
+                
+                favoriteItems.forEach(item => {
+                    const itemType = item.getAttribute('data-favorite-type');
+                    const itemTitle = item.querySelector('.card-title').textContent.toLowerCase();
+                    const itemSubtitle = item.querySelector('.card-subtitle').textContent.toLowerCase();
+                    
+                    const matchesSearch = itemTitle.includes(searchTerm) || itemSubtitle.includes(searchTerm);
+                    const matchesFilter = activeFilter === 'all' || activeFilter === itemType;
+                    
+                    if (matchesSearch && matchesFilter) {
+                        item.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                emptyFavorites.style.display = visibleCount === 0 ? 'block' : 'none';
+            }
+            
+            // Filter buttons functionality
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('active', 'btn-primary');
+                        btn.classList.add('btn-outline-primary');
+                    });
+                    this.classList.remove('btn-outline-primary');
+                    this.classList.add('active', 'btn-primary');
+                    
+                    filterAndSearchItems();
+                });
+            });
+            
+            // Search input functionality
+            favoritesSearch.addEventListener('input', filterAndSearchItems);
+            
+            // Initial check for empty favorites
+            filterAndSearchItems();
+        });
+    </script>
+</body>
+</html>

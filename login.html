@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffd700">
+    <title>Login - Bazar Dor</title>
+    <link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="lib/bootstrap-icons/bootstrap-icons.min.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- PWA icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+</head>
+<body class="bg-light">
+    <header class="app-header bg-primary">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center py-2">
+                <button class="btn text-white p-0" onclick="history.back()">
+                    <i class="bi bi-arrow-left fs-4"></i>
+                </button>
+                <h5 class="text-white mb-0">Login</h5>
+                <div style="width: 24px;"></div> <!-- Empty space for balance -->
+            </div>
+        </div>
+    </header>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <!-- Logo and Welcome Text -->
+                <div class="text-center mb-4">
+                    <div class="app-logo-container mb-3">
+                        <div class="app-logo bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mx-auto">
+                            <i class="bi bi-shop fs-1"></i>
+                        </div>
+                    </div>
+                    <h2 class="fw-bold">Welcome Back!</h2>
+                    <p class="text-muted">Sign in to continue to Bazar Dor</p>
+                </div>
+
+                <!-- Login Form -->
+                <div class="card border-0 shadow-sm rounded-4">
+                    <div class="card-body p-4">
+                        <form id="login-form">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email or Phone</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0">
+                                        <i class="bi bi-envelope text-muted"></i>
+                                    </span>
+                                    <input type="text" class="form-control bg-light border-start-0" id="email" placeholder="Enter your email or phone">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <label for="password" class="form-label">Password</label>
+                                    <a href="#" class="text-primary small text-decoration-none">Forgot?</a>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0">
+                                        <i class="bi bi-lock text-muted"></i>
+                                    </span>
+                                    <input type="password" class="form-control bg-light border-start-0" id="password" placeholder="Enter your password">
+                                    <button class="input-group-text bg-light border-start-0" type="button" id="toggle-password">
+                                        <i class="bi bi-eye text-muted"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="remember-me">
+                                    <label class="form-check-label" for="remember-me">
+                                        Remember me
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary w-100 py-2 rounded-pill mb-3">
+                                Sign In
+                            </button>
+                            
+                            <div class="text-center">
+                                <span class="text-muted">Don't have an account?</span>
+                                <a href="register.html" class="text-primary text-decoration-none">Sign Up</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Social Login -->
+                <div class="mt-4">
+                    <div class="separator text-muted mb-3">
+                        <span>OR CONTINUE WITH</span>
+                    </div>
+                    
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <button class="btn btn-outline-secondary w-100 d-flex align-items-center justify-content-center gap-2 py-2 rounded-pill">
+                                <i class="bi bi-google"></i>
+                                <span>Google</span>
+                            </button>
+                        </div>
+                        <div class="col-6">
+                            <button class="btn btn-outline-secondary w-100 d-flex align-items-center justify-content-center gap-2 py-2 rounded-pill">
+                                <i class="bi bi-facebook"></i>
+                                <span>Facebook</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add to CSS file: separator style for "OR CONTINUE WITH" -->
+    <style>
+        .app-logo-container {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .app-logo {
+            width: 80px;
+            height: 80px;
+            font-size: 2rem;
+        }
+        
+        .separator {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.8rem;
+        }
+        
+        .separator::before,
+        .separator::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .separator span {
+            padding: 0 1rem;
+        }
+    </style>
+
+    <script src="lib/bootstrap/bootstrap.bundle.min.js"></script>
+    <script>
+        // Toggle password visibility
+        document.getElementById('toggle-password').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('bi-eye');
+                icon.classList.add('bi-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
+            }
+        });
+    </script>
+</body>
+</html>

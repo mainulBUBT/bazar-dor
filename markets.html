@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffd700">
+    <title>Markets - Bazar Dor</title>
+    <link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="lib/bootstrap-icons/bootstrap-icons.min.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pagination.css">
+    <!-- PWA icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+</head>
+<body>
+    <header class="app-header bg-primary">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center py-2">
+                <button class="btn text-white p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <i class="bi bi-grid fs-4"></i>
+                </button>
+                <a class="navbar-brand text-center m-0" href="index.html">Bazar Dor</a>
+                <button class="btn text-white p-0" id="search-toggle">
+                    <i class="bi bi-search fs-4"></i>
+                </button>
+            </div>
+            
+            <!-- Location bar directly in header -->
+            <div class="location-bar bg-white rounded-pill d-flex align-items-center px-3 py-2 mb-2 shadow-sm">
+                <i class="bi bi-geo-alt text-primary me-2"></i>
+                <input type="text" class="form-control border-0 p-0 bg-transparent" id="location-search" placeholder="Search location or use current...">
+                <button class="btn btn-link text-primary p-0 ms-2" id="current-location-btn" title="Use current location">
+                    <i class="bi bi-crosshair"></i>
+                </button>
+            </div>
+            
+            <!-- Location Loading Spinner -->
+            <div id="location-loading" class="text-center py-2" style="display: none;">
+                <div class="spinner-border spinner-border-sm text-white" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            
+            <!-- Search bar (initially hidden) -->
+            <div id="search-bar" class="bg-white rounded-pill d-flex align-items-center px-3 py-2 mb-2 shadow-sm" style="display: none;">
+                <i class="bi bi-search text-primary me-2"></i>
+                <input type="text" class="form-control border-0 p-0 bg-transparent" id="market-search" placeholder="Search markets...">
+                <button class="btn p-0" id="search-close">
+                    <i class="bi bi-x-circle text-muted"></i>
+                </button>
+            </div>
+            
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header bg-primary text-white">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Bazar Dor</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html"><i class="bi bi-house me-2"></i>Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="markets.html"><i class="bi bi-shop me-2"></i>Markets</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="favorites.html"><i class="bi bi-heart me-2"></i>Favorites</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="bi bi-graph-up me-2"></i>Prices</a>
+                        </li>
+                        <li class="nav-item mt-3">
+                            <a class="nav-link" href="#"><i class="bi bi-box-arrow-in-right me-2"></i>Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="bi bi-person-plus me-2"></i>Register</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="navbar fixed-bottom navbar-dark">
+        <div class="container-fluid justify-content-center p-0">
+            <ul class="navbar-nav flex-row bottom-nav">
+                <li class="nav-item mx-0">
+                    <a class="nav-link" href="index.html">
+                        <i class="bi bi-house"></i>
+                        <div class="nav-label small">Home</div>
+                    </a>
+                </li>
+                <li class="nav-item mx-0">
+                    <a class="nav-link active" href="markets.html">
+                        <i class="bi bi-shop"></i>
+                        <div class="nav-label small">Markets</div>
+                    </a>
+                </li>
+                <li class="nav-item mx-0">
+                    <a class="nav-link" href="favorites.html">
+                        <i class="bi bi-heart"></i>
+                        <div class="nav-label small">Favorites</div>
+                    </a>
+                </li>
+                <li class="nav-item mx-0">
+                    <a class="nav-link" href="profile.html">
+                        <i class="bi bi-person"></i>
+                        <div class="nav-label small">Profile</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Markets Header -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="h4 mb-0">Markets Near You</h2>
+            <div class="dropdown">
+                <button class="btn btn-sm btn-outline-primary dropdown-toggle rounded-pill" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-sort-down me-1"></i>Sort
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="sortDropdown">
+                    <li><a class="dropdown-item" href="#" data-sort="distance">Distance</a></li>
+                    <li><a class="dropdown-item" href="#" data-sort="name">Name</a></li>
+                    <li><a class="dropdown-item" href="#" data-sort="popularity">Popularity</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Markets List -->
+        <div id="markets-list" class="row g-4 mb-5">
+            <!-- Market cards will be dynamically inserted here by JavaScript -->
+            <!-- Example static cards for preview -->
+            <div class="col-12 col-md-6 col-lg-4 mb-4 d-flex">
+                <div class="card market-card shadow-sm flex-fill" data-market-id="1">
+                    <div class="market-image-wrapper position-relative" style="height: 180px; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1506484381205-f7945653044d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="card-img-top h-100 w-100 object-fit-cover" alt="Market Image">
+                        <div class="market-status badge bg-success position-absolute top-0 end-0 m-2">Open</div>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="market-icon-wrapper bg-primary-light rounded-circle me-3">
+                                <i class="bi bi-shop text-primary"></i>
+                            </div>
+                            <div>
+                                <h5 class="card-title mb-1">Mirpur 11 Kacha Bazar</h5>
+                                <p class="card-subtitle text-muted small mb-0">Mirpur 11, Block C</p>
+                            </div>
+                        </div>
+                        <div class="market-info mb-3">
+                            <div class="d-flex align-items-center text-muted small mb-2">
+                                <i class="bi bi-clock me-2"></i>
+                                <span>Open: 7:00 AM - 10:00 PM</span>
+                            </div>
+                            <div class="d-flex align-items-center text-muted small">
+                                <i class="bi bi-tag me-2"></i>
+                                <span>20+ items updated today</span>
+                            </div>
+                        </div>
+                        <div class="mt-auto">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <span class="badge bg-primary-light text-primary rounded-pill me-2">
+                                        <i class="bi bi-geo-alt me-1"></i>0.5 km
+                                    </span>
+                                    <span class="badge bg-warning-light text-warning rounded-pill">
+                                        <i class="bi bi-star-fill me-1"></i>4.2
+                                    </span>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary rounded-pill">
+                                    <i class="bi bi-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <div class="card market-card shadow-sm h-100" data-market-id="2">
+                    <div class="market-image-wrapper position-relative">
+                        <img src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Market Image">
+                        <div class="market-status badge bg-success position-absolute top-0 end-0 m-2">Open</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="market-icon-wrapper bg-primary-light rounded-circle me-3">
+                                <i class="bi bi-shop text-primary"></i>
+                            </div>
+                            <div>
+                                <h5 class="card-title mb-1">Mirpur 10 Bazar</h5>
+                                <p class="card-subtitle text-muted small mb-0">Mirpur 10 Circle</p>
+                            </div>
+                        </div>
+                        <div class="market-info mb-3">
+                            <div class="d-flex align-items-center text-muted small mb-2">
+                                <i class="bi bi-clock me-2"></i>
+                                <span>Open: 6:00 AM - 9:00 PM</span>
+                            </div>
+                            <div class="d-flex align-items-center text-muted small">
+                                <i class="bi bi-tag me-2"></i>
+                                <span>15+ items updated today</span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <span class="badge bg-primary-light text-primary rounded-pill me-2">
+                                    <i class="bi bi-geo-alt me-1"></i>1.2 km
+                                </span>
+                                <span class="badge bg-warning-light text-warning rounded-pill">
+                                    <i class="bi bi-star-fill me-1"></i>4.0
+                                </span>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary rounded-pill">
+                                <i class="bi bi-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <div class="card market-card shadow-sm h-100" data-market-id="3">
+                    <div class="market-image-wrapper position-relative">
+                        <img src="https://images.unsplash.com/photo-1573246123716-6b1782bfc499?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Market Image">
+                        <div class="market-status badge bg-success position-absolute top-0 end-0 m-2">Open</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="market-icon-wrapper bg-primary-light rounded-circle me-3">
+                                <i class="bi bi-shop text-primary"></i>
+                            </div>
+                            <div>
+                                <h5 class="card-title mb-1">Dhanmondi 15 Market</h5>
+                                <p class="card-subtitle text-muted small mb-0">Road 15, Dhanmondi</p>
+                            </div>
+                        </div>
+                        <div class="market-info mb-3">
+                            <div class="d-flex align-items-center text-muted small mb-2">
+                                <i class="bi bi-clock me-2"></i>
+                                <span>Open: 8:00 AM - 11:00 PM</span>
+                            </div>
+                            <div class="d-flex align-items-center text-muted small">
+                                <i class="bi bi-tag me-2"></i>
+                                <span>25+ items updated today</span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <span class="badge bg-primary-light text-primary rounded-pill me-2">
+                                    <i class="bi bi-geo-alt me-1"></i>0.3 km
+                                </span>
+                                <span class="badge bg-warning-light text-warning rounded-pill">
+                                    <i class="bi bi-star-fill me-1"></i>4.5
+                                </span>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary rounded-pill">
+                                <i class="bi bi-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <div class="card market-card shadow-sm h-100" data-market-id="4">
+                    <div class="market-image-wrapper position-relative">
+                        <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Market Image">
+                        <div class="market-status badge bg-success position-absolute top-0 end-0 m-2">Open</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="market-icon-wrapper bg-primary-light rounded-circle me-3">
+                                <i class="bi bi-shop text-primary"></i>
+                            </div>
+                            <div>
+                                <h5 class="card-title mb-1">Gulshan 2 Fresh Market</h5>
+                                <p class="card-subtitle text-muted small mb-0">Gulshan Avenue</p>
+                            </div>
+                        </div>
+                        <div class="market-info mb-3">
+                            <div class="d-flex align-items-center text-muted small mb-2">
+                                <i class="bi bi-clock me-2"></i>
+                                <span>Open: 7:30 AM - 9:30 PM</span>
+                            </div>
+                            <div class="d-flex align-items-center text-muted small">
+                                <i class="bi bi-tag me-2"></i>
+                                <span>18+ items updated today</span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <span class="badge bg-primary-light text-primary rounded-pill me-2">
+                                    <i class="bi bi-geo-alt me-1"></i>1.8 km
+                                </span>
+                                <span class="badge bg-warning-light text-warning rounded-pill">
+                                    <i class="bi bi-star-fill me-1"></i>4.3
+                                </span>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary rounded-pill">
+                                <i class="bi bi-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <div class="card market-card shadow-sm h-100" data-market-id="5">
+                    <div class="market-image-wrapper position-relative">
+                        <img src="https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Market Image">
+                        <div class="market-status badge bg-success position-absolute top-0 end-0 m-2">Open</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="market-icon-wrapper bg-primary-light rounded-circle me-3">
+                                <i class="bi bi-shop text-primary"></i>
+                            </div>
+                            <div>
+                                <h5 class="card-title mb-1">Banani Farmers Market</h5>
+                                <p class="card-subtitle text-muted small mb-0">Banani Road 11</p>
+                            </div>
+                        </div>
+                        <div class="market-info mb-3">
+                            <div class="d-flex align-items-center text-muted small mb-2">
+                                <i class="bi bi-clock me-2"></i>
+                                <span>Open: 8:00 AM - 10:00 PM</span>
+                            </div>
+                            <div class="d-flex align-items-center text-muted small">
+                                <i class="bi bi-tag me-2"></i>
+                                <span>22+ items updated today</span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <span class="badge bg-primary-light text-primary rounded-pill me-2">
+                                    <i class="bi bi-geo-alt me-1"></i>2.1 km
+                                </span>
+                                <span class="badge bg-warning-light text-warning rounded-pill">
+                                    <i class="bi bi-star-fill me-1"></i>4.7
+                                </span>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary rounded-pill">
+                                <i class="bi bi-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- No Markets Found Message -->
+    <div id="no-markets-message" class="text-center py-5" style="display: none;">
+        <i class="bi bi-shop-window text-muted" style="font-size: 3rem;"></i>
+        <h3 class="mt-3">No Markets Found</h3>
+        <p class="text-muted">Try changing your location or search criteria</p>
+    </div>
+
+    <!-- Pagination Container -->
+    <div id="pagination-container" class="mb-4"></div>
+
+    <!-- Location Warning Modal -->
+    <div class="modal fade" id="locationWarningModal" tabindex="-1" aria-labelledby="locationWarningModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="border-radius: var(--border-radius); overflow: hidden;">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title" id="locationWarningModalLabel">Location Required</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Please select your location to see markets near you.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="select-location-btn" data-bs-dismiss="modal">Select Location</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="lib/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/pagination.js"></script>
+    <script src="js/markets.js"></script>
+  

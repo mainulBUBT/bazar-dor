@@ -1,0 +1,103 @@
+/* Bazar Dor Theme Configuration */
+:root {
+    /* Primary Colors */
+    --primary-color: #AB4459;
+    --primary-color-light: rgba(171, 68, 89, 0.1);
+    --primary-color-lighter: rgba(171, 68, 89, 0.05);
+    
+    /* Theme Colors */
+    --theme-color: #ffd700;
+    --theme-color-dark: #e6c200;
+    --theme-color-light: #fff4b3;
+    
+    /* Text Colors */
+    --text-dark: #212529;
+    --text-muted: #6c757d;
+    --text-light: #f8f9fa;
+    
+    /* Status Colors */
+    --success-color: #198754;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #0dcaf0;
+    
+    /* Background Colors */
+    --bg-light: #ffffff;
+    --bg-dark: #343a40;
+    --bg-muted: #f8f9fa;
+    
+    /* Border and Shadow */
+    --border-radius: 0.8rem;
+    --border-radius-pill: 50rem;
+    --box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    --box-shadow-lg: 0 5px 15px rgba(0,0,0,0.1);
+    
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 3rem;
+    
+    /* Transitions */
+    --transition-speed: 0.2s;
+    --transition-fn: ease;
+}
+
+/* Apply theme to common elements */
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.bg-theme {
+    background-color: var(--theme-color) !important;
+}
+
+.text-theme {
+    color: var(--theme-color) !important;
+}
+
+.price-up {
+    color: var(--danger-color);
+}
+
+.price-down {
+    color: var(--success-color);
+}
+
+/* Bottom navigation theming */
+.bottom-nav {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: var(--border-radius-pill);
+    box-shadow: var(--box-shadow-lg);
+}
+
+.bottom-nav .nav-link.active {
+    color: var(--primary-color);
+    background-color: var(--primary-color-light);
+}
+
+/* Filter pills theming */
+.filter-pills .btn.active {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+.bottom-nav .nav-link:hover {
+    color: var(--primary-color);
+    background-color: var(--primary-color-lighter);
+}
+
+/* Market card theming */
+.market-card .card-title {
+    color: var(--primary-color);
+}
+
+.market-card .card-text {
+    color: var(--text-muted);
+}

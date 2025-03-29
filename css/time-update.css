@@ -1,0 +1,27 @@
+.time-update {
+    font-size: 0.7rem !important;
+    opacity: 0.8;
+}
+
+.time-update .bi-clock {
+    font-size: 0.65rem;
+    margin-right: 0.2rem !important;
+}
+
+.time-update .update-icon {
+    display: inline-block;
+    margin-right: 0.2rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.6;
+    }
+}
