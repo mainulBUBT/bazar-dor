@@ -175,8 +175,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function selectMarket(market) {
         // Get the market ID from the clicked card
         const marketId = market.getAttribute('data-market-id');
-        // Redirect to a market detail page
-        window.location.href = `market-detail.html?id=${marketId}`;
+        // Redirect to the products page with the market ID
+        window.location.href = `products.html?marketId=${marketId}`;
     }
     
     // Add click event to all market cards

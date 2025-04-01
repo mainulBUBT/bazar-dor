@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#ffd700">
-    <title>Login - Bazar Dor</title>
+    <title>Sign Up - Bazar Dor</title>
     <link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="lib/bootstrap-icons/bootstrap-icons.min.css">
     <link rel="manifest" href="manifest.json">
@@ -13,9 +13,8 @@
     <!-- PWA icons -->
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
     <link rel="apple-touch-icon" href="icons/icon-192x192.png">
-
 </head>
-<body class="login-page">
+<body class="bg-light">
     <div class="login-container">
         <div class="app-logo-container fadeInUp">
             <div class="app-logo">
@@ -24,32 +23,39 @@
         </div>
         
         <div class="welcome-text fadeInUp delay-1">
-            <h1>Welcome Back!</h1>
-            <p>Sign in to continue to Bazar Dor</p>
+            <h1>Create Account</h1>
+            <p>Join Bazar Dor to explore local markets</p>
         </div>
         
         <div class="login-card fadeInUp delay-2">
-            <form id="login-form">
+            <form id="register-form">
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email or Phone</label>
+                    <label for="name" class="form-label">Full Name</label>
                     <div class="input-group">
                         <span class="input-group-text">
-                            <i class="bi bi-envelope"></i>
+                            <i class="bi bi-person"></i>
                         </span>
-                        <input type="text" class="form-control" id="email" placeholder="Enter your email or phone">
+                        <input type="text" class="form-control" id="name" placeholder="Enter your full name">
                     </div>
                 </div>
                 
                 <div class="mb-3">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <label for="password" class="form-label mb-0">Password</label>
-                        <a href="#" class="forgot-link small">Forgot Password?</a>
+                    <label for="email" class="form-label">Email</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="bi bi-envelope"></i>
+                        </span>
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email">
                     </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
                     <div class="input-group">
                         <span class="input-group-text">
                             <i class="bi bi-lock"></i>
                         </span>
-                        <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                        <input type="password" class="form-control" id="password" placeholder="Create a password">
                         <button class="input-group-text" type="button" id="toggle-password">
                             <i class="bi bi-eye"></i>
                         </button>
@@ -57,23 +63,27 @@
                 </div>
                 
                 <div class="mb-4">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="remember-me">
-                        <label class="form-check-label" for="remember-me">
-                            Remember me
-                        </label>
+                    <label for="confirm-password" class="form-label">Confirm Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="bi bi-lock"></i>
+                        </span>
+                        <input type="password" class="form-control" id="confirm-password" placeholder="Confirm your password">
+                        <button class="input-group-text" type="button" id="toggle-confirm-password">
+                            <i class="bi bi-eye"></i>
+                        </button>
                     </div>
                 </div>
                 
                 <button type="submit" class="btn btn-primary w-100">
-                    Sign In
+                    Create Account
                 </button>
             </form>
         </div>
         
         <div class="social-login fadeInUp delay-3">
             <div class="separator">
-                <span>OR CONTINUE WITH</span>
+                <span>OR SIGN UP WITH</span>
             </div>
             
             <div class="row g-3">
@@ -93,7 +103,7 @@
         </div>
         
         <div class="signup-link fadeInUp delay-3">
-            <p>Don't have an account? <a href="register.html">Sign Up</a></p>
+            <p>Already have an account? <a href="login.html">Sign In</a></p>
         </div>
     </div>
 
@@ -120,18 +130,36 @@
             }
         });
         
+        // Toggle confirm password visibility
+        document.getElementById('toggle-confirm-password').addEventListener('click', function() {
+            const passwordInput = document.getElementById('confirm-password');
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('bi-eye');
+                icon.classList.add('bi-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
+            }
+        });
+        
         // Form submission (prevent default for demo)
-        document.getElementById('login-form').addEventListener('submit', function(e) {
+        document.getElementById('register-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            // Add login logic here
+            // Add registration logic here
+            const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
             
-            if (email && password) {
+            if (name && email && password && confirmPassword && password === confirmPassword) {
                 // Show loading state
                 const submitBtn = this.querySelector('button[type="submit"]');
                 const originalText = submitBtn.innerHTML;
-                submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Signing in...';
+                submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Creating account...';
                 submitBtn.disabled = true;
                 
                 // Simulate API call
