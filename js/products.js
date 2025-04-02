@@ -134,8 +134,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const updatePriceButtons = document.querySelectorAll('.update-price-btn');
         const updatePriceModal = document.getElementById('updatePriceModal');
         const productIdInput = document.getElementById('productId');
-        const productNameInput = document.getElementById('productName');
-        const currentPriceInput = document.getElementById('currentPrice');
+        const productNameElement = document.getElementById('productName');
+        const currentPriceElement = document.getElementById('currentPrice');
         const newPriceInput = document.getElementById('newPrice');
         const submitPriceUpdateBtn = document.getElementById('submitPriceUpdate');
         
@@ -148,15 +148,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Populate the modal with product data
                 productIdInput.value = productId;
-                productNameInput.value = productName;
-                currentPriceInput.value = productPrice;
-                newPriceInput.value = productPrice; // Default to current price
+                productNameElement.textContent = productName;
+                currentPriceElement.textContent = productPrice;
+                newPriceInput.value = ''; // Clear the input field
+                newPriceInput.placeholder = productPrice; // Show current price as placeholder
                 
-                // Focus on the new price input
+                // Focus on the new price input with a slight delay to ensure modal is visible
                 setTimeout(() => {
                     newPriceInput.focus();
-                    newPriceInput.select();
-                }, 500);
+                }, 300);
             });
         });
         

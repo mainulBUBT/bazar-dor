@@ -105,6 +105,14 @@
     --bs-btn-border-color: var(--primary-color);
     --bs-btn-hover-bg: var(--primary-color);
     --bs-btn-hover-border-color: var(--primary-color);
+    --bs-btn-hover-color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary.update-price-btn:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
 }
 
 /* Authentication Pages Styles */
