@@ -99,6 +99,14 @@
     justify-content: center;
 }
 
+/* Product Update Button Styles */
+.btn-outline-primary.update-price-btn {
+    --bs-btn-color: var(--primary-color);
+    --bs-btn-border-color: var(--primary-color);
+    --bs-btn-hover-bg: var(--primary-color);
+    --bs-btn-hover-border-color: var(--primary-color);
+}
+
 /* Authentication Pages Styles */
 body.bg-light {
     background: linear-gradient(135deg, var(--primary-color-light), #f8f9fa);

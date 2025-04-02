@@ -136,90 +136,54 @@
         </div>
 
         <!-- Markets List -->
-        <div id="markets-list" class="row g-4 mb-5">
+        <div id="markets-list" class="row g-2 mb-5">
             <!-- Market cards will be dynamically inserted here by JavaScript -->
             <!-- Example static cards for preview -->
-            <div class="col-12 col-md-6 col-lg-4 mb-4 d-flex">
-                <div class="card market-card shadow-sm flex-fill" data-market-id="1" onclick="window.location.href='products.html?market_id=1'" style="cursor: pointer;">
-                    <div class="market-image-wrapper position-relative" style="height: 180px; overflow: hidden;">
-                        <img src="https://images.unsplash.com/photo-1506484381205-f7945653044d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="card-img-top h-100 w-100 object-fit-cover" alt="Market Image">
-                        <div class="market-status badge bg-success position-absolute top-0 end-0 m-2">Open</div>
-                    </div>
-                    <div class="card-body d-flex flex-column">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="market-icon-wrapper bg-primary-light rounded-circle me-3">
-                                <i class="bi bi-shop text-primary"></i>
-                            </div>
-                            <div>
-                                <h5 class="card-title mb-1">Mirpur 11 Kacha Bazar</h5>
-                                <p class="card-subtitle text-muted small mb-0">Mirpur 11, Block C</p>
-                            </div>
+            <div class="col-12 col-md-6 col-lg-4 mb-2 d-flex">
+                <div class="card market-card shadow-sm flex-fill h-100" data-market-id="1" onclick="window.location.href='products.html?market_id=1'" style="cursor: pointer;">
+                    <!-- Card Header with Image and Status Badge -->
+                    <div class="position-relative rounded-top overflow-hidden">
+                        <!-- Market Status Indicator -->
+                        <div class="market-status badge bg-success position-absolute top-0 end-0 m-3 px-3 py-2 rounded-pill shadow-sm z-index-1">
+                            <i class="bi bi-check-circle-fill me-1"></i>Open
                         </div>
-                        <div class="market-info mb-3">
-                            <div class="d-flex align-items-center text-muted small mb-2">
-                                <i class="bi bi-clock me-2"></i>
-                                <span>Open: 7:00 AM - 10:00 PM</span>
-                            </div>
-                            <div class="d-flex align-items-center text-muted small">
-                                <i class="bi bi-tag me-2"></i>
-                                <span>20+ items updated today</span>
-                            </div>
-                        </div>
-                        <div class="mt-auto">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex align-items-center">
-                                    <span class="badge bg-primary-light text-primary rounded-pill me-2">
-                                        <i class="bi bi-geo-alt me-1"></i>0.5 km
-                                    </span>
-                                    <span class="badge bg-warning-light text-warning rounded-pill">
-                                        <i class="bi bi-star-fill me-1"></i>4.2
-                                    </span>
-                                </div>
-                                <button class="btn btn-sm btn-outline-primary rounded-pill">
-                                    <i class="bi bi-arrow-right"></i>
-                                </button>
-                            </div>
+                        
+                        <!-- Favorite Button -->
+                        <button class="btn btn-light btn-sm rounded-circle position-absolute top-0 start-0 m-3 shadow-sm" title="Add to favorites">
+                            <i class="bi bi-heart text-muted"></i>
+                        </button>
+                        
+                        <!-- Market Image -->
+                        <div class="market-image-wrapper" style="height: 140px;">
+                            <img src="https://images.unsplash.com/photo-1506484381205-f7945653044d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                                class="card-img-top h-100 w-100 object-fit-cover" alt="Market Image">
                         </div>
                     </div>
-                </div>
-            </div>
-            
-            <div class="col-12 col-md-6 col-lg-4 mb-4">
-                <div class="card market-card shadow-sm h-100" data-market-id="2" onclick="window.location.href='products.html?market_id=2'" style="cursor: pointer;">
-                    <div class="market-image-wrapper position-relative">
-                        <img src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Market Image">
-                        <div class="market-status badge bg-success position-absolute top-0 end-0 m-2">Open</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="market-icon-wrapper bg-primary-light rounded-circle me-3">
-                                <i class="bi bi-shop text-primary"></i>
+                    
+                    <!-- Card Body with Market Info -->
+                    <div class="card-body d-flex flex-column p-2 gap-1">
+                        <!-- Market Icon and Title -->
+                        <div class="d-flex align-items-start">
+                            <div class="market-icon-wrapper bg-primary-light rounded-circle me-2 flex-shrink-0 p-2" 
+                                style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+                                <i class="bi bi-shop text-primary fs-4"></i>
                             </div>
-                            <div>
-                                <h5 class="card-title mb-1">Mirpur 10 Bazar</h5>
-                                <p class="card-subtitle text-muted small mb-0">Mirpur 10 Circle</p>
+                            <div class="overflow-hidden">
+                                <h5 class="card-title mb-0 text-truncate fw-bold">Mirpur 11 Kacha Bazar</h5>
+                                <p class="card-subtitle text-muted small mb-0 text-truncate">
+                                    <i class="bi bi-geo-alt-fill me-1 text-primary"></i>Mirpur 11, Block C
+                                </p>
                             </div>
                         </div>
-                        <div class="market-info mb-3">
-                            <div class="d-flex align-items-center text-muted small mb-2">
-                                <i class="bi bi-clock me-2"></i>
-                                <span>Open: 6:00 AM - 9:00 PM</span>
-                            </div>
-                            <div class="d-flex align-items-center text-muted small">
-                                <i class="bi bi-tag me-2"></i>
-                                <span>15+ items updated today</span>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center">
-                                <span class="badge bg-primary-light text-primary rounded-pill me-2">
-                                    <i class="bi bi-geo-alt me-1"></i>1.2 km
-                                </span>
-                                <span class="badge bg-warning-light text-warning rounded-pill">
-                                    <i class="bi bi-star-fill me-1"></i>4.0
-                                </span>
-                            </div>
-                            <button class="btn btn-sm btn-outline-primary rounded-pill">
+                        
+
+                        
+                        <!-- Card Footer with Distance and Action Button -->
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <span class="badge bg-primary-light text-primary rounded-pill px-2 py-1 fw-normal">
+                                <i class="bi bi-geo-alt me-1"></i>0.5 km
+                            </span>
+                            <button class="btn btn-primary rounded-pill px-3 py-2">
                                 <i class="bi bi-arrow-right"></i>
                             </button>
                         </div>
@@ -227,42 +191,51 @@
                 </div>
             </div>
             
-            <div class="col-12 col-md-6 col-lg-4 mb-4">
-                <div class="card market-card shadow-sm h-100" data-market-id="3">
-                    <div class="market-image-wrapper position-relative">
-                        <img src="https://images.unsplash.com/photo-1573246123716-6b1782bfc499?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Market Image">
-                        <div class="market-status badge bg-success position-absolute top-0 end-0 m-2">Open</div>
+            <div class="col-12 col-md-6 col-lg-4 mb-2 d-flex">
+                <div class="card market-card shadow-sm flex-fill h-100" data-market-id="2" onclick="window.location.href='products.html?market_id=2'" style="cursor: pointer;">
+                    <!-- Card Header with Image and Status Badge -->
+                    <div class="position-relative rounded-top overflow-hidden">
+                        <!-- Market Status Indicator -->
+                        <div class="market-status badge bg-success position-absolute top-0 end-0 m-3 px-3 py-2 rounded-pill shadow-sm z-index-1">
+                            <i class="bi bi-check-circle-fill me-1"></i>Open
+                        </div>
+                        
+                        <!-- Favorite Button -->
+                        <button class="btn btn-light btn-sm rounded-circle position-absolute top-0 start-0 m-3 shadow-sm" title="Add to favorites">
+                            <i class="bi bi-heart text-muted"></i>
+                        </button>
+                        
+                        <!-- Market Image -->
+                        <div class="market-image-wrapper" style="height: 140px;">
+                            <img src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                                class="card-img-top h-100 w-100 object-fit-cover" alt="Market Image">
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="market-icon-wrapper bg-primary-light rounded-circle me-3">
-                                <i class="bi bi-shop text-primary"></i>
+                    
+                    <!-- Card Body with Market Info -->
+                    <div class="card-body d-flex flex-column p-2 gap-1">
+                        <!-- Market Icon and Title -->
+                        <div class="d-flex align-items-start">
+                            <div class="market-icon-wrapper bg-primary-light rounded-circle me-2 flex-shrink-0 p-2" 
+                                style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+                                <i class="bi bi-shop text-primary fs-4"></i>
                             </div>
-                            <div>
-                                <h5 class="card-title mb-1">Dhanmondi 15 Market</h5>
-                                <p class="card-subtitle text-muted small mb-0">Road 15, Dhanmondi</p>
-                            </div>
-                        </div>
-                        <div class="market-info mb-3">
-                            <div class="d-flex align-items-center text-muted small mb-2">
-                                <i class="bi bi-clock me-2"></i>
-                                <span>Open: 8:00 AM - 11:00 PM</span>
-                            </div>
-                            <div class="d-flex align-items-center text-muted small">
-                                <i class="bi bi-tag me-2"></i>
-                                <span>25+ items updated today</span>
+                            <div class="overflow-hidden">
+                                <h5 class="card-title mb-0 text-truncate fw-bold">Mirpur 10 Bazar</h5>
+                                <p class="card-subtitle text-muted small mb-0 text-truncate">
+                                    <i class="bi bi-geo-alt-fill me-1 text-primary"></i>Mirpur 10 Circle
+                                </p>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center">
-                                <span class="badge bg-primary-light text-primary rounded-pill me-2">
-                                    <i class="bi bi-geo-alt me-1"></i>0.3 km
-                                </span>
-                                <span class="badge bg-warning-light text-warning rounded-pill">
-                                    <i class="bi bi-star-fill me-1"></i>4.5
-                                </span>
-                            </div>
-                            <button class="btn btn-sm btn-outline-primary rounded-pill">
+                        
+
+                        
+                        <!-- Card Footer with Distance and Action Button -->
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <span class="badge bg-primary-light text-primary rounded-pill px-3 py-2 fw-normal">
+                                <i class="bi bi-geo-alt me-1"></i>1.2 km
+                            </span>
+                            <button class="btn btn-primary rounded-pill px-3 py-2">
                                 <i class="bi bi-arrow-right"></i>
                             </button>
                         </div>
@@ -270,42 +243,51 @@
                 </div>
             </div>
             
-            <div class="col-12 col-md-6 col-lg-4 mb-4">
-                <div class="card market-card shadow-sm h-100" data-market-id="4">
-                    <div class="market-image-wrapper position-relative">
-                        <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Market Image">
-                        <div class="market-status badge bg-success position-absolute top-0 end-0 m-2">Open</div>
+            <div class="col-12 col-md-6 col-lg-4 mb-2 d-flex">
+                <div class="card market-card shadow-sm flex-fill h-100" data-market-id="3" onclick="window.location.href='products.html?market_id=3'" style="cursor: pointer;">
+                    <!-- Card Header with Image and Status Badge -->
+                    <div class="position-relative rounded-top overflow-hidden">
+                        <!-- Market Status Indicator -->
+                        <div class="market-status badge bg-success position-absolute top-0 end-0 m-3 px-3 py-2 rounded-pill shadow-sm z-index-1">
+                            <i class="bi bi-check-circle-fill me-1"></i>Open
+                        </div>
+                        
+                        <!-- Favorite Button -->
+                        <button class="btn btn-light btn-sm rounded-circle position-absolute top-0 start-0 m-3 shadow-sm" title="Add to favorites">
+                            <i class="bi bi-heart text-muted"></i>
+                        </button>
+                        
+                        <!-- Market Image -->
+                        <div class="market-image-wrapper" style="height: 140px;">
+                            <img src="https://images.unsplash.com/photo-1573246123716-6b1782bfc499?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                                class="card-img-top h-100 w-100 object-fit-cover" alt="Market Image">
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="market-icon-wrapper bg-primary-light rounded-circle me-3">
-                                <i class="bi bi-shop text-primary"></i>
+                    
+                    <!-- Card Body with Market Info -->
+                    <div class="card-body d-flex flex-column p-2 gap-1">
+                        <!-- Market Icon and Title -->
+                        <div class="d-flex align-items-start">
+                            <div class="market-icon-wrapper bg-primary-light rounded-circle me-2 flex-shrink-0 p-2" 
+                                style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+                                <i class="bi bi-shop text-primary fs-4"></i>
                             </div>
-                            <div>
-                                <h5 class="card-title mb-1">Gulshan 2 Fresh Market</h5>
-                                <p class="card-subtitle text-muted small mb-0">Gulshan Avenue</p>
-                            </div>
-                        </div>
-                        <div class="market-info mb-3">
-                            <div class="d-flex align-items-center text-muted small mb-2">
-                                <i class="bi bi-clock me-2"></i>
-                                <span>Open: 7:30 AM - 9:30 PM</span>
-                            </div>
-                            <div class="d-flex align-items-center text-muted small">
-                                <i class="bi bi-tag me-2"></i>
-                                <span>18+ items updated today</span>
+                            <div class="overflow-hidden">
+                                <h5 class="card-title mb-0 text-truncate fw-bold">Dhanmondi 15 Market</h5>
+                                <p class="card-subtitle text-muted small mb-0 text-truncate">
+                                    <i class="bi bi-geo-alt-fill me-1 text-primary"></i>Road 15, Dhanmondi
+                                </p>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center">
-                                <span class="badge bg-primary-light text-primary rounded-pill me-2">
-                                    <i class="bi bi-geo-alt me-1"></i>1.8 km
-                                </span>
-                                <span class="badge bg-warning-light text-warning rounded-pill">
-                                    <i class="bi bi-star-fill me-1"></i>4.3
-                                </span>
-                            </div>
-                            <button class="btn btn-sm btn-outline-primary rounded-pill">
+                        
+
+                        
+                        <!-- Card Footer with Distance and Action Button -->
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <span class="badge bg-primary-light text-primary rounded-pill px-3 py-2 fw-normal">
+                                <i class="bi bi-geo-alt me-1"></i>0.3 km
+                            </span>
+                            <button class="btn btn-primary rounded-pill px-3 py-2">
                                 <i class="bi bi-arrow-right"></i>
                             </button>
                         </div>
@@ -313,42 +295,102 @@
                 </div>
             </div>
             
-            <div class="col-12 col-md-6 col-lg-4 mb-4">
-                <div class="card market-card shadow-sm h-100" data-market-id="5">
-                    <div class="market-image-wrapper position-relative">
-                        <img src="https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Market Image">
-                        <div class="market-status badge bg-success position-absolute top-0 end-0 m-2">Open</div>
+            <div class="col-12 col-md-6 col-lg-4 mb-2 d-flex">
+                <div class="card market-card shadow-sm flex-fill h-100" data-market-id="4" onclick="window.location.href='products.html?market_id=4'" style="cursor: pointer;">
+                    <!-- Card Header with Image and Status Badge -->
+                    <div class="position-relative rounded-top overflow-hidden">
+                        <!-- Market Status Indicator -->
+                        <div class="market-status badge bg-success position-absolute top-0 end-0 m-3 px-3 py-2 rounded-pill shadow-sm z-index-1">
+                            <i class="bi bi-check-circle-fill me-1"></i>Open
+                        </div>
+                        
+                        <!-- Favorite Button -->
+                        <button class="btn btn-light btn-sm rounded-circle position-absolute top-0 start-0 m-3 shadow-sm" title="Add to favorites">
+                            <i class="bi bi-heart text-muted"></i>
+                        </button>
+                        
+                        <!-- Market Image -->
+                        <div class="market-image-wrapper" style="height: 140px;">
+                            <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                                class="card-img-top h-100 w-100 object-fit-cover" alt="Market Image">
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="market-icon-wrapper bg-primary-light rounded-circle me-3">
-                                <i class="bi bi-shop text-primary"></i>
+                    
+                    <!-- Card Body with Market Info -->
+                    <div class="card-body d-flex flex-column p-2 gap-1">
+                        <!-- Market Icon and Title -->
+                        <div class="d-flex align-items-start">
+                            <div class="market-icon-wrapper bg-primary-light rounded-circle me-2 flex-shrink-0 p-2" 
+                                style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+                                <i class="bi bi-shop text-primary fs-4"></i>
                             </div>
-                            <div>
-                                <h5 class="card-title mb-1">Banani Farmers Market</h5>
-                                <p class="card-subtitle text-muted small mb-0">Banani Road 11</p>
-                            </div>
-                        </div>
-                        <div class="market-info mb-3">
-                            <div class="d-flex align-items-center text-muted small mb-2">
-                                <i class="bi bi-clock me-2"></i>
-                                <span>Open: 8:00 AM - 10:00 PM</span>
-                            </div>
-                            <div class="d-flex align-items-center text-muted small">
-                                <i class="bi bi-tag me-2"></i>
-                                <span>22+ items updated today</span>
+                            <div class="overflow-hidden">
+                                <h5 class="card-title mb-0 text-truncate fw-bold">Gulshan 2 Fresh Market</h5>
+                                <p class="card-subtitle text-muted small mb-0 text-truncate">
+                                    <i class="bi bi-geo-alt-fill me-1 text-primary"></i>Gulshan Avenue
+                                </p>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center">
-                                <span class="badge bg-primary-light text-primary rounded-pill me-2">
-                                    <i class="bi bi-geo-alt me-1"></i>2.1 km
-                                </span>
-                                <span class="badge bg-warning-light text-warning rounded-pill">
-                                    <i class="bi bi-star-fill me-1"></i>4.7
-                                </span>
+                        
+ 
+                        
+                        <!-- Card Footer with Distance and Action Button -->
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <span class="badge bg-primary-light text-primary rounded-pill px-3 py-2 fw-normal">
+                                <i class="bi bi-geo-alt me-1"></i>1.8 km
+                            </span>
+                            <button class="btn btn-primary rounded-pill px-3 py-2">
+                                <i class="bi bi-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-md-6 col-lg-4 mb-2 d-flex">
+                <div class="card market-card shadow-sm flex-fill h-100" data-market-id="5" onclick="window.location.href='products.html?market_id=5'" style="cursor: pointer;">
+                    <!-- Card Header with Image and Status Badge -->
+                    <div class="position-relative rounded-top overflow-hidden">
+                        <!-- Market Status Indicator -->
+                        <div class="market-status badge bg-success position-absolute top-0 end-0 m-3 px-3 py-2 rounded-pill shadow-sm z-index-1">
+                            <i class="bi bi-check-circle-fill me-1"></i>Open
+                        </div>
+                        
+                        <!-- Favorite Button -->
+                        <button class="btn btn-light btn-sm rounded-circle position-absolute top-0 start-0 m-3 shadow-sm" title="Add to favorites">
+                            <i class="bi bi-heart text-muted"></i>
+                        </button>
+                        
+                        <!-- Market Image -->
+                        <div class="market-image-wrapper" style="height: 140px;">
+                            <img src="https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                                class="card-img-top h-100 w-100 object-fit-cover" alt="Market Image">
+                        </div>
+                    </div>
+                    
+                    <!-- Card Body with Market Info -->
+                    <div class="card-body d-flex flex-column p-2 gap-1">
+                        <!-- Market Icon and Title -->
+                        <div class="d-flex align-items-start">
+                            <div class="market-icon-wrapper bg-primary-light rounded-circle me-2 flex-shrink-0 p-2" 
+                                style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+                                <i class="bi bi-shop text-primary fs-4"></i>
                             </div>
-                            <button class="btn btn-sm btn-outline-primary rounded-pill">
+                            <div class="overflow-hidden">
+                                <h5 class="card-title mb-0 text-truncate fw-bold">Banani Farmers Market</h5>
+                                <p class="card-subtitle text-muted small mb-0 text-truncate">
+                                    <i class="bi bi-geo-alt-fill me-1 text-primary"></i>Banani Road 11
+                                </p>
+                            </div>
+                        </div>
+                        
+ 
+                        <!-- Card Footer with Distance and Action Button -->
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <span class="badge bg-primary-light text-primary rounded-pill px-3 py-2 fw-normal">
+                                <i class="bi bi-geo-alt me-1"></i>2.1 km
+                            </span>
+                            <button class="btn btn-primary rounded-pill px-3 py-2">
                                 <i class="bi bi-arrow-right"></i>
                             </button>
                         </div>

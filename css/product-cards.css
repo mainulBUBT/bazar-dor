@@ -41,7 +41,21 @@
 
 /* Product Card Body */
 .product-card .card-body {
-    padding: 1rem;
+    padding: 0.75rem;
+}
+
+/* Card Title and Subtitle */
+.product-card .card-title {
+    margin-bottom: 0.25rem;
+}
+
+.product-card .card-subtitle {
+    margin-bottom: 0.5rem;
+}
+
+/* Price and Update Info */
+.product-card .mt-auto {
+    margin-top: 0.5rem !important;
 }
 
 /* Product Card Footer */
