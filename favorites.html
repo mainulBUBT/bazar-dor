@@ -24,9 +24,15 @@
                     <i class="bi bi-arrow-left fs-4"></i>
                 </button>
                 <h5 class="text-white mb-0">Favorites</h5>
-                <button class="btn text-white p-0" id="search-toggle">
-                    <i class="bi bi-search fs-4"></i>
-                </button>
+                <div>
+                    <a href="notifications.html" class="btn text-white p-0 position-relative me-3" title="Notifications">
+                        <i class="bi bi-bell-fill fs-4"></i>
+                        <span class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger notification-badge">
+                            3
+                            <span class="visually-hidden">unread notifications</span>
+                        </span>
+                    </a>
+                </div>
             </div>
             
             <!-- Search bar (initially hidden) -->
@@ -63,9 +69,9 @@
         </div>
 
         <!-- Favorites List -->
-        <div id="favorites-list" class="row g-3 mb-5 favorites-list">
+        <div id="favorites-list" class="row g-2 mb-5 favorites-list">
             <!-- Favorite Market Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-3" data-favorite-type="market">
+            <div class="col-12 col-md-6 col-lg-4 mb-2" data-favorite-type="market">
                 <div class="card market-card border-0 shadow-sm rounded-4 h-100" data-market-id="1">
                     <div class="row g-0 h-100">
                         <div class="col-4">
@@ -78,7 +84,7 @@
                             </div>
                         </div>
                         <div class="col-8">
-                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                            <div class="card-body py-1 px-2 h-100 d-flex flex-column">
                                 <div class="d-flex justify-content-between align-items-start mb-1">
                                     <h5 class="card-title mb-0 fs-6 text-truncate">Mirpur 11 Kacha Bazar</h5>
                                     <span class="badge bg-success small ms-1 flex-shrink-0">Open</span>
@@ -89,7 +95,7 @@
                                     <span class="text-muted"><i class="bi bi-star-fill text-warning me-1"></i>4.5</span>
                                 </div>
                                 <div class="mt-auto pt-1">
-                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 touch-action">
+                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 py-0 px-1 d-flex align-items-center justify-content-center touch-action">
                                         <i class="bi bi-eye me-1"></i>View Market
                                     </a>
                                 </div>
@@ -100,7 +106,7 @@
             </div>
 
             <!-- Favorite Item Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-3" data-favorite-type="item">
+            <div class="col-12 col-md-6 col-lg-4 mb-2" data-favorite-type="item">
                 <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="1">
                     <div class="row g-0 h-100">
                         <div class="col-4">
@@ -113,7 +119,7 @@
                             </div>
                         </div>
                         <div class="col-8">
-                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                            <div class="card-body py-1 px-2 h-100 d-flex flex-column">
                                 <div class="d-flex justify-content-between align-items-start mb-1">
                                     <h5 class="card-title mb-0 fs-6 text-truncate">Fresh Tomatoes</h5>
                                     <span class="badge bg-success small ms-1 flex-shrink-0"><i class="bi bi-arrow-down-short"></i>৳10</span>
@@ -127,7 +133,7 @@
                                     <span class="small text-muted"><i class="bi bi-shop me-1"></i>5 markets</span>
                                 </div>
                                 <div class="mt-auto pt-1">
-                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 touch-action">
+                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 py-0 px-1 d-flex align-items-center justify-content-center touch-action">
                                         <i class="bi bi-eye me-1"></i>View Details
                                     </a>
                                 </div>
@@ -138,7 +144,7 @@
             </div>
 
             <!-- Favorite Market Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-3" data-favorite-type="market">
+            <div class="col-12 col-md-6 col-lg-4 mb-2" data-favorite-type="market">
                 <div class="card market-card border-0 shadow-sm rounded-4 h-100" data-market-id="2">
                     <div class="row g-0 h-100">
                         <div class="col-4">
@@ -151,7 +157,7 @@
                             </div>
                         </div>
                         <div class="col-8">
-                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                            <div class="card-body py-1 px-2 h-100 d-flex flex-column">
                                 <div class="d-flex justify-content-between align-items-start mb-1">
                                     <h5 class="card-title mb-0 fs-6 text-truncate">Dhanmondi Farmers Market</h5>
                                     <span class="badge bg-success small ms-1 flex-shrink-0">Open</span>
@@ -162,7 +168,7 @@
                                     <span class="text-muted"><i class="bi bi-star-fill text-warning me-1"></i>4.7</span>
                                 </div>
                                 <div class="mt-auto pt-1">
-                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 touch-action">
+                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 py-0 px-1 d-flex align-items-center justify-content-center touch-action">
                                         <i class="bi bi-eye me-1"></i>View Market
                                     </a>
                                 </div>
@@ -173,7 +179,7 @@
             </div>
 
             <!-- Favorite Item Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-3" data-favorite-type="item">
+            <div class="col-12 col-md-6 col-lg-4 mb-2" data-favorite-type="item">
                 <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="2">
                     <div class="row g-0 h-100">
                         <div class="col-4">
@@ -186,7 +192,7 @@
                             </div>
                         </div>
                         <div class="col-8">
-                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                            <div class="card-body py-1 px-2 h-100 d-flex flex-column">
                                 <div class="d-flex justify-content-between align-items-start mb-1">
                                     <h5 class="card-title mb-0 fs-6 text-truncate">Organic Carrots</h5>
                                     <span class="badge bg-danger small ms-1 flex-shrink-0"><i class="bi bi-arrow-up-short"></i>৳5</span>
@@ -200,7 +206,7 @@
                                     <span class="small text-muted"><i class="bi bi-shop me-1"></i>3 markets</span>
                                 </div>
                                 <div class="mt-auto pt-1">
-                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 touch-action">
+                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 py-0 px-1 d-flex align-items-center justify-content-center touch-action">
                                         <i class="bi bi-eye me-1"></i>View Details
                                     </a>
                                 </div>
@@ -211,7 +217,7 @@
             </div>
 
             <!-- Favorite Market Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-3" data-favorite-type="market">
+            <div class="col-12 col-md-6 col-lg-4 mb-2" data-favorite-type="market">
                 <div class="card market-card border-0 shadow-sm rounded-4 h-100" data-market-id="3">
                     <div class="row g-0 h-100">
                         <div class="col-4">
@@ -224,7 +230,7 @@
                             </div>
                         </div>
                         <div class="col-8">
-                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                            <div class="card-body py-1 px-2 h-100 d-flex flex-column">
                                 <div class="d-flex justify-content-between align-items-start mb-1">
                                     <h5 class="card-title mb-0 fs-6 text-truncate">Gulshan Fresh Market</h5>
                                     <span class="badge bg-success small ms-1 flex-shrink-0">Open</span>
@@ -235,7 +241,7 @@
                                     <span class="text-muted"><i class="bi bi-star-fill text-warning me-1"></i>4.2</span>
                                 </div>
                                 <div class="mt-auto pt-1">
-                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 touch-action">
+                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 py-0 px-1 d-flex align-items-center justify-content-center touch-action">
                                         <i class="bi bi-eye me-1"></i>View Market
                                     </a>
                                 </div>
@@ -246,7 +252,7 @@
             </div>
 
             <!-- Favorite Item Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-3" data-favorite-type="item">
+            <div class="col-12 col-md-6 col-lg-4 mb-2" data-favorite-type="item">
                 <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="3">
                     <div class="row g-0 h-100">
                         <div class="col-4">
@@ -259,7 +265,7 @@
                             </div>
                         </div>
                         <div class="col-8">
-                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                            <div class="card-body py-1 px-2 h-100 d-flex flex-column">
                                 <div class="d-flex justify-content-between align-items-start mb-1">
                                     <h5 class="card-title mb-0 fs-6 text-truncate">Fresh Potatoes</h5>
                                     <span class="badge bg-success small ms-1 flex-shrink-0"><i class="bi bi-arrow-down-short"></i>৳8</span>
@@ -273,7 +279,7 @@
                                     <span class="small text-muted"><i class="bi bi-shop me-1"></i>6 markets</span>
                                 </div>
                                 <div class="mt-auto pt-1">
-                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 touch-action">
+                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 py-0 px-1 d-flex align-items-center justify-content-center touch-action">
                                         <i class="bi bi-eye me-1"></i>View Details
                                     </a>
                                 </div>
@@ -284,7 +290,7 @@
             </div>
 
             <!-- Favorite Item Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-3" data-favorite-type="item">
+            <div class="col-12 col-md-6 col-lg-4 mb-2" data-favorite-type="item">
                 <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="4">
                     <div class="row g-0 h-100">
                         <div class="col-4">
@@ -297,7 +303,7 @@
                             </div>
                         </div>
                         <div class="col-8">
-                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                            <div class="card-body py-1 px-2 h-100 d-flex flex-column">
                                 <div class="d-flex justify-content-between align-items-start mb-1">
                                     <h5 class="card-title mb-0 fs-6 text-truncate">Premium Rice</h5>
                                     <span class="badge bg-success small ms-1 flex-shrink-0"><i class="bi bi-arrow-down-short"></i>৳15</span>
@@ -311,7 +317,7 @@
                                     <span class="small text-muted"><i class="bi bi-shop me-1"></i>4 markets</span>
                                 </div>
                                 <div class="mt-auto pt-1">
-                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 touch-action">
+                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 py-0 px-1 d-flex align-items-center justify-content-center touch-action">
                                         <i class="bi bi-eye me-1"></i>View Details
                                     </a>
                                 </div>
@@ -322,7 +328,7 @@
             </div>
 
             <!-- Favorite Market Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-3" data-favorite-type="market">
+            <div class="col-12 col-md-6 col-lg-4 mb-2" data-favorite-type="market">
                 <div class="card market-card border-0 shadow-sm rounded-4 h-100" data-market-id="4">
                     <div class="row g-0 h-100">
                         <div class="col-4">
@@ -335,7 +341,7 @@
                             </div>
                         </div>
                         <div class="col-8">
-                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                            <div class="card-body py-1 px-2 h-100 d-flex flex-column">
                                 <div class="d-flex justify-content-between align-items-start mb-1">
                                     <h5 class="card-title mb-0 fs-6 text-truncate">Banani Organic Market</h5>
                                     <span class="badge bg-danger small ms-1 flex-shrink-0">Closed</span>
@@ -346,7 +352,7 @@
                                     <span class="text-muted"><i class="bi bi-star-fill text-warning me-1"></i>4.8</span>
                                 </div>
                                 <div class="mt-auto pt-1">
-                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 touch-action">
+                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 py-0 px-1 d-flex align-items-center justify-content-center touch-action">
                                         <i class="bi bi-eye me-1"></i>View Market
                                     </a>
                                 </div>
@@ -357,7 +363,7 @@
             </div>
 
             <!-- Favorite Item Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-3" data-favorite-type="item">
+            <div class="col-12 col-md-6 col-lg-4 mb-2" data-favorite-type="item">
                 <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="5">
                     <div class="row g-0 h-100">
                         <div class="col-4">
@@ -370,7 +376,7 @@
                             </div>
                         </div>
                         <div class="col-8">
-                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                            <div class="card-body py-1 px-2 h-100 d-flex flex-column">
                                 <div class="d-flex justify-content-between align-items-start mb-1">
                                     <h5 class="card-title mb-0 fs-6 text-truncate">Fresh Mangoes</h5>
                                     <span class="badge bg-danger small ms-1 flex-shrink-0"><i class="bi bi-arrow-up-short"></i>৳20</span>
@@ -384,7 +390,7 @@
                                     <span class="small text-muted"><i class="bi bi-shop me-1"></i>7 markets</span>
                                 </div>
                                 <div class="mt-auto pt-1">
-                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 touch-action">
+                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 py-0 px-1 d-flex align-items-center justify-content-center touch-action">
                                         <i class="bi bi-eye me-1"></i>View Details
                                     </a>
                                 </div>
@@ -395,7 +401,7 @@
             </div>
 
             <!-- Favorite Market Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-3" data-favorite-type="market">
+            <div class="col-12 col-md-6 col-lg-4 mb-2" data-favorite-type="market">
                 <div class="card market-card border-0 shadow-sm rounded-4 h-100" data-market-id="5">
                     <div class="row g-0 h-100">
                         <div class="col-4">
@@ -408,7 +414,7 @@
                             </div>
                         </div>
                         <div class="col-8">
-                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
+                            <div class="card-body py-1 px-2 h-100 d-flex flex-column">
                                 <div class="d-flex justify-content-between align-items-start mb-1">
                                     <h5 class="card-title mb-0 fs-6 text-truncate">Uttara Fish Market</h5>
                                     <span class="badge bg-success small ms-1 flex-shrink-0">Open</span>
@@ -419,7 +425,7 @@
                                     <span class="text-muted"><i class="bi bi-star-fill text-warning me-1"></i>4.3</span>
                                 </div>
                                 <div class="mt-auto pt-1">
-                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 touch-action">
+                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 py-0 px-1 d-flex align-items-center justify-content-center touch-action">
                                         <i class="bi bi-eye me-1"></i>View Market
                                     </a>
                                 </div>
@@ -432,6 +438,62 @@
         
         <!-- Pagination Controls -->
         <div id="pagination-container" class="mt-4 mb-3"></div>
+    </div>
+    
+    <!-- Side Drawer Navigation -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header bg-primary text-white">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Bazar Dor</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"></button>
+        </div>
+        <div class="offcanvas-body p-0">
+            <!-- User Profile Section -->
+            <div class="drawer-profile">
+                <div class="drawer-profile-image">
+                    <i class="bi bi-person"></i>
+                </div>
+                <div class="drawer-profile-info">
+                    <h6>Guest User</h6>
+                    <p>Welcome to Bazar Dor</p>
+                </div>
+            </div>
+            
+            <!-- Navigation Menu -->
+            <ul class="navbar-nav drawer-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html"><i class="bi bi-house"></i>Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="markets.html"><i class="bi bi-shop"></i>Markets</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="favorites.html"><i class="bi bi-heart"></i>Favorites</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="notifications.html"><i class="bi bi-bell"></i>Notifications</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profile.html"><i class="bi bi-person"></i>Profile</a>
+                </li>
+            </ul>
+            
+            <div class="auth-section">
+                <h6>Join Bazar Dor</h6>
+                <a href="login.html" class="auth-btn signin">
+                    <i class="bi bi-box-arrow-in-right"></i>
+                    <span>Sign In</span>
+                </a>
+                <a href="register.html" class="auth-btn signup">
+                    <i class="bi bi-person-plus"></i>
+                    <span>Create Account</span>
+                </a>
+            </div>
+            
+            <!-- Drawer Footer -->
+            <div class="drawer-footer">
+                <p>© 2023 Bazar Dor. All rights reserved.</p>
+            </div>
+        </div>
     </div>
 
     <!-- Bottom Navigation -->

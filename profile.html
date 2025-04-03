@@ -23,9 +23,11 @@
                     <i class="bi bi-arrow-left fs-4"></i>
                 </button>
                 <h5 class="text-white mb-0">Profile</h5>
-                <button class="btn text-white p-0">
-                    <i class="bi bi-gear fs-4"></i>
-                </button>
+                <div>
+                    <button class="btn text-white p-0">
+                        <i class="bi bi-gear fs-4"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
@@ -47,6 +49,62 @@
     </div>
 
     <div class="container">
+        <!-- Side Drawer Navigation -->
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header bg-primary text-white">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Bazar Dor</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"></button>
+            </div>
+            <div class="offcanvas-body p-0">
+                <!-- User Profile Section -->
+                <div class="drawer-profile">
+                    <div class="drawer-profile-image">
+                        <i class="bi bi-person"></i>
+                    </div>
+                    <div class="drawer-profile-info">
+                        <h6>Guest User</h6>
+                        <p>Welcome to Bazar Dor</p>
+                    </div>
+                </div>
+                
+                <!-- Navigation Menu -->
+                <ul class="navbar-nav drawer-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="bi bi-house"></i>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="markets.html"><i class="bi bi-shop"></i>Markets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="favorites.html"><i class="bi bi-heart"></i>Favorites</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="notifications.html"><i class="bi bi-bell"></i>Notifications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="profile.html"><i class="bi bi-person"></i>Profile</a>
+                    </li>
+                </ul>
+                
+                <div class="auth-section">
+                    <h6>Join Bazar Dor</h6>
+                    <a href="login.html" class="auth-btn signin">
+                        <i class="bi bi-box-arrow-in-right"></i>
+                        <span>Sign In</span>
+                    </a>
+                    <a href="register.html" class="auth-btn signup">
+                        <i class="bi bi-person-plus"></i>
+                        <span>Create Account</span>
+                    </a>
+                </div>
+                
+                <!-- Drawer Footer -->
+                <div class="drawer-footer">
+                    <p>© 2023 Bazar Dor. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+        
         <div class="row g-3 mb-4">
             <div class="col-4">
                 <div class="stats-card text-center">
@@ -105,16 +163,18 @@
                 <i class="bi bi-chevron-right text-muted"></i>
             </div>
 
-            <div class="menu-item shadow-sm d-flex align-items-center">
-                <div class="menu-icon text-primary me-3">
-                    <i class="bi bi-bell"></i>
+            <a href="notifications.html" class="text-decoration-none" style="color: black;">
+                <div class="menu-item shadow-sm d-flex align-items-center">
+                    <div class="menu-icon text-primary me-3">
+                        <i class="bi bi-bell"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                        <h6 class="mb-0">Notifications</h6>
+                        <small class="text-muted">Manage your alerts</small>
+                    </div>
+                    <i class="bi bi-chevron-right text-muted"></i>
                 </div>
-                <div class="flex-grow-1">
-                    <h6 class="mb-0">Notifications</h6>
-                    <small class="text-muted">Manage your alerts</small>
-                </div>
-                <i class="bi bi-chevron-right text-muted"></i>
-            </div>
+            </a>
         </div>
 
         <div class="text-center my-5 mb-5 pb-5">

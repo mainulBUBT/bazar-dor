@@ -23,13 +23,15 @@
                     <i class="bi bi-grid fs-4"></i>
                 </button>
                 <a class="navbar-brand text-center m-0" href="#">Bazar Dor</a>
-                <button class="btn text-white p-0 position-relative" title="Notifications">
-                    <i class="bi bi-bell fs-4"></i>
-                    <span class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-primary">
-                        3
-                        <span class="visually-hidden">unread notifications</span>
-                    </span>
-                </button>
+                <div>
+                    <a href="notifications.html" class="btn text-white p-0 position-relative me-3" title="Notifications">
+                        <i class="bi bi-bell-fill fs-4"></i>
+                        <span class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger notification-badge">
+                            3
+                            <span class="visually-hidden">unread notifications</span>
+                        </span>
+                    </a>
+                </div>
             </div>
             
             <!-- Location bar directly in header -->
@@ -53,8 +55,20 @@
                     <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Bazar Dor</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"></button>
                 </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav">
+                <div class="offcanvas-body p-0">
+                    <!-- User Profile Section -->
+                    <div class="drawer-profile">
+                        <div class="drawer-profile-image">
+                            <i class="bi bi-person"></i>
+                        </div>
+                        <div class="drawer-profile-info">
+                            <h6>Guest User</h6>
+                            <p>Welcome to Bazar Dor</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Menu -->
+                    <ul class="navbar-nav drawer-nav">
                         <li class="nav-item">
                             <a class="nav-link active" href="#"><i class="bi bi-house"></i>Home</a>
                         </li>
@@ -68,14 +82,15 @@
                             <a class="nav-link" href="favorites.html"><i class="bi bi-heart"></i>Favorites</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="notifications.html"><i class="bi bi-bell"></i>Notifications</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="profile.html"><i class="bi bi-person"></i>Profile</a>
                         </li>
                     </ul>
                     
                     <div class="auth-section">
-                        <div class="text-center mb-3">
-                            <h6 class="text-muted mb-0">Join Bazar Dor</h6>
-                        </div>
+                        <h6>Join Bazar Dor</h6>
                         <a href="login.html" class="auth-btn signin">
                             <i class="bi bi-box-arrow-in-right"></i>
                             <span>Sign In</span>
@@ -84,6 +99,11 @@
                             <i class="bi bi-person-plus"></i>
                             <span>Create Account</span>
                         </a>
+                    </div>
+                    
+                    <!-- Drawer Footer -->
+                    <div class="drawer-footer">
+                        <p>© 2023 Bazar Dor. All rights reserved.</p>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffd700">
+    <title>Notifications - Bazar Dor</title>
+    <link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="lib/bootstrap-icons/bootstrap-icons.min.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- PWA icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+</head>
+<body>
+    <header class="app-header bg-primary">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center py-2">
+                <button class="btn text-white p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <i class="bi bi-grid fs-4"></i>
+                </button>
+                <a class="navbar-brand text-center m-0" href="index.html">Bazar Dor</a>
+                <div>
+                    <a href="notifications.html" class="btn text-white p-0 position-relative me-3" title="Notifications">
+                        <i class="bi bi-bell-fill fs-4"></i>
+                        <span class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger notification-badge">
+                            3
+                            <span class="visually-hidden">unread notifications</span>
+                        </span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header bg-primary text-white">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Bazar Dor</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"></button>
+                </div>
+                <div class="offcanvas-body p-0">
+                    <!-- User Profile Section -->
+                    <div class="drawer-profile">
+                        <div class="drawer-profile-image">
+                            <i class="bi bi-person"></i>
+                        </div>
+                        <div class="drawer-profile-info">
+                            <h6>Guest User</h6>
+                            <p>Welcome to Bazar Dor</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Menu -->
+                    <ul class="navbar-nav drawer-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html"><i class="bi bi-house"></i>Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="markets.html"><i class="bi bi-shop"></i>Markets</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="favorites.html"><i class="bi bi-heart"></i>Favorites</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="notifications.html"><i class="bi bi-bell"></i>Notifications</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="profile.html"><i class="bi bi-person"></i>Profile</a>
+                        </li>
+                    </ul>
+                    
+                    <div class="auth-section">
+                        <h6>Join Bazar Dor</h6>
+                        <a href="login.html" class="auth-btn signin">
+                            <i class="bi bi-box-arrow-in-right"></i>
+                            <span>Sign In</span>
+                        </a>
+                        <a href="register.html" class="auth-btn signup">
+                            <i class="bi bi-person-plus"></i>
+                            <span>Create Account</span>
+                        </a>
+                    </div>
+                    
+                    <!-- Drawer Footer -->
+                    <div class="drawer-footer">
+                        <p>© 2023 Bazar Dor. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <nav class="navbar fixed-bottom navbar-dark">
+        <div class="container-fluid justify-content-center p-0">
+            <ul class="navbar-nav flex-row bottom-nav">
+                <li class="nav-item mx-0">
+                    <a class="nav-link" href="index.html">
+                        <i class="bi bi-house"></i>
+                        <div class="nav-label small">Home</div>
+                    </a>
+                </li>
+                <li class="nav-item mx-0">
+                    <a class="nav-link" href="markets.html">
+                        <i class="bi bi-shop"></i>
+                        <div class="nav-label small">Markets</div>
+                    </a>
+                </li>
+                <li class="nav-item mx-0">
+                    <a class="nav-link" href="favorites.html">
+                        <i class="bi bi-heart"></i>
+                        <div class="nav-label small">Favorites</div>
+                    </a>
+                </li>
+                <li class="nav-item mx-0">
+                    <a class="nav-link" href="profile.html">
+                        <i class="bi bi-person"></i>
+                        <div class="nav-label small">Profile</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4 mb-7">
+        <div class="row">
+            <div class="col-12">
+                <h4 class="mb-3">Notifications</h4>
+                
+                <!-- Notifications List -->
+                <div class="notifications-list">
+                    <!-- Unread Notification -->
+                    <div class="card mb-3 notification-card unread">
+                        <div class="card-body">
+                            <div class="d-flex align-items-start">
+                                <div class="notification-icon bg-primary-light rounded-circle p-2 me-3">
+                                    <i class="bi bi-tag-fill text-primary"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <h6 class="notification-title mb-0">Price Update</h6>
+                                        <span class="notification-time text-muted small">2 hours ago</span>
+                                    </div>
+                                    <p class="notification-text mb-0">Prices for tomatoes have decreased by 15% at Central Market.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Unread Notification -->
+                    <div class="card mb-3 notification-card unread">
+                        <div class="card-body">
+                            <div class="d-flex align-items-start">
+                                <div class="notification-icon bg-warning-light rounded-circle p-2 me-3">
+                                    <i class="bi bi-shop text-warning"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <h6 class="notification-title mb-0">New Market Added</h6>
+                                        <span class="notification-time text-muted small">Yesterday</span>
+                                    </div>
+                                    <p class="notification-text mb-0">Fresh Farms Market has been added to your area. Check out their prices!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Unread Notification -->
+                    <div class="card mb-3 notification-card unread">
+                        <div class="card-body">
+                            <div class="d-flex align-items-start">
+                                <div class="notification-icon bg-success-light rounded-circle p-2 me-3">
+                                    <i class="bi bi-check-circle-fill text-success"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <h6 class="notification-title mb-0">Price Alert</h6>
+                                        <span class="notification-time text-muted small">2 days ago</span>
+                                    </div>
+                                    <p class="notification-text mb-0">Potatoes are now 20% cheaper at Sunshine Grocery compared to last week.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Read Notification -->
+                    <div class="card mb-3 notification-card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-start">
+                                <div class="notification-icon bg-info-light rounded-circle p-2 me-3">
+                                    <i class="bi bi-info-circle-fill text-info"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <h6 class="notification-title mb-0">App Update</h6>
+                                        <span class="notification-time text-muted small">1 week ago</span>
+                                    </div>
+                                    <p class="notification-text mb-0">We've updated our app with new features. Check out the latest improvements!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Read Notification -->
+                    <div class="card mb-3 notification-card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-start">
+                                <div class="notification-icon bg-secondary-light rounded-circle p-2 me-3">
+                                    <i class="bi bi-star-fill text-secondary"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <h6 class="notification-title mb-0">Weekly Summary</h6>
+                                        <span class="notification-time text-muted small">2 weeks ago</span>
+                                    </div>
+                                    <p class="notification-text mb-0">Your weekly price summary is ready. Vegetables prices have decreased by 5% on average.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mark All as Read Button -->
+                <div class="text-center mt-4">
+                    <button class="btn btn-outline-primary rounded-pill px-4">
+                        <i class="bi bi-check2-all me-2"></i>Mark all as read
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="lib/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

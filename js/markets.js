@@ -11,6 +11,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const sortDropdown = document.querySelectorAll('.dropdown-item[data-sort]');
     const selectLocationBtn = document.getElementById('select-location-btn');
     const locationWarningModal = new bootstrap.Modal(document.getElementById('locationWarningModal'));
+    const locationSearch = document.getElementById('location-search');
+    const currentLocationBtn = document.getElementById('current-location-btn');
+    const locationLoading = document.getElementById('location-loading');
+    
+    // Check for saved location on page load
+    checkSavedLocation();
+    
+    // Listen for location updates
+    window.addEventListener('locationUpdated', function(event) {
+        const location = event.detail;
+        updateMarketsBasedOnLocation(location);
+    });
+    
+    // Listen for address selection from location.js
+    document.addEventListener('addressSelected', function(event) {
+        const location = event.detail;
+        updateMarketsBasedOnLocation(location);
+    });
     
     // Constants for pagination
     const itemsPerPage = 6; // Show 6 items per page (2 rows of 3 on desktop)
@@ -301,3 +319,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+
+    // Check if user has a saved location
+    function checkSavedLocation() {
+        const savedLocation = localStorage.getItem('userLocation');
+        if (savedLocation) {
+            const location = JSON.parse(savedLocation);
+            locationSearch.value = location.address;
+            updateMarketsBasedOnLocation(location);
+        } else {
+            // Show location warning modal if no location is saved
+            locationWarningModal.show();
+        }
+    }
+    
+    // Update markets based on location
+    function updateMarketsBasedOnLocation(location) {
+        // In a real app, you would fetch markets near this location
+        // For demo, we'll just update the UI to show we have the location
+        document.querySelector('h2.h4').textContent = `Markets Near ${location.address.split(',')[0]}`;
+        
+        // You could also update distances or filter markets based on location
+        // This would typically involve an API call to get markets near the coordinates
+        console.log(`Location updated: ${location.lat}, ${location.lng}`);
+    }
