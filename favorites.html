@@ -47,14 +47,86 @@
     </header>
 
     <div class="container mt-3 mb-5 pb-5">
-        <!-- Filter Pills -->
-        <div class="filter-pills mb-3">
-            <div class="d-flex overflow-auto pb-1 hide-scrollbar">
-                <button type="button" class="btn btn-sm btn-primary rounded-pill me-2 px-3 active" data-filter="all">All</button>
-                <button type="button" class="btn btn-sm btn-outline-primary rounded-pill me-2 px-3" data-filter="markets">Markets</button>
-                <button type="button" class="btn btn-sm btn-outline-primary rounded-pill me-2 px-3" data-filter="items">Items</button>
+        <!-- Modern Filter Chips like products.html -->
+        <div class="filter-container mb-3">
+            <div class="filter-chips d-flex overflow-auto pb-2 hide-scrollbar snap-scroll">
+                <div class="filter-chip active me-2" data-filter="all">
+                    <span class="filter-icon"><i class="bi bi-grid"></i></span>
+                    <span class="filter-text">All</span>
+                </div>
+                <div class="filter-chip me-2" data-filter="markets">
+                    <span class="filter-icon"><i class="bi bi-shop"></i></span>
+                    <span class="filter-text">Markets</span>
+                </div>
+                <div class="filter-chip me-2" data-filter="items">
+                    <span class="filter-icon"><i class="bi bi-cart"></i></span>
+                    <span class="filter-text">Items</span>
+                </div>
             </div>
         </div>
+
+        <!-- Add Mobile Optimization Styles -->
+        <style>
+            /* Hide scrollbars but keep functionality */
+            .hide-scrollbar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            
+            .hide-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+            
+            /* Snap scrolling for filter pills */
+            .snap-scroll {
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .snap-scroll .filter-chip {
+                scroll-snap-align: center;
+            }
+            
+            /* Modern Filter Chips */
+            .filter-chip {
+                display: flex;
+                align-items: center;
+                padding: 0.4rem 0.8rem;
+                background-color: #f8f9fa;
+                border-radius: 2rem;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                white-space: nowrap;
+                border: 1px solid transparent;
+                flex-shrink: 0;
+            }
+            
+            .filter-chip.active {
+                background-color: var(--primary-color);
+                color: white;
+            }
+            
+            .filter-chip:active {
+                transform: scale(0.95);
+            }
+            
+            .filter-icon {
+                margin-right: 0.3rem;
+                display: inline-flex;
+                align-items: center;
+            }
+            
+            .filter-text {
+                font-size: 0.8rem;
+                font-weight: 500;
+            }
+            
+            /* Touch action improvements */
+            .touch-action {
+                -webkit-tap-highlight-color: transparent;
+                touch-action: manipulation;
+            }
+        </style>
 
         <!-- Empty state (shown when no favorites) -->
         <div id="empty-favorites" class="text-center py-5" style="display: none;">
@@ -296,7 +368,7 @@
                         <div class="col-4">
                             <div class="position-relative h-100">
                                 <img src="https://images.unsplash.com/photo-1587049352851-8d4e89133924?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Product Image">
+                                      class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Product Image">
                                 <button class="btn btn-sm position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-1 favorite-btn active">
                                     <i class="bi bi-heart-fill text-danger"></i>
                                 </button>
@@ -561,7 +633,7 @@
             // Function to handle both filtering and searching
             function filterAndSearchItems() {
                 const searchTerm = favoritesSearch.value.toLowerCase();
-                const activeFilter = document.querySelector('[data-filter].active').getAttribute('data-filter');
+                const activeFilter = document.querySelector('.filter-chip.active').getAttribute('data-filter');
                 let visibleCount = 0;
                 
                 favoriteItems.forEach(item => {
@@ -583,15 +655,15 @@
                 emptyFavorites.style.display = visibleCount === 0 ? 'block' : 'none';
             }
             
-            // Filter buttons functionality
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    filterButtons.forEach(btn => {
-                        btn.classList.remove('active', 'btn-primary');
-                        btn.classList.add('btn-outline-primary');
-                    });
-                    this.classList.remove('btn-outline-primary');
-                    this.classList.add('active', 'btn-primary');
+            // Filter chips functionality
+            const filterChips = document.querySelectorAll('.filter-chip');
+            filterChips.forEach(chip => {
+                chip.addEventListener('click', function() {
+                    // Remove active class from all chips
+                    filterChips.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked chip
+                    this.classList.add('active');
                     
                     filterAndSearchItems();
                 });
