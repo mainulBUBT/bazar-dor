@@ -7,11 +7,14 @@
     max-width: 100%;
     display: flex;
     flex-direction: column;
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 8px;
 }
 
 .product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
 }
 
 /* Product Card Image Container */
@@ -19,7 +22,7 @@
     position: relative;
     height: 100%;
     overflow: hidden;
-    border-radius: 15px 15px 0 0;
+    border-radius: 8px 8px 0 0;
 }
 
 /* Product Card Image */
@@ -31,36 +34,48 @@
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
-    min-height: 120px;
+    min-height: 100px;
 }
 
 /* Product Card Image Hover Effect */
 .product-card:hover .position-relative img {
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
 /* Product Card Body */
 .product-card .card-body {
-    padding: 0.75rem;
+    padding: 0.5rem;
 }
 
 /* Card Title and Subtitle */
 .product-card .card-title {
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.15rem;
+    font-size: 0.85rem;
+    line-height: 1.2;
 }
 
 .product-card .card-subtitle {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
+    font-size: 0.75rem;
 }
 
 /* Price and Update Info */
-.product-card .mt-auto {
-    margin-top: 0.5rem !important;
+.product-card .price-tag {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.product-card .price-unit {
+    font-size: 0.7rem;
+}
+
+.product-card .time-update {
+    font-size: 0.7rem;
 }
 
 /* Product Card Footer */
 .product-card .card-footer {
-    padding: 0.75rem 1rem;
+    padding: 0.5rem;
     background: transparent;
     border-top: 1px solid rgba(0,0,0,0.05);
 }
@@ -78,11 +93,11 @@
 @media (max-width: 575.98px) {
     .product-card .position-relative {
         height: 100%;
-        min-height: 120px;
+        min-height: 100px;
     }
     
     .product-card .row {
-        min-height: 120px;
+        min-height: 100px;
         height: 100%;
     }
 }
@@ -90,13 +105,13 @@
 /* Tablet and Desktop */
 @media (min-width: 768px) {
     .product-card .row {
-        min-height: 160px;
+        min-height: 130px;
         height: 100%;
     }
     
     .product-card .position-relative {
         height: 100%;
-        min-height: 160px;
+        min-height: 130px;
     }
 }
 
@@ -115,4 +130,88 @@
 
 .favorites-list .card .row {
     flex: 1;
+}
+
+/* Product Cards Specific Styling */
+.market-items-page .product-card {
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.06);
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    margin-bottom: 6px;
+}
+
+.market-items-page .card-title {
+    font-size: 0.8rem !important;
+    line-height: 1.2;
+    font-weight: 600;
+    margin-bottom: 0.1rem;
+}
+
+.market-items-page .card-subtitle {
+    font-size: 0.7rem;
+    margin-bottom: 0.1rem;
+}
+
+.market-items-page .product-image-wrapper {
+    height: 90px;
+    position: relative;
+}
+
+.market-items-page .product-image-wrapper img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.market-items-page .card-body {
+    padding: 0.4rem;
+}
+
+.market-items-page .price-tag {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.market-items-page .price-unit {
+    font-size: 0.65rem;
+}
+
+.market-items-page .badge {
+    font-size: 0.6rem;
+    font-weight: normal;
+    padding: 0.15rem 0.4rem;
+}
+
+.market-items-page .btn-sm {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.7rem;
+}
+
+.market-items-page .container {
+    padding-left: 0.15rem;
+    padding-right: 0.15rem;
+}
+
+.market-items-page #products-list {
+    margin-left: -1px;
+    margin-right: -1px;
+}
+
+.market-items-page #products-list .col-6,
+.market-items-page #products-list .col-md-4,
+.market-items-page #products-list .col-lg-3 {
+    padding-left: 1px;
+    padding-right: 1px;
+}
+
+/* Remove margins from container on all pages */
+#products-list {
+    margin-left: -2px;
+    margin-right: -2px;
+}
+
+#products-list > div {
+    padding-left: 2px;
+    padding-right: 2px;
 }

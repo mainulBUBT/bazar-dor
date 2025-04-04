@@ -1,0 +1,162 @@
+/* Favorites Page Specific Styles */
+
+/* Reduce card gaps and margins */
+.favorites-list {
+    --bs-gutter-x: 0.2rem;
+    --bs-gutter-y: 0.2rem;
+}
+
+/* Make card buttons thinner */
+.favorites-list .btn.rounded-pill {
+    padding-top: 0.1rem !important;
+    padding-bottom: 0.1rem !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    font-size: 0.75rem;
+    height: 24px;
+    line-height: 1;
+}
+
+/* Adjust card body padding */
+.favorites-list .card-body {
+    padding: 0.4rem 0.2rem; /* Reduced horizontal padding */
+}
+
+/* Smaller card titles */
+.favorites-list .card-title {
+    font-size: 0.85rem !important;
+    line-height: 1.2;
+}
+
+/* Reduce margin between card elements */
+.favorites-list .card-subtitle {
+    margin-bottom: 0.15rem !important;
+}
+
+.favorites-list .mb-2 {
+    margin-bottom: 0.15rem !important;
+}
+
+/* Card button positioning fixes - moved from card-fixes.css */
+
+/* Ensure all favorite buttons are positioned consistently */
+.favorite-btn {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    margin: 0.5rem !important;
+    z-index: 10;
+}
+
+/* Adjust favorite button size in favorites list */
+.favorites-list .favorite-btn {
+    padding: 0.1rem !important;
+    margin: 0.2rem !important;
+}
+
+/* Ensure consistent positioning for all card buttons */
+.card .position-relative {
+    position: relative !important;
+    overflow: hidden;
+}
+
+/* Make sure all card images have consistent height */
+.card .position-relative img {
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+.favorites-list .col-12 {
+    margin-bottom: 0.2rem !important;
+}
+
+.favorites-list .card {
+    margin-bottom: 0.2rem !important;
+}
+
+/* Ensure consistent button placement at the bottom of cards */
+.favorites-list .card .mt-auto {
+    margin-top: auto !important;
+}
+
+/* Make all card action buttons consistent */
+.favorites-list .card .btn-primary.rounded-pill {
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Fix market card subtitle spacing to match product cards */
+.favorites-list [data-favorite-type="market"] .card-subtitle {
+    margin-bottom: 0.15rem !important;
+}
+
+/* Search bar styles */
+#search-bar {
+    display: none;
+}
+
+/* Empty state styles */
+.empty-state-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: rgba(var(--bs-primary-rgb), 0.1);
+    margin: 0 auto;
+}
+
+.empty-state-icon i {
+    font-size: 3rem;
+}
+
+/* Hide scrollbar styles */
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Image fit styles */
+.object-fit-cover {
+    object-fit: cover;
+}
+
+/* Button styles */
+.btn-outline-primary {
+    --bs-btn-color: var(--primary-color);
+    --bs-btn-border-color: var(--primary-color);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--primary-color);
+    --bs-btn-hover-border-color: var(--primary-color);
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: var(--primary-color);
+    --bs-btn-active-border-color: var(--primary-color);
+}
+
+.btn-primary {
+    --bs-btn-bg: var(--primary-color);
+    --bs-btn-border-color: var(--primary-color);
+    --bs-btn-hover-bg: var(--primary-color);
+    --bs-btn-hover-border-color: var(--primary-color);
+    --bs-btn-active-bg: var(--primary-color);
+    --bs-btn-active-border-color: var(--primary-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    .favorites-list .card-body {
+        padding: 0.3rem 0.3rem;
+    }
+    
+    .favorites-list .btn.rounded-pill {
+        font-size: 0.7rem;
+        height: 22px;
+    }
+}

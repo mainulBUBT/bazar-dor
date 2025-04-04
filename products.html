@@ -17,7 +17,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
     <link rel="apple-touch-icon" href="icons/icon-192x192.png">
 </head>
-<body class="bg-light">
+<body class="bg-light market-items-page">
     <header class="app-header bg-primary">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center py-2">
@@ -47,239 +47,385 @@
         </div>
     </header>
 
-    <div class="container mt-3 mb-5 pb-5">
-        <!-- Filter Pills - Mobile Optimized -->
-        <div class="filter-pills mb-3 sticky-top bg-light pt-2" style="top: 56px; z-index: 1000;">
-            <div class="d-flex overflow-auto pb-2 hide-scrollbar snap-scroll">
-                <button type="button" class="btn btn-md btn-primary rounded-pill me-2 px-4 py-2 touch-action active" data-filter="all" style="--bs-btn-bg: var(--primary-color); --bs-btn-border-color: var(--primary-color); min-width: 70px;">All</button>
-                <button type="button" class="btn btn-md btn-outline-primary rounded-pill me-2 px-4 py-2 touch-action" data-filter="vegetables" style="--bs-btn-color: var(--primary-color); --bs-btn-border-color: var(--primary-color); --bs-btn-hover-bg: var(--primary-color); min-width: 110px;">Vegetables</button>
-                <button type="button" class="btn btn-md btn-outline-primary rounded-pill me-2 px-4 py-2 touch-action" data-filter="fruits" style="--bs-btn-color: var(--primary-color); --bs-btn-border-color: var(--primary-color); --bs-btn-hover-bg: var(--primary-color); min-width: 80px;">Fruits</button>
-                <button type="button" class="btn btn-md btn-outline-primary rounded-pill me-2 px-4 py-2 touch-action" data-filter="meat" style="--bs-btn-color: var(--primary-color); --bs-btn-border-color: var(--primary-color); --bs-btn-hover-bg: var(--primary-color); min-width: 80px;">Meat</button>
-                <button type="button" class="btn btn-md btn-outline-primary rounded-pill me-2 px-4 py-2 touch-action" data-filter="fish" style="--bs-btn-color: var(--primary-color); --bs-btn-border-color: var(--primary-color); --bs-btn-hover-bg: var(--primary-color); min-width: 80px;">Fish</button>
-                <button type="button" class="btn btn-md btn-outline-primary rounded-pill me-2 px-4 py-2 touch-action" data-filter="spices" style="--bs-btn-color: var(--primary-color); --bs-btn-border-color: var(--primary-color); --bs-btn-hover-bg: var(--primary-color); min-width: 80px;">Spices</button>
+    <!-- Market Header Floating - Visible after scroll -->
+    <div class="market-mini-header floating-market-header">
+        <div class="container px-2">
+            <div class="card border-0 shadow-sm mb-2">
+                <div class="card-body py-2">
+                    <div class="d-flex align-items-center">
+                        <div class="me-3" style="width: 40px; height: 40px; border-radius: 8px; overflow: hidden;">
+                            <img src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?q=80&w=200&auto=format&fit=crop" 
+                                alt="Dhaka Central Market" class="w-100 h-100 object-fit-cover">
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="mb-0 fw-bold">Dhaka Central Market</h6>
+                            <div class="d-flex align-items-center small text-muted">
+                                <span class="badge bg-success rounded-pill py-1 px-2 me-2">Open</span>
+                                <span>2.4 km away</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-0 mb-5 pb-5">
+        <!-- Market Header static - initial view -->
+        <div class="card border-0 shadow-sm mb-2 market-mini-header static-market-header">
+            <div class="card-body py-2">
+                <div class="d-flex align-items-center">
+                    <div class="me-3" style="width: 50px; height: 50px; border-radius: 8px; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?q=80&w=200&auto=format&fit=crop" 
+                             alt="Dhaka Central Market" class="w-100 h-100 object-fit-cover">
+                    </div>
+                    <div class="flex-grow-1">
+                        <h5 class="mb-1 fw-bold">Dhaka Central Market</h5>
+                        <div class="d-flex align-items-center small text-muted">
+                            <i class="bi bi-geo-alt me-1"></i>
+                            <span>Gulshan, Dhaka</span>
+                            <span class="mx-2">•</span>
+                            <span class="badge bg-success rounded-pill py-1 px-2">Open</span>
+                            <span class="ms-2">2.4 km away</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tab Navigation - Equal Size Tabs with Icons -->
+        <ul class="nav nav-tabs mb-3 equal-tabs" id="marketTabs" role="tablist">
+            <li class="nav-item flex-fill text-center" role="presentation">
+                <a class="nav-link active" id="products-tab" data-bs-toggle="tab" href="#products-content" role="tab" aria-controls="products-content" aria-selected="true">
+                    <i class="bi bi-grid me-1"></i>Products
+                </a>
+            </li>
+            <li class="nav-item flex-fill text-center" role="presentation">
+                <a class="nav-link" id="table-view-tab" data-bs-toggle="tab" href="#table-view" role="tab" aria-controls="table-view" aria-selected="false">
+                    <i class="bi bi-table me-1"></i>Table
+                </a>
+            </li>
+            <li class="nav-item flex-fill text-center" role="presentation">
+                <a class="nav-link" id="reviews-tab" data-bs-toggle="tab" href="#reviews-content" role="tab" aria-controls="reviews-content" aria-selected="false">
+                    <i class="bi bi-star me-1"></i>Reviews
+                </a>
+            </li>
+        </ul>
+        
+        <!-- Tab Content -->
+        <div class="tab-content" id="marketTabsContent">
+            <!-- Products Grid View -->
+            <div class="tab-pane fade show active" id="products-content" role="tabpanel" aria-labelledby="products-tab">
+                <!-- Modern Filter - No Background -->
+                <div class="filter-container mb-3">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h6 class="mb-0 fw-bold">Products</h6>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-light rounded-pill py-1 px-3 d-flex align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-filter me-1"></i>Sort
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-sort-down me-2"></i>Price: High to Low</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-sort-up me-2"></i>Price: Low to High</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-arrow-repeat me-2"></i>Recently Updated</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-chips d-flex overflow-auto pb-2 hide-scrollbar snap-scroll">
+                        <div class="filter-chip active me-2" data-filter="all">
+                            <span class="filter-icon"><i class="bi bi-grid"></i></span>
+                            <span class="filter-text">All</span>
+                        </div>
+                        <div class="filter-chip me-2" data-filter="vegetables">
+                            <span class="filter-icon"><i class="bi bi-basket2"></i></span>
+                            <span class="filter-text">Vegetables</span>
+                        </div>
+                        <div class="filter-chip me-2" data-filter="fruits">
+                            <span class="filter-icon"><i class="bi bi-apple"></i></span>
+                            <span class="filter-text">Fruits</span>
+                        </div>
+                        <div class="filter-chip me-2" data-filter="meat">
+                            <span class="filter-icon"><i class="bi bi-egg-fried"></i></span>
+                            <span class="filter-text">Meat</span>
+                        </div>
+                        <div class="filter-chip me-2" data-filter="fish">
+                            <span class="filter-icon"><i class="bi bi-water"></i></span>
+                            <span class="filter-text">Fish</span>
+                        </div>
+                        <div class="filter-chip me-2" data-filter="spices">
+                            <span class="filter-icon"><i class="bi bi-flower1"></i></span>
+                            <span class="filter-text">Spices</span>
+                        </div>
             </div>
         </div>
 
         <!-- Products List -->
-        <div id="products-list" class="row g-1 mb-5">
+                <div id="products-list" class="row g-1 mx-n2 mb-5">
             <!-- Product Card Template - Mobile Optimized -->
-            <div class="col-12 col-md-6 col-lg-4 mb-2" data-product-type="vegetables">
-                <div class="card product-card border-0 shadow-sm rounded-4 h-100 touch-action" data-product-id="1">
-                    <div class="row g-0 h-100">
-                        <div class="col-4">
-                            <div class="position-relative h-100">
+                    <div class="col-6 col-md-4 col-lg-3 mb-1 px-1" data-product-type="vegetables">
+                        <div class="card product-card border-0 shadow-sm h-100 touch-action" data-product-id="1">
+                            <div class="position-relative">
+                                <div class="product-image-wrapper">
                                 <img src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?q=80&w=400&auto=format&fit=crop" 
-                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Fresh Tomatoes" loading="lazy">
-                                <button class="btn position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-2 favorite-btn">
-                                    <i class="bi bi-heart text-danger fs-5"></i>
+                                         class="card-img-top" alt="Fresh Tomatoes" loading="lazy">
+                                    <span class="badge bg-success position-absolute top-0 end-0 m-1">
+                                        <i class="bi bi-arrow-down-short"></i>৳5
+                                    </span>
+                                    <button class="btn position-absolute top-0 start-0 m-1 rounded-circle bg-white shadow-sm p-1 favorite-btn">
+                                        <i class="bi bi-heart text-danger"></i>
                                 </button>
                             </div>
                         </div>
-                        <div class="col-8">
-                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
-                                <div class="d-flex justify-content-between align-items-start mb-1">
-                                    <h5 class="card-title mb-0 fs-6 fw-bold text-truncate">Fresh Tomatoes</h5>
-                                    <span class="badge bg-success ms-1 flex-shrink-0"><i class="bi bi-arrow-down-short"></i>৳5</span>
-                                </div>
-                                <p class="card-subtitle text-muted small mb-2 text-truncate">Vegetables</p>
+                            <div class="card-body p-2 d-flex flex-column">
+                                <h5 class="card-title fs-6 text-truncate">Fresh Tomatoes</h5>
+                                <p class="card-subtitle small text-muted text-truncate">Vegetables</p>
                                 <div class="d-flex justify-content-between align-items-center mt-auto">
                                     <div>
-                                        <span class="fw-bold text-primary fs-5">৳80</span>
-                                        <span class="small text-muted">/ kg</span>
+                                        <span class="text-primary price-tag">৳80</span>
+                                        <span class="text-muted price-unit">/ kg</span>
                                     </div>
-                                    <span class="small text-muted time-update"><span class="update-icon">🔄</span>Updated 2h ago</span>
+                                    <span class="small text-muted time-update"><i class="bi bi-arrow-repeat me-1"></i>2h ago</span>
                                 </div>
-                                <div class="mt-2">
+                                <div class="mt-1">
                                     <button class="btn btn-sm btn-outline-primary w-100 rounded-pill update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="1" data-product-name="Fresh Tomatoes" data-product-price="80">
                                         <i class="bi bi-pencil-square me-1"></i>Update Price
                                     </button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Fruits Card - Mobile Optimized -->
-            <div class="col-12 col-md-6 col-lg-4 mb-2" data-product-type="fruits">
-                <div class="card product-card border-0 shadow-sm rounded-4 h-100 touch-action" data-product-id="2">
-                    <div class="row g-0 h-100">
-                        <div class="col-4">
-                            <div class="position-relative h-100">
+                    <!-- Fruits Card -->
+                    <div class="col-6 col-md-4 col-lg-3 mb-1 px-1" data-product-type="fruits">
+                        <div class="card product-card border-0 shadow-sm h-100 touch-action" data-product-id="2">
+                            <div class="position-relative">
+                                <div class="product-image-wrapper">
                                 <img src="https://images.unsplash.com/photo-1553279768-865429fa0078?q=80&w=400&auto=format&fit=crop" 
-                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Sweet Mango" loading="lazy">
-                                <button class="btn position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-2 favorite-btn">
-                                    <i class="bi bi-heart text-danger fs-5"></i>
+                                         class="card-img-top" alt="Sweet Mango" loading="lazy">
+                                    <span class="badge bg-danger position-absolute top-0 end-0 m-1">
+                                        <i class="bi bi-arrow-up-short"></i>৳10
+                                    </span>
+                                    <button class="btn position-absolute top-0 start-0 m-1 rounded-circle bg-white shadow-sm p-1 favorite-btn">
+                                        <i class="bi bi-heart text-danger"></i>
                                 </button>
                             </div>
                         </div>
-                        <div class="col-8">
-                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
-                                <div class="d-flex justify-content-between align-items-start mb-1">
-                                    <h5 class="card-title mb-0 fs-6 fw-bold text-truncate">Sweet Mango</h5>
-                                    <span class="badge bg-danger ms-1 flex-shrink-0"><i class="bi bi-arrow-up-short"></i>৳10</span>
-                                </div>
-                                <p class="card-subtitle text-muted small mb-2 text-truncate">Fruits</p>
+                            <div class="card-body p-2 d-flex flex-column">
+                                <h5 class="card-title fs-6 text-truncate">Sweet Mango</h5>
+                                <p class="card-subtitle small text-muted text-truncate">Fruits</p>
                                 <div class="d-flex justify-content-between align-items-center mt-auto">
                                     <div>
-                                        <span class="fw-bold text-primary fs-5">৳120</span>
-                                        <span class="small text-muted">/ kg</span>
+                                        <span class="text-primary price-tag">৳120</span>
+                                        <span class="text-muted price-unit">/ kg</span>
                                     </div>
-                                    <span class="small text-muted time-update"><span class="update-icon">🔄</span>Updated 1h ago</span>
+                                    <span class="small text-muted time-update"><i class="bi bi-arrow-repeat me-1"></i>1h ago</span>
                                 </div>
-                                <div class="mt-2">
+                                <div class="mt-1">
                                     <button class="btn btn-sm btn-outline-primary w-100 rounded-pill update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="2" data-product-name="Sweet Mango" data-product-price="120">
                                         <i class="bi bi-pencil-square me-1"></i>Update Price
                                     </button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- More Vegetables Card - Mobile Optimized -->
-            <div class="col-12 col-md-6 col-lg-4 mb-2" data-product-type="vegetables">
-                <div class="card product-card border-0 shadow-sm rounded-4 h-100 touch-action" data-product-id="6">
-                    <div class="row g-0 h-100">
-                        <div class="col-4">
-                            <div class="position-relative h-100">
+                    <!-- More Vegetables Card -->
+                    <div class="col-6 col-md-4 col-lg-3 mb-1 px-1" data-product-type="vegetables">
+                        <div class="card product-card border-0 shadow-sm h-100 touch-action" data-product-id="6">
+                            <div class="position-relative">
+                                <div class="product-image-wrapper">
                                 <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?q=80&w=400&auto=format&fit=crop" 
-                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Fresh Potatoes" loading="lazy">
-                                <button class="btn position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-2 favorite-btn">
-                                    <i class="bi bi-heart text-danger fs-5"></i>
+                                         class="card-img-top" alt="Fresh Potatoes" loading="lazy">
+                                    <span class="badge bg-success position-absolute top-0 end-0 m-1">
+                                        <i class="bi bi-arrow-down-short"></i>৳3
+                                    </span>
+                                    <button class="btn position-absolute top-0 start-0 m-1 rounded-circle bg-white shadow-sm p-1 favorite-btn">
+                                        <i class="bi bi-heart text-danger"></i>
                                 </button>
                             </div>
                         </div>
-                        <div class="col-8">
-                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
-                                <div class="d-flex justify-content-between align-items-start mb-1">
-                                    <h5 class="card-title mb-0 fs-6 fw-bold text-truncate">Fresh Potatoes</h5>
-                                    <span class="badge bg-success ms-1 flex-shrink-0"><i class="bi bi-arrow-down-short"></i>৳3</span>
-                                </div>
-                                <p class="card-subtitle text-muted small mb-2 text-truncate">Vegetables</p>
+                            <div class="card-body p-2 d-flex flex-column">
+                                <h5 class="card-title fs-6 text-truncate">Fresh Potatoes</h5>
+                                <p class="card-subtitle small text-muted text-truncate">Vegetables</p>
                                 <div class="d-flex justify-content-between align-items-center mt-auto">
                                     <div>
-                                        <span class="fw-bold text-primary fs-5">৳45</span>
-                                        <span class="small text-muted">/ kg</span>
+                                        <span class="text-primary price-tag">৳45</span>
+                                        <span class="text-muted price-unit">/ kg</span>
                                     </div>
-                                    <span class="small text-muted time-update"><span class="update-icon">🔄</span>Updated 10m ago</span>
+                                    <span class="small text-muted time-update"><i class="bi bi-arrow-repeat me-1"></i>10m ago</span>
                                 </div>
-                                <div class="mt-2">
+                                <div class="mt-1">
                                     <button class="btn btn-sm btn-outline-primary w-100 rounded-pill update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="6" data-product-name="Fresh Potatoes" data-product-price="45">
                                         <i class="bi bi-pencil-square me-1"></i>Update Price
                                     </button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- More Fruits Card - Mobile Optimized -->
-            <div class="col-12 col-md-6 col-lg-4 mb-2" data-product-type="fruits">
-                <div class="card product-card border-0 shadow-sm rounded-4 h-100 touch-action" data-product-id="7">
-                    <div class="row g-0 h-100">
-                        <div class="col-4">
-                            <div class="position-relative h-100">
+                    <!-- More Fruits Card -->
+                    <div class="col-6 col-md-4 col-lg-3 mb-1 px-1" data-product-type="fruits">
+                        <div class="card product-card border-0 shadow-sm h-100 touch-action" data-product-id="7">
+                            <div class="position-relative">
+                                <div class="product-image-wrapper">
                                 <img src="https://images.unsplash.com/photo-1603833665858-e61d17a86224?q=80&w=400&auto=format&fit=crop" 
-                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Ripe Bananas" loading="lazy">
-                                <button class="btn position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-2 favorite-btn">
-                                    <i class="bi bi-heart text-danger fs-5"></i>
+                                         class="card-img-top" alt="Ripe Bananas" loading="lazy">
+                                    <span class="badge bg-success position-absolute top-0 end-0 m-1">
+                                        <i class="bi bi-arrow-down-short"></i>৳5
+                                    </span>
+                                    <button class="btn position-absolute top-0 start-0 m-1 rounded-circle bg-white shadow-sm p-1 favorite-btn">
+                                        <i class="bi bi-heart text-danger"></i>
                                 </button>
                             </div>
                         </div>
-                        <div class="col-8">
-                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
-                                <div class="d-flex justify-content-between align-items-start mb-1">
-                                    <h5 class="card-title mb-0 fs-6 fw-bold text-truncate">Ripe Bananas</h5>
-                                    <span class="badge bg-success ms-1 flex-shrink-0"><i class="bi bi-arrow-down-short"></i>৳5</span>
-                                </div>
-                                <p class="card-subtitle text-muted small mb-2 text-truncate">Fruits</p>
+                            <div class="card-body p-2 d-flex flex-column">
+                                <h5 class="card-title fs-6 text-truncate">Ripe Bananas</h5>
+                                <p class="card-subtitle small text-muted text-truncate">Fruits</p>
                                 <div class="d-flex justify-content-between align-items-center mt-auto">
                                     <div>
-                                        <span class="fw-bold text-primary fs-5">৳65</span>
-                                        <span class="small text-muted">/ dozen</span>
+                                        <span class="text-primary price-tag">৳65</span>
+                                        <span class="text-muted price-unit">/ dozen</span>
                                     </div>
-                                    <span class="small text-muted time-update"><span class="update-icon">🔄</span>Updated 25m ago</span>
+                                    <span class="small text-muted time-update"><i class="bi bi-arrow-repeat me-1"></i>25m ago</span>
                                 </div>
-                                <div class="mt-2">
+                                <div class="mt-1">
                                     <button class="btn btn-sm btn-outline-primary w-100 rounded-pill update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="7" data-product-name="Ripe Bananas" data-product-price="65">
                                         <i class="bi bi-pencil-square me-1"></i>Update Price
                                     </button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- More Meat Card - Mobile Optimized -->
-            <div class="col-12 col-md-6 col-lg-4 mb-2" data-product-type="meat">
-                <div class="card product-card border-0 shadow-sm rounded-4 h-100 touch-action" data-product-id="8">
-                    <div class="row g-0 h-100">
-                        <div class="col-4">
-                            <div class="position-relative h-100">
+                    <!-- More Meat Card -->
+                    <div class="col-6 col-md-4 col-lg-3 mb-1 px-1" data-product-type="meat">
+                        <div class="card product-card border-0 shadow-sm h-100 touch-action" data-product-id="8">
+                            <div class="position-relative">
+                                <div class="product-image-wrapper">
                                 <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?q=80&w=400&auto=format&fit=crop" 
-                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Beef" loading="lazy">
-                                <button class="btn position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-2 favorite-btn">
-                                    <i class="bi bi-heart text-danger fs-5"></i>
+                                         class="card-img-top" alt="Beef" loading="lazy">
+                                    <span class="badge bg-danger position-absolute top-0 end-0 m-1">
+                                        <i class="bi bi-arrow-up-short"></i>৳25
+                                    </span>
+                                    <button class="btn position-absolute top-0 start-0 m-1 rounded-circle bg-white shadow-sm p-1 favorite-btn">
+                                        <i class="bi bi-heart text-danger"></i>
                                 </button>
                             </div>
                         </div>
-                        <div class="col-8">
-                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
-                                <div class="d-flex justify-content-between align-items-start mb-1">
-                                    <h5 class="card-title mb-0 fs-6 fw-bold text-truncate">Premium Beef</h5>
-                                    <span class="badge bg-danger ms-1 flex-shrink-0"><i class="bi bi-arrow-up-short"></i>৳25</span>
-                                </div>
-                                <p class="card-subtitle text-muted small mb-2 text-truncate">Meat</p>
+                            <div class="card-body p-2 d-flex flex-column">
+                                <h5 class="card-title fs-6 text-truncate">Premium Beef</h5>
+                                <p class="card-subtitle small text-muted text-truncate">Meat</p>
                                 <div class="d-flex justify-content-between align-items-center mt-auto">
                                     <div>
-                                        <span class="fw-bold text-primary fs-5">৳850</span>
-                                        <span class="small text-muted">/ kg</span>
+                                        <span class="text-primary price-tag">৳850</span>
+                                        <span class="text-muted price-unit">/ kg</span>
                                     </div>
-                                    <span class="small text-muted time-update"><span class="update-icon">🔄</span>Updated 5m ago</span>
+                                    <span class="small text-muted time-update"><i class="bi bi-arrow-repeat me-1"></i>5m ago</span>
                                 </div>
-                                <div class="mt-2">
+                                <div class="mt-1">
                                     <button class="btn btn-sm btn-outline-primary w-100 rounded-pill update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="8" data-product-name="Premium Beef" data-product-price="850">
                                         <i class="bi bi-pencil-square me-1"></i>Update Price
                                     </button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- More Fish Card - Mobile Optimized -->
-            <div class="col-12 col-md-6 col-lg-4 mb-2" data-product-type="fish">
-                <div class="card product-card border-0 shadow-sm rounded-4 h-100 touch-action" data-product-id="9">
-                    <div class="row g-0 h-100">
-                        <div class="col-4">
-                            <div class="position-relative h-100">
-                                <img src="https://images.unsplash.com/photo-1534948216015-843149f72be3?q=80&w=400&auto=format&fit=crop" 
-                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Hilsa Fish" loading="lazy">
-                                <button class="btn position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-2 favorite-btn">
-                                    <i class="bi bi-heart text-danger fs-5"></i>
+                    <!-- More Vegetables Card -->
+                    <div class="col-6 col-md-4 col-lg-3 mb-1 px-1" data-product-type="vegetables">
+                        <div class="card product-card border-0 shadow-sm h-100 touch-action" data-product-id="11">
+                            <div class="position-relative">
+                                <div class="product-image-wrapper">
+                                    <img src="https://images.unsplash.com/photo-1447175008436-054170c2e979?q=80&w=400&auto=format&fit=crop" 
+                                         class="card-img-top" alt="Fresh Carrots">
+                                    <span class="badge bg-success position-absolute top-0 end-0 m-1">
+                                        <i class="bi bi-arrow-down-short"></i>৳8
+                                    </span>
+                                    <button class="btn position-absolute top-0 start-0 m-1 rounded-circle bg-white shadow-sm p-1 favorite-btn">
+                                        <i class="bi bi-heart text-danger"></i>
                                 </button>
                             </div>
                         </div>
-                        <div class="col-8">
-                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
-                                <div class="d-flex justify-content-between align-items-start mb-1">
-                                    <h5 class="card-title mb-0 fs-6 fw-bold text-truncate">Fresh Hilsa</h5>
-                                    <span class="badge bg-danger ms-1 flex-shrink-0"><i class="bi bi-arrow-up-short"></i>৳30</span>
-                                </div>
-                                <p class="card-subtitle text-muted small mb-2 text-truncate">Fish</p>
+                            <div class="card-body p-2 d-flex flex-column">
+                                <h5 class="card-title fs-6 text-truncate">Fresh Carrots</h5>
+                                <p class="card-subtitle small text-muted text-truncate">Vegetables</p>
                                 <div class="d-flex justify-content-between align-items-center mt-auto">
                                     <div>
-                                        <span class="fw-bold text-primary fs-5">৳1200</span>
-                                        <span class="small text-muted">/ kg</span>
+                                        <span class="text-primary price-tag">৳55</span>
+                                        <span class="text-muted price-unit">/ kg</span>
                                     </div>
-                                    <span class="small text-muted time-update"><span class="update-icon">🔄</span>Updated 20m ago</span>
+                                    <span class="small text-muted time-update"><i class="bi bi-arrow-repeat me-1"></i>15m ago</span>
                                 </div>
-                                <div class="mt-2">
+                                <div class="mt-1">
+                                    <button class="btn btn-sm btn-outline-primary w-100 rounded-pill update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="11" data-product-name="Fresh Carrots" data-product-price="55">
+                                        <i class="bi bi-pencil-square me-1"></i>Update Price
+                                    </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                    <!-- More Fruits Card -->
+                    <div class="col-6 col-md-4 col-lg-3 mb-1 px-1" data-product-type="fruits">
+                        <div class="card product-card border-0 shadow-sm h-100 touch-action" data-product-id="15">
+                            <div class="position-relative">
+                                <div class="product-image-wrapper">
+                                    <img src="https://images.unsplash.com/photo-1464965911861-746a04b4bca6?q=80&w=400&auto=format&fit=crop" 
+                                         class="card-img-top" alt="Fresh Strawberries">
+                                    <span class="badge bg-danger position-absolute top-0 end-0 m-1">
+                                        <i class="bi bi-arrow-up-short"></i>৳10
+                                    </span>
+                                    <button class="btn position-absolute top-0 start-0 m-1 rounded-circle bg-white shadow-sm p-1 favorite-btn">
+                                    <i class="bi bi-heart text-danger"></i>
+                                </button>
+                            </div>
+                        </div>
+                            <div class="card-body p-2 d-flex flex-column">
+                                <h5 class="card-title fs-6 text-truncate">Fresh Strawberries</h5>
+                                <p class="card-subtitle small text-muted text-truncate">Fruits</p>
+                                <div class="d-flex justify-content-between align-items-center mt-auto">
+                                    <div>
+                                        <span class="text-primary price-tag">৳220</span>
+                                        <span class="text-muted price-unit">/ kg</span>
+                                    </div>
+                                    <span class="small text-muted time-update"><i class="bi bi-arrow-repeat me-1"></i>15m ago</span>
+                                </div>
+                                <div class="mt-1">
+                                    <button class="btn btn-sm btn-outline-primary w-100 rounded-pill update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="15" data-product-name="Fresh Strawberries" data-product-price="220">
+                                        <i class="bi bi-pencil-square me-1"></i>Update Price
+                                    </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                    <!-- More Fish Card -->
+                    <div class="col-6 col-md-4 col-lg-3 mb-1 px-1" data-product-type="fish">
+                        <div class="card product-card border-0 shadow-sm h-100 touch-action" data-product-id="9">
+                            <div class="position-relative">
+                                <div class="product-image-wrapper">
+                                    <img src="https://images.unsplash.com/photo-1534948216015-843149f72be3?q=80&w=400&auto=format&fit=crop" 
+                                         class="card-img-top" alt="Fresh Hilsa" loading="lazy">
+                                    <span class="badge bg-danger position-absolute top-0 end-0 m-1">
+                                        <i class="bi bi-arrow-up-short"></i>৳30
+                                    </span>
+                                    <button class="btn position-absolute top-0 start-0 m-1 rounded-circle bg-white shadow-sm p-1 favorite-btn">
+                                    <i class="bi bi-heart text-danger"></i>
+                                </button>
+                            </div>
+                        </div>
+                            <div class="card-body p-2 d-flex flex-column">
+                                <h5 class="card-title fs-6 text-truncate">Fresh Hilsa</h5>
+                                <p class="card-subtitle small text-muted text-truncate">Fish</p>
+                                <div class="d-flex justify-content-between align-items-center mt-auto">
+                                    <div>
+                                        <span class="text-primary price-tag">৳1200</span>
+                                        <span class="text-muted price-unit">/ kg</span>
+                                    </div>
+                                    <span class="small text-muted time-update"><i class="bi bi-arrow-repeat me-1"></i>20m ago</span>
+                                </div>
+                                <div class="mt-1">
                                     <button class="btn btn-sm btn-outline-primary w-100 rounded-pill update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="9" data-product-name="Fresh Hilsa" data-product-price="1200">
                                         <i class="bi bi-pencil-square me-1"></i>Update Price
                                     </button>
@@ -287,151 +433,101 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- More Spices Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-2" data-product-type="spices">
-                <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="10">
-                    <div class="row g-0 h-100">
-                        <div class="col-4">
-                            <div class="position-relative h-100">
-                                <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=80&w=400&auto=format&fit=crop" 
-                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Black Pepper">
-                                <button class="btn btn-sm position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-1 favorite-btn">
-                                    <i class="bi bi-heart text-danger"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="col-8">
-                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
-                                <div class="d-flex justify-content-between align-items-start mb-1">
-                                    <h5 class="card-title mb-0 fs-6 text-truncate">Black Pepper</h5>
-                                    <span class="badge bg-success small ms-1 flex-shrink-0"><i class="bi bi-arrow-down-short"></i>৳12</span>
+                    <!-- More Spices Card -->
+                    <div class="col-6 col-md-4 col-lg-3 mb-1 px-1" data-product-type="spices">
+                        <div class="card product-card border-0 shadow-sm h-100 touch-action" data-product-id="10">
+                            <div class="position-relative">
+                                <div class="product-image-wrapper">
+                                    <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=80&w=400&auto=format&fit=crop" 
+                                         class="card-img-top" alt="Black Pepper">
+                                    <span class="badge bg-success position-absolute top-0 end-0 m-1">
+                                        <i class="bi bi-arrow-down-short"></i>৳12
+                                    </span>
+                                    <button class="btn position-absolute top-0 start-0 m-1 rounded-circle bg-white shadow-sm p-1 favorite-btn">
+                                        <i class="bi bi-heart text-danger"></i>
+                                    </button>
                                 </div>
-                                <p class="card-subtitle text-muted small mb-1 text-truncate">Spices</p>
+                            </div>
+                            <div class="card-body p-2 d-flex flex-column">
+                                <h5 class="card-title fs-6 text-truncate">Black Pepper</h5>
+                                <p class="card-subtitle small text-muted text-truncate">Spices</p>
                                 <div class="d-flex justify-content-between align-items-center mt-auto">
                                     <div>
-                                        <span class="fw-bold text-primary fs-5">৳250</span>
-                                        <span class="small text-muted">/ kg</span>
+                                        <span class="text-primary price-tag">৳250</span>
+                                        <span class="text-muted price-unit">/ kg</span>
                                     </div>
-                                    <span class="small text-muted time-update"><span class="update-icon">🔄</span>Updated 40m ago</span>
+                                    <span class="small text-muted time-update"><i class="bi bi-arrow-repeat me-1"></i>30m ago</span>
                                 </div>
-                                <div class="mt-2">
+                                <div class="mt-1">
                                     <button class="btn btn-sm btn-outline-primary w-100 rounded-pill update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="10" data-product-name="Black Pepper" data-product-price="250">
                                         <i class="bi bi-pencil-square me-1"></i>Update Price
                                     </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Vegetables Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-2" data-product-type="vegetables">
-                <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="11">
-                    <div class="row g-0 h-100">
-                        <div class="col-4">
-                            <div class="position-relative h-100">
-                                <img src="https://images.unsplash.com/photo-1447175008436-054170c2e979?q=80&w=400&auto=format&fit=crop" 
-                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Fresh Carrots">
-                                <button class="btn btn-sm position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-1 favorite-btn">
-                                    <i class="bi bi-heart text-danger"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="col-8">
-                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
-                                <div class="d-flex justify-content-between align-items-start mb-1">
-                                    <h5 class="card-title mb-0 fs-6 text-truncate">Fresh Carrots</h5>
-                                    <span class="badge bg-success small ms-1 flex-shrink-0"><i class="bi bi-arrow-down-short"></i>৳8</span>
-                                </div>
-                                <p class="card-subtitle text-muted small mb-1 text-truncate">Vegetables</p>
-                                <div class="d-flex justify-content-between align-items-center mt-auto">
-                                    <div>
-                                        <span class="fw-bold text-primary fs-5">৳55</span>
-                                        <span class="small text-muted">/ kg</span>
-                                    </div>
-                                    <span class="small text-muted time-update"><span class="update-icon">🔄</span>Updated 15m ago</span>
-                                </div>
-                                <div class="mt-2">
-                                    <button class="btn btn-sm btn-outline-primary w-100 rounded-pill update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="11" data-product-name="Fresh Carrots" data-product-price="55">
-                                        <i class="bi bi-pencil-square me-1"></i>Update Price
-                                    </button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Fish Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-2" data-product-type="fish">
-                <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="12">
-                    <div class="row g-0 h-100">
-                        <div class="col-4">
-                            <div class="position-relative h-100">
+                    <div class="col-6 col-md-4 col-lg-3 mb-1 px-1" data-product-type="fish">
+                        <div class="card product-card border-0 shadow-sm h-100 touch-action" data-product-id="12">
+                            <div class="position-relative">
+                                <div class="product-image-wrapper">
                                 <img src="https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?q=80&w=400&auto=format&fit=crop" 
-                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Fresh Salmon">
-                                <button class="btn btn-sm position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-1 favorite-btn">
+                                         class="card-img-top" alt="Fresh Salmon">
+                                    <span class="badge bg-danger position-absolute top-0 end-0 m-1">
+                                        <i class="bi bi-arrow-up-short"></i>৳20
+                                    </span>
+                                    <button class="btn position-absolute top-0 start-0 m-1 rounded-circle bg-white shadow-sm p-1 favorite-btn">
                                     <i class="bi bi-heart text-danger"></i>
                                 </button>
                             </div>
                         </div>
-                        <div class="col-8">
-                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
-                                <div class="d-flex justify-content-between align-items-start mb-1">
-                                    <h5 class="card-title mb-0 fs-6 text-truncate">Fresh Salmon</h5>
-                                    <span class="badge bg-danger small ms-1 flex-shrink-0"><i class="bi bi-arrow-up-short"></i>৳20</span>
-                                </div>
-                                <p class="card-subtitle text-muted small mb-1 text-truncate">Fish</p>
+                            <div class="card-body p-2 d-flex flex-column">
+                                <h5 class="card-title fs-6 text-truncate">Fresh Salmon</h5>
+                                <p class="card-subtitle small text-muted text-truncate">Fish</p>
                                 <div class="d-flex justify-content-between align-items-center mt-auto">
                                     <div>
-                                        <span class="fw-bold text-primary fs-5">৳950</span>
-                                        <span class="small text-muted">/ kg</span>
+                                        <span class="text-primary price-tag">৳950</span>
+                                        <span class="text-muted price-unit">/ kg</span>
                                     </div>
-                                    <span class="small text-muted time-update"><span class="update-icon">🔄</span>Updated 30m ago</span>
+                                    <span class="small text-muted time-update"><i class="bi bi-arrow-repeat me-1"></i>30m ago</span>
                                 </div>
-                                <div class="mt-2">
+                                <div class="mt-1">
                                     <button class="btn btn-sm btn-outline-primary w-100 rounded-pill update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="12" data-product-name="Fresh Salmon" data-product-price="950">
                                         <i class="bi bi-pencil-square me-1"></i>Update Price
                                     </button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Meat Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-2" data-product-type="meat">
-                <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="13">
-                    <div class="row g-0 h-100">
-                        <div class="col-4">
-                            <div class="position-relative h-100">
+                    <div class="col-6 col-md-4 col-lg-3 mb-1 px-1" data-product-type="meat">
+                        <div class="card product-card border-0 shadow-sm h-100 touch-action" data-product-id="13">
+                            <div class="position-relative">
+                                <div class="product-image-wrapper">
                                 <img src="https://images.unsplash.com/photo-1560781290-7dc94c0f8f4f?q=80&w=400&auto=format&fit=crop" 
-                                     class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Chicken Breast">
-                                <button class="btn btn-sm position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-1 favorite-btn">
+                                         class="card-img-top" alt="Chicken Breast">
+                                    <span class="badge bg-success position-absolute top-0 end-0 m-1">
+                                        <i class="bi bi-arrow-down-short"></i>৳15
+                                    </span>
+                                    <button class="btn position-absolute top-0 start-0 m-1 rounded-circle bg-white shadow-sm p-1 favorite-btn">
                                     <i class="bi bi-heart text-danger"></i>
                                 </button>
                             </div>
                         </div>
-                        <div class="col-8">
-                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
-                                <div class="d-flex justify-content-between align-items-start mb-1">
-                                    <h5 class="card-title mb-0 fs-6 text-truncate">Chicken Breast</h5>
-                                    <span class="badge bg-success small ms-1 flex-shrink-0"><i class="bi bi-arrow-down-short"></i>৳15</span>
-                                </div>
-                                <p class="card-subtitle text-muted small mb-1 text-truncate">Meat</p>
+                            <div class="card-body p-2 d-flex flex-column">
+                                <h5 class="card-title fs-6 text-truncate">Chicken Breast</h5>
+                                <p class="card-subtitle small text-muted text-truncate">Meat</p>
                                 <div class="d-flex justify-content-between align-items-center mt-auto">
                                     <div>
-                                        <span class="fw-bold text-primary fs-5">৳380</span>
-                                        <span class="small text-muted">/ kg</span>
+                                        <span class="text-primary price-tag">৳380</span>
+                                        <span class="text-muted price-unit">/ kg</span>
                                     </div>
-                                    <span class="small text-muted time-update"><span class="update-icon">🔄</span>Updated 45m ago</span>
+                                    <span class="small text-muted time-update"><i class="bi bi-arrow-repeat me-1"></i>45m ago</span>
                                 </div>
-                                <div class="mt-2">
+                                <div class="mt-1">
                                     <button class="btn btn-sm btn-outline-primary w-100 rounded-pill update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="13" data-product-name="Chicken Breast" data-product-price="380">
                                         <i class="bi bi-pencil-square me-1"></i>Update Price
                                     </button>
@@ -439,106 +535,336 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Pagination - Mobile Optimized -->
+                    <nav aria-label="Product navigation" class="my-3">
+                        <ul class="pagination pagination-sm justify-content-center">
+                            <li class="page-item disabled">
+                                <a class="page-link rounded-circle mx-1 shadow-sm d-flex align-items-center justify-content-center" href="#" aria-label="Previous" style="width: 35px; height: 35px;">
+                                    <i class="bi bi-chevron-left"></i>
+                                </a>
+                            </li>
+                            <li class="page-item active"><a class="page-link rounded-circle mx-1 shadow-sm d-flex align-items-center justify-content-center" href="#" style="width: 35px; height: 35px;">1</a></li>
+                            <li class="page-item"><a class="page-link rounded-circle mx-1 shadow-sm d-flex align-items-center justify-content-center" href="#" style="width: 35px; height: 35px;">2</a></li>
+                            <li class="page-item"><a class="page-link rounded-circle mx-1 shadow-sm d-flex align-items-center justify-content-center" href="#" style="width: 35px; height: 35px;">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link rounded-circle mx-1 shadow-sm d-flex align-items-center justify-content-center" href="#" aria-label="Next" style="width: 35px; height: 35px;">
+                                    <i class="bi bi-chevron-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
 
-            <!-- More Fruits Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-2" data-product-type="fruits">
-                <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="15">
-                    <div class="row g-0 h-100">
-                        <div class="col-4">
-                            <div class="position-relative h-100">
-                                <img src="https://images.unsplash.com/photo-1464965911861-746a04b4bca6?q=80&w=400&auto=format&fit=crop" 
-                                    class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Fresh Strawberries">
-                                <button class="btn btn-sm position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-1 favorite-btn">
-                                    <i class="bi bi-heart text-danger"></i>
+            <!-- Table View -->
+            <div class="tab-pane fade" id="table-view" role="tabpanel" aria-labelledby="table-view-tab">
+                <div class="table-responsive mt-2">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Product</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Unit</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-2" style="width: 32px; height: 32px; overflow: hidden; border-radius: 4px;">
+                                            <img src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?q=80&w=100&auto=format&fit=crop" width="32" height="32" alt="Tomatoes" class="object-fit-cover">
+                                        </div>
+                                        <div class="fw-medium">Fresh Tomatoes</div>
+                                    </div>
+                                </td>
+                                <td>Vegetables</td>
+                                <td class="text-primary fw-medium">৳80</td>
+                                <td>kg</td>
+                                <td><span class="badge bg-success text-white">Price Down</span></td>
+                                <td>
+                                    <div class="d-flex">
+                                        <button class="btn btn-sm btn-outline-primary me-1 update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="1" data-product-name="Fresh Tomatoes" data-product-price="80">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger favorite-btn">
+                                            <i class="bi bi-heart"></i>
                                 </button>
                             </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-2" style="width: 32px; height: 32px; overflow: hidden; border-radius: 4px;">
+                                            <img src="https://images.unsplash.com/photo-1553279768-865429fa0078?q=80&w=100&auto=format&fit=crop" width="32" height="32" alt="Mango" class="object-fit-cover">
+                        </div>
+                                        <div class="fw-medium">Sweet Mango</div>
+                                </div>
+                                </td>
+                                <td>Fruits</td>
+                                <td class="text-primary fw-medium">৳120</td>
+                                <td>kg</td>
+                                <td><span class="badge bg-danger text-white">Price Up</span></td>
+                                <td>
+                                    <div class="d-flex">
+                                        <button class="btn btn-sm btn-outline-primary me-1 update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="2" data-product-name="Sweet Mango" data-product-price="120">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger favorite-btn">
+                                            <i class="bi bi-heart"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-2" style="width: 32px; height: 32px; overflow: hidden; border-radius: 4px;">
+                                            <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?q=80&w=100&auto=format&fit=crop" width="32" height="32" alt="Potatoes" class="object-fit-cover">
+                                </div>
+                                        <div class="fw-medium">Fresh Potatoes</div>
+                                    </div>
+                                </td>
+                                <td>Vegetables</td>
+                                <td class="text-primary fw-medium">৳45</td>
+                                <td>kg</td>
+                                <td><span class="badge bg-success text-white">Price Down</span></td>
+                                <td>
+                                    <div class="d-flex">
+                                        <button class="btn btn-sm btn-outline-primary me-1 update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="6" data-product-name="Fresh Potatoes" data-product-price="45">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger favorite-btn">
+                                            <i class="bi bi-heart"></i>
+                                    </button>
+                                </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-2" style="width: 32px; height: 32px; overflow: hidden; border-radius: 4px;">
+                                            <img src="https://images.unsplash.com/photo-1603833665858-e61d17a86224?q=80&w=100&auto=format&fit=crop" width="32" height="32" alt="Bananas" class="object-fit-cover">
+                            </div>
+                                        <div class="fw-medium">Ripe Bananas</div>
+                        </div>
+                                </td>
+                                <td>Fruits</td>
+                                <td class="text-primary fw-medium">৳65</td>
+                                <td>dozen</td>
+                                <td><span class="badge bg-success text-white">Price Down</span></td>
+                                <td>
+                                    <div class="d-flex">
+                                        <button class="btn btn-sm btn-outline-primary me-1 update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="7" data-product-name="Ripe Bananas" data-product-price="65">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger favorite-btn">
+                                            <i class="bi bi-heart"></i>
+                                        </button>
+                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-2" style="width: 32px; height: 32px; overflow: hidden; border-radius: 4px;">
+                                            <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?q=80&w=100&auto=format&fit=crop" width="32" height="32" alt="Beef" class="object-fit-cover">
+                </div>
+                                        <div class="fw-medium">Premium Beef</div>
+            </div>
+                                </td>
+                                <td>Meat</td>
+                                <td class="text-primary fw-medium">৳850</td>
+                                <td>kg</td>
+                                <td><span class="badge bg-danger text-white">Price Up</span></td>
+                                <td>
+                                    <div class="d-flex">
+                                        <button class="btn btn-sm btn-outline-primary me-1 update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="8" data-product-name="Premium Beef" data-product-price="850">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger favorite-btn">
+                                            <i class="bi bi-heart"></i>
+                                </button>
+                            </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-2" style="width: 32px; height: 32px; overflow: hidden; border-radius: 4px;">
+                                            <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=80&w=100&auto=format&fit=crop" width="32" height="32" alt="Black Pepper" class="object-fit-cover">
+                                        </div>
+                                        <div class="fw-medium">Black Pepper</div>
+                                    </div>
+                                </td>
+                                <td>Spices</td>
+                                <td class="text-primary fw-medium">৳250</td>
+                                <td>kg</td>
+                                <td><span class="badge bg-success text-white">Price Down</span></td>
+                                <td>
+                                    <div class="d-flex">
+                                        <button class="btn btn-sm btn-outline-primary me-1 update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="10" data-product-name="Black Pepper" data-product-price="250">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger favorite-btn">
+                                            <i class="bi bi-heart"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Reviews -->
+            <div class="tab-pane fade" id="reviews-content" role="tabpanel" aria-labelledby="reviews-tab">
+                <div class="container pt-3">
+                    <!-- Reviews Stats -->
+                    <div class="card border-0 shadow-sm mb-3">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-4 text-center border-end">
+                                    <h1 class="display-4 fw-bold text-primary">4.7</h1>
+                                    <div class="text-warning mb-2">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-half"></i>
+                                    </div>
+                                    <p class="text-muted small mb-0">Based on 218 reviews</p>
                         </div>
                         <div class="col-8">
-                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
-                                <div class="d-flex justify-content-between align-items-start mb-1">
-                                    <h5 class="card-title mb-0 fs-6 text-truncate">Fresh Strawberries</h5>
-                                    <span class="badge bg-danger small ms-1 flex-shrink-0"><i class="bi bi-arrow-up-short"></i>৳10</span>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <span class="me-2 small">5</span>
+                                        <div class="progress flex-grow-1" style="height: 8px;">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-                                <p class="card-subtitle text-muted small mb-1 text-truncate">Fruits</p>
-                                <div class="d-flex justify-content-between align-items-center mt-auto">
-                                    <div>
-                                        <span class="fw-bold text-primary fs-5">৳220</span>
-                                        <span class="small text-muted">/ kg</span>
+                                        <span class="ms-2 small text-muted">75%</span>
                                     </div>
-                                    <span class="small text-muted time-update"><span class="update-icon">🔄</span>Updated 15m ago</span>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <span class="me-2 small">4</span>
+                                        <div class="progress flex-grow-1" style="height: 8px;">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: 18%" aria-valuenow="18" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-                                <div class="mt-2">
-                                    <button class="btn btn-sm btn-outline-primary w-100 rounded-pill update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="15" data-product-name="Fresh Strawberries" data-product-price="220">
-                                        <i class="bi bi-pencil-square me-1"></i>Update Price
-                                    </button>
+                                        <span class="ms-2 small text-muted">18%</span>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <span class="me-2 small">3</span>
+                                        <div class="progress flex-grow-1" style="height: 8px;">
+                                            <div class="progress-bar bg-warning" role="progressbar" style="width: 5%" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <span class="ms-2 small text-muted">5%</span>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <span class="me-2 small">2</span>
+                                        <div class="progress flex-grow-1" style="height: 8px;">
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 1%" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <span class="ms-2 small text-muted">1%</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <span class="me-2 small">1</span>
+                                        <div class="progress flex-grow-1" style="height: 8px;">
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 1%" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <span class="ms-2 small text-muted">1%</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Fish Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-2" data-product-type="fish">
-                <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="14">
-                    <div class="row g-0 h-100">
-                        <div class="col-4">
-                            <div class="position-relative h-100">
-                                <img src="https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?q=80&w=400&auto=format&fit=crop" 
-                                    class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Fresh Fish">
-                                <button class="btn btn-sm position-absolute top-0 start-0 m-2 rounded-circle bg-white shadow-sm p-1 favorite-btn">
-                                    <i class="bi bi-heart text-danger"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="col-8">
-                            <div class="card-body py-2 px-3 h-100 d-flex flex-column">
-                                <div class="d-flex justify-content-between align-items-start mb-1">
-                                    <h5 class="card-title mb-0 fs-6 text-truncate">Fresh Tuna</h5>
-                                    <span class="badge bg-danger small ms-1 flex-shrink-0"><i class="bi bi-arrow-up-short"></i>৳15</span>
-                                </div>
-                                <p class="card-subtitle text-muted small mb-1 text-truncate">Fish</p>
-                                <div class="d-flex justify-content-between align-items-center mt-auto">
-                                    <div>
-                                        <span class="fw-bold text-primary fs-5">৳850</span>
-                                        <span class="small text-muted">/ kg</span>
-                                    </div>
-                                    <span class="small text-muted time-update"><span class="update-icon">🔄</span>Updated 35m ago</span>
-                                </div>
-                                <div class="mt-2">
-                                    <button class="btn btn-sm btn-outline-primary w-100 rounded-pill update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="14" data-product-name="Fresh Tuna" data-product-price="850">
-                                        <i class="bi bi-pencil-square me-1"></i>Update Price
+                    
+                    <!-- Write Review Button -->
+                    <div class="d-grid gap-2 mb-3">
+                        <button class="btn btn-primary" type="button">
+                            <i class="bi bi-pencil-square me-2"></i> Write a Review
                                     </button>
                                 </div>
+                    
+                    <!-- Review Item -->
+                    <div class="card border-0 shadow-sm mb-3">
+                        <div class="card-body">
+                            <div class="d-flex mb-2">
+                                <div class="me-2">
+                                    <div class="avatar-circle bg-primary text-white">AR</div>
                             </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">Ahmed Rahman</h6>
+                                    <div class="text-warning small">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
                         </div>
+                                    <span class="text-muted small">2 days ago</span>
                     </div>
+                            </div>
+                            <p class="mb-0">Great market with fresh produce! The vendors are friendly and prices are reasonable. I appreciate how clean they keep everything. Will continue to shop here weekly.</p>
                 </div>
             </div>
 
-            <!-- Pagination - Mobile Optimized -->
-            <nav aria-label="Product navigation" class="my-4">
-                <ul class="pagination pagination-lg justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link rounded-circle mx-1 shadow-sm d-flex align-items-center justify-content-center" href="#" aria-label="Previous" style="width: 45px; height: 45px;">
-                            <i class="bi bi-chevron-left"></i>
-                        </a>
-                    </li>
-                    <li class="page-item active"><a class="page-link rounded-circle mx-1 shadow-sm d-flex align-items-center justify-content-center" href="#" style="width: 45px; height: 45px;">1</a></li>
-                    <li class="page-item"><a class="page-link rounded-circle mx-1 shadow-sm d-flex align-items-center justify-content-center" href="#" style="width: 45px; height: 45px;">2</a></li>
-                    <li class="page-item"><a class="page-link rounded-circle mx-1 shadow-sm d-flex align-items-center justify-content-center" href="#" style="width: 45px; height: 45px;">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link rounded-circle mx-1 shadow-sm d-flex align-items-center justify-content-center" href="#" aria-label="Next" style="width: 45px; height: 45px;">
-                            <i class="bi bi-chevron-right"></i>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+                    <!-- Review Item -->
+                    <div class="card border-0 shadow-sm mb-3">
+                        <div class="card-body">
+                            <div class="d-flex mb-2">
+                                <div class="me-2">
+                                    <div class="avatar-circle bg-info text-white">SJ</div>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">Sarah Johnson</h6>
+                                    <div class="text-warning small">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star"></i>
+                                    </div>
+                                    <span class="text-muted small">1 week ago</span>
+                                </div>
+                            </div>
+                            <p class="mb-0">I love the variety of fresh fruits and vegetables available here. The spice section is excellent too! Only reason for 4 stars is that it can get very crowded on weekends.</p>
+                        </div>
         </div>
 
-        
+                    <!-- Review Item -->
+                    <div class="card border-0 shadow-sm mb-3">
+                        <div class="card-body">
+                            <div class="d-flex mb-2">
+                                <div class="me-2">
+                                    <div class="avatar-circle bg-success text-white">MH</div>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">Mohammad Hasan</h6>
+                                    <div class="text-warning small">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-half"></i>
+                                    </div>
+                                    <span class="text-muted small">2 weeks ago</span>
+                                </div>
+                            </div>
+                            <p class="mb-0">Best fish selection in the area! Always fresh and prices are competitive. The staff is knowledgeable about what's in season. Highly recommend their hilsa fish!</p>
+                        </div>
+                    </div>
+                    
+                    <!-- View More Button -->
+                    <div class="d-grid gap-2 mb-4">
+                        <button class="btn btn-outline-primary" type="button">
+                            View More Reviews
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <nav class="navbar fixed-bottom navbar-dark">
@@ -590,8 +916,42 @@
             -webkit-overflow-scrolling: touch;
         }
         
-        .snap-scroll .btn {
+        .snap-scroll .filter-chip {
             scroll-snap-align: center;
+        }
+        
+        /* Modern Filter Chips */
+        .filter-chip {
+            display: flex;
+            align-items: center;
+            padding: 0.4rem 0.8rem;
+            background-color: #f8f9fa;
+            border-radius: 2rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            border: 1px solid transparent;
+            flex-shrink: 0;
+        }
+        
+        .filter-chip.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .filter-chip:active {
+            transform: scale(0.95);
+        }
+        
+        .filter-icon {
+            margin-right: 0.3rem;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .filter-text {
+            font-size: 0.8rem;
+            font-weight: 500;
         }
         
         /* Touch action improvements */
@@ -610,6 +970,67 @@
         /* Improve object fit for images */
         .object-fit-cover {
             object-fit: cover;
+        }
+        
+        /* Market mini header styles */
+        .market-mini-header {
+            transition: transform 0.2s ease;
+        }
+        
+        .market-mini-header:active {
+            transform: none;
+        }
+        
+        /* Tab navigation styles */
+        .nav-tabs .nav-link {
+            border: none;
+            color: var(--bs-gray-600);
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            background-color: transparent;
+        }
+        
+        /* Avatar styles for reviews */
+        .avatar-circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        
+        /* Table view optimizations */
+        .table-responsive {
+            scrollbar-width: thin;
+        }
+        
+        .table-responsive::-webkit-scrollbar {
+            height: 4px;
+        }
+        
+        .table-responsive::-webkit-scrollbar-thumb {
+            background-color: rgba(0,0,0,0.1);
+            border-radius: 4px;
+        }
+        
+        .table th {
+            font-weight: 600;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+        
+        .table td {
+            font-size: 0.85rem;
+            vertical-align: middle;
         }
         
         /* Improve bottom nav for mobile */
@@ -639,6 +1060,164 @@
         
         .favorite-btn:active {
             transform: scale(0.9);
+        }
+        
+        /* Additional custom styling for smaller product cards */
+        .product-card .product-image-wrapper {
+            height: 75px;
+        }
+        
+        .product-card .card-title {
+            font-size: 0.75rem !important;
+            margin-bottom: 0;
+            line-height: 1.1;
+        }
+        
+        .product-card .card-subtitle {
+            font-size: 0.65rem !important;
+            margin-bottom: 0.1rem;
+        }
+        
+        .product-card .price-tag {
+            font-size: 0.75rem;
+        }
+        
+        .product-card .price-unit,
+        .product-card .time-update {
+            font-size: 0.6rem;
+        }
+        
+        .product-card .badge {
+            font-size: 0.55rem;
+            padding: 0.15rem 0.25rem;
+        }
+        
+        .product-card .card-body {
+            padding: 0.25rem 0.4rem !important;
+        }
+        
+        .product-card .btn-sm {
+            padding: 0.15rem 0.4rem;
+            font-size: 0.65rem;
+        }
+        
+        /* Adjust container padding for mobile */
+        @media (max-width: 576px) {
+            .container {
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+            
+            #products-list {
+                margin-left: -8px;
+                margin-right: -8px;
+            }
+            
+            #products-list > div {
+                padding-left: 2px !important;
+                padding-right: 2px !important;
+            }
+            
+            .product-card {
+                margin-bottom: 4px !important;
+            }
+            
+            .filter-container {
+                position: sticky;
+                top: 56px;
+                z-index: 1000;
+                background-color: #fff;
+                padding-top: 0.5rem;
+            }
+            
+            .table th, .table td {
+                padding: 0.5rem 0.35rem;
+                font-size: 0.75rem;
+            }
+            
+            .table .btn-sm {
+                padding: 0.15rem 0.25rem;
+                font-size: 0.7rem;
+            }
+            
+            /* Fix equal tabs on mobile */
+            .equal-tabs {
+                display: flex;
+                width: 100%;
+            }
+            
+            .equal-tabs .nav-item {
+                flex: 1;
+            }
+            
+            .equal-tabs .nav-link {
+                padding: 0.5rem 0.25rem;
+                font-size: 0.75rem;
+            }
+        }
+        
+        /* Sticky market header styles */
+        .sticky-market-header {
+            position: sticky;
+            top: 56px; /* Height of the main header */
+            z-index: 1019;
+            margin-top: 0;
+            border-radius: 0 0 0.5rem 0.5rem !important;
+        }
+        
+        /* Header and market header connection */
+        .app-header {
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+        }
+        
+        /* Floating market header that appears after scroll */
+        .floating-market-header {
+            position: fixed;
+            top: -100px; /* Initially hidden above the viewport */
+            left: 0;
+            right: 0;
+            z-index: 1020;
+            transition: top 0.3s;
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .floating-market-header.visible {
+            top: 56px; /* Height of the main header */
+        }
+        
+        /* Static market header */
+        .static-market-header {
+            transition: opacity 0.2s;
+        }
+        
+        .static-market-header.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .container.mt-0 {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        /* Tab icon alignment */
+        .nav-tabs .nav-link i {
+            font-size: 0.9rem;
+            vertical-align: -1px;
+        }
+        
+        @media (max-width: 576px) {
+            .equal-tabs .nav-link {
+                padding: 0.5rem 0.25rem;
+                font-size: 0.75rem;
+            }
+            
+            .nav-tabs .nav-link i {
+                font-size: 0.8rem;
+            }
         }
         
         /* Price Update Modal Mobile Styles */
@@ -676,39 +1255,37 @@
         }
     </style>
     
-    <!-- Update Price Modal - Mobile Optimized -->
+    <!-- Update Price Modal -->
     <div class="modal fade" id="updatePriceModal" tabindex="-1" aria-labelledby="updatePriceModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-sm">
-            <div class="modal-content" style="border-radius: 20px; overflow: hidden;">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="updatePriceModalLabel">
-                        <i class="bi bi-tag-fill me-2"></i>Update Price
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title" id="updatePriceModalLabel">Update Price</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body py-4">
-                    <form id="updatePriceForm">
-                        <input type="hidden" id="productId">
-                        <div class="text-center mb-3">
-                            <h5 id="productName" class="fw-bold mb-0"></h5>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <span class="text-muted me-2">Current:</span>
-                                <span class="badge bg-light text-dark border px-3 py-2 fs-6">৳<span id="currentPrice"></span></span>
+                    <div class="text-center mb-4">
+                        <h4 id="productName" class="mb-3">Product Name</h4>
+                        <div class="d-flex justify-content-center align-items-center gap-3">
+                            <div class="text-muted">Current Price:</div>
+                            <div id="currentPrice" class="text-primary fs-5 fw-bold">৳0</div>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <div class="input-group input-group-lg">
-                                <span class="input-group-text bg-light border-end-0">৳</span>
-                                <input type="number" class="form-control border-start-0 fs-5 text-center fw-bold" id="newPrice" required min="1" step="1" placeholder="Enter new price" inputmode="numeric">
+                        <label for="newPrice" class="form-label">New Price (৳)</label>
+                        <div class="input-group">
+                            <span class="input-group-text">৳</span>
+                            <input type="number" class="form-control form-control-lg text-center fw-bold" id="newPrice" placeholder="Enter new price">
                             </div>
                         </div>
-                    </form>
                 </div>
                 <div class="modal-footer flex-column border-0 pt-0 pb-4">
-                    <button type="button" class="btn btn-primary btn-lg w-100 rounded-pill mb-2" id="submitPriceUpdate">
+                    <button type="button" class="btn btn-primary btn-lg w-100 rounded-pill mb-2" id="updatePriceSubmit">
                         <i class="bi bi-check-circle me-2"></i>Update Price
                     </button>
-                    <button type="button" class="btn btn-outline-secondary rounded-pill w-75" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-light w-100 rounded-pill" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle me-2"></i>Cancel
+                    </button>
                 </div>
             </div>
         </div>
@@ -718,69 +1295,109 @@
     <script src="lib/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="js/products.js"></script>
     <script>
-        // DOM Elements
-        document.addEventListener('DOMContentLoaded', function() {
-            const searchToggle = document.getElementById('search-toggle');
-            const searchBar = document.getElementById('search-bar');
-            const searchClose = document.getElementById('search-close');
-            const productsSearch = document.getElementById('products-search');
-            const filterButtons = document.querySelectorAll('[data-filter]');
-            const productsList = document.getElementById('products-list');
-            const favoriteButtons = document.querySelectorAll('.favorite-btn');
-
-            // Toggle search bar visibility
-            searchToggle.addEventListener('click', () => {
-                searchBar.style.display = 'flex';
-                productsSearch.focus();
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize all tooltips
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
             });
 
-            searchClose.addEventListener('click', () => {
-                searchBar.style.display = 'none';
-                productsSearch.value = '';
-                filterProducts();
-            });
+            // Filter functionality
+            const filterChips = document.querySelectorAll('.filter-chip');
+            const productCards = document.querySelectorAll('[data-product-type]');
 
-            // Filter products based on search input
-            productsSearch.addEventListener('input', filterProducts);
-
-            function filterProducts() {
-                const searchTerm = productsSearch.value.toLowerCase();
-                const activeFilter = document.querySelector('[data-filter].active').getAttribute('data-filter');
-                const productCards = document.querySelectorAll('.product-card');
-                
-                productCards.forEach(card => {
-                    const productTitle = card.querySelector('.card-title').textContent.toLowerCase();
-                    const productType = card.closest('[data-product-type]').getAttribute('data-product-type');
-                    const matchesSearch = productTitle.includes(searchTerm);
-                    const matchesFilter = activeFilter === 'all' || productType === activeFilter;
+            // Tab navigation handling
+            const tabLinks = document.querySelectorAll('.nav-tabs .nav-link');
+            tabLinks.forEach(tab => {
+                tab.addEventListener('click', function(e) {
+                    e.preventDefault();
                     
-                    card.closest('[data-product-type]').style.display = (matchesSearch && matchesFilter) ? 'block' : 'none';
+                    // Remove active class from all tabs
+                    tabLinks.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to current tab
+                    this.classList.add('active');
+                    
+                    // Hide all tab panes
+                    document.querySelectorAll('.tab-pane').forEach(pane => {
+                        pane.classList.remove('show', 'active');
+                    });
+                    
+                    // Show the current tab pane
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetPane = document.getElementById(targetId);
+                    if (targetPane) {
+                        targetPane.classList.add('show', 'active');
+                    }
                 });
-            }
+            });
 
-            // Handle filter button clicks
-            filterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Remove active class from all buttons
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
+            // Category filtering
+            filterChips.forEach(chip => {
+                chip.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
                     
-                    // Add active class to clicked button
-                    button.classList.add('active');
+                    // Remove active class from all chips
+                    filterChips.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked chip
+                    this.classList.add('active');
                     
                     // Filter products
-                    filterProducts();
-                    
-                    // Scroll button into view (for mobile)
-                    button.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                productCards.forEach(card => {
+                        if (filter === 'all' || card.getAttribute('data-product-type') === filter) {
+                            card.parentElement.style.display = '';
+                        } else {
+                            card.parentElement.style.display = 'none';
+                        }
+                    });
                 });
             });
 
-            // Handle favorite button clicks
-            favoriteButtons.forEach(button => {
-                button.addEventListener('click', (e) => {
-                    e.stopPropagation(); // Prevent card click
-                    const icon = button.querySelector('i');
+            // Product card tap effect
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach(card => {
+                card.addEventListener('touchstart', function() {
+                    this.classList.add('card-highlight');
+                });
+                
+                card.addEventListener('touchend', function() {
+                    this.classList.remove('card-highlight');
+                });
+            });
+
+            // Handle price update modal
+            const updatePriceModal = document.getElementById('updatePriceModal');
+            const updatePriceBtns = document.querySelectorAll('.update-price-btn');
+            const productNameElement = document.getElementById('productName');
+            const currentPriceElement = document.getElementById('currentPrice');
+            const newPriceInput = document.getElementById('newPrice');
+            
+            updatePriceBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-product-id');
+                    const productName = this.getAttribute('data-product-name');
+                    const productPrice = this.getAttribute('data-product-price');
                     
+                    // Set modal content
+                    productNameElement.textContent = productName;
+                    currentPriceElement.textContent = '৳' + productPrice;
+                    newPriceInput.value = productPrice;
+                    
+                    // Store product ID in modal for submission
+                    updatePriceModal.setAttribute('data-product-id', productId);
+                });
+            });
+
+            // Handle favorite buttons
+            const favBtns = document.querySelectorAll('.favorite-btn');
+            favBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Prevent card click
+                    
+                    const icon = this.querySelector('i');
+                    
+                    // Toggle filled/outline heart
                     if (icon.classList.contains('bi-heart')) {
                         icon.classList.remove('bi-heart');
                         icon.classList.add('bi-heart-fill');
@@ -788,64 +1405,90 @@
                         icon.classList.remove('bi-heart-fill');
                         icon.classList.add('bi-heart');
                     }
-                    
-                    // Here you would typically save to localStorage or send to server
-                    const productId = button.closest('[data-product-id]').getAttribute('data-product-id');
-                    console.log(`Product ${productId} favorite status changed`);
                 });
             });
 
-            // Add touch feedback to product cards
-            const productCards = document.querySelectorAll('.product-card');
-            productCards.forEach(card => {
-                card.addEventListener('click', () => {
-                    // Add a subtle highlight effect
-                    card.classList.add('card-highlight');
-                    
-                    // Remove it after animation completes
-                    setTimeout(() => {
-                        card.classList.remove('card-highlight');
-                        // Here you would typically navigate to product detail page
-                        console.log(`Navigating to product ${card.getAttribute('data-product-id')} details`);
-                    }, 150);
-                });
-            });
+            // Add highlight animation for price change
+            function animateValue(element, start, end, duration) {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    const value = Math.floor(progress * (end - start) + start);
+                    element.textContent = '৳' + value;
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
 
-            // Add snap scrolling behavior for filter pills
-            const filterPills = document.querySelector('.filter-pills .hide-scrollbar');
-            if (filterPills) {
-                // When a filter button is clicked, ensure it's visible in the scroll area
-                filterButtons.forEach(button => {
-                    button.addEventListener('click', () => {
-                        const scrollLeft = filterPills.scrollLeft;
-                        const buttonLeft = button.offsetLeft;
-                        const containerWidth = filterPills.clientWidth;
+            // Submit button for price update
+            const updatePriceSubmitBtn = document.getElementById('updatePriceSubmit');
+            if (updatePriceSubmitBtn) {
+                updatePriceSubmitBtn.addEventListener('click', function() {
+                    const modal = bootstrap.Modal.getInstance(updatePriceModal);
+                    const productId = updatePriceModal.getAttribute('data-product-id');
+                    const newPrice = newPriceInput.value;
+                    
+                    // Find the product price element on the page
+                    const productCard = document.querySelector(`[data-product-id="${productId}"]`);
+                    if (productCard) {
+                        const priceTag = productCard.querySelector('.price-tag');
+                        const currentPrice = parseInt(priceTag.textContent.replace('৳', ''));
                         
-                        // Center the button in the visible area
-                        filterPills.scrollTo({
-                            left: buttonLeft - (containerWidth / 2) + (button.clientWidth / 2),
-                            behavior: 'smooth'
-                        });
-                    });
+                        // Animate price change
+                        animateValue(priceTag, currentPrice, newPrice, 500);
+                        
+                        // Update price badge
+                        const priceBadge = productCard.querySelector('.badge');
+                        if (newPrice > currentPrice) {
+                            priceBadge.classList.remove('bg-success');
+                            priceBadge.classList.add('bg-danger');
+                            priceBadge.innerHTML = '<i class="bi bi-arrow-up-short"></i>৳' + (newPrice - currentPrice);
+                        } else if (newPrice < currentPrice) {
+                            priceBadge.classList.remove('bg-danger');
+                            priceBadge.classList.add('bg-success');
+                            priceBadge.innerHTML = '<i class="bi bi-arrow-down-short"></i>৳' + (currentPrice - newPrice);
+                        }
+                        
+                        // Update time
+                        const timeUpdate = productCard.querySelector('.time-update');
+                        timeUpdate.innerHTML = '<i class="bi bi-arrow-repeat me-1"></i>Just now';
+                        
+                        // Update button attribute
+                        const updateBtn = productCard.querySelector('.update-price-btn');
+                        updateBtn.setAttribute('data-product-price', newPrice);
+                    }
+                    
+                    // Close modal
+                    modal.hide();
                 });
             }
 
-            // Add lazy loading for images that come into viewport
-            const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+            // Add market header float behavior
+            const appHeader = document.querySelector('.app-header');
+            const floatingMarketHeader = document.querySelector('.floating-market-header');
+            const staticMarketHeader = document.querySelector('.static-market-header');
             
-            if ('IntersectionObserver' in window) {
-                const imageObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            img.src = img.src; // Trigger load if needed
-                            imageObserver.unobserve(img);
-                        }
-                    });
-                });
+            window.addEventListener('scroll', function() {
+                const headerHeight = appHeader.offsetHeight;
+                const staticMarketRect = staticMarketHeader.getBoundingClientRect();
                 
-                lazyImages.forEach(img => imageObserver.observe(img));
-            }
+                // Show floating header when static header is scrolled up
+                if (staticMarketRect.top < headerHeight) {
+                    floatingMarketHeader.classList.add('visible');
+                } else {
+                    floatingMarketHeader.classList.remove('visible');
+                }
+                
+                // Optional: hide static header when it's underneath the floating header
+                if (staticMarketRect.top < 0) {
+                    staticMarketHeader.classList.add('hidden');
+                } else {
+                    staticMarketHeader.classList.remove('hidden');
+                }
+            });
         });
     </script>
 </body>

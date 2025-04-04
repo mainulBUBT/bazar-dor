@@ -37,8 +37,8 @@
             <!-- Location bar directly in header -->
             <div class="location-bar bg-white rounded-pill d-flex align-items-center px-2 py-1 mb-2 shadow-sm">
                 <i class="bi bi-geo-alt text-primary me-1 small"></i>
-                <input type="text" class="form-control border-0 p-0 bg-transparent small" id="location-search" placeholder="Search location or use current..." style="font-size: 0.85rem; height: 28px;">
-                <button class="btn btn-link text-primary p-0 ms-1" id="current-location-btn" title="Use current location" style="font-size: 0.85rem;">
+                <input type="text" class="form-control border-0 p-0 bg-transparent small header-search-input" id="location-search" placeholder="Search location or use current...">
+                <button class="btn btn-link text-primary p-0 ms-1 location-btn" id="current-location-btn" title="Use current location">
                     <i class="bi bi-crosshair"></i>
                 </button>
             </div>
@@ -53,8 +53,8 @@
             <!-- Search bar (initially hidden) -->
             <div id="search-bar" class="bg-white rounded-pill d-flex align-items-center px-2 py-1 mb-2 shadow-sm" style="display: none;">
                 <i class="bi bi-search text-primary me-1 small"></i>
-                <input type="text" class="form-control border-0 p-0 bg-transparent small" id="market-search" placeholder="Search markets..." style="font-size: 0.85rem; height: 28px;">
-                <button class="btn p-0" id="search-close" style="font-size: 0.85rem;">
+                <input type="text" class="form-control border-0 p-0 bg-transparent small header-search-input" id="market-search" placeholder="Search markets...">
+                <button class="btn p-0 location-btn" id="search-close">
                     <i class="bi bi-x-circle text-muted"></i>
                 </button>
             </div>
@@ -91,7 +91,10 @@
                             <a class="nav-link" href="notifications.html"><i class="bi bi-bell"></i>Notifications</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="bi bi-graph-up"></i>Prices</a>
+                            <a class="nav-link" href="#"><i class="bi bi-award"></i>Membership</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="teams.html"><i class="bi bi-people"></i>Our Team & Volunteers</a>
                         </li>
                     </ul>
                     
@@ -147,9 +150,9 @@
         </div>
     </nav>
 
-    <div class="container mt-4">
+    <div class="container mt-2">
         <!-- Markets Header -->
-        <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="d-flex justify-content-between align-items-center mb-2">
             <h2 class="h4 mb-0">Markets Near You</h2>
             <div class="dropdown">
                 <button class="btn btn-sm btn-outline-primary dropdown-toggle rounded-pill" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -164,25 +167,25 @@
         </div>
 
         <!-- Markets List -->
-        <div id="markets-list" class="row g-2 mb-5">
+        <div id="markets-list" class="row g-2 mx-1 mb-5">
             <!-- Market cards will be dynamically inserted here by JavaScript -->
             <!-- Example static cards for preview -->
             <div class="col-12 col-md-6 col-lg-4 mb-2 d-flex">
-                <div class="card market-card shadow-sm flex-fill h-100" data-market-id="1" onclick="window.location.href='products.html?market_id=1'" style="cursor: pointer;">
+                <div class="card market-card shadow-sm flex-fill h-100" data-market-id="1">
                     <!-- Card Header with Image and Status Badge -->
                     <div class="position-relative rounded-top overflow-hidden">
                         <!-- Market Status Indicator -->
-                        <div class="market-status badge bg-success position-absolute top-0 end-0 m-3 px-3 py-2 rounded-pill shadow-sm z-index-1">
+                        <div class="market-status badge bg-success position-absolute top-0 end-0 m-2 px-2 py-1 rounded-pill shadow-sm z-index-1">
                             <i class="bi bi-check-circle-fill me-1"></i>Open
                         </div>
                         
                         <!-- Favorite Button -->
-                        <button class="btn btn-light btn-sm rounded-circle position-absolute top-0 start-0 m-3 shadow-sm" title="Add to favorites">
+                        <button class="btn btn-light btn-sm rounded-circle position-absolute top-0 start-0 m-2 shadow-sm favorite-btn" title="Add to favorites">
                             <i class="bi bi-heart text-muted"></i>
                         </button>
                         
                         <!-- Market Image -->
-                        <div class="market-image-wrapper" style="height: 140px;">
+                        <div class="market-image-wrapper market-detail-link" data-market-id="1">
                             <img src="https://images.unsplash.com/photo-1506484381205-f7945653044d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                                 class="card-img-top h-100 w-100 object-fit-cover" alt="Market Image">
                         </div>
@@ -191,50 +194,57 @@
                     <!-- Card Body with Market Info -->
                     <div class="card-body d-flex flex-column p-2 gap-1">
                         <!-- Market Icon and Title -->
-                        <div class="d-flex align-items-start">
-                            <div class="market-icon-wrapper bg-primary-light rounded-circle me-2 flex-shrink-0 p-2" 
-                                style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
-                                <i class="bi bi-shop text-primary fs-4"></i>
+                        <div class="d-flex align-items-start market-detail-link" data-market-id="1">
+                            <div class="market-icon-wrapper bg-primary-light rounded-circle me-2 flex-shrink-0 p-2">
+                                <i class="bi bi-shop text-primary fs-5"></i>
                             </div>
                             <div class="overflow-hidden">
-                                <h5 class="card-title mb-0 text-truncate fw-bold">Mirpur 11 Kacha Bazar</h5>
-                                <p class="card-subtitle text-muted small mb-0 text-truncate">
-                                    <i class="bi bi-geo-alt-fill me-1 text-primary"></i>Mirpur 11, Block C
-                                </p>
+                                <h5 class="card-title mb-0 text-truncate fw-bold">Mirpur 11 Kacha Bazar <a href="products.html?market_id=1" class="text-primary"><i class="bi bi-arrow-right-circle-fill"></i></a></h5>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="card-subtitle text-muted small mb-0 text-truncate">
+                                        <i class="bi bi-geo-alt-fill me-1 text-primary"></i>Mirpur 11, Block C
+                                        <span class="mx-1 text-muted">•</span>
+                                        <span class="small text-muted">0.5 km</span>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                         
-
-                        
-                        <!-- Card Footer with Distance and Action Button -->
-                        <div class="d-flex justify-content-between align-items-center mt-auto">
-                            <span class="badge bg-primary-light text-primary rounded-pill px-2 py-1 fw-normal">
-                                <i class="bi bi-geo-alt me-1"></i>0.5 km
-                            </span>
-                            <button class="btn btn-primary rounded-pill px-3 py-2">
-                                <i class="bi bi-arrow-right"></i>
-                            </button>
+                        <!-- Market Stats -->
+                        <div class="market-stats d-flex gap-3 pt-2 mt-2 border-top">
+                            <div class="stat-item text-center">
+                                <div class="small fw-bold text-primary">4.8</div>
+                                <div class="stat-label text-muted">Rating</div>
+                            </div>
+                            <div class="stat-item text-center">
+                                <div class="small fw-bold text-primary">96</div>
+                                <div class="stat-label text-muted">Products</div>
+                            </div>
+                            <div class="stat-item text-center">
+                                <div class="small fw-bold text-primary">7am-9pm</div>
+                                <div class="stat-label text-muted">Hours</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="col-12 col-md-6 col-lg-4 mb-2 d-flex">
-                <div class="card market-card shadow-sm flex-fill h-100" data-market-id="2" onclick="window.location.href='products.html?market_id=2'" style="cursor: pointer;">
+                <div class="card market-card shadow-sm flex-fill h-100" data-market-id="2">
                     <!-- Card Header with Image and Status Badge -->
                     <div class="position-relative rounded-top overflow-hidden">
                         <!-- Market Status Indicator -->
-                        <div class="market-status badge bg-success position-absolute top-0 end-0 m-3 px-3 py-2 rounded-pill shadow-sm z-index-1">
+                        <div class="market-status badge bg-success position-absolute top-0 end-0 m-2 px-2 py-1 rounded-pill shadow-sm z-index-1">
                             <i class="bi bi-check-circle-fill me-1"></i>Open
                         </div>
                         
                         <!-- Favorite Button -->
-                        <button class="btn btn-light btn-sm rounded-circle position-absolute top-0 start-0 m-3 shadow-sm" title="Add to favorites">
+                        <button class="btn btn-light btn-sm rounded-circle position-absolute top-0 start-0 m-2 shadow-sm favorite-btn" title="Add to favorites">
                             <i class="bi bi-heart text-muted"></i>
                         </button>
                         
                         <!-- Market Image -->
-                        <div class="market-image-wrapper" style="height: 140px;">
+                        <div class="market-image-wrapper market-detail-link" data-market-id="2">
                             <img src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                                 class="card-img-top h-100 w-100 object-fit-cover" alt="Market Image">
                         </div>
@@ -243,50 +253,57 @@
                     <!-- Card Body with Market Info -->
                     <div class="card-body d-flex flex-column p-2 gap-1">
                         <!-- Market Icon and Title -->
-                        <div class="d-flex align-items-start">
-                            <div class="market-icon-wrapper bg-primary-light rounded-circle me-2 flex-shrink-0 p-2" 
-                                style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
-                                <i class="bi bi-shop text-primary fs-4"></i>
+                        <div class="d-flex align-items-start market-detail-link" data-market-id="2">
+                            <div class="market-icon-wrapper bg-primary-light rounded-circle me-2 flex-shrink-0 p-2">
+                                <i class="bi bi-shop text-primary fs-5"></i>
                             </div>
                             <div class="overflow-hidden">
-                                <h5 class="card-title mb-0 text-truncate fw-bold">Mirpur 10 Bazar</h5>
-                                <p class="card-subtitle text-muted small mb-0 text-truncate">
-                                    <i class="bi bi-geo-alt-fill me-1 text-primary"></i>Mirpur 10 Circle
-                                </p>
+                                <h5 class="card-title mb-0 text-truncate fw-bold">Mirpur 10 Bazar <a href="products.html?market_id=2" class="text-primary"><i class="bi bi-arrow-right-circle-fill"></i></a></h5>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="card-subtitle text-muted small mb-0 text-truncate">
+                                        <i class="bi bi-geo-alt-fill me-1 text-primary"></i>Mirpur 10 Circle
+                                        <span class="mx-1 text-muted">•</span>
+                                        <span class="small text-muted">1.2 km</span>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                         
-
-                        
-                        <!-- Card Footer with Distance and Action Button -->
-                        <div class="d-flex justify-content-between align-items-center mt-auto">
-                            <span class="badge bg-primary-light text-primary rounded-pill px-3 py-2 fw-normal">
-                                <i class="bi bi-geo-alt me-1"></i>1.2 km
-                            </span>
-                            <button class="btn btn-primary rounded-pill px-3 py-2">
-                                <i class="bi bi-arrow-right"></i>
-                            </button>
+                        <!-- Market Stats -->
+                        <div class="market-stats d-flex gap-3 pt-2 mt-2 border-top">
+                            <div class="stat-item text-center">
+                                <div class="small fw-bold text-primary">4.5</div>
+                                <div class="stat-label text-muted">Rating</div>
+                            </div>
+                            <div class="stat-item text-center">
+                                <div class="small fw-bold text-primary">124</div>
+                                <div class="stat-label text-muted">Products</div>
+                            </div>
+                            <div class="stat-item text-center">
+                                <div class="small fw-bold text-primary">6am-8pm</div>
+                                <div class="stat-label text-muted">Hours</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="col-12 col-md-6 col-lg-4 mb-2 d-flex">
-                <div class="card market-card shadow-sm flex-fill h-100" data-market-id="3" onclick="window.location.href='products.html?market_id=3'" style="cursor: pointer;">
+                <div class="card market-card shadow-sm flex-fill h-100" data-market-id="3">
                     <!-- Card Header with Image and Status Badge -->
                     <div class="position-relative rounded-top overflow-hidden">
                         <!-- Market Status Indicator -->
-                        <div class="market-status badge bg-success position-absolute top-0 end-0 m-3 px-3 py-2 rounded-pill shadow-sm z-index-1">
+                        <div class="market-status badge bg-success position-absolute top-0 end-0 m-2 px-2 py-1 rounded-pill shadow-sm z-index-1">
                             <i class="bi bi-check-circle-fill me-1"></i>Open
                         </div>
                         
                         <!-- Favorite Button -->
-                        <button class="btn btn-light btn-sm rounded-circle position-absolute top-0 start-0 m-3 shadow-sm" title="Add to favorites">
+                        <button class="btn btn-light btn-sm rounded-circle position-absolute top-0 start-0 m-2 shadow-sm favorite-btn" title="Add to favorites">
                             <i class="bi bi-heart text-muted"></i>
                         </button>
                         
                         <!-- Market Image -->
-                        <div class="market-image-wrapper" style="height: 140px;">
+                        <div class="market-image-wrapper market-detail-link" data-market-id="3">
                             <img src="https://images.unsplash.com/photo-1573246123716-6b1782bfc499?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                                 class="card-img-top h-100 w-100 object-fit-cover" alt="Market Image">
                         </div>
@@ -295,50 +312,57 @@
                     <!-- Card Body with Market Info -->
                     <div class="card-body d-flex flex-column p-2 gap-1">
                         <!-- Market Icon and Title -->
-                        <div class="d-flex align-items-start">
-                            <div class="market-icon-wrapper bg-primary-light rounded-circle me-2 flex-shrink-0 p-2" 
-                                style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
-                                <i class="bi bi-shop text-primary fs-4"></i>
+                        <div class="d-flex align-items-start market-detail-link" data-market-id="3">
+                            <div class="market-icon-wrapper bg-primary-light rounded-circle me-2 flex-shrink-0 p-2">
+                                <i class="bi bi-shop text-primary fs-5"></i>
                             </div>
                             <div class="overflow-hidden">
-                                <h5 class="card-title mb-0 text-truncate fw-bold">Dhanmondi 15 Market</h5>
-                                <p class="card-subtitle text-muted small mb-0 text-truncate">
-                                    <i class="bi bi-geo-alt-fill me-1 text-primary"></i>Road 15, Dhanmondi
-                                </p>
+                                <h5 class="card-title mb-0 text-truncate fw-bold">Dhanmondi 15 Market <a href="products.html?market_id=3" class="text-primary"><i class="bi bi-arrow-right-circle-fill"></i></a></h5>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="card-subtitle text-muted small mb-0 text-truncate">
+                                        <i class="bi bi-geo-alt-fill me-1 text-primary"></i>Road 15, Dhanmondi
+                                        <span class="mx-1 text-muted">•</span>
+                                        <span class="small text-muted">0.3 km</span>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                         
-
-                        
-                        <!-- Card Footer with Distance and Action Button -->
-                        <div class="d-flex justify-content-between align-items-center mt-auto">
-                            <span class="badge bg-primary-light text-primary rounded-pill px-3 py-2 fw-normal">
-                                <i class="bi bi-geo-alt me-1"></i>0.3 km
-                            </span>
-                            <button class="btn btn-primary rounded-pill px-3 py-2">
-                                <i class="bi bi-arrow-right"></i>
-                            </button>
+                        <!-- Market Stats -->
+                        <div class="market-stats d-flex gap-3 pt-2 mt-2 border-top">
+                            <div class="stat-item text-center">
+                                <div class="small fw-bold text-primary">4.9</div>
+                                <div class="stat-label text-muted">Rating</div>
+                            </div>
+                            <div class="stat-item text-center">
+                                <div class="small fw-bold text-primary">142</div>
+                                <div class="stat-label text-muted">Products</div>
+                            </div>
+                            <div class="stat-item text-center">
+                                <div class="small fw-bold text-primary">8am-10pm</div>
+                                <div class="stat-label text-muted">Hours</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="col-12 col-md-6 col-lg-4 mb-2 d-flex">
-                <div class="card market-card shadow-sm flex-fill h-100" data-market-id="4" onclick="window.location.href='products.html?market_id=4'" style="cursor: pointer;">
+                <div class="card market-card shadow-sm flex-fill h-100" data-market-id="4">
                     <!-- Card Header with Image and Status Badge -->
                     <div class="position-relative rounded-top overflow-hidden">
                         <!-- Market Status Indicator -->
-                        <div class="market-status badge bg-success position-absolute top-0 end-0 m-3 px-3 py-2 rounded-pill shadow-sm z-index-1">
+                        <div class="market-status badge bg-success position-absolute top-0 end-0 m-2 px-2 py-1 rounded-pill shadow-sm z-index-1">
                             <i class="bi bi-check-circle-fill me-1"></i>Open
                         </div>
                         
                         <!-- Favorite Button -->
-                        <button class="btn btn-light btn-sm rounded-circle position-absolute top-0 start-0 m-3 shadow-sm" title="Add to favorites">
+                        <button class="btn btn-light btn-sm rounded-circle position-absolute top-0 start-0 m-2 shadow-sm favorite-btn" title="Add to favorites">
                             <i class="bi bi-heart text-muted"></i>
                         </button>
                         
                         <!-- Market Image -->
-                        <div class="market-image-wrapper" style="height: 140px;">
+                        <div class="market-image-wrapper market-detail-link" data-market-id="4">
                             <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                                 class="card-img-top h-100 w-100 object-fit-cover" alt="Market Image">
                         </div>
@@ -347,50 +371,57 @@
                     <!-- Card Body with Market Info -->
                     <div class="card-body d-flex flex-column p-2 gap-1">
                         <!-- Market Icon and Title -->
-                        <div class="d-flex align-items-start">
-                            <div class="market-icon-wrapper bg-primary-light rounded-circle me-2 flex-shrink-0 p-2" 
-                                style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
-                                <i class="bi bi-shop text-primary fs-4"></i>
+                        <div class="d-flex align-items-start market-detail-link" data-market-id="4">
+                            <div class="market-icon-wrapper bg-primary-light rounded-circle me-2 flex-shrink-0 p-2">
+                                <i class="bi bi-shop text-primary fs-5"></i>
                             </div>
                             <div class="overflow-hidden">
-                                <h5 class="card-title mb-0 text-truncate fw-bold">Gulshan 2 Fresh Market</h5>
-                                <p class="card-subtitle text-muted small mb-0 text-truncate">
-                                    <i class="bi bi-geo-alt-fill me-1 text-primary"></i>Gulshan Avenue
-                                </p>
+                                <h5 class="card-title mb-0 text-truncate fw-bold">Gulshan 2 Fresh Market <a href="products.html?market_id=4" class="text-primary"><i class="bi bi-arrow-right-circle-fill"></i></a></h5>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="card-subtitle text-muted small mb-0 text-truncate">
+                                        <i class="bi bi-geo-alt-fill me-1 text-primary"></i>Gulshan Avenue
+                                        <span class="mx-1 text-muted">•</span>
+                                        <span class="small text-muted">1.8 km</span>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                         
- 
-                        
-                        <!-- Card Footer with Distance and Action Button -->
-                        <div class="d-flex justify-content-between align-items-center mt-auto">
-                            <span class="badge bg-primary-light text-primary rounded-pill px-3 py-2 fw-normal">
-                                <i class="bi bi-geo-alt me-1"></i>1.8 km
-                            </span>
-                            <button class="btn btn-primary rounded-pill px-3 py-2">
-                                <i class="bi bi-arrow-right"></i>
-                            </button>
+                        <!-- Market Stats -->
+                        <div class="market-stats d-flex gap-3 pt-2 mt-2 border-top">
+                            <div class="stat-item text-center">
+                                <div class="small fw-bold text-primary">4.6</div>
+                                <div class="stat-label text-muted">Rating</div>
+                            </div>
+                            <div class="stat-item text-center">
+                                <div class="small fw-bold text-primary">115</div>
+                                <div class="stat-label text-muted">Products</div>
+                            </div>
+                            <div class="stat-item text-center">
+                                <div class="small fw-bold text-primary">7am-8pm</div>
+                                <div class="stat-label text-muted">Hours</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="col-12 col-md-6 col-lg-4 mb-2 d-flex">
-                <div class="card market-card shadow-sm flex-fill h-100" data-market-id="5" onclick="window.location.href='products.html?market_id=5'" style="cursor: pointer;">
+                <div class="card market-card shadow-sm flex-fill h-100" data-market-id="5">
                     <!-- Card Header with Image and Status Badge -->
                     <div class="position-relative rounded-top overflow-hidden">
                         <!-- Market Status Indicator -->
-                        <div class="market-status badge bg-success position-absolute top-0 end-0 m-3 px-3 py-2 rounded-pill shadow-sm z-index-1">
+                        <div class="market-status badge bg-success position-absolute top-0 end-0 m-2 px-2 py-1 rounded-pill shadow-sm z-index-1">
                             <i class="bi bi-check-circle-fill me-1"></i>Open
                         </div>
                         
                         <!-- Favorite Button -->
-                        <button class="btn btn-light btn-sm rounded-circle position-absolute top-0 start-0 m-3 shadow-sm" title="Add to favorites">
+                        <button class="btn btn-light btn-sm rounded-circle position-absolute top-0 start-0 m-2 shadow-sm favorite-btn" title="Add to favorites">
                             <i class="bi bi-heart text-muted"></i>
                         </button>
                         
                         <!-- Market Image -->
-                        <div class="market-image-wrapper" style="height: 140px;">
+                        <div class="market-image-wrapper market-detail-link" data-market-id="5">
                             <img src="https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                                 class="card-img-top h-100 w-100 object-fit-cover" alt="Market Image">
                         </div>
@@ -399,28 +430,36 @@
                     <!-- Card Body with Market Info -->
                     <div class="card-body d-flex flex-column p-2 gap-1">
                         <!-- Market Icon and Title -->
-                        <div class="d-flex align-items-start">
-                            <div class="market-icon-wrapper bg-primary-light rounded-circle me-2 flex-shrink-0 p-2" 
-                                style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
-                                <i class="bi bi-shop text-primary fs-4"></i>
+                        <div class="d-flex align-items-start market-detail-link" data-market-id="5">
+                            <div class="market-icon-wrapper bg-primary-light rounded-circle me-2 flex-shrink-0 p-2">
+                                <i class="bi bi-shop text-primary fs-5"></i>
                             </div>
                             <div class="overflow-hidden">
-                                <h5 class="card-title mb-0 text-truncate fw-bold">Banani Farmers Market</h5>
-                                <p class="card-subtitle text-muted small mb-0 text-truncate">
-                                    <i class="bi bi-geo-alt-fill me-1 text-primary"></i>Banani Road 11
-                                </p>
+                                <h5 class="card-title mb-0 text-truncate fw-bold">Banani Farmers Market <a href="products.html?market_id=5" class="text-primary"><i class="bi bi-arrow-right-circle-fill"></i></a></h5>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="card-subtitle text-muted small mb-0 text-truncate">
+                                        <i class="bi bi-geo-alt-fill me-1 text-primary"></i>Banani Road 11
+                                        <span class="mx-1 text-muted">•</span>
+                                        <span class="small text-muted">2.1 km</span>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                         
- 
-                        <!-- Card Footer with Distance and Action Button -->
-                        <div class="d-flex justify-content-between align-items-center mt-auto">
-                            <span class="badge bg-primary-light text-primary rounded-pill px-3 py-2 fw-normal">
-                                <i class="bi bi-geo-alt me-1"></i>2.1 km
-                            </span>
-                            <button class="btn btn-primary rounded-pill px-3 py-2">
-                                <i class="bi bi-arrow-right"></i>
-                            </button>
+                        <!-- Market Stats -->
+                        <div class="market-stats d-flex gap-3 pt-2 mt-2 border-top">
+                            <div class="stat-item text-center">
+                                <div class="small fw-bold text-primary">4.7</div>
+                                <div class="stat-label text-muted">Rating</div>
+                            </div>
+                            <div class="stat-item text-center">
+                                <div class="small fw-bold text-primary">108</div>
+                                <div class="stat-label text-muted">Products</div>
+                            </div>
+                            <div class="stat-item text-center">
+                                <div class="small fw-bold text-primary">8am-9pm</div>
+                                <div class="stat-label text-muted">Hours</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -437,28 +476,48 @@
     <!-- Pagination Container -->
     <div id="pagination-container" class="mb-4"></div>
 
-    <!-- Location Warning Modal -->
-    <div class="modal fade" id="locationWarningModal" tabindex="-1" aria-labelledby="locationWarningModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" style="border-radius: var(--border-radius); overflow: hidden;">
-                <div class="modal-header bg-warning">
-                    <h5 class="modal-title" id="locationWarningModalLabel">Location Required</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Please select your location to see markets near you.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="select-location-btn" data-bs-dismiss="modal">Select Location</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script src="lib/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="js/location.js"></script>
     <script src="js/app.js"></script>
     <script src="js/pagination.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle market detail links
+            const marketDetailLinks = document.querySelectorAll('.market-detail-link');
+            marketDetailLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    const marketId = this.getAttribute('data-market-id');
+                    window.location.href = `products.html?market_id=${marketId}`;
+                });
+                // Add cursor pointer style
+                link.style.cursor = 'pointer';
+            });
+            
+            // Handle favorite buttons
+            const favoriteButtons = document.querySelectorAll('.favorite-btn');
+            favoriteButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Prevent card click
+                    const icon = this.querySelector('i');
+                    
+                    if (icon.classList.contains('bi-heart')) {
+                        icon.classList.remove('bi-heart');
+                        icon.classList.add('bi-heart-fill');
+                        icon.classList.remove('text-muted');
+                        icon.classList.add('text-danger');
+                    } else {
+                        icon.classList.remove('bi-heart-fill');
+                        icon.classList.add('bi-heart');
+                        icon.classList.remove('text-danger');
+                        icon.classList.add('text-muted');
+                    }
+                    
+                    const marketCard = this.closest('.market-card');
+                    const marketId = marketCard.getAttribute('data-market-id');
+                    console.log(`Market ${marketId} favorite status changed`);
+                });
+            });
+        });
+    </script>
     <script src="js/markets.js"></script>
   

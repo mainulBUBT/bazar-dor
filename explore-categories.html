@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffd700">
+    <title>Explore Categories - Bazar Dor</title>
+    <link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="lib/bootstrap-icons/bootstrap-icons.min.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/banner-slider.css">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+</head>
+<body class="bg-light">
+    <header class="app-header bg-primary">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center py-2">
+                <button class="btn text-white p-0" onclick="window.history.back()">
+                    <i class="bi bi-arrow-left fs-4"></i>
+                </button>
+                <h5 class="text-white mb-0">All Categories</h5>
+                <div>
+                    <a href="notifications.html" class="btn text-white p-0 position-relative me-3" title="Notifications">
+                        <i class="bi bi-bell-fill fs-4"></i>
+                        <span class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger notification-badge">
+                            3
+                            <span class="visually-hidden">unread notifications</span>
+                        </span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Search bar -->
+            <div class="bg-white rounded-pill d-flex align-items-center px-2 py-1 mb-2 shadow-sm">
+                <i class="bi bi-search text-primary me-1 small"></i>
+                <input type="text" class="form-control border-0 p-0 bg-transparent small" id="category-search" placeholder="Search categories..." style="font-size: 0.85rem; height: 28px;">
+                <button class="btn p-0" id="search-clear" style="display: none; font-size: 0.85rem;">
+                    <i class="bi bi-x-circle text-muted"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mt-3 mb-5 pb-5">
+        <!-- Banner Slider Section -->
+        <div class="mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h6 class="mb-0 border-start border-primary border-4 ps-2">Featured Offers</h6>
+            </div>
+            
+            <div class="promo-banners hide-scrollbar d-flex overflow-auto gap-3 pb-2">
+                <!-- Promo Banner 1 -->
+                <div class="promo-banner-card promo-banner-blue rounded-4 shadow-sm">
+                    <div class="p-3 text-white">
+                        <div class="d-flex justify-content-between align-items-start mb-4">
+                            <div>
+                                <span class="badge bg-white text-primary rounded-pill px-3 mb-2">New</span>
+                                <h5 class="mb-1">Weekend Sale</h5>
+                                <p class="mb-0 small opacity-75">Up to 25% off on vegetables</p>
+                            </div>
+                            <div class="promo-icon rounded-circle bg-white p-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-basket2-fill text-primary fs-5"></i>
+                            </div>
+                        </div>
+                        <button class="btn btn-sm btn-light rounded-pill px-3">Shop Now</button>
+                    </div>
+                </div>
+                
+                <!-- Promo Banner 2 -->
+                <div class="promo-banner-card promo-banner-pink rounded-4 shadow-sm">
+                    <div class="p-3 text-white">
+                        <div class="d-flex justify-content-between align-items-start mb-4">
+                            <div>
+                                <span class="badge bg-white text-danger rounded-pill px-3 mb-2">Hot</span>
+                                <h5 class="mb-1">Fruits Festival</h5>
+                                <p class="mb-0 small opacity-75">Fresh seasonal fruits available</p>
+                            </div>
+                            <div class="promo-icon rounded-circle bg-white p-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-apple text-danger fs-5"></i>
+                            </div>
+                        </div>
+                        <button class="btn btn-sm btn-light rounded-pill px-3">Explore</button>
+                    </div>
+                </div>
+                
+                <!-- Promo Banner 3 -->
+                <div class="promo-banner-card promo-banner-purple rounded-4 shadow-sm">
+                    <div class="p-3 text-white">
+                        <div class="d-flex justify-content-between align-items-start mb-4">
+                            <div>
+                                <span class="badge bg-white text-purple rounded-pill px-3 mb-2">Special</span>
+                                <h5 class="mb-1">Premium Meats</h5>
+                                <p class="mb-0 small opacity-75">Exclusive offers on fresh meat</p>
+                            </div>
+                            <div class="promo-icon rounded-circle bg-white p-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-archive-fill text-purple fs-5"></i>
+                            </div>
+                        </div>
+                        <button class="btn btn-sm btn-light rounded-pill px-3">View Deals</button>
+                    </div>
+                </div>
+                
+                <!-- Promo Banner 4 -->
+                <div class="promo-banner-card promo-banner-teal rounded-4 shadow-sm">
+                    <div class="p-3 text-white">
+                        <div class="d-flex justify-content-between align-items-start mb-4">
+                            <div>
+                                <span class="badge bg-white text-info rounded-pill px-3 mb-2">New</span>
+                                <h5 class="mb-1">Dairy Products</h5>
+                                <p class="mb-0 small opacity-75">Fresh milk & dairy items</p>
+                            </div>
+                            <div class="promo-icon rounded-circle bg-white p-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-egg text-info fs-5"></i>
+                            </div>
+                        </div>
+                        <button class="btn btn-sm btn-light rounded-pill px-3">Check Out</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Popular Categories Section -->
+        <div class="section mb-4">
+            <h6 class="mb-3 border-start border-primary border-4 ps-2">Popular Categories</h6>
+            <div class="row g-3">
+                <div class="col-4 col-md-3">
+                    <div class="card category-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-3">
+                            <div class="icon-wrapper bg-primary-light rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-basket2-fill text-primary fs-4"></i>
+                            </div>
+                            <h6 class="card-title mb-0 small">Vegetables</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 col-md-3">
+                    <div class="card category-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-3">
+                            <div class="icon-wrapper bg-primary-light rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-apple text-primary fs-4"></i>
+                            </div>
+                            <h6 class="card-title mb-0 small">Fruits</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 col-md-3">
+                    <div class="card category-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-3">
+                            <div class="icon-wrapper bg-primary-light rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-egg text-primary fs-4"></i>
+                            </div>
+                            <h6 class="card-title mb-0 small">Dairy & Eggs</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 col-md-3">
+                    <div class="card category-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-3">
+                            <div class="icon-wrapper bg-primary-light rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-archive-fill text-primary fs-4"></i>
+                            </div>
+                            <h6 class="card-title mb-0 small">Meat</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- All Categories Section -->
+        <div class="section">
+            <h6 class="mb-3 border-start border-primary border-4 ps-2">All Categories</h6>
+            <div class="row g-3" id="categories-grid">
+                <div class="col-4 col-md-3" data-category="vegetables">
+                    <div class="card category-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-3">
+                            <div class="icon-wrapper bg-primary-light rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-basket2-fill text-primary fs-4"></i>
+                            </div>
+                            <h6 class="card-title mb-0 small">Vegetables</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 col-md-3" data-category="fruits">
+                    <div class="card category-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-3">
+                            <div class="icon-wrapper bg-primary-light rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-apple text-primary fs-4"></i>
+                            </div>
+                            <h6 class="card-title mb-0 small">Fruits</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 col-md-3" data-category="dairy">
+                    <div class="card category-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-3">
+                            <div class="icon-wrapper bg-primary-light rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-egg text-primary fs-4"></i>
+                            </div>
+                            <h6 class="card-title mb-0 small">Dairy & Eggs</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 col-md-3" data-category="beverages">
+                    <div class="card category-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-3">
+                            <div class="icon-wrapper bg-primary-light rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-cup-hot text-primary fs-4"></i>
+                            </div>
+                            <h6 class="card-title mb-0 small">Beverages</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 col-md-3" data-category="grains">
+                    <div class="card category-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-3">
+                            <div class="icon-wrapper bg-primary-light rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-bag-fill text-primary fs-4"></i>
+                            </div>
+                            <h6 class="card-title mb-0 small">Grains</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 col-md-3" data-category="meat">
+                    <div class="card category-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-3">
+                            <div class="icon-wrapper bg-primary-light rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-archive-fill text-primary fs-4"></i>
+                            </div>
+                            <h6 class="card-title mb-0 small">Meat</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 col-md-3" data-category="oils">
+                    <div class="card category-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-3">
+                            <div class="icon-wrapper bg-primary-light rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-droplet text-primary fs-4"></i>
+                            </div>
+                            <h6 class="card-title mb-0 small">Oils</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 col-md-3" data-category="packaged">
+                    <div class="card category-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-3">
+                            <div class="icon-wrapper bg-primary-light rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-box text-primary fs-4"></i>
+                            </div>
+                            <h6 class="card-title mb-0 small">Packaged Foods</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 col-md-3" data-category="fish">
+                    <div class="card category-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-3">
+                            <div class="icon-wrapper bg-primary-light rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-water text-primary fs-4"></i>
+                            </div>
+                            <h6 class="card-title mb-0 small">Fish</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 col-md-3" data-category="spices">
+                    <div class="card category-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-3">
+                            <div class="icon-wrapper bg-primary-light rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-flower1 text-primary fs-4"></i>
+                            </div>
+                            <h6 class="card-title mb-0 small">Spices</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 col-md-3" data-category="snacks">
+                    <div class="card category-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-3">
+                            <div class="icon-wrapper bg-primary-light rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-pie-chart-fill text-primary fs-4"></i>
+                            </div>
+                            <h6 class="card-title mb-0 small">Snacks</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 col-md-3" data-category="personal">
+                    <div class="card category-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-3">
+                            <div class="icon-wrapper bg-primary-light rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-shield-fill-check text-primary fs-4"></i>
+                            </div>
+                            <h6 class="card-title mb-0 small">Personal Care</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 col-md-3" data-category="cleaning">
+                    <div class="card category-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-3">
+                            <div class="icon-wrapper bg-primary-light rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-bucket-fill text-primary fs-4"></i>
+                            </div>
+                            <h6 class="card-title mb-0 small">Cleaning</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 col-md-3" data-category="baby">
+                    <div class="card category-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-3">
+                            <div class="icon-wrapper bg-primary-light rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-emoji-smile text-primary fs-4"></i>
+                            </div>
+                            <h6 class="card-title mb-0 small">Baby Products</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 col-md-3" data-category="bakery">
+                    <div class="card category-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-3">
+                            <div class="icon-wrapper bg-primary-light rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-bread-slice text-primary fs-4"></i>
+                            </div>
+                            <h6 class="card-title mb-0 small">Bakery</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 col-md-3" data-category="frozen">
+                    <div class="card category-card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-3">
+                            <div class="icon-wrapper bg-primary-light rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-snow text-primary fs-4"></i>
+                            </div>
+                            <h6 class="card-title mb-0 small">Frozen Foods</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- No Results Message (initially hidden) -->
+            <div id="no-results" class="text-center py-5" style="display: none;">
+                <i class="bi bi-search text-muted" style="font-size: 3rem;"></i>
+                <h5 class="mt-3">No Categories Found</h5>
+                <p class="text-muted">Try a different search term</p>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar fixed-bottom navbar-dark">
+        <div class="container-fluid justify-content-center p-0">
+            <ul class="navbar-nav flex-row bottom-nav">
+                <li class="nav-item mx-0">
+                    <a class="nav-link active" href="index.html">
+                        <i class="bi bi-house"></i>
+                        <div class="nav-label small">Home</div>
+                    </a>
+                </li>
+                <li class="nav-item mx-0">
+                    <a class="nav-link" href="markets.html">
+                        <i class="bi bi-shop"></i>
+                        <div class="nav-label small">Markets</div>
+                    </a>
+                </li>
+                <li class="nav-item mx-0">
+                    <a class="nav-link" href="favorites.html">
+                        <i class="bi bi-heart"></i>
+                        <div class="nav-label small">Favorites</div>
+                    </a>
+                </li>
+                <li class="nav-item mx-0">
+                    <a class="nav-link" href="profile.html">
+                        <i class="bi bi-person"></i>
+                        <div class="nav-label small">Profile</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Toast Notification System -->
+    <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3" style="z-index: 1060; bottom: 70px !important;">
+        <div id="locationToast" class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="bi bi-geo-alt me-2"></i>
+                    <span>Please select your location to browse products</span>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="lib/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Search functionality
+            const searchInput = document.getElementById('category-search');
+            const searchClear = document.getElementById('search-clear');
+            const categoryCards = document.querySelectorAll('[data-category]');
+            const noResults = document.getElementById('no-results');
+            
+            // Show/hide clear button when typing
+            searchInput.addEventListener('input', function() {
+                searchClear.style.display = this.value.length > 0 ? 'block' : 'none';
+                filterCategories(this.value.toLowerCase());
+            });
+            
+            // Clear search
+            searchClear.addEventListener('click', function() {
+                searchInput.value = '';
+                searchClear.style.display = 'none';
+                filterCategories('');
+            });
+            
+            // Filter categories based on search input
+            function filterCategories(searchTerm) {
+                let visibleCount = 0;
+                
+                categoryCards.forEach(card => {
+                    const categoryName = card.querySelector('.card-title').textContent.toLowerCase();
+                    
+                    if (categoryName.includes(searchTerm)) {
+                        card.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Show/hide no results message
+                noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+            }
+            
+            // Make category cards clickable
+            categoryCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Show toast notification
+                    const locationToast = new bootstrap.Toast(document.getElementById('locationToast'));
+                    locationToast.show();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

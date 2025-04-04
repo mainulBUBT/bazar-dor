@@ -322,17 +322,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // Check if user has a saved location
-    function checkSavedLocation() {
-        const savedLocation = localStorage.getItem('userLocation');
-        if (savedLocation) {
-            const location = JSON.parse(savedLocation);
-            locationSearch.value = location.address;
-            updateMarketsBasedOnLocation(location);
-        } else {
-            // Show location warning modal if no location is saved
-            locationWarningModal.show();
-        }
-    }
+    // function checkSavedLocation() {
+    //     const savedLocation = localStorage.getItem('userLocation');
+    //     if (savedLocation) {
+    //         const location = JSON.parse(savedLocation);
+    //         locationSearch.value = location.address;
+    //         updateMarketsBasedOnLocation(location);
+    //     } else {
+    //         // Show location warning modal if no location is saved
+    //         locationWarningModal.show();
+    //     }
+    // }
     
     // Update markets based on location
     function updateMarketsBasedOnLocation(location) {

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffd700">
+    <title>Edit Profile - Bazar Dor</title>
+    <link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="lib/bootstrap-icons/bootstrap-icons.min.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+</head>
+
+<body class="bg-light">
+    <header class="app-header bg-primary">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center py-2">
+                <button class="btn text-white p-0" onclick="window.location.href='personal-info.html'">
+                    <i class="bi bi-arrow-left fs-4"></i>
+                </button>
+                <h5 class="text-white mb-0">Edit Profile</h5>
+                <div>
+                    <button class="btn text-white p-0" id="save-changes-btn">
+                        <i class="bi bi-check-lg fs-4"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mt-4 mb-7">
+        <div class="card border-0 shadow-sm rounded-4 mb-4">
+            <div class="card-body p-4">
+                <div class="text-center mb-4">
+                    <div class="position-relative d-inline-block">
+                        <img src="https://api.dicebear.com/6.x/avataaars/svg?seed=John" class="rounded-circle" width="100" height="100" alt="Profile Picture">
+                        <div class="position-absolute bottom-0 end-0">
+                            <label for="profile-pic-upload" class="btn btn-primary rounded-circle" style="width: 36px; height: 36px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                                <i class="bi bi-camera"></i>
+                            </label>
+                            <input type="file" id="profile-pic-upload" class="d-none">
+                        </div>
+                    </div>
+                </div>
+
+                <form id="profile-edit-form">
+                    <div class="mb-3">
+                        <label for="fullName" class="form-label small text-muted">Full Name</label>
+                        <input type="text" class="form-control rounded-3" id="fullName" value="John Doe">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label small text-muted">Email Address</label>
+                        <input type="email" class="form-control rounded-3" id="email" value="johndoe@example.com">
+                        <div class="form-text small">We'll never share your email with anyone else.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="phoneNumber" class="form-label small text-muted">Phone Number</label>
+                        <div class="input-group">
+                            <span class="input-group-text rounded-start-3">+880</span>
+                            <input type="tel" class="form-control rounded-end-3" id="phoneNumber" value="1234567890">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small text-muted">Gender</label>
+                        <div class="d-flex">
+                            <div class="form-check me-3">
+                                <input class="form-check-input" type="radio" name="gender" id="male" value="male" checked>
+                                <label class="form-check-label" for="male">Male</label>
+                            </div>
+                            <div class="form-check me-3">
+                                <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                                <label class="form-check-label" for="female">Female</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="other" value="other">
+                                <label class="form-check-label" for="other">Other</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="birthdate" class="form-label small text-muted">Date of Birth</label>
+                        <input type="date" class="form-control rounded-3" id="birthdate" value="1990-06-15">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="bio" class="form-label small text-muted">Bio</label>
+                        <textarea class="form-control rounded-3" id="bio" rows="3" placeholder="Tell us about yourself..."></textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="d-grid gap-2 mb-4">
+            <button class="btn btn-primary rounded-pill py-2" id="save-profile-btn">Save Changes</button>
+            <button class="btn btn-outline-secondary rounded-pill py-2" onclick="window.location.href='personal-info.html'">Cancel</button>
+        </div>
+    </div>
+
+    <nav class="navbar fixed-bottom navbar-dark">
+        <div class="container-fluid justify-content-center p-0">
+            <ul class="navbar-nav flex-row bottom-nav">
+                <li class="nav-item mx-0">
+                    <a class="nav-link" href="index.html">
+                        <i class="bi bi-house"></i>
+                        <div class="nav-label small">Home</div>
+                    </a>
+                </li>
+                <li class="nav-item mx-0">
+                    <a class="nav-link" href="markets.html">
+                        <i class="bi bi-shop"></i>
+                        <div class="nav-label small">Markets</div>
+                    </a>
+                </li>
+                <li class="nav-item mx-0">
+                    <a class="nav-link" href="favorites.html">
+                        <i class="bi bi-heart"></i>
+                        <div class="nav-label small">Favorites</div>
+                    </a>
+                </li>
+                <li class="nav-item mx-0">
+                    <a class="nav-link active" href="profile.html">
+                        <i class="bi bi-person"></i>
+                        <div class="nav-label small">Profile</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Success Toast -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <i class="bi bi-check-circle me-2"></i>
+                <strong class="me-auto">Success</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Your profile has been updated successfully!
+            </div>
+        </div>
+    </div>
+
+    <script src="lib/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        // Handle profile image upload
+        document.getElementById('profile-pic-upload').addEventListener('change', function(e) {
+            if (e.target.files.length > 0) {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    document.querySelector('.rounded-circle').src = e.target.result;
+                }
+                
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        // Handle form submission
+        document.getElementById('save-profile-btn').addEventListener('click', function() {
+            // Here you would add validation and API call to save the data
+            const successToast = new bootstrap.Toast(document.getElementById('successToast'));
+            successToast.show();
+            
+            // Redirect after successful save (after short delay)
+            setTimeout(() => {
+                window.location.href = 'personal-info.html';
+            }, 2000);
+        });
+        
+        // Also trigger save when clicking the check icon in the header
+        document.getElementById('save-changes-btn').addEventListener('click', function() {
+            document.getElementById('save-profile-btn').click();
+        });
+    </script>
+</body>
+
+</html> 

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffd700">
+    <title>Personal Information - Bazar Dor</title>
+    <link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="lib/bootstrap-icons/bootstrap-icons.min.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+</head>
+
+<body class="bg-light">
+    <header class="app-header bg-primary">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center py-2">
+                <button class="btn text-white p-0" onclick="window.location.href='profile.html'">
+                    <i class="bi bi-arrow-left fs-4"></i>
+                </button>
+                <h5 class="text-white mb-0">Personal Information</h5>
+                <div>
+                    <button class="btn text-white p-0" onclick="window.location.href='personal-info-edit.html'">
+                        <i class="bi bi-pencil-square fs-4"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mt-4 mb-7">
+        <div class="card border-0 shadow-sm rounded-4 mb-4">
+            <div class="card-body p-4">
+                <div class="d-flex align-items-center mb-4">
+                    <div class="position-relative">
+                        <img src="https://api.dicebear.com/6.x/avataaars/svg?seed=John" class="rounded-circle" width="80" height="80" alt="Profile Picture">
+                        <div class="position-absolute bottom-0 end-0">
+                            <label for="profile-pic-upload" class="btn btn-sm btn-primary rounded-circle" style="width: 32px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                                <i class="bi bi-camera"></i>
+                            </label>
+                            <input type="file" id="profile-pic-upload" class="d-none">
+                        </div>
+                    </div>
+                    <div class="ms-3">
+                        <h5 class="mb-1 fw-bold">John Doe</h5>
+                        <p class="text-muted mb-0 small">Member since January 2023</p>
+                    </div>
+                </div>
+
+                <div class="info-group mb-3">
+                    <label class="text-muted small mb-1">Full Name</label>
+                    <p class="mb-0 fw-medium">John Doe</p>
+                </div>
+
+                <div class="info-group mb-3">
+                    <label class="text-muted small mb-1">Email Address</label>
+                    <p class="mb-0 fw-medium">johndoe@example.com</p>
+                </div>
+
+                <div class="info-group mb-3">
+                    <label class="text-muted small mb-1">Phone Number</label>
+                    <p class="mb-0 fw-medium">+880 1234567890</p>
+                </div>
+
+                <div class="info-group mb-3">
+                    <label class="text-muted small mb-1">Gender</label>
+                    <p class="mb-0 fw-medium">Male</p>
+                </div>
+
+                <div class="info-group mb-3">
+                    <label class="text-muted small mb-1">Date of Birth</label>
+                    <p class="mb-0 fw-medium">15 June 1990</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border-0 shadow-sm rounded-4 mb-4">
+            <div class="card-body p-4">
+                <h6 class="card-title fw-bold mb-3">Account Settings</h6>
+                
+                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                    <div>
+                        <p class="mb-0 fw-medium">Email Notifications</p>
+                        <small class="text-muted">Receive emails about your account</small>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
+                    </div>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                    <div>
+                        <p class="mb-0 fw-medium">SMS Notifications</p>
+                        <small class="text-muted">Receive text messages about orders</small>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="smsNotifications" checked>
+                    </div>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                    <div>
+                        <p class="mb-0 fw-medium">Profile Visibility</p>
+                        <small class="text-muted">Allow others to see your profile</small>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="profileVisibility">
+                    </div>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center py-2">
+                    <div>
+                        <p class="mb-0 fw-medium">Two-Factor Authentication</p>
+                        <small class="text-muted">Enable additional security</small>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="twoFactorAuth">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border-0 shadow-sm rounded-4 mb-4">
+            <div class="card-body p-4">
+                <h6 class="card-title fw-bold mb-3">Account Security</h6>
+                
+                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                    <div>
+                        <p class="mb-0 fw-medium">Password</p>
+                        <small class="text-muted">Last changed 3 months ago</small>
+                    </div>
+                    <button class="btn btn-outline-primary btn-sm rounded-pill px-3">Change</button>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center py-2">
+                    <div>
+                        <p class="mb-0 fw-medium">Connected Accounts</p>
+                        <small class="text-muted">Manage social accounts</small>
+                    </div>
+                    <button class="btn btn-outline-primary btn-sm rounded-pill px-3">Manage</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-grid gap-2 mb-4">
+            <button class="btn btn-primary rounded-pill py-2">Save Changes</button>
+            <button class="btn btn-outline-danger rounded-pill py-2">Delete Account</button>
+        </div>
+    </div>
+
+    <nav class="navbar fixed-bottom navbar-dark">
+        <div class="container-fluid justify-content-center p-0">
+            <ul class="navbar-nav flex-row bottom-nav">
+                <li class="nav-item mx-0">
+                    <a class="nav-link" href="index.html">
+                        <i class="bi bi-house"></i>
+                        <div class="nav-label small">Home</div>
+                    </a>
+                </li>
+                <li class="nav-item mx-0">
+                    <a class="nav-link" href="markets.html">
+                        <i class="bi bi-shop"></i>
+                        <div class="nav-label small">Markets</div>
+                    </a>
+                </li>
+                <li class="nav-item mx-0">
+                    <a class="nav-link" href="favorites.html">
+                        <i class="bi bi-heart"></i>
+                        <div class="nav-label small">Favorites</div>
+                    </a>
+                </li>
+                <li class="nav-item mx-0">
+                    <a class="nav-link active" href="profile.html">
+                        <i class="bi bi-person"></i>
+                        <div class="nav-label small">Profile</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <script src="lib/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html> 

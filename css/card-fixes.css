@@ -1,0 +1,27 @@
+/* Card button positioning fixes */
+
+/* Ensure all favorite buttons are positioned consistently */
+.favorite-btn {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    margin: 0.5rem !important;
+    z-index: 10;
+}
+
+/* Add top margin to Uttara Fish Market card */
+[data-market-id="5"] {
+    margin-top: 0.5rem !important;
+}
+
+/* Ensure consistent positioning for all card buttons */
+.card .position-relative {
+    position: relative !important;
+    overflow: hidden;
+}
+
+/* Make sure all card images have consistent height */
+.card .position-relative img {
+    height: 100% !important;
+    object-fit: cover !important;
+}

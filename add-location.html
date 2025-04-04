@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffd700">
+    <title>Add Location - Bazar Dor</title>
+    <link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="lib/bootstrap-icons/bootstrap-icons.min.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <style>
+        #map-container {
+            height: 200px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+    <header class="app-header bg-primary">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center py-2">
+                <button class="btn text-white p-0" onclick="window.location.href='saved-locations.html'">
+                    <i class="bi bi-arrow-left fs-4"></i>
+                </button>
+                <h5 class="text-white mb-0">Add New Location</h5>
+                <div>
+                    <button class="btn text-white p-0" id="save-location-btn">
+                        <i class="bi bi-check-lg fs-4"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mt-4 mb-7">
+        <div class="card border-0 shadow-sm rounded-4 mb-4">
+            <div class="card-body p-4">
+                <div id="map-container">
+                    <img src="https://via.placeholder.com/800x400/e0e0e0/6c757d?text=Map+Preview" alt="Map" class="w-100 h-100 object-fit-cover">
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-white border-end-0">
+                        <i class="bi bi-search text-muted"></i>
+                    </span>
+                    <input type="text" class="form-control border-start-0 ps-0" id="location-search" placeholder="Search for a location...">
+                </div>
+
+                <div class="d-flex align-items-center mb-3">
+                    <button class="btn btn-outline-primary rounded-pill me-2" id="use-current-location">
+                        <i class="bi bi-geo-alt me-1"></i>Use current location
+                    </button>
+                    <span class="text-muted small">or fill in the form below</span>
+                </div>
+
+                <form id="location-form">
+                    <div class="mb-3">
+                        <label for="location-label" class="form-label small text-muted">Location Label</label>
+                        <input type="text" class="form-control rounded-3" id="location-label" placeholder="Home, Office, etc.">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="address-line-1" class="form-label small text-muted">Address Line 1</label>
+                        <input type="text" class="form-control rounded-3" id="address-line-1" placeholder="House/Building number, Street">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="address-line-2" class="form-label small text-muted">Address Line 2 (Optional)</label>
+                        <input type="text" class="form-control rounded-3" id="address-line-2" placeholder="Apartment, Suite, Unit, etc.">
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label for="city" class="form-label small text-muted">City</label>
+                            <input type="text" class="form-control rounded-3" id="city" placeholder="City">
+                        </div>
+                        <div class="col-6">
+                            <label for="area" class="form-label small text-muted">Area</label>
+                            <input type="text" class="form-control rounded-3" id="area" placeholder="Area/District">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label for="postal-code" class="form-label small text-muted">Postal Code</label>
+                            <input type="text" class="form-control rounded-3" id="postal-code" placeholder="Postal Code">
+                        </div>
+                        <div class="col-6">
+                            <label for="country" class="form-label small text-muted">Country</label>
+                            <select class="form-select rounded-3" id="country">
+                                <option value="bangladesh" selected>Bangladesh</option>
+                                <option value="india">India</option>
+                                <option value="pakistan">Pakistan</option>
+                                <option value="nepal">Nepal</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="phone" class="form-label small text-muted">Phone Number</label>
+                        <div class="input-group">
+                            <span class="input-group-text rounded-start-3">+880</span>
+                            <input type="tel" class="form-control rounded-end-3" id="phone" placeholder="Phone Number">
+                        </div>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="set-as-default">
+                        <label class="form-check-label" for="set-as-default">
+                            Set as default address
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="d-grid gap-2">
+            <button class="btn btn-primary rounded-pill py-2" id="save-address-btn">Save Address</button>
+            <button class="btn btn-outline-secondary rounded-pill py-2" onclick="window.location.href='saved-locations.html'">Cancel</button>
+        </div>
+    </div>
+
+    <nav class="navbar fixed-bottom navbar-dark">
+        <div class="container-fluid justify-content-center p-0">
+            <ul class="navbar-nav flex-row bottom-nav">
+                <li class="nav-item mx-0">
+                    <a class="nav-link" href="index.html">
+                        <i class="bi bi-house"></i>
+                        <div class="nav-label small">Home</div>
+                    </a>
+                </li>
+                <li class="nav-item mx-0">
+                    <a class="nav-link" href="markets.html">
+                        <i class="bi bi-shop"></i>
+                        <div class="nav-label small">Markets</div>
+                    </a>
+                </li>
+                <li class="nav-item mx-0">
+                    <a class="nav-link" href="favorites.html">
+                        <i class="bi bi-heart"></i>
+                        <div class="nav-label small">Favorites</div>
+                    </a>
+                </li>
+                <li class="nav-item mx-0">
+                    <a class="nav-link active" href="profile.html">
+                        <i class="bi bi-person"></i>
+                        <div class="nav-label small">Profile</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Location Detected Modal -->
+    <div class="modal fade" id="locationDetectedModal" tabindex="-1" aria-labelledby="locationDetectedModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 overflow-hidden">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="locationDetectedModalLabel">Location Detected</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body py-4">
+                    <p>We've detected your current location:</p>
+                    <p class="fw-bold">123 Main Street, Dhaka 1217, Bangladesh</p>
+                    <p>Would you like to use this as your address?</p>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">No, I'll enter manually</button>
+                    <button type="button" class="btn btn-primary rounded-pill" id="use-detected-location">Yes, use this</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <i class="bi bi-check-circle me-2"></i>
+                <strong class="me-auto">Success</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Location added successfully!
+            </div>
+        </div>
+    </div>
+
+    <script src="lib/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        // Show location modal when "Use current location" is clicked
+        document.getElementById('use-current-location').addEventListener('click', function() {
+            const locationModal = new bootstrap.Modal(document.getElementById('locationDetectedModal'));
+            locationModal.show();
+        });
+        
+        // Fill form with detected location
+        document.getElementById('use-detected-location').addEventListener('click', function() {
+            // Here you would use the actual detected location data
+            document.getElementById('address-line-1').value = '123 Main Street';
+            document.getElementById('city').value = 'Dhaka';
+            document.getElementById('postal-code').value = '1217';
+            
+            // Hide modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('locationDetectedModal'));
+            modal.hide();
+        });
+        
+        // Handle form submission
+        document.getElementById('save-address-btn').addEventListener('click', function() {
+            // Here you would validate the form and call your API to save the address
+            
+            // Show success toast
+            const successToast = new bootstrap.Toast(document.getElementById('successToast'));
+            successToast.show();
+            
+            // Redirect after successful save (after short delay)
+            setTimeout(() => {
+                window.location.href = 'saved-locations.html';
+            }, 2000);
+        });
+        
+        // Also trigger save when clicking the check icon in the header
+        document.getElementById('save-location-btn').addEventListener('click', function() {
+            document.getElementById('save-address-btn').click();
+        });
+    </script>
+</body>
+
+</html> 
