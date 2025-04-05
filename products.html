@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#ffd700">
+    <meta name="theme-color" content="#AB4459">
     <title>Products - Bazar Dor</title>
     <link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="lib/bootstrap-icons/bootstrap-icons.min.css">
@@ -16,6 +16,104 @@
     <link rel="stylesheet" href="css/product-cards.css">
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
     <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <style>
+        /* Enhanced styles for market page */
+        :root {
+            --primary-rgb: 171, 68, 89;
+        }
+        
+        .app-header {
+            /* No border-radius needed anymore */
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .market-combined-card {
+            position: relative;
+            z-index: 10;
+            margin-top: 0;
+            border-radius: 0 !important;
+        }
+        
+        /* Fix for tab icons - change from block to flex layout */
+        .market-tabs .nav-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 0.5rem;
+            color: var(--bs-gray-600);
+            border-bottom: 2px solid transparent;
+            background-color: transparent !important;
+            transition: all 0.2s ease;
+        }
+        
+        .market-tabs .nav-link i {
+            font-size: 1.25rem;
+            margin-bottom: 4px;
+            display: block;
+        }
+        
+        /* Selected tab style - only bottom border */
+        .market-tabs .nav-link.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            background-color: transparent !important;
+            font-weight: 600;
+        }
+        
+        /* Fix for horizontal layout in tabs (used for product & review tabs) */
+        .market-tabs .nav-link.horizontal-layout {
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .market-tabs .nav-link.horizontal-layout i {
+            margin-bottom: 0;
+            margin-right: 0.5rem;
+        }
+        
+        /* Sort dropdown fixes */
+        .dropdown-item {
+            display: flex !important;
+            align-items: center !important;
+        }
+        
+        .dropdown-item i {
+            display: inline-block !important;
+            font-size: 1rem;
+        }
+        
+        /* Ensure sort button has consistent icon display */
+        .filter-container .btn i {
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+        
+        .product-card {
+            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px) scale(1.01);
+        }
+        
+        .product-card .favorite-btn {
+            opacity: 0.85;
+            transform: scale(0.9);
+            transition: all 0.2s ease;
+        }
+        
+        .product-card:hover .favorite-btn {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .filter-chips {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+    </style>
 </head>
 <body class="bg-light market-items-page">
     <header class="app-header bg-primary">
@@ -47,35 +145,13 @@
         </div>
     </header>
 
-    <!-- Market Header Floating - Visible after scroll -->
-    <div class="market-mini-header floating-market-header">
-        <div class="container px-2">
-            <div class="card border-0 shadow-sm mb-2">
-                <div class="card-body py-2">
+    <!-- Combined Market Info Card with Tabs -->
+    <div class="container mt-2 mb-5 pb-5">
+        <div class="card border-0 shadow-sm market-combined-card">
+            <!-- Market Info Section -->
+            <div class="card-body py-3">
                     <div class="d-flex align-items-center">
-                        <div class="me-3" style="width: 40px; height: 40px; border-radius: 8px; overflow: hidden;">
-                            <img src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?q=80&w=200&auto=format&fit=crop" 
-                                alt="Dhaka Central Market" class="w-100 h-100 object-fit-cover">
-                        </div>
-                        <div class="flex-grow-1">
-                            <h6 class="mb-0 fw-bold">Dhaka Central Market</h6>
-                            <div class="d-flex align-items-center small text-muted">
-                                <span class="badge bg-success rounded-pill py-1 px-2 me-2">Open</span>
-                                <span>2.4 km away</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container mt-0 mb-5 pb-5">
-        <!-- Market Header static - initial view -->
-        <div class="card border-0 shadow-sm mb-2 market-mini-header static-market-header">
-            <div class="card-body py-2">
-                <div class="d-flex align-items-center">
-                    <div class="me-3" style="width: 50px; height: 50px; border-radius: 8px; overflow: hidden;">
+                    <div class="me-3" style="width: 60px; height: 60px; border-radius: 10px; overflow: hidden; box-shadow: 0 3px 8px rgba(0,0,0,0.1);">
                         <img src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?q=80&w=200&auto=format&fit=crop" 
                              alt="Dhaka Central Market" class="w-100 h-100 object-fit-cover">
                     </div>
@@ -85,49 +161,48 @@
                             <i class="bi bi-geo-alt me-1"></i>
                             <span>Gulshan, Dhaka</span>
                             <span class="mx-2">•</span>
-                            <span class="badge bg-success rounded-pill py-1 px-2">Open</span>
+                            <span class="badge bg-success rounded-pill py-1 px-2 d-flex align-items-center">
+                                <i class="bi bi-clock me-1"></i> Open
+                            </span>
                             <span class="ms-2">2.4 km away</span>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- Tab Navigation - Equal Size Tabs with Icons -->
-        <ul class="nav nav-tabs mb-3 equal-tabs" id="marketTabs" role="tablist">
+            <!-- Tab Navigation -->
+            <div class="card-footer bg-white border-0 pt-0 pb-3">
+                <ul class="nav nav-tabs border-0 equal-tabs market-tabs" id="marketTabs" role="tablist">
             <li class="nav-item flex-fill text-center" role="presentation">
-                <a class="nav-link active" id="products-tab" data-bs-toggle="tab" href="#products-content" role="tab" aria-controls="products-content" aria-selected="true">
-                    <i class="bi bi-grid me-1"></i>Products
+                        <a class="nav-link horizontal-layout active" id="products-tab" data-bs-toggle="tab" href="#products-content" role="tab" aria-controls="products-content" aria-selected="true">
+                            <i class="bi bi-grid me-2 text-primary"></i>Products
                 </a>
             </li>
             <li class="nav-item flex-fill text-center" role="presentation">
-                <a class="nav-link" id="table-view-tab" data-bs-toggle="tab" href="#table-view" role="tab" aria-controls="table-view" aria-selected="false">
-                    <i class="bi bi-table me-1"></i>Table
-                </a>
-            </li>
-            <li class="nav-item flex-fill text-center" role="presentation">
-                <a class="nav-link" id="reviews-tab" data-bs-toggle="tab" href="#reviews-content" role="tab" aria-controls="reviews-content" aria-selected="false">
-                    <i class="bi bi-star me-1"></i>Reviews
+                        <a class="nav-link horizontal-layout" id="reviews-tab" data-bs-toggle="tab" href="#reviews-content" role="tab" aria-controls="reviews-content" aria-selected="false">
+                            <i class="bi bi-star me-2"></i>Reviews
                 </a>
             </li>
         </ul>
+            </div>
+        </div>
         
         <!-- Tab Content -->
-        <div class="tab-content" id="marketTabsContent">
+        <div class="tab-content mt-3" id="marketTabsContent">
             <!-- Products Grid View -->
             <div class="tab-pane fade show active" id="products-content" role="tabpanel" aria-labelledby="products-tab">
                 <!-- Modern Filter - No Background -->
                 <div class="filter-container mb-3">
                     <div class="d-flex justify-content-between align-items-center mb-2">
-                        <h6 class="mb-0 fw-bold"></h6>
+                        <h6 class="mb-0 fw-bold">Products</h6>
                         <div class="dropdown">
                             <button class="btn btn-sm btn-light rounded-pill py-1 px-3 d-flex align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-filter me-1"></i>Sort
+                                <i class="bi bi-funnel-fill me-2 text-primary"></i><span>Sort</span>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end shadow-sm">
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-sort-down me-2"></i>Price: High to Low</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-sort-up me-2"></i>Price: Low to High</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-arrow-repeat me-2"></i>Recently Updated</a></li>
+                                <li><a class="dropdown-item d-flex align-items-center" href="#"><i class="bi bi-sort-down me-2 text-primary"></i>Price: High to Low</a></li>
+                                <li><a class="dropdown-item d-flex align-items-center" href="#"><i class="bi bi-sort-up me-2 text-primary"></i>Price: Low to High</a></li>
+                                <li><a class="dropdown-item d-flex align-items-center" href="#"><i class="bi bi-arrow-repeat me-2 text-primary"></i>Recently Updated</a></li>
                             </ul>
                         </div>
                     </div>
@@ -189,7 +264,7 @@
                                 </div>
                                 <div class="mt-1">
                                     <button class="btn btn-sm btn-outline-primary w-100 rounded-pill update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="1" data-product-name="Fresh Tomatoes" data-product-price="80">
-                                        <i class="bi bi-pencil-square me-1"></i>Update Price
+                                        <i class="bi bi-currency-exchange me-1"></i>Update Price
                                     </button>
                         </div>
                     </div>
@@ -223,7 +298,7 @@
                                 </div>
                                 <div class="mt-1">
                                     <button class="btn btn-sm btn-outline-primary w-100 rounded-pill update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="2" data-product-name="Sweet Mango" data-product-price="120">
-                                        <i class="bi bi-pencil-square me-1"></i>Update Price
+                                        <i class="bi bi-currency-exchange me-1"></i>Update Price
                                     </button>
                         </div>
                     </div>
@@ -257,7 +332,7 @@
                                 </div>
                                 <div class="mt-1">
                                     <button class="btn btn-sm btn-outline-primary w-100 rounded-pill update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="6" data-product-name="Fresh Potatoes" data-product-price="45">
-                                        <i class="bi bi-pencil-square me-1"></i>Update Price
+                                        <i class="bi bi-currency-exchange me-1"></i>Update Price
                                     </button>
                         </div>
                     </div>
@@ -291,7 +366,7 @@
                                 </div>
                                 <div class="mt-1">
                                     <button class="btn btn-sm btn-outline-primary w-100 rounded-pill update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="7" data-product-name="Ripe Bananas" data-product-price="65">
-                                        <i class="bi bi-pencil-square me-1"></i>Update Price
+                                        <i class="bi bi-currency-exchange me-1"></i>Update Price
                                     </button>
                         </div>
                     </div>
@@ -325,7 +400,7 @@
                                 </div>
                                 <div class="mt-1">
                                     <button class="btn btn-sm btn-outline-primary w-100 rounded-pill update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="8" data-product-name="Premium Beef" data-product-price="850">
-                                        <i class="bi bi-pencil-square me-1"></i>Update Price
+                                        <i class="bi bi-currency-exchange me-1"></i>Update Price
                                     </button>
                         </div>
                     </div>
@@ -359,7 +434,7 @@
                                 </div>
                                 <div class="mt-1">
                                     <button class="btn btn-sm btn-outline-primary w-100 rounded-pill update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="11" data-product-name="Fresh Carrots" data-product-price="55">
-                                        <i class="bi bi-pencil-square me-1"></i>Update Price
+                                        <i class="bi bi-currency-exchange me-1"></i>Update Price
                                     </button>
                         </div>
                     </div>
@@ -393,7 +468,7 @@
                                 </div>
                                 <div class="mt-1">
                                     <button class="btn btn-sm btn-outline-primary w-100 rounded-pill update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="15" data-product-name="Fresh Strawberries" data-product-price="220">
-                                        <i class="bi bi-pencil-square me-1"></i>Update Price
+                                        <i class="bi bi-currency-exchange me-1"></i>Update Price
                                     </button>
                         </div>
                     </div>
@@ -427,7 +502,7 @@
                                 </div>
                                 <div class="mt-1">
                                     <button class="btn btn-sm btn-outline-primary w-100 rounded-pill update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="9" data-product-name="Fresh Hilsa" data-product-price="1200">
-                                        <i class="bi bi-pencil-square me-1"></i>Update Price
+                                        <i class="bi bi-currency-exchange me-1"></i>Update Price
                                     </button>
                                 </div>
                             </div>
@@ -461,7 +536,7 @@
                                 </div>
                                 <div class="mt-1">
                                     <button class="btn btn-sm btn-outline-primary w-100 rounded-pill update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="10" data-product-name="Black Pepper" data-product-price="250">
-                                        <i class="bi bi-pencil-square me-1"></i>Update Price
+                                        <i class="bi bi-currency-exchange me-1"></i>Update Price
                                     </button>
                         </div>
                     </div>
@@ -495,7 +570,7 @@
                                 </div>
                                 <div class="mt-1">
                                     <button class="btn btn-sm btn-outline-primary w-100 rounded-pill update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="12" data-product-name="Fresh Salmon" data-product-price="950">
-                                        <i class="bi bi-pencil-square me-1"></i>Update Price
+                                        <i class="bi bi-currency-exchange me-1"></i>Update Price
                                     </button>
                         </div>
                     </div>
@@ -529,7 +604,7 @@
                                 </div>
                                 <div class="mt-1">
                                     <button class="btn btn-sm btn-outline-primary w-100 rounded-pill update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="13" data-product-name="Chicken Breast" data-product-price="380">
-                                        <i class="bi bi-pencil-square me-1"></i>Update Price
+                                        <i class="bi bi-currency-exchange me-1"></i>Update Price
                                     </button>
                                 </div>
                             </div>
@@ -554,194 +629,6 @@
                             </li>
                         </ul>
                     </nav>
-                </div>
-            </div>
-
-            <!-- Table View -->
-            <div class="tab-pane fade" id="table-view" role="tabpanel" aria-labelledby="table-view-tab">
-                <div class="table-responsive mt-2">
-                    <table class="table table-hover">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Product</th>
-                                <th>Category</th>
-                                <th>Price</th>
-                                <th>Unit</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="me-2" style="width: 32px; height: 32px; overflow: hidden; border-radius: 4px;">
-                                            <img src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?q=80&w=100&auto=format&fit=crop" width="32" height="32" alt="Tomatoes" class="object-fit-cover">
-                                        </div>
-                                        <div class="fw-medium">Fresh Tomatoes</div>
-                                    </div>
-                                </td>
-                                <td>Vegetables</td>
-                                <td class="text-primary fw-medium">৳80</td>
-                                <td>kg</td>
-                                <td><span class="badge bg-success text-white">Price Down</span></td>
-                                <td>
-                                    <div class="d-flex">
-                                        <button class="btn btn-sm btn-outline-primary me-1 update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="1" data-product-name="Fresh Tomatoes" data-product-price="80">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </button>
-                                        <button class="btn btn-sm btn-outline-danger favorite-btn">
-                                            <i class="bi bi-heart"></i>
-                                </button>
-                            </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="me-2" style="width: 32px; height: 32px; overflow: hidden; border-radius: 4px;">
-                                            <img src="https://images.unsplash.com/photo-1553279768-865429fa0078?q=80&w=100&auto=format&fit=crop" width="32" height="32" alt="Mango" class="object-fit-cover">
-                        </div>
-                                        <div class="fw-medium">Sweet Mango</div>
-                                </div>
-                                </td>
-                                <td>Fruits</td>
-                                <td class="text-primary fw-medium">৳120</td>
-                                <td>kg</td>
-                                <td><span class="badge bg-danger text-white">Price Up</span></td>
-                                <td>
-                                    <div class="d-flex">
-                                        <button class="btn btn-sm btn-outline-primary me-1 update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="2" data-product-name="Sweet Mango" data-product-price="120">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </button>
-                                        <button class="btn btn-sm btn-outline-danger favorite-btn">
-                                            <i class="bi bi-heart"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="me-2" style="width: 32px; height: 32px; overflow: hidden; border-radius: 4px;">
-                                            <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?q=80&w=100&auto=format&fit=crop" width="32" height="32" alt="Potatoes" class="object-fit-cover">
-                                </div>
-                                        <div class="fw-medium">Fresh Potatoes</div>
-                                    </div>
-                                </td>
-                                <td>Vegetables</td>
-                                <td class="text-primary fw-medium">৳45</td>
-                                <td>kg</td>
-                                <td><span class="badge bg-success text-white">Price Down</span></td>
-                                <td>
-                                    <div class="d-flex">
-                                        <button class="btn btn-sm btn-outline-primary me-1 update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="6" data-product-name="Fresh Potatoes" data-product-price="45">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </button>
-                                        <button class="btn btn-sm btn-outline-danger favorite-btn">
-                                            <i class="bi bi-heart"></i>
-                                    </button>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="me-2" style="width: 32px; height: 32px; overflow: hidden; border-radius: 4px;">
-                                            <img src="https://images.unsplash.com/photo-1603833665858-e61d17a86224?q=80&w=100&auto=format&fit=crop" width="32" height="32" alt="Bananas" class="object-fit-cover">
-                            </div>
-                                        <div class="fw-medium">Ripe Bananas</div>
-                        </div>
-                                </td>
-                                <td>Fruits</td>
-                                <td class="text-primary fw-medium">৳65</td>
-                                <td>dozen</td>
-                                <td><span class="badge bg-success text-white">Price Down</span></td>
-                                <td>
-                                    <div class="d-flex">
-                                        <button class="btn btn-sm btn-outline-primary me-1 update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="7" data-product-name="Ripe Bananas" data-product-price="65">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </button>
-                                        <button class="btn btn-sm btn-outline-danger favorite-btn">
-                                            <i class="bi bi-heart"></i>
-                                        </button>
-                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="me-2" style="width: 32px; height: 32px; overflow: hidden; border-radius: 4px;">
-                                            <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?q=80&w=100&auto=format&fit=crop" width="32" height="32" alt="Beef" class="object-fit-cover">
-                </div>
-                                        <div class="fw-medium">Premium Beef</div>
-            </div>
-                                </td>
-                                <td>Meat</td>
-                                <td class="text-primary fw-medium">৳850</td>
-                                <td>kg</td>
-                                <td><span class="badge bg-danger text-white">Price Up</span></td>
-                                <td>
-                                    <div class="d-flex">
-                                        <button class="btn btn-sm btn-outline-primary me-1 update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="8" data-product-name="Premium Beef" data-product-price="850">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </button>
-                                        <button class="btn btn-sm btn-outline-danger favorite-btn">
-                                            <i class="bi bi-heart"></i>
-                                </button>
-                            </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="me-2" style="width: 32px; height: 32px; overflow: hidden; border-radius: 4px;">
-                                            <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=80&w=100&auto=format&fit=crop" width="32" height="32" alt="Black Pepper" class="object-fit-cover">
-                                        </div>
-                                        <div class="fw-medium">Black Pepper</div>
-                                    </div>
-                                </td>
-                                <td>Spices</td>
-                                <td class="text-primary fw-medium">৳250</td>
-                                <td>kg</td>
-                                <td><span class="badge bg-success text-white">Price Down</span></td>
-                                <td>
-                                    <div class="d-flex">
-                                        <button class="btn btn-sm btn-outline-primary me-1 update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="10" data-product-name="Black Pepper" data-product-price="250">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </button>
-                                        <button class="btn btn-sm btn-outline-danger favorite-btn">
-                                            <i class="bi bi-heart"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <!-- Pagination for Table View -->
-                <nav aria-label="Table navigation" class="my-3">
-                    <ul class="pagination pagination-sm justify-content-center">
-                        <li class="page-item disabled">
-                            <a class="page-link rounded-circle mx-1 shadow-sm d-flex align-items-center justify-content-center" href="#" aria-label="Previous" style="width: 35px; height: 35px;">
-                                <i class="bi bi-chevron-left"></i>
-                            </a>
-                        </li>
-                        <li class="page-item active"><a class="page-link rounded-circle mx-1 shadow-sm d-flex align-items-center justify-content-center" href="#" style="width: 35px; height: 35px;">1</a></li>
-                        <li class="page-item"><a class="page-link rounded-circle mx-1 shadow-sm d-flex align-items-center justify-content-center" href="#" style="width: 35px; height: 35px;">2</a></li>
-                        <li class="page-item"><a class="page-link rounded-circle mx-1 shadow-sm d-flex align-items-center justify-content-center" href="#" style="width: 35px; height: 35px;">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link rounded-circle mx-1 shadow-sm d-flex align-items-center justify-content-center" href="#" aria-label="Next" style="width: 35px; height: 35px;">
-                                <i class="bi bi-chevron-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                
-                <!-- Table View Info Text -->
-                <div class="text-center text-muted small mb-3">
-                    <p>Showing 1-6 of 15 products</p>
                 </div>
             </div>
 
@@ -921,450 +808,69 @@
             </ul>
         </div>
     </nav>
-
-    <!-- Mobile Optimization Styles -->
-    <style>
-        /* Hide scrollbars but keep functionality */
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        
-        /* Snap scrolling for filter pills */
-        .snap-scroll {
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-        }
-        
-        .snap-scroll .filter-chip {
-            scroll-snap-align: center;
-        }
-        
-        /* Modern Filter Chips */
-        .filter-chip {
-            display: flex;
-            align-items: center;
-            padding: 0.4rem 0.8rem;
-            background-color: #f8f9fa;
-            border-radius: 2rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-            border: 1px solid transparent;
-            flex-shrink: 0;
-        }
-        
-        .filter-chip.active {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        
-        .filter-chip:active {
-            transform: scale(0.95);
-        }
-        
-        .filter-icon {
-            margin-right: 0.3rem;
-            display: inline-flex;
-            align-items: center;
-        }
-        
-        .filter-text {
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-        
-        /* Touch action improvements */
-        .touch-action {
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-        }
-        
-        /* Card highlight effect on tap */
-        .card-highlight {
-            transform: scale(0.98);
-            transition: transform 0.15s ease-in-out;
-            box-shadow: 0 0 0 3px var(--primary-color-light) !important;
-        }
-        
-        /* Improve object fit for images */
-        .object-fit-cover {
-            object-fit: cover;
-        }
-        
-        /* Market mini header styles */
-        .market-mini-header {
-            transition: transform 0.2s ease;
-        }
-        
-        .market-mini-header:active {
-            transform: none;
-        }
-        
-        /* Tab navigation styles */
-        .nav-tabs .nav-link {
-            border: none;
-            color: var(--bs-gray-600);
-            font-weight: 500;
-            font-size: 0.9rem;
-            padding: 0.5rem 1rem;
-        }
-        
-        .nav-tabs .nav-link.active {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--primary-color);
-            background-color: transparent;
-        }
-        
-        /* Avatar styles for reviews */
-        .avatar-circle {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 0.8rem;
-        }
-        
-        /* Table view optimizations */
-        .table-responsive {
-            scrollbar-width: thin;
-        }
-        
-        .table-responsive::-webkit-scrollbar {
-            height: 4px;
-        }
-        
-        .table-responsive::-webkit-scrollbar-thumb {
-            background-color: rgba(0,0,0,0.1);
-            border-radius: 4px;
-        }
-        
-        .table th {
-            font-weight: 600;
-            font-size: 0.8rem;
-            white-space: nowrap;
-        }
-        
-        .table td {
-            font-size: 0.85rem;
-            vertical-align: middle;
-        }
-        
-        /* Improve bottom nav for mobile */
-        .bottom-nav {
-            padding: 0.5rem;
-        }
-        
-        .bottom-nav .nav-item {
-            flex: 1;
-            text-align: center;
-        }
-        
-        .bottom-nav .nav-link {
-            padding: 0.5rem 0;
-            border-radius: 0.5rem;
-        }
-        
-        .bottom-nav .nav-link.active {
-            background-color: var(--primary-color-light);
-            color: var(--primary-color);
-        }
-        
-        /* Improve favorite button tap area */
-        .favorite-btn {
-            transition: transform 0.15s ease;
-        }
-        
-        .favorite-btn:active {
-            transform: scale(0.9);
-        }
-        
-        /* Additional custom styling for smaller product cards */
-        .product-card .product-image-wrapper {
-            height: 75px;
-        }
-        
-        .product-card .card-title {
-            font-size: 0.75rem !important;
-            margin-bottom: 0;
-            line-height: 1.1;
-        }
-        
-        .product-card .card-subtitle {
-            font-size: 0.65rem !important;
-            margin-bottom: 0.1rem;
-        }
-        
-        .product-card .price-tag {
-            font-size: 0.75rem;
-        }
-        
-        .product-card .price-unit,
-        .product-card .time-update {
-            font-size: 0.6rem;
-        }
-        
-        .product-card .badge {
-            font-size: 0.55rem;
-            padding: 0.15rem 0.25rem;
-        }
-        
-        .product-card .card-body {
-            padding: 0.25rem 0.4rem !important;
-        }
-        
-        .product-card .btn-sm {
-            padding: 0.15rem 0.4rem;
-            font-size: 0.65rem;
-        }
-        
-        /* Adjust container padding for mobile */
-        @media (max-width: 576px) {
-            .container {
-                padding-left: 8px;
-                padding-right: 8px;
-            }
-            
-            #products-list {
-                margin-left: -8px;
-                margin-right: -8px;
-            }
-            
-            #products-list > div {
-                padding-left: 2px !important;
-                padding-right: 2px !important;
-            }
-            
-            .product-card {
-                margin-bottom: 4px !important;
-            }
-            
-            .filter-container {
-                position: sticky;
-                top: 56px;
-                z-index: 1000;
-                background-color: #fff;
-                padding-top: 0.5rem;
-            }
-            
-            .table th, .table td {
-                padding: 0.5rem 0.35rem;
-                font-size: 0.75rem;
-            }
-            
-            .table .btn-sm {
-                padding: 0.15rem 0.25rem;
-                font-size: 0.7rem;
-            }
-            
-            /* Fix equal tabs on mobile */
-            .equal-tabs {
-                display: flex;
-                width: 100%;
-            }
-            
-            .equal-tabs .nav-item {
-                flex: 1;
-            }
-            
-            .equal-tabs .nav-link {
-                padding: 0.5rem 0.25rem;
-                font-size: 0.75rem;
-            }
-        }
-        
-        /* Sticky market header styles */
-        .sticky-market-header {
-            position: sticky;
-            top: 56px; /* Height of the main header */
-            z-index: 1019;
-            margin-top: 0;
-            border-radius: 0 0 0.5rem 0.5rem !important;
-        }
-        
-        /* Header and market header connection */
-        .app-header {
-            position: sticky;
-            top: 0;
-            z-index: 1030;
-        }
-        
-        /* Floating market header that appears after scroll */
-        .floating-market-header {
-            position: fixed;
-            top: -100px; /* Initially hidden above the viewport */
-            left: 0;
-            right: 0;
-            z-index: 1020;
-            transition: top 0.3s;
-            background-color: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .floating-market-header.visible {
-            top: 56px; /* Height of the main header */
-        }
-        
-        /* Static market header */
-        .static-market-header {
-            transition: opacity 0.2s;
-        }
-        
-        .static-market-header.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-        
-        .container.mt-0 {
-            margin-top: 0 !important;
-            padding-top: 0 !important;
-        }
-
-        /* Tab icon alignment */
-        .nav-tabs .nav-link i {
-            font-size: 0.9rem;
-            vertical-align: -1px;
-        }
-        
-        @media (max-width: 576px) {
-            .equal-tabs .nav-link {
-                padding: 0.5rem 0.25rem;
-                font-size: 0.75rem;
-            }
-            
-            .nav-tabs .nav-link i {
-                font-size: 0.8rem;
-            }
-        }
-        
-        /* Price Update Modal Mobile Styles */
-        #updatePriceModal .modal-content {
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-        }
-        
-        #updatePriceModal .modal-header {
-            padding: 1.25rem 1.5rem;
-        }
-        
-        #updatePriceModal .modal-body {
-            padding: 1.5rem;
-        }
-        
-        #updatePriceModal #newPrice {
-            height: 60px;
-            font-size: 1.5rem;
-        }
-        
-        #updatePriceModal .input-group-text {
-            font-size: 1.25rem;
-            font-weight: 500;
-        }
-        
-        /* Improve number input for mobile */
-        input[type="number"] {
-            -moz-appearance: textfield;
-        }
-        
-        input[type="number"]::-webkit-outer-spin-button,
-        input[type="number"]::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        
-        /* Table pagination styles */
-        .table-responsive {
-            min-height: 300px; /* Ensure table has consistent height during pagination */
-            position: relative;
-        }
-        
-        /* Loading animation styling */
-        .spinner-border {
-            width: 2rem;
-            height: 2rem;
-            border-width: 0.2rem;
-        }
-        
-        /* Table row hover effect */
-        .table-hover tbody tr:hover {
-            background-color: rgba(var(--primary-rgb), 0.04);
-            transition: background-color 0.2s;
-        }
-        
-        /* Pagination transition effects */
-        .pagination .page-link {
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        
-        .pagination .page-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        
-        .pagination .page-link:active {
-            transform: translateY(0);
-        }
-        
-        /* Fade in animation for table rows */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        #table-view tbody tr {
-            animation: fadeIn 0.3s ease-out forwards;
-            animation-delay: calc(var(--animation-order, 0) * 0.05s);
-            opacity: 0;
-        }
-        
-        /* Mobile responsiveness for pagination */
-        @media (max-width: 576px) {
-            .pagination .page-link {
-                width: 30px !important;
-                height: 30px !important;
-                font-size: 0.7rem;
-            }
-        }
-    </style>
     
     <!-- Update Price Modal -->
     <div class="modal fade" id="updatePriceModal" tabindex="-1" aria-labelledby="updatePriceModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 shadow">
-                <div class="modal-header border-0 pb-0">
-                    <h5 class="modal-title" id="updatePriceModalLabel">Update Price</h5>
+            <div class="modal-content" style="border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                <div class="modal-body p-0">
+                    <!-- Close button in top-right corner -->
+                    <div class="text-end p-2">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body py-4">
-                    <div class="text-center mb-4">
-                        <h4 id="productName" class="mb-3">Product Name</h4>
-                        <div class="d-flex justify-content-center align-items-center gap-3">
-                            <div class="text-muted">Current Price:</div>
-                            <div id="currentPrice" class="text-primary fs-5 fw-bold">৳0</div>
+                    
+                    <div class="text-center px-4 pb-2">
+                        <!-- Product Icon -->
+                        <div class="mb-4">
+                            <div class="icon-wrapper mx-auto" style="width: 90px; height: 90px; background-color: rgba(var(--primary-rgb), 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.2);">
+                                <i class="bi bi-bag-fill text-primary" style="font-size: 3rem;"></i>
                             </div>
                         </div>
-                        <div class="mb-3">
-                        <label for="newPrice" class="form-label">New Price (৳)</label>
-                        <div class="input-group">
-                            <span class="input-group-text">৳</span>
-                            <input type="number" class="form-control form-control-lg text-center fw-bold" id="newPrice" placeholder="Enter new price">
+                        
+                        <!-- Product Info -->
+                        <h4 id="productName" class="mb-2 fw-bold">Product Name</h4>
+                        <div class="d-flex align-items-center justify-content-center mb-4">
+                            <span class="badge bg-light text-primary me-2 px-3 py-2">
+                                <i class="bi bi-tag-fill me-1"></i>Current Price
+                            </span>
+                            <span id="currentPrice" class="text-primary fs-4 fw-bold">৳0</span>
                             </div>
+                        
+                        <!-- Price Input with Numeric Keypad -->
+                        <div class="price-input-container mb-4">
+                            <label for="newPrice" class="form-label fw-medium mb-2">Enter New Price (৳)</label>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-text bg-light border-0 rounded-start-pill">৳</span>
+                                <input type="number" inputmode="numeric" pattern="[0-9]*" class="form-control form-control-lg text-center fw-bold border-0 bg-light rounded-end-pill" id="newPrice" placeholder="0">
                         </div>
                 </div>
-                <div class="modal-footer flex-column border-0 pt-0 pb-4">
-                    <button type="button" class="btn btn-primary btn-lg w-100 rounded-pill mb-2" id="updatePriceSubmit">
-                        <i class="bi bi-check-circle me-2"></i>Update Price
+                        
+                        <!-- Pricing Suggestions -->
+                        <div class="suggested-prices mb-4">
+                            <p class="text-muted small mb-2">Tap to adjust price quickly:</p>
+                            <div class="d-flex flex-wrap justify-content-center gap-2">
+                                <button class="btn btn-sm btn-light rounded-pill price-suggestion px-3 py-2" data-price-diff="-5">-৳5</button>
+                                <button class="btn btn-sm btn-light rounded-pill price-suggestion px-3 py-2" data-price-diff="-10">-৳10</button>
+                                <button class="btn btn-sm btn-light rounded-pill price-suggestion px-3 py-2" data-price-diff="-20">-৳20</button>
+                                <button class="btn btn-sm btn-light rounded-pill price-suggestion px-3 py-2" data-price-diff="+5">+৳5</button>
+                                <button class="btn btn-sm btn-light rounded-pill price-suggestion px-3 py-2" data-price-diff="+10">+৳10</button>
+                                <button class="btn btn-sm btn-light rounded-pill price-suggestion px-3 py-2" data-price-diff="+20">+৳20</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Hidden Input for Product ID -->
+                        <input type="hidden" id="productId" value="">
+                        
+                        <!-- Action Buttons -->
+                        <div class="d-grid gap-2 mb-4">
+                            <button type="button" class="btn btn-primary py-3 rounded-pill fw-bold" id="updatePriceSubmit">
+                                <i class="bi bi-check-circle-fill me-2"></i>Update Price
                     </button>
-                    <button type="button" class="btn btn-light w-100 rounded-pill" data-bs-dismiss="modal">
+                            <button type="button" class="btn btn-outline-secondary py-2 rounded-pill" data-bs-dismiss="modal">
                         <i class="bi bi-x-circle me-2"></i>Cancel
                     </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1385,33 +891,6 @@
             const filterChips = document.querySelectorAll('.filter-chip');
             const productCards = document.querySelectorAll('[data-product-type]');
 
-            // Tab navigation handling
-            const tabLinks = document.querySelectorAll('.nav-tabs .nav-link');
-            tabLinks.forEach(tab => {
-                tab.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    // Remove active class from all tabs
-                    tabLinks.forEach(t => t.classList.remove('active'));
-                    
-                    // Add active class to current tab
-                    this.classList.add('active');
-                    
-                    // Hide all tab panes
-                    document.querySelectorAll('.tab-pane').forEach(pane => {
-                        pane.classList.remove('show', 'active');
-                    });
-                    
-                    // Show the current tab pane
-                    const targetId = this.getAttribute('href').substring(1);
-                    const targetPane = document.getElementById(targetId);
-                    if (targetPane) {
-                        targetPane.classList.add('show', 'active');
-                    }
-                });
-            });
-
-            // Category filtering
             filterChips.forEach(chip => {
                 chip.addEventListener('click', function() {
                     const filter = this.getAttribute('data-filter');
@@ -1422,528 +901,76 @@
                     // Add active class to clicked chip
                     this.classList.add('active');
                     
-                    // Filter products
+                    // Show/hide product cards based on filter
                 productCards.forEach(card => {
                         if (filter === 'all' || card.getAttribute('data-product-type') === filter) {
-                            card.parentElement.style.display = '';
+                            card.closest('.col-6').style.display = '';
                         } else {
-                            card.parentElement.style.display = 'none';
+                            card.closest('.col-6').style.display = 'none';
                         }
                     });
                 });
             });
 
-            // Product card tap effect
-            const cards = document.querySelectorAll('.product-card');
-            cards.forEach(card => {
-                card.addEventListener('touchstart', function() {
-                    this.classList.add('card-highlight');
-                });
-                
-                card.addEventListener('touchend', function() {
-                    this.classList.remove('card-highlight');
+            // Favorite button functionality - simplified demo
+            document.querySelectorAll('.favorite-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const icon = this.querySelector('i');
+                    if (icon.classList.contains('bi-heart')) {
+                        icon.classList.replace('bi-heart', 'bi-heart-fill');
+                        this.classList.replace('btn-outline-danger', 'btn-danger');
+                    } else {
+                        icon.classList.replace('bi-heart-fill', 'bi-heart');
+                        this.classList.replace('btn-danger', 'btn-outline-danger');
+                    }
                 });
             });
 
-            // Handle price update modal
-            const updatePriceModal = document.getElementById('updatePriceModal');
-            const updatePriceBtns = document.querySelectorAll('.update-price-btn');
-            const productNameElement = document.getElementById('productName');
-            const currentPriceElement = document.getElementById('currentPrice');
-            const newPriceInput = document.getElementById('newPrice');
-            
-            updatePriceBtns.forEach(btn => {
+            // Update price modal - simple demo
+            const updateBtns = document.querySelectorAll('.update-price-btn');
+            updateBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
-                    const productId = this.getAttribute('data-product-id');
                     const productName = this.getAttribute('data-product-name');
                     const productPrice = this.getAttribute('data-product-price');
+                    const productId = this.getAttribute('data-product-id');
                     
-                    // Set modal content
-                    productNameElement.textContent = productName;
-                    currentPriceElement.textContent = '৳' + productPrice;
-                    newPriceInput.value = productPrice;
-                    
-                    // Store product ID in modal for submission
-                    updatePriceModal.setAttribute('data-product-id', productId);
+                    document.getElementById('productName').textContent = productName;
+                    document.getElementById('currentPrice').textContent = '৳' + productPrice;
+                    document.getElementById('newPrice').value = productPrice;
+                    document.getElementById('productId').value = productId;
                 });
             });
-
-            // Handle favorite buttons
-            const favBtns = document.querySelectorAll('.favorite-btn');
-            favBtns.forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.stopPropagation(); // Prevent card click
+            
+            // Price suggestion buttons
+            const priceSuggestions = document.querySelectorAll('.price-suggestion');
+            priceSuggestions.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const priceDiff = this.getAttribute('data-price-diff');
+                    const newPriceInput = document.getElementById('newPrice');
+                    const currentValue = parseInt(newPriceInput.value) || 0;
                     
-                    const icon = this.querySelector('i');
+                    // Parse the price difference (can be positive or negative)
+                    let diff = parseInt(priceDiff);
                     
-                    // Toggle filled/outline heart
-                    if (icon.classList.contains('bi-heart')) {
-                        icon.classList.remove('bi-heart');
-                        icon.classList.add('bi-heart-fill');
-                    } else {
-                        icon.classList.remove('bi-heart-fill');
-                        icon.classList.add('bi-heart');
-                    }
+                    // Update the input value
+                    newPriceInput.value = currentValue + diff;
+                    
+                    // Visual feedback - brief highlight
+                    this.classList.add('btn-primary', 'text-white');
+                    setTimeout(() => {
+                        this.classList.remove('btn-primary', 'text-white');
+                    }, 300);
                 });
             });
-
-            // Add highlight animation for price change
-            function animateValue(element, start, end, duration) {
-                let startTimestamp = null;
-                const step = (timestamp) => {
-                    if (!startTimestamp) startTimestamp = timestamp;
-                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                    const value = Math.floor(progress * (end - start) + start);
-                    element.textContent = '৳' + value;
-                    if (progress < 1) {
-                        window.requestAnimationFrame(step);
-                    }
-                };
-                window.requestAnimationFrame(step);
-            }
-
-            // Submit button for price update
+            
+            // Demo form submission - no actual functionality needed
             const updatePriceSubmitBtn = document.getElementById('updatePriceSubmit');
             if (updatePriceSubmitBtn) {
                 updatePriceSubmitBtn.addEventListener('click', function() {
-                    const modal = bootstrap.Modal.getInstance(updatePriceModal);
-                    const productId = updatePriceModal.getAttribute('data-product-id');
-                    const newPrice = newPriceInput.value;
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('updatePriceModal'));
+                    if (modal) modal.hide();
                     
-                    // Find the product price element on the page
-                    const productCard = document.querySelector(`[data-product-id="${productId}"]`);
-                    if (productCard) {
-                        const priceTag = productCard.querySelector('.price-tag');
-                        const currentPrice = parseInt(priceTag.textContent.replace('৳', ''));
-                        
-                        // Animate price change
-                        animateValue(priceTag, currentPrice, newPrice, 500);
-                        
-                        // Update price badge
-                        const priceBadge = productCard.querySelector('.badge');
-                        if (newPrice > currentPrice) {
-                            priceBadge.classList.remove('bg-success');
-                            priceBadge.classList.add('bg-danger');
-                            priceBadge.innerHTML = '<i class="bi bi-arrow-up-short"></i>৳' + (newPrice - currentPrice);
-                        } else if (newPrice < currentPrice) {
-                            priceBadge.classList.remove('bg-danger');
-                            priceBadge.classList.add('bg-success');
-                            priceBadge.innerHTML = '<i class="bi bi-arrow-down-short"></i>৳' + (currentPrice - newPrice);
-                        }
-                        
-                        // Update time
-                        const timeUpdate = productCard.querySelector('.time-update');
-                        timeUpdate.innerHTML = '<i class="bi bi-arrow-repeat me-1"></i>Just now';
-                        
-                        // Update button attribute
-                        const updateBtn = productCard.querySelector('.update-price-btn');
-                        updateBtn.setAttribute('data-product-price', newPrice);
-                    }
-                    
-                    // Close modal
-                    modal.hide();
-                });
-            }
-
-            // Add market header float behavior
-            const appHeader = document.querySelector('.app-header');
-            const floatingMarketHeader = document.querySelector('.floating-market-header');
-            const staticMarketHeader = document.querySelector('.static-market-header');
-            
-            window.addEventListener('scroll', function() {
-                const headerHeight = appHeader.offsetHeight;
-                const staticMarketRect = staticMarketHeader.getBoundingClientRect();
-                
-                // Show floating header when static header is scrolled up
-                if (staticMarketRect.top < headerHeight) {
-                    floatingMarketHeader.classList.add('visible');
-                } else {
-                    floatingMarketHeader.classList.remove('visible');
-                }
-                
-                // Optional: hide static header when it's underneath the floating header
-                if (staticMarketRect.top < 0) {
-                    staticMarketHeader.classList.add('hidden');
-                } else {
-                    staticMarketHeader.classList.remove('hidden');
-                }
-            });
-            
-            // Table pagination functionality
-            const tablePages = document.querySelectorAll('#table-view .pagination .page-item:not(.disabled)');
-            const tablePrevPage = document.querySelector('#table-view .pagination .page-item:first-child');
-            const tableNextPage = document.querySelector('#table-view .pagination .page-item:last-child');
-            const tableInfoText = document.querySelector('#table-view .text-muted p');
-            
-            tablePages.forEach(page => {
-                page.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    // Get page number
-                    const pageLink = this.querySelector('.page-link');
-                    if (!pageLink) return;
-                    
-                    const pageNumber = pageLink.textContent.trim();
-                    if (!pageNumber || isNaN(parseInt(pageNumber))) return;
-                    
-                    // Remove active class from all pages
-                    tablePages.forEach(p => p.classList.remove('active'));
-                    
-                    // Add active class to clicked page
-                    this.classList.add('active');
-                    
-                    // Update pagination next/prev buttons state
-                    if (pageNumber === '1') {
-                        tablePrevPage.classList.add('disabled');
-                        tableNextPage.classList.remove('disabled');
-                    } else if (pageNumber === '3') {
-                        tablePrevPage.classList.remove('disabled');
-                        tableNextPage.classList.add('disabled');
-                    } else {
-                        tablePrevPage.classList.remove('disabled');
-                        tableNextPage.classList.remove('disabled');
-                    }
-                    
-                    // Update displayed info text based on page number
-                    if (pageNumber === '1') {
-                        tableInfoText.textContent = 'Showing 1-6 of 15 products';
-                    } else if (pageNumber === '2') {
-                        tableInfoText.textContent = 'Showing 7-12 of 15 products';
-                    } else if (pageNumber === '3') {
-                        tableInfoText.textContent = 'Showing 13-15 of 15 products';
-                    }
-                    
-                    // Simulate data loading
-                    const tableBody = document.querySelector('#table-view table tbody');
-                    
-                    // Add loading animation
-                    tableBody.innerHTML = `
-                        <tr>
-                            <td colspan="6" class="text-center py-4">
-                                <div class="spinner-border text-primary" role="status">
-                                    <span class="visually-hidden">Loading...</span>
-                                </div>
-                                <p class="mt-2 text-muted">Loading page ${pageNumber}...</p>
-                            </td>
-                        </tr>
-                    `;
-                    
-                    // Simulate network delay
-                    setTimeout(() => {
-                        // Generate different content based on page number
-                        if (pageNumber === '1') {
-                            tableBody.innerHTML = document.querySelector('#table-view table tbody').innerHTML;
-                        } else if (pageNumber === '2') {
-                            tableBody.innerHTML = `
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2" style="width: 32px; height: 32px; overflow: hidden; border-radius: 4px;">
-                                                <img src="https://images.unsplash.com/photo-1534948216015-843149f72be3?q=80&w=100&auto=format&fit=crop" width="32" height="32" alt="Hilsa" class="object-fit-cover">
-                                            </div>
-                                            <div class="fw-medium">Fresh Hilsa</div>
-                                        </div>
-                                    </td>
-                                    <td>Fish</td>
-                                    <td class="text-primary fw-medium">৳1200</td>
-                                    <td>kg</td>
-                                    <td><span class="badge bg-danger text-white">Price Up</span></td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <button class="btn btn-sm btn-outline-primary me-1 update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="9" data-product-name="Fresh Hilsa" data-product-price="1200">
-                                                <i class="bi bi-pencil-square"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-danger favorite-btn">
-                                                <i class="bi bi-heart"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2" style="width: 32px; height: 32px; overflow: hidden; border-radius: 4px;">
-                                                <img src="https://images.unsplash.com/photo-1447175008436-054170c2e979?q=80&w=100&auto=format&fit=crop" width="32" height="32" alt="Carrots" class="object-fit-cover">
-                                            </div>
-                                            <div class="fw-medium">Fresh Carrots</div>
-                                        </div>
-                                    </td>
-                                    <td>Vegetables</td>
-                                    <td class="text-primary fw-medium">৳55</td>
-                                    <td>kg</td>
-                                    <td><span class="badge bg-success text-white">Price Down</span></td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <button class="btn btn-sm btn-outline-primary me-1 update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="11" data-product-name="Fresh Carrots" data-product-price="55">
-                                                <i class="bi bi-pencil-square"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-danger favorite-btn">
-                                                <i class="bi bi-heart"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2" style="width: 32px; height: 32px; overflow: hidden; border-radius: 4px;">
-                                                <img src="https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?q=80&w=100&auto=format&fit=crop" width="32" height="32" alt="Salmon" class="object-fit-cover">
-                                            </div>
-                                            <div class="fw-medium">Fresh Salmon</div>
-                                        </div>
-                                    </td>
-                                    <td>Fish</td>
-                                    <td class="text-primary fw-medium">৳950</td>
-                                    <td>kg</td>
-                                    <td><span class="badge bg-danger text-white">Price Up</span></td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <button class="btn btn-sm btn-outline-primary me-1 update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="12" data-product-name="Fresh Salmon" data-product-price="950">
-                                                <i class="bi bi-pencil-square"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-danger favorite-btn">
-                                                <i class="bi bi-heart"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2" style="width: 32px; height: 32px; overflow: hidden; border-radius: 4px;">
-                                                <img src="https://images.unsplash.com/photo-1560781290-7dc94c0f8f4f?q=80&w=100&auto=format&fit=crop" width="32" height="32" alt="Chicken" class="object-fit-cover">
-                                            </div>
-                                            <div class="fw-medium">Chicken Breast</div>
-                                        </div>
-                                    </td>
-                                    <td>Meat</td>
-                                    <td class="text-primary fw-medium">৳380</td>
-                                    <td>kg</td>
-                                    <td><span class="badge bg-success text-white">Price Down</span></td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <button class="btn btn-sm btn-outline-primary me-1 update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="13" data-product-name="Chicken Breast" data-product-price="380">
-                                                <i class="bi bi-pencil-square"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-danger favorite-btn">
-                                                <i class="bi bi-heart"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2" style="width: 32px; height: 32px; overflow: hidden; border-radius: 4px;">
-                                                <img src="https://images.unsplash.com/photo-1596170778037-6af147eb5d9b?q=80&w=100&auto=format&fit=crop" width="32" height="32" alt="Garlic" class="object-fit-cover">
-                                            </div>
-                                            <div class="fw-medium">Fresh Garlic</div>
-                                        </div>
-                                    </td>
-                                    <td>Vegetables</td>
-                                    <td class="text-primary fw-medium">৳75</td>
-                                    <td>kg</td>
-                                    <td><span class="badge bg-success text-white">Price Down</span></td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <button class="btn btn-sm btn-outline-primary me-1 update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="14" data-product-name="Fresh Garlic" data-product-price="75">
-                                                <i class="bi bi-pencil-square"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-danger favorite-btn">
-                                                <i class="bi bi-heart"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2" style="width: 32px; height: 32px; overflow: hidden; border-radius: 4px;">
-                                                <img src="https://images.unsplash.com/photo-1464965911861-746a04b4bca6?q=80&w=100&auto=format&fit=crop" width="32" height="32" alt="Strawberries" class="object-fit-cover">
-                                            </div>
-                                            <div class="fw-medium">Fresh Strawberries</div>
-                                        </div>
-                                    </td>
-                                    <td>Fruits</td>
-                                    <td class="text-primary fw-medium">৳220</td>
-                                    <td>kg</td>
-                                    <td><span class="badge bg-danger text-white">Price Up</span></td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <button class="btn btn-sm btn-outline-primary me-1 update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="15" data-product-name="Fresh Strawberries" data-product-price="220">
-                                                <i class="bi bi-pencil-square"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-danger favorite-btn">
-                                                <i class="bi bi-heart"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            `;
-                        } else if (pageNumber === '3') {
-                            tableBody.innerHTML = `
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2" style="width: 32px; height: 32px; overflow: hidden; border-radius: 4px;">
-                                                <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=100&auto=format&fit=crop" width="32" height="32" alt="Ginger" class="object-fit-cover">
-                                            </div>
-                                            <div class="fw-medium">Fresh Ginger</div>
-                                        </div>
-                                    </td>
-                                    <td>Spices</td>
-                                    <td class="text-primary fw-medium">৳120</td>
-                                    <td>kg</td>
-                                    <td><span class="badge bg-secondary text-white">Unchanged</span></td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <button class="btn btn-sm btn-outline-primary me-1 update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="16" data-product-name="Fresh Ginger" data-product-price="120">
-                                                <i class="bi bi-pencil-square"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-danger favorite-btn">
-                                                <i class="bi bi-heart"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2" style="width: 32px; height: 32px; overflow: hidden; border-radius: 4px;">
-                                                <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=100&auto=format&fit=crop" width="32" height="32" alt="Broccoli" class="object-fit-cover">
-                                            </div>
-                                            <div class="fw-medium">Fresh Broccoli</div>
-                                        </div>
-                                    </td>
-                                    <td>Vegetables</td>
-                                    <td class="text-primary fw-medium">৳95</td>
-                                    <td>kg</td>
-                                    <td><span class="badge bg-danger text-white">Price Up</span></td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <button class="btn btn-sm btn-outline-primary me-1 update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="17" data-product-name="Fresh Broccoli" data-product-price="95">
-                                                <i class="bi bi-pencil-square"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-danger favorite-btn">
-                                                <i class="bi bi-heart"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2" style="width: 32px; height: 32px; overflow: hidden; border-radius: 4px;">
-                                                <img src="https://images.unsplash.com/photo-1517382848-91f8df35e4e6?q=80&w=100&auto=format&fit=crop" width="32" height="32" alt="Mutton" class="object-fit-cover">
-                                            </div>
-                                            <div class="fw-medium">Premium Mutton</div>
-                                        </div>
-                                    </td>
-                                    <td>Meat</td>
-                                    <td class="text-primary fw-medium">৳900</td>
-                                    <td>kg</td>
-                                    <td><span class="badge bg-success text-white">Price Down</span></td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <button class="btn btn-sm btn-outline-primary me-1 update-price-btn" data-bs-toggle="modal" data-bs-target="#updatePriceModal" data-product-id="18" data-product-name="Premium Mutton" data-product-price="900">
-                                                <i class="bi bi-pencil-square"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-danger favorite-btn">
-                                                <i class="bi bi-heart"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            `;
-                        }
-                        
-                        // Reinitialize buttons after content is loaded
-                        initializeTableButtons();
-                    }, 800);
-                });
-            });
-            
-            // Handle prev/next navigation for table
-            if (tableNextPage) {
-                tableNextPage.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (this.classList.contains('disabled')) return;
-                    
-                    // Find current active page
-                    const activePage = document.querySelector('#table-view .pagination .page-item.active');
-                    if (!activePage) return;
-                    
-                    // Get next page
-                    const nextPage = activePage.nextElementSibling;
-                    if (nextPage && nextPage !== this) {
-                        nextPage.querySelector('.page-link').click();
-                    }
-                });
-            }
-            
-            if (tablePrevPage) {
-                tablePrevPage.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (this.classList.contains('disabled')) return;
-                    
-                    // Find current active page
-                    const activePage = document.querySelector('#table-view .pagination .page-item.active');
-                    if (!activePage) return;
-                    
-                    // Get previous page
-                    const prevPage = activePage.previousElementSibling;
-                    if (prevPage && prevPage !== this) {
-                        prevPage.querySelector('.page-link').click();
-                    }
-                });
-            }
-            
-            // Helper function to initialize buttons after content load
-            function initializeTableButtons() {
-                // Reinitialize favorite buttons
-                const newFavBtns = document.querySelectorAll('#table-view .favorite-btn');
-                newFavBtns.forEach(btn => {
-                    btn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        
-                        const icon = this.querySelector('i');
-                        
-                        if (icon.classList.contains('bi-heart')) {
-                            icon.classList.remove('bi-heart');
-                            icon.classList.add('bi-heart-fill');
-                            this.classList.add('text-danger');
-                            this.classList.remove('btn-outline-danger');
-                            this.classList.add('btn-danger');
-                        } else {
-                            icon.classList.remove('bi-heart-fill');
-                            icon.classList.add('bi-heart');
-                            this.classList.remove('text-danger');
-                            this.classList.add('btn-outline-danger');
-                            this.classList.remove('btn-danger');
-                        }
-                    });
-                });
-                
-                // Reinitialize update price buttons
-                const newUpdateBtns = document.querySelectorAll('#table-view .update-price-btn');
-                newUpdateBtns.forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const productId = this.getAttribute('data-product-id');
-                        const productName = this.getAttribute('data-product-name');
-                        const productPrice = this.getAttribute('data-product-price');
-                        
-                        // Set modal content
-                        document.getElementById('updateProductName').textContent = productName;
-                        document.getElementById('currentPrice').textContent = '৳' + productPrice;
-                        document.getElementById('newPrice').value = productPrice;
-                        updatePriceModal.setAttribute('data-product-id', productId);
-                    });
-                });
-                
-                // Add animation order to table rows for sequential fade-in
-                const tableRows = document.querySelectorAll('#table-view tbody tr');
-                tableRows.forEach((row, index) => {
-                    row.style.setProperty('--animation-order', index);
+                    // Could show a success message here in a real app
                 });
             }
         });

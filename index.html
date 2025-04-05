@@ -293,24 +293,29 @@
     <!-- Location Warning Modal -->
     <div class="modal fade" id="locationWarningModal" tabindex="-1" aria-labelledby="locationWarningModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" style="border-radius: var(--border-radius); overflow: hidden;">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="locationWarningModalLabel">
-                        <i class="bi bi-geo-alt me-2"></i>Location Required
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center py-4">
-                    <div class="mb-3">
-                        <div class="icon-wrapper mx-auto mb-2" style="width: 70px; height: 70px; background-color: var(--primary-color-light); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                            <i class="bi bi-geo-alt-fill text-primary" style="font-size: 2.5rem;"></i>
+            <div class="modal-content" style="border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                <div class="modal-body p-0">
+                    <div class="text-end p-2">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="text-center px-4 pb-4">
+                        <div class="mb-4">
+                            <div class="icon-wrapper mx-auto" style="width: 90px; height: 90px; background-color: var(--primary-color-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(var(--bs-primary-rgb), 0.3);">
+                                <i class="bi bi-geo-alt-fill text-primary" style="font-size: 3rem;"></i>
+                            </div>
+                        </div>
+                        <h5 class="mb-3 fw-bold">Please Select Your Location</h5>
+                        <p class="text-muted mb-4">We need your location to show relevant market prices in your area</p>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="button" class="btn btn-primary py-3 rounded-pill fw-bold" id="useCurrentLocationBtn">
+                                <i class="bi bi-crosshair me-2"></i>Use Current Location
+                            </button>
+                            <button type="button" class="btn btn-outline-primary py-2 rounded-pill" data-bs-dismiss="modal">
+                                Select Later
+                            </button>
                         </div>
                     </div>
-                    <h6 class="mb-2 fw-bold">Select Your Location</h6>
-                    <p class="text-muted mb-0">Please select your area first before browsing categories.</p>
-                </div>
-                <div class="modal-footer justify-content-center border-0 pt-0 pb-4">
-                    <button type="button" class="btn btn-primary px-4 rounded-pill" data-bs-dismiss="modal">Okay, Got it</button>
                 </div>
             </div>
         </div>
@@ -342,6 +347,23 @@
                 // Add pointer cursor to indicate it's clickable
                 vegetablesCard.style.cursor = 'pointer';
             }
+            
+            // Handle Use Current Location button
+            document.getElementById('useCurrentLocationBtn').addEventListener('click', function() {
+                // Show loading spinner (assuming it exists elsewhere in the document)
+                document.getElementById('location-loading').style.display = 'block';
+                
+                // Close the modal
+                const locationModal = bootstrap.Modal.getInstance(document.getElementById('locationWarningModal'));
+                locationModal.hide();
+                
+                // Simulate getting location and then redirect
+                setTimeout(() => {
+                    document.getElementById('location-loading').style.display = 'none';
+                    // Here you would handle the actual location fetching
+                    window.location.href = 'markets.html'; // Or redirect to appropriate page
+                }, 1500);
+            });
         });
     </script>
 </body>
