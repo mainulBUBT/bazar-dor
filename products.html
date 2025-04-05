@@ -17,6 +17,34 @@
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
     <link rel="apple-touch-icon" href="icons/icon-192x192.png">
     <style>
+        /* Updated bottom navigation style */
+        .navbar-nav.bottom-nav .nav-link.active {
+            color: var(--primary-color);
+            background-color: #f8e4e8;
+            border-radius: 16px;
+            box-shadow: none;
+            transform: none;
+            width: 90%;
+            margin: 0 auto;
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+            border-top: none;
+        }
+        
+        .navbar-nav.bottom-nav .nav-link.active::before {
+            display: none;
+        }
+        
+        .navbar-nav.bottom-nav .nav-link.active i {
+            color: var(--primary-color);
+            margin-bottom: 2px;
+        }
+        
+        .navbar-nav.bottom-nav .nav-item {
+            display: flex;
+            justify-content: center;
+        }
+        
         /* Enhanced styles for market page */
         :root {
             --primary-rgb: 171, 68, 89;
@@ -782,27 +810,27 @@
         <div class="container-fluid justify-content-center p-0">
             <ul class="navbar-nav flex-row bottom-nav">
                 <li class="nav-item mx-0">
-                    <a class="nav-link d-flex flex-column align-items-center py-2" href="index.html">
-                        <i class="bi bi-house fs-4 mb-1"></i>
-                        <div class="nav-label small fw-medium">Home</div>
+                    <a class="nav-link" href="index.html">
+                        <i class="bi bi-house"></i>
+                        <div class="nav-label small">Home</div>
                     </a>
                 </li>
                 <li class="nav-item mx-0">
-                    <a class="nav-link d-flex flex-column align-items-center py-2" href="markets.html">
-                        <i class="bi bi-shop fs-4 mb-1"></i>
-                        <div class="nav-label small fw-medium">Markets</div>
+                    <a class="nav-link active" href="markets.html">
+                        <i class="bi bi-shop"></i>
+                        <div class="nav-label small">Markets</div>
                     </a>
                 </li>
                 <li class="nav-item mx-0">
-                    <a class="nav-link d-flex flex-column align-items-center py-2" href="favorites.html">
-                        <i class="bi bi-heart fs-4 mb-1"></i>
-                        <div class="nav-label small fw-medium">Favorites</div>
+                    <a class="nav-link" href="favorites.html">
+                        <i class="bi bi-heart"></i>
+                        <div class="nav-label small">Favorites</div>
                     </a>
                 </li>
                 <li class="nav-item mx-0">
-                    <a class="nav-link d-flex flex-column align-items-center py-2" href="profile.html">
-                        <i class="bi bi-person fs-4 mb-1"></i>
-                        <div class="nav-label small fw-medium">Profile</div>
+                    <a class="nav-link" href="profile.html">
+                        <i class="bi bi-person"></i>
+                        <div class="nav-label small">Profile</div>
                     </a>
                 </li>
             </ul>
