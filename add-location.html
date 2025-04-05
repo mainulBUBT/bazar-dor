@@ -11,15 +11,22 @@
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/map.css">
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
     <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+          crossorigin=""/>
+    <!-- Additional map style fixes -->
     <style>
-        #map-container {
-            height: 200px;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        .leaflet-control-zoom {
+            z-index: 1000 !important;
+            margin-top: 10px !important;
+            margin-right: 10px !important;
+        }
+        .leaflet-top {
+            z-index: 1000 !important;
         }
     </style>
 </head>
@@ -44,28 +51,65 @@
     <div class="container mt-4 mb-7">
         <div class="card border-0 shadow-sm rounded-4 mb-4">
             <div class="card-body p-4">
-                <div id="map-container">
-                    <img src="https://via.placeholder.com/800x400/e0e0e0/6c757d?text=Map+Preview" alt="Map" class="w-100 h-100 object-fit-cover">
-                </div>
-
-                <div class="input-group mb-3">
-                    <span class="input-group-text bg-white border-end-0">
-                        <i class="bi bi-search text-muted"></i>
-                    </span>
-                    <input type="text" class="form-control border-start-0 ps-0" id="location-search" placeholder="Search for a location...">
+                <div id="map-container" class="mb-3">
+                    <div id="map"></div>
+                    <div class="map-marker-centered">
+                        <i class="bi bi-geo-alt-fill"></i>
+                    </div>
+                    <div class="map-search-container">
+                        <div class="position-relative">
+                            <i class="bi bi-search map-search-icon"></i>
+                            <input type="text" id="map-search-input" class="map-search-box" placeholder="Search for a location">
+                            <button class="map-search-clear" title="Clear">
+                                <i class="bi bi-x"></i>
+                            </button>
+                            <div id="map-search-results" class="map-search-results"></div>
+                        </div>
+                    </div>
+                    <button id="map-current-location" class="map-current-location-btn" title="Your location">
+                        <i class="bi bi-crosshair"></i>
+                    </button>
+                    <button id="map-fullscreen" class="map-fullscreen-btn" title="Full screen">
+                        <i class="bi bi-fullscreen"></i>
+                    </button>
+                    <div class="drag-hint">
+                        <i class="bi bi-arrows-move me-1"></i> Drag map to set location
+                    </div>
+                    <div id="map-loading" class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-light bg-opacity-75">
+                        <div class="text-center">
+                            <div class="spinner-border text-primary mb-2" role="status">
+                                <span class="visually-hidden">Loading map...</span>
+                            </div>
+                            <p class="mb-0 fw-medium">Loading map...</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="d-flex align-items-center mb-3">
-                    <button class="btn btn-outline-primary rounded-pill me-2" id="use-current-location">
-                        <i class="bi bi-geo-alt me-1"></i>Use current location
-                    </button>
-                    <span class="text-muted small">or fill in the form below</span>
+                    <p class="text-muted mb-0 small"><i class="bi bi-info-circle me-1"></i> You can search locations, use the current location button <i class="bi bi-crosshair text-primary mx-1"></i>, or directly enter coordinates below</p>
                 </div>
 
                 <form id="location-form">
                     <div class="mb-3">
                         <label for="location-label" class="form-label small text-muted">Location Label</label>
                         <input type="text" class="form-control rounded-3" id="location-label" placeholder="Home, Office, etc.">
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label for="visible-latitude" class="form-label small text-muted">Latitude (decimal)</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control rounded-start-3" id="visible-latitude" style="min-width: 120px;" placeholder="23.8103">
+                                <span class="input-group-text rounded-end-3 bg-light">°N</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <label for="visible-longitude" class="form-label small text-muted">Longitude (decimal)</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control rounded-start-3" id="visible-longitude" style="min-width: 120px;" placeholder="90.4125">
+                                <span class="input-group-text rounded-end-3 bg-light">°E</span>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="mb-3">
@@ -76,33 +120,6 @@
                     <div class="mb-3">
                         <label for="address-line-2" class="form-label small text-muted">Address Line 2 (Optional)</label>
                         <input type="text" class="form-control rounded-3" id="address-line-2" placeholder="Apartment, Suite, Unit, etc.">
-                    </div>
-
-                    <div class="row mb-3">
-                        <div class="col-6">
-                            <label for="city" class="form-label small text-muted">City</label>
-                            <input type="text" class="form-control rounded-3" id="city" placeholder="City">
-                        </div>
-                        <div class="col-6">
-                            <label for="area" class="form-label small text-muted">Area</label>
-                            <input type="text" class="form-control rounded-3" id="area" placeholder="Area/District">
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <div class="col-6">
-                            <label for="postal-code" class="form-label small text-muted">Postal Code</label>
-                            <input type="text" class="form-control rounded-3" id="postal-code" placeholder="Postal Code">
-                        </div>
-                        <div class="col-6">
-                            <label for="country" class="form-label small text-muted">Country</label>
-                            <select class="form-select rounded-3" id="country">
-                                <option value="bangladesh" selected>Bangladesh</option>
-                                <option value="india">India</option>
-                                <option value="pakistan">Pakistan</option>
-                                <option value="nepal">Nepal</option>
-                            </select>
-                        </div>
                     </div>
 
                     <div class="mb-3">
@@ -119,6 +136,10 @@
                             Set as default address
                         </label>
                     </div>
+                    
+                    <!-- Hidden fields for coordinates -->
+                    <input type="hidden" id="latitude" name="latitude" value="23.8103">
+                    <input type="hidden" id="longitude" name="longitude" value="90.4125">
                 </form>
             </div>
         </div>
@@ -132,28 +153,28 @@
     <nav class="navbar fixed-bottom navbar-dark">
         <div class="container-fluid justify-content-center p-0">
             <ul class="navbar-nav flex-row bottom-nav">
-                <li class="nav-item mx-0">
+                <li class="nav-item">
                     <a class="nav-link" href="index.html">
                         <i class="bi bi-house"></i>
-                        <div class="nav-label small">Home</div>
+                        <span class="nav-label">Home</span>
                     </a>
                 </li>
-                <li class="nav-item mx-0">
+                <li class="nav-item">
                     <a class="nav-link" href="markets.html">
                         <i class="bi bi-shop"></i>
-                        <div class="nav-label small">Markets</div>
+                        <span class="nav-label">Markets</span>
                     </a>
                 </li>
-                <li class="nav-item mx-0">
+                <li class="nav-item">
                     <a class="nav-link" href="favorites.html">
                         <i class="bi bi-heart"></i>
-                        <div class="nav-label small">Favorites</div>
+                        <span class="nav-label">Favorites</span>
                     </a>
                 </li>
-                <li class="nav-item mx-0">
+                <li class="nav-item">
                     <a class="nav-link active" href="profile.html">
                         <i class="bi bi-person"></i>
-                        <div class="nav-label small">Profile</div>
+                        <span class="nav-label">Profile</span>
                     </a>
                 </li>
             </ul>
@@ -163,26 +184,84 @@
     <!-- Location Detected Modal -->
     <div class="modal fade" id="locationDetectedModal" tabindex="-1" aria-labelledby="locationDetectedModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-4 overflow-hidden">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="locationDetectedModalLabel">Location Detected</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-content position-relative p-3">
+                <div class="modal-close position-absolute"><button type="button" class="btn border-0" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button></div>
+                <div class="p-3">
+                    <div class="text-center mb-3">
+                        <img src="img/location-detected.svg" alt="Location Detected" class="mb-2">
+                        <h5 class="fw-bold">Location Detected</h5>
+                        <p class="mx-auto text-secondary">We detected your location as:</p>
+                        <p class="fw-bold">123 Main Street, Dhaka, Bangladesh</p>
+                    </div>
+                    
+                    <!-- Hidden fields to store detected address components -->
+                    <input type="hidden" id="detected-address-line-1" value="">
+                    <input type="hidden" id="detected-city" value="">
+                    <input type="hidden" id="detected-postal-code" value="">
+                    <input type="hidden" id="detected-area" value="">
+                    
+                    <div class="d-grid gap-3">
+                        <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">No, I'll enter manually</button>
+                        <button type="button" class="btn btn-primary rounded-pill" id="use-detected-location">Yes, use this</button>
+                    </div>
                 </div>
-                <div class="modal-body py-4">
-                    <p>We've detected your current location:</p>
-                    <p class="fw-bold">123 Main Street, Dhaka 1217, Bangladesh</p>
-                    <p>Would you like to use this as your address?</p>
-                </div>
-                <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">No, I'll enter manually</button>
-                    <button type="button" class="btn btn-primary rounded-pill" id="use-detected-location">Yes, use this</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Location Error Modal -->
+    <div class="modal fade" id="locationErrorModal" tabindex="-1" aria-labelledby="locationErrorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content position-relative p-3">
+                <div class="modal-close position-absolute top-0 end-0 p-3"><button type="button" class="btn border-0" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button></div>
+                <div class="p-4">
+                    <div class="text-center mb-3">
+                        <i class="bi bi-exclamation-triangle-fill text-warning fs-1 mb-3"></i>
+                        <h5 class="fw-bold">Location Error</h5>
+                        <p id="location-error-message" class="mx-auto text-secondary">Could not get your current location.</p>
+                    </div>
+                    
+                    <div class="text-center mt-3">
+                        <p class="small text-muted mb-2">Try these fixes:</p>
+                        <ul class="text-start small text-muted ps-4">
+                            <li>Check if location services are enabled on your device</li>
+                            <li>Allow location access for this website in your browser settings</li>
+                            <li>Make sure you have an active internet connection</li>
+                            <li>Try searching for your location instead</li>
+                        </ul>
+                        
+                        <div class="mt-3 border-top pt-3">
+                            <p class="small fw-medium mb-2">Device-specific help:</p>
+                            <div class="d-flex justify-content-around">
+                                <div class="text-center">
+                                    <i class="bi bi-apple fs-4 d-block mb-1"></i>
+                                    <span class="small d-block">iPhone/iPad</span>
+                                    <div class="small text-muted">Settings → Privacy → Location Services</div>
+                                </div>
+                                <div class="text-center">
+                                    <i class="bi bi-android2 fs-4 d-block mb-1"></i>
+                                    <span class="small d-block">Android</span>
+                                    <div class="small text-muted">Settings → Location</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid mt-3">
+                        <button type="button" class="btn btn-primary rounded-pill" data-bs-dismiss="modal">OK</button>
+                    </div>
+                    <div class="d-grid mt-2">
+                        <button type="button" id="retry-location-btn" class="btn btn-outline-primary rounded-pill">
+                            <i class="bi bi-arrow-repeat me-1"></i> Retry with different settings
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Success Toast -->
-    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div class="position-fixed bottom-0 end-0 p-3 toast-container">
         <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header bg-success text-white">
                 <i class="bi bi-check-circle me-2"></i>
@@ -194,31 +273,642 @@
             </div>
         </div>
     </div>
+    
+    <!-- Retrying Toast -->
+    <div class="position-fixed bottom-0 end-0 p-3 toast-container">
+        <div id="retryingToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-primary text-white">
+                <i class="bi bi-arrow-repeat me-2"></i>
+                <strong class="me-auto">Retrying</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Trying to get your location with different settings...
+            </div>
+        </div>
+    </div>
+    
+    <!-- Location Success Toast -->
+    <div class="position-fixed bottom-0 end-0 p-3 toast-container">
+        <div id="locationSuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <i class="bi bi-check-circle me-2"></i>
+                <strong class="me-auto">Location Found</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Successfully found your location! <br>
+                <small class="text-muted">You can now drag the map to adjust your position if needed.</small>
+            </div>
+        </div>
+    </div>
 
     <script src="lib/bootstrap/bootstrap.bundle.min.js"></script>
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+            crossorigin=""></script>
     <script src="js/app.js"></script>
     <script>
-        // Show location modal when "Use current location" is clicked
-        document.getElementById('use-current-location').addEventListener('click', function() {
-            const locationModal = new bootstrap.Modal(document.getElementById('locationDetectedModal'));
-            locationModal.show();
+        // Initialize map variables
+        let map;
+        let currentMarker;
+        let currentLatLng = { lat: 23.8103, lng: 90.4125 }; // Default to Dhaka, Bangladesh
+        let dragHintTimeout;
+        
+        // Initialize the map when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                console.log("Initializing map on DOMContentLoaded...");
+                initMap();
+                
+                // Set up search functionality
+                setupMapSearch();
+                
+                // Set up current location button
+                document.getElementById('map-current-location').addEventListener('click', getCurrentLocation);
+                
+                // Set up fullscreen button
+                document.getElementById('map-fullscreen').addEventListener('click', toggleMapFullscreen);
+                
+                // Set up lat/lng input fields
+                setupCoordinateInputs();
+                
+                // Check geolocation permission
+                checkGeolocationPermission();
+                
+                // Ensure map container has proper height
+                document.getElementById('map-container').style.height = '250px';
+            } catch (error) {
+                console.error("Error initializing map on DOMContentLoaded: ", error);
+            }
         });
         
-        // Fill form with detected location
-        document.getElementById('use-detected-location').addEventListener('click', function() {
-            // Here you would use the actual detected location data
-            document.getElementById('address-line-1').value = '123 Main Street';
-            document.getElementById('city').value = 'Dhaka';
-            document.getElementById('postal-code').value = '1217';
-            
-            // Hide modal
-            const modal = bootstrap.Modal.getInstance(document.getElementById('locationDetectedModal'));
-            modal.hide();
+        // Backup initialization when window fully loads
+        window.addEventListener('load', function() {
+            try {
+                console.log("Window load event fired, checking map...");
+                if (!map || !map._loaded) {
+                    console.log("Map not initialized on DOMContentLoaded, initializing now...");
+                    initMap();
+                } else {
+                    console.log("Map already initialized, forcing resize");
+                    map.invalidateSize(true);
+                    hideMapLoading();
+                }
+            } catch (error) {
+                console.error("Error initializing map on window load: ", error);
+            }
         });
+        
+        // Function to hide map loading overlay
+        function hideMapLoading() {
+            const mapLoading = document.getElementById('map-loading');
+            if (mapLoading) {
+                mapLoading.style.display = 'none';
+            }
+        }
+        
+        // Initialize Leaflet map
+        function initMap() {
+            // Check if map already exists
+            if (map) {
+                console.log("Map already initialized, resizing...");
+                map.invalidateSize(true);
+                return;
+            }
+            
+            console.log("Creating new map instance...");
+            
+            // Create map instance
+            try {
+                map = L.map('map', {
+                    zoomControl: false,  // We'll add zoom control in a better position
+                    attributionControl: true
+                }).setView([currentLatLng.lat, currentLatLng.lng], 15);
+                
+                // Add OpenStreetMap tiles (free to use)
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                    maxZoom: 19
+                }).addTo(map);
+                
+                // Add zoom control to top-right
+                L.control.zoom({
+                    position: 'topright'
+                }).addTo(map);
+                
+                // Hide loading overlay
+                hideMapLoading();
+                
+                // Show drag hint for a few seconds
+                showDragHint();
+                
+                // Update coordinates when map is dragged
+                map.on('move', function() {
+                    const center = map.getCenter();
+                    currentLatLng = {
+                        lat: center.lat,
+                        lng: center.lng
+                    };
+                    
+                    // Update form fields
+                    updateCoordinateFields(currentLatLng);
+                    
+                    // Hide drag hint after user starts moving
+                    hideDragHint();
+                });
+                
+                // Debug: log when map is fully loaded
+                map.on('load', function() {
+                    console.log("Map fully loaded");
+                });
+                
+                // Force a resize after a short delay to ensure proper rendering
+                setTimeout(function() {
+                    map.invalidateSize(true);
+                    console.log("Map resized after initialization");
+                    hideMapLoading();
+                    
+                    // Ensure controls are visible
+                    const zoomControl = document.querySelector('.leaflet-control-zoom');
+                    if (zoomControl) {
+                        zoomControl.style.display = 'block';
+                    }
+                }, 500);
+                
+                console.log("Map initialized successfully");
+            } catch (error) {
+                console.error("Error creating map: ", error);
+            }
+        }
+        
+        // Show drag hint
+        function showDragHint() {
+            const dragHint = document.querySelector('.drag-hint');
+            if (dragHint) {
+                dragHint.classList.remove('fade-out');
+                // Auto-hide after a few seconds
+                dragHintTimeout = setTimeout(() => {
+                    hideDragHint();
+                }, 5000);
+            }
+        }
+        
+        // Hide drag hint
+        function hideDragHint() {
+            const dragHint = document.querySelector('.drag-hint');
+            if (dragHint) {
+                dragHint.classList.add('fade-out');
+            }
+            
+            // Clear the timeout if it exists
+            if (dragHintTimeout) {
+                clearTimeout(dragHintTimeout);
+            }
+        }
+        
+        // Set up coordinate input fields
+        function setupCoordinateInputs() {
+            const latInput = document.getElementById('visible-latitude');
+            const lngInput = document.getElementById('visible-longitude');
+            const hiddenLatInput = document.getElementById('latitude');
+            const hiddenLngInput = document.getElementById('longitude');
+            
+            // Initial values
+            updateCoordinateFields(currentLatLng);
+            
+            // Update map when coordinates change
+            latInput.addEventListener('change', updateMapFromCoordinates);
+            lngInput.addEventListener('change', updateMapFromCoordinates);
+        }
+        
+        // Update coordinate fields from map position
+        function updateCoordinateFields(latLng) {
+            const latInput = document.getElementById('visible-latitude');
+            const lngInput = document.getElementById('visible-longitude');
+            const hiddenLatInput = document.getElementById('latitude');
+            const hiddenLngInput = document.getElementById('longitude');
+            
+            if (latInput && lngInput && hiddenLatInput && hiddenLngInput) {
+                // Format to 8 decimal places for display
+                latInput.value = latLng.lat.toFixed(8);
+                lngInput.value = latLng.lng.toFixed(8);
+                
+                // Update hidden fields with full precision
+                hiddenLatInput.value = latLng.lat;
+                hiddenLngInput.value = latLng.lng;
+            }
+        }
+        
+        // Update map position from coordinate fields
+        function updateMapFromCoordinates() {
+            const latInput = document.getElementById('visible-latitude');
+            const lngInput = document.getElementById('visible-longitude');
+            
+            if (latInput && lngInput && map) {
+                const lat = parseFloat(latInput.value);
+                const lng = parseFloat(lngInput.value);
+                
+                if (!isNaN(lat) && !isNaN(lng)) {
+                    map.setView([lat, lng], map.getZoom());
+                    currentLatLng = { lat, lng };
+                    
+                    // Update hidden fields
+                    document.getElementById('latitude').value = lat;
+                    document.getElementById('longitude').value = lng;
+                }
+            }
+        }
+        
+        // Get current location
+        function getCurrentLocation() {
+            console.log("Getting current location...");
+            
+            // Add pulse effect to button
+            const locationButton = document.getElementById('map-current-location');
+            if (locationButton) {
+                locationButton.classList.add('pulsing');
+            }
+            
+            // Check if geolocation is available
+            if (!navigator.geolocation) {
+                showLocationError("Geolocation is not supported by your browser.");
+                return;
+            }
+            
+            // Request current position with options
+            const options = {
+                enableHighAccuracy: true,
+                timeout: 10000,  // 10 seconds
+                maximumAge: 0    // Don't use cached position
+            };
+            
+            navigator.geolocation.getCurrentPosition(
+                // Success
+                function(position) {
+                    console.log("Got position:", position);
+                    
+                    // Remove pulsing effect
+                    if (locationButton) {
+                        locationButton.classList.remove('pulsing');
+                    }
+                    
+                    // Update map with current location
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+                    
+                    // Update map
+                    if (map) {
+                        map.setView([lat, lng], 16);
+                        
+                        // Set current position
+                        currentLatLng = { lat, lng };
+                        
+                        // Update form fields
+                        updateCoordinateFields(currentLatLng);
+                        
+                        // Show success toast
+                        const locationSuccessToast = new bootstrap.Toast(document.getElementById('locationSuccessToast'));
+                        locationSuccessToast.show();
+                        
+                        // Add marker pulse animation
+                        const markerIcon = document.querySelector('.map-marker-centered');
+                        if (markerIcon) {
+                            markerIcon.classList.add('marker-pulse');
+                            setTimeout(() => {
+                                markerIcon.classList.remove('marker-pulse');
+                            }, 2000);
+                        }
+                        
+                        // Try to reverse geocode the location
+                        reverseGeocode(lat, lng);
+                    }
+                },
+                // Error
+                function(error) {
+                    console.error("Geolocation error:", error);
+                    
+                    // Remove pulsing effect
+                    if (locationButton) {
+                        locationButton.classList.remove('pulsing');
+                    }
+                    
+                    // Show error message
+                    let errorMessage = "Could not get your current location.";
+                    
+                    switch(error.code) {
+                        case error.PERMISSION_DENIED:
+                            errorMessage = "Location access was denied. Please check your browser settings and ensure location access is allowed for this site.";
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            errorMessage = "Location information is unavailable. Please try again or search for your location manually.";
+                            break;
+                        case error.TIMEOUT:
+                            errorMessage = "The request to get your location timed out. Please try again or check your connection.";
+                            break;
+                        case error.UNKNOWN_ERROR:
+                            errorMessage = "An unknown error occurred while getting your location. Please try again later.";
+                            break;
+                    }
+                    
+                    showLocationError(errorMessage);
+                },
+                // Options
+                options
+            );
+        }
+        
+        // Show location error modal with message
+        function showLocationError(message) {
+            // Update error message
+            const errorMessageElement = document.getElementById('location-error-message');
+            if (errorMessageElement) {
+                errorMessageElement.textContent = message;
+            }
+            
+            // Show modal
+            const locationErrorModal = new bootstrap.Modal(document.getElementById('locationErrorModal'));
+            locationErrorModal.show();
+            
+            // Set up retry button
+            document.getElementById('retry-location-btn').addEventListener('click', function() {
+                // Hide modal
+                locationErrorModal.hide();
+                
+                // Show retrying toast
+                const retryingToast = new bootstrap.Toast(document.getElementById('retryingToast'));
+                retryingToast.show();
+                
+                // Retry with looser options
+                retryWithLooserOptions();
+            });
+        }
+        
+        // Retry getting location with more permissive options
+        function retryWithLooserOptions() {
+            console.log("Retrying with looser options...");
+            
+            if (!navigator.geolocation) {
+                showLocationError("Geolocation is not supported by your browser.");
+                return;
+            }
+            
+            // Less strict options
+            const options = {
+                enableHighAccuracy: false,  // Less accuracy is okay
+                timeout: 15000,             // Longer timeout (15 seconds)
+                maximumAge: 60000           // Allow cached positions up to 1 minute old
+            };
+            
+            navigator.geolocation.getCurrentPosition(
+                // Success - same handler as before
+                function(position) {
+                    console.log("Got position (retry):", position);
+                    
+                    // Update map with current location
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+                    
+                    // Update map
+                    if (map) {
+                        map.setView([lat, lng], 16);
+                        
+                        // Set current position
+                        currentLatLng = { lat, lng };
+                        
+                        // Update form fields
+                        updateCoordinateFields(currentLatLng);
+                        
+                        // Show success toast
+                        const locationSuccessToast = new bootstrap.Toast(document.getElementById('locationSuccessToast'));
+                        locationSuccessToast.show();
+                        
+                        // Add marker pulse animation
+                        const markerIcon = document.querySelector('.map-marker-centered');
+                        if (markerIcon) {
+                            markerIcon.classList.add('marker-pulse');
+                            setTimeout(() => {
+                                markerIcon.classList.remove('marker-pulse');
+                            }, 2000);
+                        }
+                        
+                        // Try to reverse geocode the location
+                        reverseGeocode(lat, lng);
+                    }
+                },
+                // Error
+                function(error) {
+                    console.error("Geolocation retry error:", error);
+                    
+                    // Show error message
+                    let errorMessage = "Still could not get your location. Please enter it manually.";
+                    showLocationError(errorMessage);
+                },
+                // Options
+                options
+            );
+        }
+        
+        // Mock reverse geocode function (in a real app, this would call a geocoding service)
+        function reverseGeocode(lat, lng) {
+            console.log("Reverse geocoding coordinates:", lat, lng);
+            
+            // In a real app, you would call a geocoding API here
+            // For demo purposes, we'll just show the detected location modal with placeholder data
+            
+            // Show modal
+            const locationDetectedModal = new bootstrap.Modal(document.getElementById('locationDetectedModal'));
+            locationDetectedModal.show();
+            
+            // Set up use detected location button
+            document.getElementById('use-detected-location').addEventListener('click', function() {
+                // Here we would use the actual detected address data
+                document.getElementById('address-line-1').value = '123 Main Street';
+                
+                // Hide modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('locationDetectedModal'));
+                modal.hide();
+            });
+        }
+        
+        // Toggle map fullscreen
+        function toggleMapFullscreen() {
+            const mapContainer = document.getElementById('map-container');
+            
+            if (document.fullscreenElement !== mapContainer) {
+                // Enter fullscreen
+                if (mapContainer.requestFullscreen) {
+                    mapContainer.requestFullscreen();
+                } else if (mapContainer.webkitRequestFullscreen) {
+                    mapContainer.webkitRequestFullscreen();
+                } else if (mapContainer.msRequestFullscreen) {
+                    mapContainer.msRequestFullscreen();
+                }
+                
+                // Change icon
+                document.getElementById('map-fullscreen').innerHTML = '<i class="bi bi-fullscreen-exit"></i>';
+            } else {
+                // Exit fullscreen
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+                
+                // Change icon back
+                document.getElementById('map-fullscreen').innerHTML = '<i class="bi bi-fullscreen"></i>';
+            }
+            
+            // Make sure map resizes correctly
+            setTimeout(() => {
+                if (map) {
+                    map.invalidateSize(true);
+                }
+            }, 100);
+        }
+        
+        // Basic implementation of map search (would connect to an API in production)
+        function setupMapSearch() {
+            const searchInput = document.getElementById('map-search-input');
+            const clearButton = document.querySelector('.map-search-clear');
+            const resultsContainer = document.getElementById('map-search-results');
+            
+            // Show/hide clear button based on input
+            searchInput.addEventListener('input', function() {
+                if (this.value.length > 0) {
+                    clearButton.classList.add('visible');
+                } else {
+                    clearButton.classList.remove('visible');
+                    resultsContainer.classList.remove('show');
+                }
+            });
+            
+            // Clear search
+            clearButton.addEventListener('click', function() {
+                searchInput.value = '';
+                clearButton.classList.remove('visible');
+                resultsContainer.classList.remove('show');
+                searchInput.focus();
+            });
+            
+            // Mock search function (would be replaced with real API call)
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && this.value.trim().length > 0) {
+                    e.preventDefault();
+                    mockSearch(this.value.trim());
+                }
+            });
+        }
+        
+        // Mock search function (would be replaced with real API call)
+        function mockSearch(query) {
+            console.log("Searching for:", query);
+            
+            // For demo, let's simulate a delay and then show some mock results
+            const resultsContainer = document.getElementById('map-search-results');
+            
+            // Show loading
+            resultsContainer.innerHTML = '<div class="p-3 text-center"><div class="spinner-border spinner-border-sm text-primary" role="status"></div> Searching...</div>';
+            resultsContainer.classList.add('show');
+            
+            // Simulate API delay
+            setTimeout(() => {
+                // Mock results
+                const mockPlaces = [
+                    { name: query + " Street", address: "Dhaka, Bangladesh", lat: 23.8103, lng: 90.4125 },
+                    { name: query + " Road", address: "Gulshan, Dhaka", lat: 23.7925, lng: 90.4078 },
+                    { name: query + " Avenue", address: "Banani, Dhaka", lat: 23.7937, lng: 90.4066 }
+                ];
+                
+                if (mockPlaces.length > 0) {
+                    let html = '';
+                    mockPlaces.forEach((place, index) => {
+                        html += `
+                            <div class="map-search-result-item" data-lat="${place.lat}" data-lng="${place.lng}">
+                                <div class="fw-medium">${place.name}</div>
+                                <div class="small text-muted">${place.address}</div>
+                            </div>
+                        `;
+                    });
+                    
+                    resultsContainer.innerHTML = html;
+                    
+                    // Add click events to results
+                    document.querySelectorAll('.map-search-result-item').forEach(item => {
+                        item.addEventListener('click', function() {
+                            const lat = parseFloat(this.getAttribute('data-lat'));
+                            const lng = parseFloat(this.getAttribute('data-lng'));
+                            
+                            // Update map
+                            if (map && !isNaN(lat) && !isNaN(lng)) {
+                                map.setView([lat, lng], 16);
+                                currentLatLng = { lat, lng };
+                                updateCoordinateFields(currentLatLng);
+                            }
+                            
+                            // Hide results
+                            resultsContainer.classList.remove('show');
+                            
+                            // Update search input with selected place
+                            document.getElementById('map-search-input').value = this.querySelector('.fw-medium').textContent;
+                            
+                            // Also update address
+                            document.getElementById('address-line-1').value = this.querySelector('.fw-medium').textContent;
+                        });
+                    });
+                } else {
+                    resultsContainer.innerHTML = '<div class="p-3 text-center">No results found</div>';
+                }
+            }, 1000);
+        }
+        
+        // Check geolocation permission
+        function checkGeolocationPermission() {
+            if (navigator.permissions && navigator.permissions.query) {
+                navigator.permissions.query({ name: 'geolocation' }).then(result => {
+                    console.log("Geolocation permission status:", result.state);
+                    
+                    // Listen for permission changes
+                    result.addEventListener('change', function() {
+                        console.log("Geolocation permission changed to:", this.state);
+                    });
+                    
+                    // If permission is already granted, show the current location button with pulse
+                    if (result.state === 'granted') {
+                        const locationButton = document.getElementById('map-current-location');
+                        if (locationButton) {
+                            locationButton.classList.add('pulsing');
+                            setTimeout(() => {
+                                locationButton.classList.remove('pulsing');
+                            }, 3000);
+                        }
+                    }
+                });
+            }
+        }
         
         // Handle form submission
         document.getElementById('save-address-btn').addEventListener('click', function() {
             // Here you would validate the form and call your API to save the address
+            
+            // Simple validation example
+            const labelInput = document.getElementById('location-label');
+            const addressInput = document.getElementById('address-line-1');
+            
+            if (!labelInput.value.trim()) {
+                labelInput.classList.add('is-invalid');
+                labelInput.focus();
+                return;
+            }
+            
+            if (!addressInput.value.trim()) {
+                addressInput.classList.add('is-invalid');
+                addressInput.focus();
+                return;
+            }
             
             // Show success toast
             const successToast = new bootstrap.Toast(document.getElementById('successToast'));

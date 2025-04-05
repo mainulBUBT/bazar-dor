@@ -11,17 +11,13 @@
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/map.css">
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
     <link rel="apple-touch-icon" href="icons/icon-192x192.png">
-    <style>
-        #map-container {
-            height: 200px;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+          crossorigin=""/>
 </head>
 
 <body class="bg-light">
@@ -44,27 +40,65 @@
     <div class="container mt-4 mb-7">
         <div class="card border-0 shadow-sm rounded-4 mb-4">
             <div class="card-body p-4">
-                <div id="map-container">
-                    <img src="https://via.placeholder.com/800x400/e0e0e0/6c757d?text=Map+Preview" alt="Map" class="w-100 h-100 object-fit-cover">
-                </div>
-
-                <div class="input-group mb-3">
-                    <span class="input-group-text bg-white border-end-0">
-                        <i class="bi bi-search text-muted"></i>
-                    </span>
-                    <input type="text" class="form-control border-start-0 ps-0" id="location-search" placeholder="Search for a location...">
+                <div id="map-container" class="mb-3">
+                    <div id="map"></div>
+                    <div class="map-marker-centered">
+                        <i class="bi bi-geo-alt-fill"></i>
+                    </div>
+                    <div class="map-search-container">
+                        <div class="position-relative">
+                            <i class="bi bi-search map-search-icon"></i>
+                            <input type="text" id="map-search-input" class="map-search-box" placeholder="Search for a location">
+                            <button class="map-search-clear" title="Clear">
+                                <i class="bi bi-x"></i>
+                            </button>
+                            <div id="map-search-results" class="map-search-results"></div>
+                        </div>
+                    </div>
+                    <button id="map-current-location" class="map-current-location-btn" title="Your location">
+                        <i class="bi bi-crosshair"></i>
+                    </button>
+                    <button id="map-fullscreen" class="map-fullscreen-btn" title="Full screen">
+                        <i class="bi bi-fullscreen"></i>
+                    </button>
+                    <div class="drag-hint">
+                        <i class="bi bi-arrows-move me-1"></i> Drag map to set location
+                    </div>
+                    <div id="map-loading" class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-light bg-opacity-75">
+                        <div class="text-center">
+                            <div class="spinner-border text-primary mb-2" role="status">
+                                <span class="visually-hidden">Loading map...</span>
+                            </div>
+                            <p class="mb-0 fw-medium">Loading map...</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="d-flex align-items-center mb-3">
-                    <button class="btn btn-outline-primary rounded-pill me-2" id="use-current-location">
-                        <i class="bi bi-geo-alt me-1"></i>Update with current location
-                    </button>
+                    <p class="text-muted mb-0 small"><i class="bi bi-info-circle me-1"></i> You can search locations, use the current location button <i class="bi bi-crosshair text-primary mx-1"></i>, or directly enter coordinates below</p>
                 </div>
 
                 <form id="location-form">
                     <div class="mb-3">
                         <label for="location-label" class="form-label small text-muted">Location Label</label>
                         <input type="text" class="form-control rounded-3" id="location-label" value="Home">
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label for="visible-latitude" class="form-label small text-muted">Latitude (decimal)</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control rounded-start-3" id="visible-latitude" style="min-width: 120px;" value="23.81030000">
+                                <span class="input-group-text rounded-end-3 bg-light">°N</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <label for="visible-longitude" class="form-label small text-muted">Longitude (decimal)</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control rounded-start-3" id="visible-longitude" style="min-width: 120px;" value="90.41250000">
+                                <span class="input-group-text rounded-end-3 bg-light">°E</span>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="mb-3">
@@ -75,33 +109,6 @@
                     <div class="mb-3">
                         <label for="address-line-2" class="form-label small text-muted">Address Line 2 (Optional)</label>
                         <input type="text" class="form-control rounded-3" id="address-line-2" value="Apartment 4B">
-                    </div>
-
-                    <div class="row mb-3">
-                        <div class="col-6">
-                            <label for="city" class="form-label small text-muted">City</label>
-                            <input type="text" class="form-control rounded-3" id="city" value="Dhaka">
-                        </div>
-                        <div class="col-6">
-                            <label for="area" class="form-label small text-muted">Area</label>
-                            <input type="text" class="form-control rounded-3" id="area" value="Gulshan">
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <div class="col-6">
-                            <label for="postal-code" class="form-label small text-muted">Postal Code</label>
-                            <input type="text" class="form-control rounded-3" id="postal-code" value="1217">
-                        </div>
-                        <div class="col-6">
-                            <label for="country" class="form-label small text-muted">Country</label>
-                            <select class="form-select rounded-3" id="country">
-                                <option value="bangladesh" selected>Bangladesh</option>
-                                <option value="india">India</option>
-                                <option value="pakistan">Pakistan</option>
-                                <option value="nepal">Nepal</option>
-                            </select>
-                        </div>
                     </div>
 
                     <div class="mb-3">
@@ -118,11 +125,15 @@
                             Set as default address
                         </label>
                     </div>
+
+                    <!-- Hidden fields for coordinates -->
+                    <input type="hidden" id="latitude" name="latitude" value="23.8103">
+                    <input type="hidden" id="longitude" name="longitude" value="90.4125">
                 </form>
             </div>
         </div>
 
-        <div class="d-grid gap-2">
+        <div class="d-grid gap-2 mb-5">
             <button class="btn btn-primary rounded-pill py-2" id="save-address-btn">Update Address</button>
             <button class="btn btn-outline-secondary rounded-pill py-2" onclick="window.location.href='saved-locations.html'">Cancel</button>
             <button class="btn btn-outline-danger rounded-pill py-2" id="delete-address-btn">Delete This Address</button>
@@ -132,28 +143,28 @@
     <nav class="navbar fixed-bottom navbar-dark">
         <div class="container-fluid justify-content-center p-0">
             <ul class="navbar-nav flex-row bottom-nav">
-                <li class="nav-item mx-0">
+                <li class="nav-item">
                     <a class="nav-link" href="index.html">
                         <i class="bi bi-house"></i>
-                        <div class="nav-label small">Home</div>
+                        <span class="nav-label">Home</span>
                     </a>
                 </li>
-                <li class="nav-item mx-0">
+                <li class="nav-item">
                     <a class="nav-link" href="markets.html">
                         <i class="bi bi-shop"></i>
-                        <div class="nav-label small">Markets</div>
+                        <span class="nav-label">Markets</span>
                     </a>
                 </li>
-                <li class="nav-item mx-0">
+                <li class="nav-item">
                     <a class="nav-link" href="favorites.html">
                         <i class="bi bi-heart"></i>
-                        <div class="nav-label small">Favorites</div>
+                        <span class="nav-label">Favorites</span>
                     </a>
                 </li>
-                <li class="nav-item mx-0">
+                <li class="nav-item">
                     <a class="nav-link active" href="profile.html">
                         <i class="bi bi-person"></i>
-                        <div class="nav-label small">Profile</div>
+                        <span class="nav-label">Profile</span>
                     </a>
                 </li>
             </ul>
@@ -184,26 +195,84 @@
     <!-- Location Detected Modal -->
     <div class="modal fade" id="locationDetectedModal" tabindex="-1" aria-labelledby="locationDetectedModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-4 overflow-hidden">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="locationDetectedModalLabel">Location Detected</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-content position-relative p-3">
+                <div class="modal-close position-absolute"><button type="button" class="btn border-0" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button></div>
+                <div class="p-3">
+                    <div class="text-center mb-3">
+                        <img src="img/location-detected.svg" alt="Location Detected" class="mb-2">
+                        <h5 class="fw-bold">Location Detected</h5>
+                        <p class="mx-auto text-secondary">We detected your location as:</p>
+                        <p class="fw-bold">123 Main Street, Dhaka, Bangladesh</p>
+                    </div>
+                    
+                    <!-- Hidden fields to store detected address components -->
+                    <input type="hidden" id="detected-address-line-1" value="">
+                    <input type="hidden" id="detected-city" value="">
+                    <input type="hidden" id="detected-postal-code" value="">
+                    <input type="hidden" id="detected-area" value="">
+                    
+                    <div class="d-grid gap-3">
+                        <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">No, keep current</button>
+                        <button type="button" class="btn btn-primary rounded-pill" id="use-detected-location">Yes, update</button>
+                    </div>
                 </div>
-                <div class="modal-body py-4">
-                    <p>We've detected your current location:</p>
-                    <p class="fw-bold">456 New Street, Dhaka 1215, Bangladesh</p>
-                    <p>Would you like to update your address with this location?</p>
-                </div>
-                <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">No, keep current</button>
-                    <button type="button" class="btn btn-primary rounded-pill" id="use-detected-location">Yes, update</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Location Error Modal -->
+    <div class="modal fade" id="locationErrorModal" tabindex="-1" aria-labelledby="locationErrorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content position-relative p-3">
+                <div class="modal-close position-absolute top-0 end-0 p-3"><button type="button" class="btn border-0" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button></div>
+                <div class="p-4">
+                    <div class="text-center mb-3">
+                        <i class="bi bi-exclamation-triangle-fill text-warning fs-1 mb-3"></i>
+                        <h5 class="fw-bold">Location Error</h5>
+                        <p id="location-error-message" class="mx-auto text-secondary">Could not get your current location.</p>
+                    </div>
+                    
+                    <div class="text-center mt-3">
+                        <p class="small text-muted mb-2">Try these fixes:</p>
+                        <ul class="text-start small text-muted ps-4">
+                            <li>Check if location services are enabled on your device</li>
+                            <li>Allow location access for this website in your browser settings</li>
+                            <li>Make sure you have an active internet connection</li>
+                            <li>Try searching for your location instead</li>
+                        </ul>
+                        
+                        <div class="mt-3 border-top pt-3">
+                            <p class="small fw-medium mb-2">Device-specific help:</p>
+                            <div class="d-flex justify-content-around">
+                                <div class="text-center">
+                                    <i class="bi bi-apple fs-4 d-block mb-1"></i>
+                                    <span class="small d-block">iPhone/iPad</span>
+                                    <div class="small text-muted">Settings → Privacy → Location Services</div>
+                                </div>
+                                <div class="text-center">
+                                    <i class="bi bi-android2 fs-4 d-block mb-1"></i>
+                                    <span class="small d-block">Android</span>
+                                    <div class="small text-muted">Settings → Location</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid mt-3">
+                        <button type="button" class="btn btn-primary rounded-pill" data-bs-dismiss="modal">OK</button>
+                    </div>
+                    <div class="d-grid mt-2">
+                        <button type="button" id="retry-location-btn" class="btn btn-outline-primary rounded-pill">
+                            <i class="bi bi-arrow-repeat me-1"></i> Retry with different settings
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Success Toast -->
-    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div class="position-fixed bottom-0 end-0 p-3 toast-container">
         <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header bg-success text-white">
                 <i class="bi bi-check-circle me-2"></i>
@@ -215,28 +284,607 @@
             </div>
         </div>
     </div>
+    
+    <!-- Retrying Toast -->
+    <div class="position-fixed bottom-0 end-0 p-3 toast-container">
+        <div id="retryingToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-primary text-white">
+                <i class="bi bi-arrow-repeat me-2"></i>
+                <strong class="me-auto">Retrying</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Trying to get your location with different settings...
+            </div>
+        </div>
+    </div>
+    
+    <!-- Location Success Toast -->
+    <div class="position-fixed bottom-0 end-0 p-3 toast-container">
+        <div id="locationSuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <i class="bi bi-check-circle me-2"></i>
+                <strong class="me-auto">Location Found</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Successfully found your location! <br>
+                <small class="text-muted">You can now drag the map to adjust your position if needed.</small>
+            </div>
+        </div>
+    </div>
 
     <script src="lib/bootstrap/bootstrap.bundle.min.js"></script>
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+            crossorigin=""></script>
     <script src="js/app.js"></script>
     <script>
-        // Show location modal when "Use current location" is clicked
-        document.getElementById('use-current-location').addEventListener('click', function() {
-            const locationModal = new bootstrap.Modal(document.getElementById('locationDetectedModal'));
-            locationModal.show();
+        // Initialize map variables
+        let map;
+        let currentMarker;
+        let currentLatLng = { lat: 23.8103, lng: 90.4125 }; // Default to Dhaka, Bangladesh
+        let dragHintTimeout;
+        
+        // Initialize the map when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                console.log("Initializing map on DOMContentLoaded...");
+                initMap();
+                
+                // Set up search functionality
+                setupMapSearch();
+                
+                // Set up current location button
+                document.getElementById('map-current-location').addEventListener('click', getCurrentLocation);
+                
+                // Set up fullscreen button
+                document.getElementById('map-fullscreen').addEventListener('click', toggleMapFullscreen);
+                
+                // Set up lat/lng input fields
+                setupCoordinateInputs();
+                
+                // Check geolocation permission
+                checkGeolocationPermission();
+            } catch (error) {
+                console.error("Error initializing map on DOMContentLoaded: ", error);
+            }
         });
+        
+        // Backup initialization when window fully loads
+        window.addEventListener('load', function() {
+            try {
+                console.log("Window load event fired, checking map...");
+                if (!map || !map._loaded) {
+                    console.log("Map not initialized on DOMContentLoaded, initializing now...");
+                    initMap();
+                } else {
+                    console.log("Map already initialized, forcing resize");
+                    map.invalidateSize(true);
+                    hideMapLoading();
+                }
+            } catch (error) {
+                console.error("Error initializing map on window load: ", error);
+            }
+        });
+        
+        // Function to hide map loading overlay
+        function hideMapLoading() {
+            const mapLoading = document.getElementById('map-loading');
+            if (mapLoading) {
+                mapLoading.style.display = 'none';
+            }
+        }
+        
+        // Initialize Leaflet map
+        function initMap() {
+            // Check if map already exists
+            if (map) {
+                console.log("Map already initialized, resizing...");
+                map.invalidateSize(true);
+                return;
+            }
+            
+            console.log("Creating new map instance...");
+            
+            // Create map instance
+            try {
+                map = L.map('map', {
+                    zoomControl: false,  // We'll add zoom control in a better position
+                    attributionControl: true
+                }).setView([currentLatLng.lat, currentLatLng.lng], 15);
+                
+                // Add OpenStreetMap tiles (free to use)
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                    maxZoom: 19,
+                }).addTo(map);
+                
+                // Add zoom control to top-right
+                L.control.zoom({
+                    position: 'topright'
+                }).addTo(map);
+                
+                console.log("Map initialized successfully");
+                
+                // Update coordinates when map is moved
+                map.on('movestart', function() {
+                    // Show drag hint
+                    const dragHint = document.querySelector('.drag-hint');
+                    dragHint.classList.remove('fade-out');
+                    
+                    // Clear any existing timeout
+                    if (dragHintTimeout) {
+                        clearTimeout(dragHintTimeout);
+                    }
+                });
+                
+                map.on('moveend', function() {
+                    const center = map.getCenter();
+                    currentLatLng.lat = center.lat;
+                    currentLatLng.lng = center.lng;
+                    
+                    // Update hidden form fields (keep sign)
+                    document.getElementById('latitude').value = center.lat.toFixed(8);
+                    document.getElementById('longitude').value = center.lng.toFixed(8);
+                    
+                    // Update visible fields with direction indicators
+                    updateCoordinateDisplay(center.lat, center.lng, 8);
+                    
+                    // Auto-retrieve address after map stops moving
+                    reverseGeocode(center.lat, center.lng);
+                    
+                    // Fade out drag hint after 3 seconds
+                    const dragHint = document.querySelector('.drag-hint');
+                    dragHintTimeout = setTimeout(function() {
+                        dragHint.classList.add('fade-out');
+                    }, 3000);
+                });
+                
+                // Force a resize after a short delay to ensure proper rendering
+                setTimeout(function() {
+                    map.invalidateSize(true);
+                    console.log("Map resized after initialization");
+                    hideMapLoading();
+                    
+                    // Ensure controls are visible
+                    const zoomControl = document.querySelector('.leaflet-control-zoom');
+                    if (zoomControl) {
+                        zoomControl.style.display = 'block';
+                    }
+                }, 500);
+            } catch (error) {
+                console.error("Error creating map:", error);
+            }
+        }
+        
+        // Set up coordinate input fields
+        function setupCoordinateInputs() {
+            const visibleLatInput = document.getElementById('visible-latitude');
+            const visibleLngInput = document.getElementById('visible-longitude');
+            const latSuffix = visibleLatInput.nextElementSibling;
+            const lngSuffix = visibleLngInput.nextElementSibling;
+            
+            // Initialize with current values and directions
+            updateCoordinateDisplay(currentLatLng.lat, currentLatLng.lng, 8);
+            
+            // Update map when lat input changes
+            visibleLatInput.addEventListener('change', function() {
+                let lat = parseFloat(this.value);
+                if (!isNaN(lat) && lat >= 0 && lat <= 90) {
+                    // Apply direction based on suffix
+                    if (latSuffix.textContent === '°S') {
+                        lat = -lat;
+                    }
+                    updateMapLocation(lat, currentLatLng.lng);
+                } else {
+                    // Reset to current value if invalid
+                    updateCoordinateDisplay(currentLatLng.lat, currentLatLng.lng, 8);
+                    alert('Please enter a valid latitude value between 0 and 90');
+                }
+            });
+            
+            // Update map when lng input changes
+            visibleLngInput.addEventListener('change', function() {
+                let lng = parseFloat(this.value);
+                if (!isNaN(lng) && lng >= 0 && lng <= 180) {
+                    // Apply direction based on suffix
+                    if (lngSuffix.textContent === '°W') {
+                        lng = -lng;
+                    }
+                    updateMapLocation(currentLatLng.lat, lng);
+                } else {
+                    // Reset to current value if invalid
+                    updateCoordinateDisplay(currentLatLng.lat, currentLatLng.lng, 8);
+                    alert('Please enter a valid longitude value between 0 and 180');
+                }
+            });
+            
+            // Toggle N/S direction on click
+            latSuffix.addEventListener('click', function() {
+                const newLat = -currentLatLng.lat; // Flip sign
+                updateMapLocation(newLat, currentLatLng.lng);
+            });
+            
+            // Toggle E/W direction on click
+            lngSuffix.addEventListener('click', function() {
+                const newLng = -currentLatLng.lng; // Flip sign
+                updateMapLocation(currentLatLng.lat, newLng);
+            });
+        }
+        
+        // Update visible coordinate inputs with proper direction indicators
+        function updateCoordinateDisplay(lat, lng, decimalPlaces = 8) {
+            const visibleLatInput = document.getElementById('visible-latitude');
+            const visibleLngInput = document.getElementById('visible-longitude');
+            const latSuffix = visibleLatInput.nextElementSibling;
+            const lngSuffix = visibleLngInput.nextElementSibling;
+            
+            // Update values without sign, showing full precision
+            visibleLatInput.value = Math.abs(lat).toFixed(decimalPlaces);
+            visibleLngInput.value = Math.abs(lng).toFixed(decimalPlaces);
+            
+            // Update direction indicators
+            latSuffix.textContent = lat >= 0 ? '°N' : '°S';
+            lngSuffix.textContent = lng >= 0 ? '°E' : '°W';
+        }
+        
+        // Update map location
+        function updateMapLocation(lat, lng) {
+            currentLatLng.lat = lat;
+            currentLatLng.lng = lng;
+            
+            // Center map on new location
+            map.setView([lat, lng], 16);
+            
+            // Update hidden form fields (keep sign)
+            document.getElementById('latitude').value = lat.toFixed(8);
+            document.getElementById('longitude').value = lng.toFixed(8);
+            
+            // Update visible fields with direction indicators
+            updateCoordinateDisplay(lat, lng, 8);
+        }
+        
+        // Reverse geocode coordinates to address
+        function reverseGeocode(lat, lng) {
+            const marker = document.querySelector('.map-marker-centered');
+            marker.classList.add('marker-pulse');
+            
+            // Using OpenStreetMap Nominatim API (free but has usage limits)
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`)
+                .then(response => response.json())
+                .then(data => {
+                    marker.classList.remove('marker-pulse');
+                    
+                    // Update form with address components
+                    if (data && data.address) {
+                        const address = data.address;
+                        
+                        // Update map search input with detected place name
+                        const placeName = [
+                            address.road || address.street || '',
+                            address.suburb || address.neighbourhood || '',
+                            address.city || address.town || address.village || ''
+                        ].filter(Boolean).join(', ').slice(0, 40);
+                        
+                        document.getElementById('map-search-input').value = placeName;
+                        
+                        // Update address form fields
+                        updateAddressFields(address);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error geocoding address:', error);
+                    marker.classList.remove('marker-pulse');
+                });
+        }
         
         // Fill form with detected location
         document.getElementById('use-detected-location').addEventListener('click', function() {
-            // Here you would use the actual detected location data
-            document.getElementById('address-line-1').value = '456 New Street';
-            document.getElementById('city').value = 'Dhaka';
-            document.getElementById('postal-code').value = '1215';
-            document.getElementById('area').value = 'Banani';
+            // Update form with detected address data from modal hidden fields to form
+            const addressLine1 = document.getElementById('detected-address-line-1').value;
+            const city = document.getElementById('detected-city').value;
+            const postalCode = document.getElementById('detected-postal-code').value;
+            const area = document.getElementById('detected-area').value;
+            
+            if (addressLine1) document.getElementById('address-line-1').value = addressLine1;
+            if (city) document.getElementById('city').value = city;
+            if (postalCode) document.getElementById('postal-code').value = postalCode;
+            
+            // Try to match area with select options if detected
+            if (area) {
+                const areaSelect = document.getElementById('area');
+                for(let i = 0; i < areaSelect.options.length; i++) {
+                    if(areaSelect.options[i].text.toLowerCase() === area.toLowerCase()) {
+                        areaSelect.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
             
             // Hide modal
             const modal = bootstrap.Modal.getInstance(document.getElementById('locationDetectedModal'));
             modal.hide();
         });
+        
+        // Set up search functionality
+        function setupMapSearch() {
+            const searchInput = document.getElementById('map-search-input');
+            const searchResults = document.getElementById('map-search-results');
+            const clearButton = document.querySelector('.map-search-clear');
+            
+            // Add input event with debounce for search
+            let debounceTimeout;
+            searchInput.addEventListener('input', function() {
+                // Show/hide clear button
+                if (searchInput.value.length > 0) {
+                    clearButton.classList.add('visible');
+                } else {
+                    clearButton.classList.remove('visible');
+                }
+                
+                clearTimeout(debounceTimeout);
+                debounceTimeout = setTimeout(function() {
+                    const query = searchInput.value.trim();
+                    if (query.length >= 3) {
+                        searchLocations(query);
+                    } else {
+                        searchResults.innerHTML = '';
+                        searchResults.classList.remove('show');
+                    }
+                }, 500);
+            });
+            
+            // Handle click outside to close dropdown
+            document.addEventListener('click', function(e) {
+                if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                    searchResults.classList.remove('show');
+                }
+            });
+            
+            // Focus input - show results if we have them
+            searchInput.addEventListener('focus', function() {
+                if (searchResults.children.length > 0) {
+                    searchResults.classList.add('show');
+                }
+                
+                // Show clear button if we have text
+                if (searchInput.value.length > 0) {
+                    clearButton.classList.add('visible');
+                }
+            });
+            
+            // Handle blur event
+            searchInput.addEventListener('blur', function() {
+                // Only hide clear button if we're not hovering over it
+                if (!clearButton.matches(':hover')) {
+                    setTimeout(() => {
+                        clearButton.classList.remove('visible');
+                    }, 200);
+                }
+            });
+
+            // Add clear button event
+            clearButton.addEventListener('click', function() {
+                searchInput.value = '';
+                searchResults.innerHTML = '';
+                searchResults.classList.remove('show');
+                clearButton.classList.remove('visible');
+                searchInput.focus();
+            });
+            
+            // Add keyboard support for dropdown navigation
+            searchInput.addEventListener('keydown', function(e) {
+                if (searchResults.classList.contains('show')) {
+                    const items = searchResults.querySelectorAll('.map-search-result-item');
+                    const activeItem = searchResults.querySelector('.map-search-result-item.active');
+                    let index = -1;
+                    
+                    if (activeItem) {
+                        index = Array.from(items).indexOf(activeItem);
+                    }
+                    
+                    // Down arrow
+                    if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        if (index < items.length - 1) {
+                            if (activeItem) activeItem.classList.remove('active');
+                            items[index + 1].classList.add('active');
+                            items[index + 1].scrollIntoView({ block: 'nearest' });
+                        }
+                    }
+                    
+                    // Up arrow
+                    if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        if (index > 0) {
+                            if (activeItem) activeItem.classList.remove('active');
+                            items[index - 1].classList.add('active');
+                            items[index - 1].scrollIntoView({ block: 'nearest' });
+                        }
+                    }
+                    
+                    // Enter key
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if (activeItem) {
+                            activeItem.click();
+                        } else if (items.length > 0) {
+                            items[0].click();
+                        }
+                    }
+                    
+                    // Escape key
+                    if (e.key === 'Escape') {
+                        e.preventDefault();
+                        searchResults.classList.remove('show');
+                    }
+                }
+            });
+        }
+        
+        // Search for locations based on query
+        function searchLocations(query) {
+            const searchResults = document.getElementById('map-search-results');
+            const marker = document.querySelector('.map-marker-centered');
+            marker.classList.add('marker-pulse');
+            
+            // Clear previous results
+            searchResults.innerHTML = '';
+            
+            // Show loading indicator in results
+            searchResults.classList.add('show');
+            searchResults.innerHTML = '<div class="p-3 text-center"><div class="spinner-border spinner-border-sm text-primary me-2" role="status"></div>Searching...</div>';
+            
+            // Use Nominatim to search for locations
+            fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&addressdetails=1&limit=5`)
+                .then(response => response.json())
+                .then(data => {
+                    marker.classList.remove('marker-pulse');
+                    searchResults.innerHTML = '';
+                    
+                    if (data && data.length > 0) {
+                        data.forEach(result => {
+                            const resultItem = document.createElement('div');
+                            resultItem.className = 'map-search-result-item';
+                            resultItem.innerHTML = `
+                                <div class="fw-medium">${result.display_name.split(',')[0]}</div>
+                                <div class="small text-muted">${result.display_name}</div>
+                            `;
+                            
+                            // Add click handler for result
+                            resultItem.addEventListener('click', function() {
+                                selectSearchResult(result);
+                            });
+                            
+                            searchResults.appendChild(resultItem);
+                        });
+                        searchResults.classList.add('show');
+                    } else {
+                        searchResults.innerHTML = '<div class="p-3 text-center text-muted">No results found</div>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error searching locations:', error);
+                    marker.classList.remove('marker-pulse');
+                    searchResults.innerHTML = '<div class="p-3 text-center text-danger">Error searching</div>';
+                });
+        }
+        
+        // Handle selection of a search result
+        function selectSearchResult(result) {
+            // Update map position
+            const lat = parseFloat(result.lat);
+            const lon = parseFloat(result.lon);
+            updateMapLocation(lat, lon);
+            
+            // Update search input with selected location
+            document.getElementById('map-search-input').value = result.display_name.split(',')[0];
+            
+            // Hide results dropdown
+            document.getElementById('map-search-results').classList.remove('show');
+            
+            // Update address fields
+            if (result.address) {
+                updateAddressFields(result.address);
+            }
+        }
+        
+        // Get current location using button in map
+        function getCurrentLocation() {
+            const marker = document.querySelector('.map-marker-centered');
+            const locationBtn = document.getElementById('map-current-location');
+            
+            marker.classList.add('marker-pulse');
+            locationBtn.classList.add('pulsing');
+            
+            // Try to get current location
+            if (navigator.geolocation) {
+                // For mobile devices, we need to use more permissive options
+                const options = {
+                    enableHighAccuracy: true,  // Try to get the most accurate position
+                    timeout: 15000,            // Longer timeout for slower mobile connections
+                    maximumAge: 0              // Don't use cached position
+                };
+                
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        // Success - update map with location
+                        const lat = position.coords.latitude;
+                        const lng = position.coords.longitude;
+                        updateMapLocation(lat, lng);
+                        
+                        // Get address from coordinates using reverse geocoding
+                        reverseGeocode(lat, lng);
+                        
+                        marker.classList.remove('marker-pulse');
+                        locationBtn.classList.remove('pulsing');
+                        
+                        // Show success toast
+                        const successToast = new bootstrap.Toast(document.getElementById('locationSuccessToast'));
+                        successToast.show();
+                    },
+                    function(error) {
+                        // Error - provide more specific user feedback
+                        marker.classList.remove('marker-pulse');
+                        locationBtn.classList.remove('pulsing');
+                        
+                        console.error("Geolocation error:", error);
+                        
+                        let errorMessage = "Could not get your current location.";
+                        
+                        switch(error.code) {
+                            case error.PERMISSION_DENIED:
+                                errorMessage = "Location access was denied. Please enable location services in your device settings and browser permissions.";
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                errorMessage = "Location information is unavailable. Please check if your device's GPS is enabled or try again in an open area.";
+                                break;
+                            case error.TIMEOUT:
+                                errorMessage = "Location request timed out. Please check your internet connection and try again.";
+                                break;
+                            default:
+                                errorMessage = "An unknown error occurred while getting your location. Please try again later.";
+                        }
+                        
+                        // Show error modal with specific message
+                        const locationErrorModal = new bootstrap.Modal(document.getElementById('locationErrorModal'));
+                        document.getElementById('location-error-message').textContent = errorMessage;
+                        locationErrorModal.show();
+                    },
+                    options
+                );
+            } else {
+                marker.classList.remove('marker-pulse');
+                locationBtn.classList.remove('pulsing');
+                
+                // Show error modal for unsupported browsers
+                const locationErrorModal = new bootstrap.Modal(document.getElementById('locationErrorModal'));
+                document.getElementById('location-error-message').textContent = "Geolocation is not supported by your browser. Please try a different browser or enter your location manually.";
+                locationErrorModal.show();
+            }
+        }
+        
+        // Update form fields with address data
+        function updateAddressFields(address) {
+            // Update form with address components
+            document.getElementById('address-line-1').value = 
+                [address.road || address.street || '', address.house_number || ''].filter(Boolean).join(' ');
+            document.getElementById('city').value = address.city || address.town || address.village || '';
+            document.getElementById('postal-code').value = address.postcode || '';
+            
+            // Try to match area with select options
+            const areaSelect = document.getElementById('area');
+            const areaToMatch = address.suburb || address.neighbourhood || '';
+            
+            for(let i = 0; i < areaSelect.options.length; i++) {
+                if(areaSelect.options[i].text.toLowerCase() === areaToMatch.toLowerCase()) {
+                    areaSelect.selectedIndex = i;
+                    break;
+                }
+            }
+        }
         
         // Handle form submission
         document.getElementById('save-address-btn').addEventListener('click', function() {
@@ -274,6 +922,159 @@
             // Redirect after deletion
             window.location.href = 'saved-locations.html';
         });
+
+        // Toggle map fullscreen mode
+        function toggleMapFullscreen() {
+            const mapContainer = document.getElementById('map-container');
+            const fullscreenBtn = document.getElementById('map-fullscreen');
+            
+            if (!document.fullscreenElement) {
+                // Enter fullscreen
+                if (mapContainer.requestFullscreen) {
+                    mapContainer.requestFullscreen();
+                } else if (mapContainer.mozRequestFullScreen) { // Firefox
+                    mapContainer.mozRequestFullScreen();
+                } else if (mapContainer.webkitRequestFullscreen) { // Chrome, Safari & Opera
+                    mapContainer.webkitRequestFullscreen();
+                } else if (mapContainer.msRequestFullscreen) { // IE/Edge
+                    mapContainer.msRequestFullscreen();
+                }
+                fullscreenBtn.innerHTML = '<i class="bi bi-fullscreen-exit"></i>';
+                fullscreenBtn.title = "Exit full screen";
+            } else {
+                // Exit fullscreen
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) { // Firefox
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) { // Chrome, Safari & Opera
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) { // IE/Edge
+                    document.msExitFullscreen();
+                }
+                fullscreenBtn.innerHTML = '<i class="bi bi-fullscreen"></i>';
+                fullscreenBtn.title = "Full screen";
+            }
+            
+            // Resize map after fullscreen toggle to prevent rendering issues
+            setTimeout(function() {
+                map.invalidateSize();
+            }, 100);
+        }
+        
+        // Listen for fullscreen change event to update button icon
+        document.addEventListener('fullscreenchange', updateFullscreenButtonIcon);
+        document.addEventListener('webkitfullscreenchange', updateFullscreenButtonIcon);
+        document.addEventListener('mozfullscreenchange', updateFullscreenButtonIcon);
+        document.addEventListener('MSFullscreenChange', updateFullscreenButtonIcon);
+        
+        // Update fullscreen button icon based on fullscreen state
+        function updateFullscreenButtonIcon() {
+            const fullscreenBtn = document.getElementById('map-fullscreen');
+            if (document.fullscreenElement) {
+                fullscreenBtn.innerHTML = '<i class="bi bi-fullscreen-exit"></i>';
+                fullscreenBtn.title = "Exit full screen";
+            } else {
+                fullscreenBtn.innerHTML = '<i class="bi bi-fullscreen"></i>';
+                fullscreenBtn.title = "Full screen";
+            }
+        }
+
+        // Check if geolocation permission is granted
+        function checkGeolocationPermission() {
+            // Only works in modern browsers that support the Permissions API
+            if (navigator.permissions && navigator.permissions.query) {
+                navigator.permissions.query({ name: 'geolocation' })
+                    .then(function(permissionStatus) {
+                        console.log("Geolocation permission status:", permissionStatus.state);
+                        
+                        // Listen for changes to the permission state
+                        permissionStatus.onchange = function() {
+                            console.log("Geolocation permission changed to:", this.state);
+                        };
+                    })
+                    .catch(function(error) {
+                        console.error("Error checking geolocation permission:", error);
+                    });
+            } else {
+                console.log("Permissions API not supported in this browser");
+            }
+        }
+
+        // Add retry button functionality
+        document.getElementById('retry-location-btn').addEventListener('click', function() {
+            // Hide the error modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('locationErrorModal'));
+            modal.hide();
+            
+            // Try with different settings
+            retryGetCurrentLocation();
+        });
+        
+        // Retry getting location with different settings
+        function retryGetCurrentLocation() {
+            const marker = document.querySelector('.map-marker-centered');
+            const locationBtn = document.getElementById('map-current-location');
+            
+            marker.classList.add('marker-pulse');
+            locationBtn.classList.add('pulsing');
+            
+            // Show message to user
+            const toast = new bootstrap.Toast(document.getElementById('retryingToast'));
+            toast.show();
+            
+            // Try to get current location with different settings
+            if (navigator.geolocation) {
+                // Alternative options with lower accuracy but may work better on some devices
+                const options = {
+                    enableHighAccuracy: false,  // Lower accuracy, but faster and uses less battery
+                    timeout: 20000,             // Even longer timeout
+                    maximumAge: 60000           // Allow cached position (1 minute)
+                };
+                
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        // Success - update map with location
+                        const lat = position.coords.latitude;
+                        const lng = position.coords.longitude;
+                        updateMapLocation(lat, lng);
+                        
+                        // Get address from coordinates using reverse geocoding
+                        reverseGeocode(lat, lng);
+                        
+                        marker.classList.remove('marker-pulse');
+                        locationBtn.classList.remove('pulsing');
+                        
+                        // Show success toast
+                        const successToast = new bootstrap.Toast(document.getElementById('locationSuccessToast'));
+                        successToast.show();
+                    },
+                    function(error) {
+                        // Still failed
+                        marker.classList.remove('marker-pulse');
+                        locationBtn.classList.remove('pulsing');
+                        
+                        console.error("Retry geolocation error:", error);
+                        
+                        // Show a different error message suggesting manual input
+                        const locationErrorModal = new bootstrap.Modal(document.getElementById('locationErrorModal'));
+                        document.getElementById('location-error-message').textContent = 
+                            "We're still having trouble getting your location. Please try searching for your location or entering coordinates manually.";
+                        locationErrorModal.show();
+                    },
+                    options
+                );
+            } else {
+                marker.classList.remove('marker-pulse');
+                locationBtn.classList.remove('pulsing');
+                
+                // Show error for unsupported browsers
+                const locationErrorModal = new bootstrap.Modal(document.getElementById('locationErrorModal'));
+                document.getElementById('location-error-message').textContent = 
+                    "Geolocation is not supported by your browser. Please try a different browser or enter your location manually.";
+                locationErrorModal.show();
+            }
+        }
     </script>
 </body>
 

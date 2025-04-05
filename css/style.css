@@ -1320,6 +1320,34 @@ body.login-page {
     z-index: 1000;
 }
 
+/* Updated bottom navigation style - modern app-like design */
+.navbar-nav.bottom-nav .nav-link.active {
+    color: var(--primary-color);
+    background-color: #f8e4e8;
+    border-radius: 16px;
+    box-shadow: none;
+    transform: none;
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-top: none;
+}
+
+.navbar-nav.bottom-nav .nav-link.active::before {
+    display: none;
+}
+
+.navbar-nav.bottom-nav .nav-link.active i {
+    color: var(--primary-color);
+    margin-bottom: 2px;
+}
+
+.navbar-nav.bottom-nav .nav-item {
+    display: flex;
+    justify-content: center;
+}
+
 .bottom-nav .nav-item {
     width: 25%;
     display: flex;
@@ -1347,28 +1375,6 @@ body.login-page {
 
 .bottom-nav .nav-link.active {
     color: var(--primary-color);
-    background-color: rgba(var(--primary-color-rgb), 0.12);
-    box-shadow: 0 4px 8px rgba(var(--primary-color-rgb), 0.15);
-    position: relative;
-    width: 100%;
-    padding: 8px 4px;
-}
-
-.bottom-nav .nav-link.active::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background-color: var(--primary-color);
-    border-radius: 3px 3px 0 0;
-}
-
-.bottom-nav .nav-link:hover:not(.active) {
-    color: var(--primary-color);
-    background-color: rgba(var(--primary-color-rgb), 0.04);
-    transform: translateY(-2px);
 }
 
 .bottom-nav .nav-link i {
@@ -1385,6 +1391,12 @@ body.login-page {
 .bottom-nav .nav-link.active i {
     transform: scale(1.1);
     color: var(--primary-color);
+}
+
+.bottom-nav .nav-link:hover:not(.active) {
+    color: var(--primary-color);
+    background-color: rgba(var(--primary-color-rgb), 0.04);
+    transform: translateY(-2px);
 }
 
 .bottom-nav .nav-label {
@@ -2058,6 +2070,21 @@ body.login-page {
 
 .location-btn {
     font-size: 0.85rem;
+}
+
+/* Button spacing and bottom margins */
+.mb-7 {
+    margin-bottom: 5rem !important;
+}
+
+.btn, .d-grid .btn {
+    margin-bottom: 0.5rem;
+}
+
+@media (max-width: 576px) {
+    .container .d-grid {
+        margin-bottom: 1.5rem;
+    }
 }
 
 /* Profile Page Styles - Modern Update */

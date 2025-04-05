@@ -1,0 +1,249 @@
+body {
+    padding-bottom: 70px;
+}
+#map-container {
+    height: 250px;
+    overflow: hidden;
+    border-radius: 10px;
+    position: relative;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    margin-bottom: 1rem;
+}
+#map {
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+/* Map search controls */
+.map-search-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 60px; /* Reduced width to leave space for map controls */
+    z-index: 1000;
+}
+.map-search-box {
+    width: 100%;
+    padding: 8px 12px 8px 40px;
+    border-radius: 24px;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    font-size: 14px;
+}
+.map-search-clear {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 14px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: none;
+}
+.map-search-clear.visible {
+    display: block;
+}
+.map-search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+    font-size: 16px;
+}
+.map-search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 5px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+}
+.map-search-results.show {
+    display: block;
+}
+.map-search-result-item {
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+.map-search-result-item:hover,
+.map-search-result-item.active {
+    background-color: #f5f5f5;
+}
+.map-search-result-item.active {
+    background-color: #f0f7ff;
+    border-left: 3px solid var(--bs-primary);
+}
+.map-search-result-item:last-child {
+    border-bottom: none;
+}
+.map-current-location-btn {
+    position: absolute;
+    right: 10px;
+    bottom: 30px; /* Position at bottom */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    border: 2px solid rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #3b82f6;
+    z-index: 1000;
+    font-size: 18px;
+}
+.map-current-location-btn:hover {
+    background-color: #f8f9fa;
+}
+.map-current-location-btn:active {
+    background-color: #e9ecef;
+}
+.map-marker-centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    z-index: 1000;
+    color: var(--bs-primary);
+    font-size: 2rem;
+    pointer-events: none;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+}
+.leaflet-control-attribution {
+    font-size: 9px !important;
+}
+/* Improve Leaflet popup styling */
+.leaflet-popup-content-wrapper {
+    border-radius: 8px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
+}
+.leaflet-popup-content {
+    margin: 10px 14px !important;
+    font-family: 'Inter', sans-serif !important;
+}
+/* Add pulsing effect to marker when loading */
+@keyframes markerPulse {
+    0% { transform: translate(-50%, -100%) scale(1); opacity: 1; }
+    50% { transform: translate(-50%, -100%) scale(1.2); opacity: 0.7; }
+    100% { transform: translate(-50%, -100%) scale(1); opacity: 1; }
+}
+.marker-pulse {
+    animation: markerPulse 1.5s infinite ease-in-out;
+}
+/* Drag instruction hint */
+.drag-hint {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.85);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    pointer-events: none;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    z-index: 400;
+    transition: opacity 0.3s;
+}
+.drag-hint.fade-out {
+    opacity: 0;
+}
+/* Current location button pulse effect */
+@keyframes pulseButton {
+    0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5); }
+    70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+.map-current-location-btn.pulsing {
+    animation: pulseButton 1.5s infinite;
+}
+.input-group-text {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.input-group-text:hover {
+    background-color: #e9ecef !important;
+}
+.leaflet-control-zoom {
+    border: 2px solid rgba(0,0,0,0.2) !important;
+    border-radius: 4px !important;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.4) !important;
+}
+.leaflet-control-zoom a {
+    width: 36px !important;
+    height: 36px !important;
+    line-height: 36px !important;
+    font-size: 18px !important;
+    font-weight: bold;
+}
+.map-fullscreen-btn {
+    position: absolute;
+    right: 10px;
+    bottom: 80px; /* Position above current location button */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    border: 2px solid rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #3b82f6;
+    z-index: 1000;
+    font-size: 18px;
+}
+.map-fullscreen-btn:hover {
+    background-color: #f8f9fa;
+}
+.map-fullscreen-btn:active {
+    background-color: #e9ecef;
+}
+#map-container:fullscreen {
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #f8f9fa;
+}
+#map-container:fullscreen #map {
+    height: 100vh;
+}
+#map-container:fullscreen .drag-hint {
+    bottom: 20px;
+}
+
+/* Toast container styling */
+.toast-container {
+    z-index: 1100;
+    bottom: 70px !important;
+    width: 100%;
+    right: 0 !important;
+    left: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.toast-container .toast {
+    max-width: 320px;
+    width: 100%;
+}
+
+/* Add margin to buttons at the bottom of pages */
+.mb-7 {
+    margin-bottom: 5rem !important;
+} 
