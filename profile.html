@@ -22,7 +22,7 @@
                 <button class="btn text-white p-0" onclick="window.location.href='index.html'">
                     <i class="bi bi-arrow-left fs-4"></i>
                 </button>
-                <h5 class="text-white mb-0">Profile</h5>
+                <h5 class="text-white mb-0">My Profile</h5>
                 <div>
                     <button class="btn text-white p-0">
                         <i class="bi bi-gear fs-4"></i>
@@ -32,157 +32,126 @@
         </div>
     </header>
 
-    <div class="profile-header text-white">
+    <div class="bd-profile-header">
         <div class="container">
             <div class="text-center">
                 <div class="position-relative d-inline-block mb-3">
                     <img src="https://api.dicebear.com/6.x/avataaars/svg?seed=John"
-                        class="profile-avatar rounded-circle" alt="Profile Picture">
-                    <button class="btn btn-light btn-sm rounded-circle position-absolute bottom-0 end-0 shadow-sm">
-                        <i class="bi bi-pencil"></i>
+                        class="bd-profile-avatar rounded-circle" alt="Profile Picture">
+                    <button class="btn bd-edit-avatar-btn rounded-circle position-absolute bottom-0 end-0">
+                        <i class="bi bi-pencil-fill"></i>
                     </button>
                 </div>
-                <h4 class="mb-0 text-muted">John Doe</h4>
-                <p class="mb-0 opacity-75 text-muted">+880 1234567890</p>
+                <h4 class="fw-bold mb-1">John Doe</h4>
+                <div class="d-flex align-items-center justify-content-center">
+                    <i class="bi bi-telephone-fill text-primary me-1 small"></i>
+                    <p class="mb-0 text-muted">+880 1234567890</p>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="container mt-3">
-        <!-- Side Drawer Navigation -->
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-            <div class="offcanvas-header bg-primary text-white">
-                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Bazar Dor</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"></button>
-            </div>
-            <div class="offcanvas-body p-0">
-                <!-- User Profile Section -->
-                <div class="drawer-profile">
-                    <div class="drawer-profile-image">
-                        <i class="bi bi-person"></i>
+    <div class="container">
+        <!-- Stats Cards -->
+        <div class="row g-3 bd-stats-container">
+            <div class="col-4">
+                <div class="bd-stat-card text-center">
+                    <div class="bd-stat-icon bg-danger-light">
+                        <i class="bi bi-heart-fill text-danger"></i>
                     </div>
-                    <div class="drawer-profile-info">
-                        <h6>Guest User</h6>
-                        <p>Welcome to Bazar Dor</p>
+                    <h3 class="mb-1 fw-bold fs-4">12</h3>
+                    <small class="text-muted d-block">Favorites</small>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="bd-stat-card text-center">
+                    <div class="bd-stat-icon bg-primary-light">
+                        <i class="bi bi-list-check text-primary"></i>
                     </div>
-                </div>
-                
-                <!-- Navigation Menu -->
-                <ul class="navbar-nav drawer-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html"><i class="bi bi-house"></i>Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="markets.html"><i class="bi bi-shop"></i>Markets</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="favorites.html"><i class="bi bi-heart"></i>Favorites</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="notifications.html"><i class="bi bi-bell"></i>Notifications</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="profile.html"><i class="bi bi-person"></i>Profile</a>
-                    </li>
-                </ul>
-                
-                <div class="auth-section">
-                    <h6>Join Bazar Dor</h6>
-                    <a href="login.html" class="auth-btn signin">
-                        <i class="bi bi-box-arrow-in-right"></i>
-                        <span>Sign In</span>
-                    </a>
-                    <a href="register.html" class="auth-btn signup">
-                        <i class="bi bi-person-plus"></i>
-                        <span>Create Account</span>
-                    </a>
-                </div>
-                
-                <!-- Drawer Footer -->
-                <div class="drawer-footer">
-                    <p>© 2023 Bazar Dor. All rights reserved.</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="row g-3 mb-4">
-            <div class="col-4">
-                <div class="stats-card text-center">
-                    <i class="bi bi-heart-fill text-danger mb-2 fs-4"></i>
-                    <h3 class="mb-1">12</h3>
-                    <small class="text-muted">Favourites</small>
+                    <h3 class="mb-1 fw-bold fs-4">5</h3>
+                    <small class="text-muted d-block">Lists</small>
                 </div>
             </div>
             <div class="col-4">
-                <div class="stats-card text-center">
-                    <i class="bi bi-list-check text-primary mb-2 fs-4"></i>
-                    <h3 class="mb-1">5</h3>
-                    <small class="text-muted">Lists</small>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="stats-card text-center">
-                    <i class="bi bi-star-fill text-warning mb-2 fs-4"></i>
-                    <h3 class="mb-1">3</h3>
-                    <small class="text-muted">Reviews</small>
+                <div class="bd-stat-card text-center">
+                    <div class="bd-stat-icon bg-warning-light">
+                        <i class="bi bi-star-fill text-warning"></i>
+                    </div>
+                    <h3 class="mb-1 fw-bold fs-4">3</h3>
+                    <small class="text-muted d-block">Reviews</small>
                 </div>
             </div>
         </div>
 
-        <div class="menu-section">
-            <a href="personal-info.html" class="text-decoration-none" style="color: black;">
-                <div class="menu-item shadow-sm d-flex align-items-center">
-                    <div class="menu-icon text-primary me-3">
-                        <i class="bi bi-person"></i>
+        <!-- Menu Section -->
+        <div class="bd-menu-section">
+            <a href="personal-info.html" class="text-decoration-none" style="color: inherit;">
+                <div class="bd-menu-item d-flex align-items-center">
+                    <div class="bd-menu-icon text-primary me-3">
+                        <i class="bi bi-person-fill"></i>
                     </div>
                     <div class="flex-grow-1">
-                        <h6 class="mb-0">Personal Information</h6>
+                        <h6 class="mb-0 fw-medium">Personal Information</h6>
                         <small class="text-muted">Update your personal details</small>
                     </div>
                     <i class="bi bi-chevron-right text-muted"></i>
                 </div>
             </a>
 
-            <a href="saved-locations.html" class="text-decoration-none" style="color: black;">
-                <div class="menu-item shadow-sm d-flex align-items-center">
-                    <div class="menu-icon text-primary me-3">
-                        <i class="bi bi-geo-alt"></i>
+            <a href="saved-locations.html" class="text-decoration-none" style="color: inherit;">
+                <div class="bd-menu-item d-flex align-items-center">
+                    <div class="bd-menu-icon text-primary me-3">
+                        <i class="bi bi-geo-alt-fill"></i>
                     </div>
                     <div class="flex-grow-1">
-                        <h6 class="mb-0">Saved Locations</h6>
+                        <h6 class="mb-0 fw-medium">Saved Locations</h6>
                         <small class="text-muted">Manage your addresses</small>
                     </div>
                     <i class="bi bi-chevron-right text-muted"></i>
                 </div>
             </a>
 
-            <div class="menu-item shadow-sm d-flex align-items-center">
-                <div class="menu-icon text-primary me-3">
+            <div class="bd-menu-item d-flex align-items-center">
+                <div class="bd-menu-icon text-primary me-3">
                     <i class="bi bi-clock-history"></i>
                 </div>
                 <div class="flex-grow-1">
-                    <h6 class="mb-0">Order History</h6>
+                    <h6 class="mb-0 fw-medium">Order History</h6>
                     <small class="text-muted">View your past orders</small>
                 </div>
                 <i class="bi bi-chevron-right text-muted"></i>
             </div>
 
-            <a href="notifications.html" class="text-decoration-none" style="color: black;">
-                <div class="menu-item shadow-sm d-flex align-items-center">
-                    <div class="menu-icon text-primary me-3">
-                        <i class="bi bi-bell"></i>
+            <a href="notifications.html" class="text-decoration-none" style="color: inherit;">
+                <div class="bd-menu-item d-flex align-items-center">
+                    <div class="bd-menu-icon text-primary me-3">
+                        <i class="bi bi-bell-fill"></i>
                     </div>
                     <div class="flex-grow-1">
-                        <h6 class="mb-0">Notifications</h6>
+                        <h6 class="mb-0 fw-medium">Notifications</h6>
                         <small class="text-muted">Manage your alerts</small>
+                    </div>
+                    <i class="bi bi-chevron-right text-muted"></i>
+                </div>
+            </a>
+            
+            <a href="#" class="text-decoration-none" style="color: inherit;">
+                <div class="bd-menu-item d-flex align-items-center">
+                    <div class="bd-menu-icon bg-danger-light text-danger me-3">
+                        <i class="bi bi-shield-lock-fill"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                        <h6 class="mb-0 fw-medium">Privacy & Security</h6>
+                        <small class="text-muted">Manage app permissions</small>
                     </div>
                     <i class="bi bi-chevron-right text-muted"></i>
                 </div>
             </a>
         </div>
 
-        <div class="text-center my-5 mb-5 pb-5">
-            <button class="btn btn-outline-danger rounded-pill px-5 py-2">
+        <!-- Sign Out Button -->
+        <div class="text-center bd-sign-out-container">
+            <button class="btn btn-outline-danger rounded-pill bd-sign-out-btn" id="logout-btn">
                 <i class="bi bi-box-arrow-right me-2"></i>Sign Out
             </button>
         </div>
@@ -222,15 +191,15 @@
     <!-- Logout Confirmation Modal -->
     <div class="modal fade" id="logoutConfirmModal" tabindex="-1" aria-labelledby="logoutConfirmModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" style="border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <div class="modal-content bd-modal-content">
                 <div class="modal-body p-0">
                     <div class="text-end p-2">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="text-center px-4 pb-4">
                         <div class="mb-4">
-                            <div class="icon-wrapper mx-auto" style="width: 90px; height: 90px; background-color: #ffe6e6; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(220, 53, 69, 0.2);">
-                                <i class="bi bi-box-arrow-right text-danger" style="font-size: 3rem;"></i>
+                            <div class="bd-icon-wrapper danger-light">
+                                <i class="bi bi-box-arrow-right text-danger"></i>
                             </div>
                         </div>
                         <h5 class="mb-3 fw-bold">Sign Out</h5>
@@ -302,7 +271,7 @@
         const logoutModal = new bootstrap.Modal(document.getElementById('logoutConfirmModal'));
         
         // Add click event to logout button
-        document.querySelector('.btn-outline-danger').addEventListener('click', function() {
+        document.getElementById('logout-btn').addEventListener('click', function() {
             logoutModal.show();
         });
         

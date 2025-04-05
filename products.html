@@ -647,7 +647,7 @@
                                         <i class="bi bi-star-fill"></i>
                                         <i class="bi bi-star-fill"></i>
                                         <i class="bi bi-star-half"></i>
-                                    </div>
+                            </div>
                                     <p class="text-muted small mb-0">Based on 218 reviews</p>
                         </div>
                         <div class="col-8">
@@ -664,19 +664,19 @@
                                             <div class="progress-bar bg-success" role="progressbar" style="width: 18%" aria-valuenow="18" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                         <span class="ms-2 small text-muted">18%</span>
-                                    </div>
+                                </div>
                                     <div class="d-flex align-items-center mb-2">
                                         <span class="me-2 small">3</span>
                                         <div class="progress flex-grow-1" style="height: 8px;">
                                             <div class="progress-bar bg-warning" role="progressbar" style="width: 5%" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
+                            </div>
                                         <span class="ms-2 small text-muted">5%</span>
-                                    </div>
+                        </div>
                                     <div class="d-flex align-items-center mb-2">
                                         <span class="me-2 small">2</span>
                                         <div class="progress flex-grow-1" style="height: 8px;">
                                             <div class="progress-bar bg-danger" role="progressbar" style="width: 1%" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
+                    </div>
                                         <span class="ms-2 small text-muted">1%</span>
                                     </div>
                                     <div class="d-flex align-items-center">
@@ -688,15 +688,15 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    
+                </div>
+            </div>
+
                     <!-- Write Review Button -->
                     <div class="d-grid gap-2 mb-3">
                         <button class="btn btn-primary" type="button">
                             <i class="bi bi-pencil-square me-2"></i> Write a Review
-                                    </button>
-                                </div>
+                                </button>
+                            </div>
                     
                     <!-- Review Item -->
                     <div class="card border-0 shadow-sm mb-3">
@@ -704,8 +704,8 @@
                             <div class="d-flex mb-2">
                                 <div class="me-2">
                                     <div class="avatar-circle bg-primary text-white">AR</div>
-                            </div>
-                                <div>
+                        </div>
+                                    <div>
                                     <h6 class="mb-0 fw-bold">Ahmed Rahman</h6>
                                     <div class="text-warning small">
                                         <i class="bi bi-star-fill"></i>
@@ -713,13 +713,13 @@
                                         <i class="bi bi-star-fill"></i>
                                         <i class="bi bi-star-fill"></i>
                                         <i class="bi bi-star-fill"></i>
-                        </div>
+                                    </div>
                                     <span class="text-muted small">2 days ago</span>
-                    </div>
-                            </div>
+                                </div>
+                                </div>
                             <p class="mb-0">Great market with fresh produce! The vendors are friendly and prices are reasonable. I appreciate how clean they keep everything. Will continue to shop here weekly.</p>
-                </div>
-            </div>
+                            </div>
+                        </div>
 
                     <!-- Review Item -->
                     <div class="card border-0 shadow-sm mb-3">
@@ -727,7 +727,7 @@
                             <div class="d-flex mb-2">
                                 <div class="me-2">
                                     <div class="avatar-circle bg-info text-white">SJ</div>
-                                </div>
+                    </div>
                                 <div>
                                     <h6 class="mb-0 fw-bold">Sarah Johnson</h6>
                                     <div class="text-warning small">
@@ -741,8 +741,8 @@
                                 </div>
                             </div>
                             <p class="mb-0">I love the variety of fresh fruits and vegetables available here. The spice section is excellent too! Only reason for 4 stars is that it can get very crowded on weekends.</p>
-                        </div>
-        </div>
+                </div>
+            </div>
 
                     <!-- Review Item -->
                     <div class="card border-0 shadow-sm mb-3">
@@ -765,8 +765,8 @@
                             </div>
                             <p class="mb-0">Best fish selection in the area! Always fresh and prices are competitive. The staff is knowledgeable about what's in season. Highly recommend their hilsa fish!</p>
                         </div>
-                    </div>
-                    
+        </div>
+
                     <!-- View More Button -->
                     <div class="d-grid gap-2 mb-4">
                         <button class="btn btn-outline-primary" type="button">
@@ -808,7 +808,7 @@
             </ul>
         </div>
     </nav>
-    
+
     <!-- Update Price Modal -->
     <div class="modal fade" id="updatePriceModal" tabindex="-1" aria-labelledby="updatePriceModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -842,8 +842,8 @@
                             <div class="input-group input-group-lg">
                                 <span class="input-group-text bg-light border-0 rounded-start-pill">৳</span>
                                 <input type="number" inputmode="numeric" pattern="[0-9]*" class="form-control form-control-lg text-center fw-bold border-0 bg-light rounded-end-pill" id="newPrice" placeholder="0">
+                            </div>
                         </div>
-                </div>
                         
                         <!-- Pricing Suggestions -->
                         <div class="suggested-prices mb-4">
@@ -855,7 +855,7 @@
                                 <button class="btn btn-sm btn-light rounded-pill price-suggestion px-3 py-2" data-price-diff="+5">+৳5</button>
                                 <button class="btn btn-sm btn-light rounded-pill price-suggestion px-3 py-2" data-price-diff="+10">+৳10</button>
                                 <button class="btn btn-sm btn-light rounded-pill price-suggestion px-3 py-2" data-price-diff="+20">+৳20</button>
-                            </div>
+                </div>
                         </div>
                         
                         <!-- Hidden Input for Product ID -->
@@ -940,7 +940,7 @@
                     document.getElementById('productId').value = productId;
                 });
             });
-            
+
             // Price suggestion buttons
             const priceSuggestions = document.querySelectorAll('.price-suggestion');
             priceSuggestions.forEach(btn => {
@@ -960,9 +960,9 @@
                     setTimeout(() => {
                         this.classList.remove('btn-primary', 'text-white');
                     }, 300);
+                    });
                 });
-            });
-            
+                
             // Demo form submission - no actual functionality needed
             const updatePriceSubmitBtn = document.getElementById('updatePriceSubmit');
             if (updatePriceSubmitBtn) {
