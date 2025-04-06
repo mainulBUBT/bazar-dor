@@ -186,7 +186,7 @@
 
         <!-- Sign Out Button -->
         <div class="text-center bd-sign-out-container mb-5">
-            <button class="btn btn-outline-danger rounded-pill bd-sign-out-btn" id="logout-btn">
+            <button class="btn btn-outline-danger rounded-pill bd-sign-out-btn" id="logout-btn" data-bs-toggle="modal" data-bs-target="#logoutConfirmModal">
                 <i class="bi bi-box-arrow-right me-2"></i>Sign Out
             </button>
         </div>
@@ -241,7 +241,7 @@
                         <p class="text-muted mb-4">Are you sure you want to sign out of your account?</p>
                         
                         <div class="d-grid gap-2">
-                            <button type="button" class="btn btn-danger py-3 rounded-pill fw-bold" id="confirm-logout-btn">
+                            <button type="button" class="btn btn-danger py-3 rounded-pill fw-bold" id="confirm-logout-btn" onclick="window.location.href='login.html';">
                                 Sign Out
                             </button>
                             <button type="button" class="btn btn-outline-secondary py-2 rounded-pill" data-bs-dismiss="modal">
@@ -276,54 +276,58 @@
                 delay: 3000
             });
             
-            // Initialize logout modal
-            const logoutModal = new bootstrap.Modal(document.getElementById('logoutConfirmModal'));
-            
             // Function to show success toast with custom message
             function showSuccessToast(message) {
                 document.getElementById('toastMessage').textContent = message;
                 successToast.show();
             }
             
-            // Simulate toast display when clicking on menu items (for demo purposes)
-            document.querySelector('a[href="personal-info.html"]').addEventListener('click', function(e) {
-                // This is just for demonstration - in actual implementation, 
-                // the toast would be shown after returning from the personal info page
-                e.preventDefault();
-                showSuccessToast('Personal information updated successfully!');
-                setTimeout(() => {
-                    window.location.href = 'personal-info.html';
-                }, 1000);
-            });
+            // Menu item click handlers
+            const personalInfoLink = document.querySelector('a[href="personal-info.html"]');
+            if (personalInfoLink) {
+                personalInfoLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showSuccessToast('Personal information updated successfully!');
+                    setTimeout(() => {
+                        window.location.href = 'personal-info.html';
+                    }, 1000);
+                });
+            }
             
-            document.querySelector('a[href="saved-locations.html"]').addEventListener('click', function(e) {
-                // This is just for demonstration - in actual implementation,
-                // the toast would be shown after returning from the saved locations page
-                e.preventDefault();
-                showSuccessToast('Location saved successfully!');
-                setTimeout(() => {
-                    window.location.href = 'saved-locations.html';
-                }, 1000);
-            });
+            const savedLocationsLink = document.querySelector('a[href="saved-locations.html"]');
+            if (savedLocationsLink) {
+                savedLocationsLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showSuccessToast('Location saved successfully!');
+                    setTimeout(() => {
+                        window.location.href = 'saved-locations.html';
+                    }, 1000);
+                });
+            }
             
-            // Add click event to logout button
-            document.getElementById('logout-btn').addEventListener('click', function() {
-                logoutModal.show();
-            });
-            
-            // Add click event to confirm logout button
-            document.getElementById('confirm-logout-btn').addEventListener('click', function() {
-                // Here you would add the actual logout functionality
-                // For example: clear session, remove tokens, etc.
-                
-                // Show success toast for logout
-                showSuccessToast('Logged out successfully!');
-                
-                // Redirect to login page after a short delay
-                setTimeout(() => {
-                    window.location.href = 'login.html';
-                }, 1500);
-            });
+            // Add click event to confirm logout button - override the onclick attribute for proper flow
+            const confirmLogoutBtn = document.getElementById('confirm-logout-btn');
+            if (confirmLogoutBtn) {
+                confirmLogoutBtn.addEventListener('click', function(e) {
+                    // Prevent default to override the onclick attribute temporarily
+                    e.preventDefault();
+                    
+                    // Close the modal programmatically
+                    const logoutModal = document.getElementById('logoutConfirmModal');
+                    const bsModal = bootstrap.Modal.getInstance(logoutModal);
+                    if (bsModal) {
+                        bsModal.hide();
+                    }
+                    
+                    // Show success toast for logout
+                    showSuccessToast('Logged out successfully!');
+                    
+                    // Redirect to login page after a short delay
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 1500);
+                });
+            }
         });
     </script>
 </body>
