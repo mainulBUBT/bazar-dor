@@ -12,8 +12,7 @@
 }
 
 .product-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transform: translateY(-5px) scale(1.01);
 }
 
 .product-card:hover .position-relative img {
@@ -88,6 +87,18 @@
     border-top: 1px solid rgba(0,0,0,0.05);
 }
 
+/* Favorite Button Styling */
+.product-card .favorite-btn {
+    opacity: 0.85;
+    transform: scale(0.9);
+    transition: all 0.2s ease;
+}
+
+.product-card:hover .favorite-btn {
+    opacity: 1;
+    transform: scale(1);
+}
+
 /* Card Highlight Effect */
 .card-highlight {
     transform: scale(0.98);
@@ -130,6 +141,121 @@
 .market-items-page #products-list .col-lg-3 {
     padding-left: 1px;
     padding-right: 1px;
+}
+
+/* Market Info Styling */
+.market-info-thumbnail {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+/* Updated bottom navigation style */
+.navbar-nav.bottom-nav .nav-link.active {
+    color: var(--primary-color);
+    background-color: #f8e4e8;
+    border-radius: 16px;
+    box-shadow: none;
+    transform: none;
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-top: none;
+}
+
+.navbar-nav.bottom-nav .nav-link.active::before {
+    display: none;
+}
+
+.navbar-nav.bottom-nav .nav-link.active i {
+    color: var(--primary-color);
+    margin-bottom: 2px;
+}
+
+.navbar-nav.bottom-nav .nav-item {
+    display: flex;
+    justify-content: center;
+}
+
+/* Enhanced styles for market page */
+:root {
+    --primary-rgb: 171, 68, 89;
+}
+
+.app-header {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.market-combined-card {
+    position: relative;
+    z-index: 10;
+    margin-top: 0;
+    border-radius: 0 !important;
+}
+
+/* Fix for tab icons - change from block to flex layout */
+.market-tabs .nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 0.5rem;
+    color: var(--bs-gray-600);
+    border-bottom: 2px solid transparent;
+    background-color: transparent !important;
+    transition: all 0.2s ease;
+}
+
+.market-tabs .nav-link i {
+    font-size: 1.25rem;
+    margin-bottom: 4px;
+    display: block;
+}
+
+/* Selected tab style - only bottom border */
+.market-tabs .nav-link.active {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    background-color: transparent !important;
+    font-weight: 600;
+}
+
+/* Fix for horizontal layout in tabs (used for product & review tabs) */
+.market-tabs .nav-link.horizontal-layout {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.market-tabs .nav-link.horizontal-layout i {
+    margin-bottom: 0;
+    margin-right: 0.5rem;
+}
+
+/* Sort dropdown fixes */
+.dropdown-item {
+    display: flex !important;
+    align-items: center !important;
+}
+
+.dropdown-item i {
+    display: inline-block !important;
+    font-size: 1rem;
+}
+
+/* Ensure sort button has consistent icon display */
+.filter-container .btn i {
+    display: inline-block;
+    font-size: 0.9rem;
+}
+
+/* Filter chip styles */
+.filter-chips {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 }
 
 /* Favorites Page Specific Styles */
@@ -547,6 +673,21 @@ input[type="number"]::-webkit-inner-spin-button {
     padding: 0.5rem 1.5rem 1.5rem;
 }
 
+#updatePriceModal .icon-wrapper {
+    width: 90px; 
+    height: 90px; 
+    background-color: rgba(var(--primary-rgb), 0.1); 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.2);
+}
+
+#updatePriceModal .icon-wrapper i {
+    font-size: 3rem;
+}
+
 #updatePriceModal #newPrice {
     height: 60px;
     font-size: 1.75rem;
@@ -597,6 +738,31 @@ input[type="number"]::-webkit-inner-spin-button {
     border-color: rgba(var(--primary-rgb), 0.2);
     color: var(--primary-color);
     border-radius: 0.75rem 0 0 0.75rem;
+}
+
+/* Search bar styling */
+#search-bar {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+#search-bar .form-control {
+    height: 32px;
+    font-size: 0.9rem;
+}
+
+#search-bar .bi-search {
+    font-size: 0.85rem;
+}
+
+#search-bar .btn {
+    padding: 0.25rem;
+}
+
+/* Search Bar - Hidden state */
+#search-bar[style="display: none;"] {
+    display: none !important;
 }
 
 /* Media Queries */
@@ -684,4 +850,195 @@ input[type="number"]::-webkit-inner-spin-button {
 .bi {
     display: inline-block;
     vertical-align: -0.125em;
+}
+
+/* Mobile-Friendly Pagination Enhancement */
+.pagination-mobile {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+.page-navigation {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 0.25rem;
+}
+
+.page-btn {
+    border: none;
+    background-color: transparent;
+    color: #6c757d;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.page-btn:hover:not(:disabled) {
+    background-color: #f0f0f0;
+    color: #212529;
+}
+
+.page-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.page-info {
+    margin: 0 0.75rem;
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+/* Pagination links */
+.pagination .page-link {
+    border: none;
+    width: 30px;
+    height: 30px;
+    line-height: 18px;
+    font-size: 0.875rem;
+    color: #6c757d;
+    background-color: #fff;
+    font-weight: 500;
+    text-align: center;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.pagination .page-link:hover {
+    background-color: #f0f0f0;
+    color: #212529;
+}
+
+.pagination .page-link.active {
+    background-color: #0d6efd;
+    color: #fff;
+}
+
+/* Responsive styles for pagination */
+@media (max-width: 576px) {
+    .pagination {
+        display: none;
+    }
+}
+
+@media (min-width: 577px) {
+    .pagination-mobile {
+        display: none;
+    }
+}
+
+/* Load More Button Alternative */
+.load-more-container {
+    margin: 1rem 0 0;
+    text-align: center;
+}
+
+.load-more-btn {
+    padding: 0.75rem 2rem;
+    background-color: white;
+    color: var(--primary-color);
+    border: 1px solid rgba(var(--primary-rgb), 0.2);
+    border-radius: 2rem;
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.load-more-btn:hover {
+    background-color: var(--primary-color-light);
+    box-shadow: 0 5px 15px rgba(var(--primary-rgb), 0.15);
+    transform: translateY(-2px);
+}
+
+.load-more-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 3px rgba(var(--primary-rgb), 0.1);
+}
+
+.load-more-btn .spinner-border {
+    width: 1rem;
+    height: 1rem;
+    border-width: 0.15rem;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    display: none;
+}
+
+.load-more-btn.loading .spinner-border {
+    display: inline-block;
+}
+
+.load-more-btn.loading {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+/* Adjust container for mobile app layout */
+.container.mb-5 {
+    margin-bottom: 70px !important; /* Space for fixed bottom nav */
+}
+
+#products-list {
+    margin-bottom: 0 !important;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 1;
+    }
+    20% {
+        transform: scale(25, 25);
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(40, 40);
+    }
+}
+
+@media (max-width: 576px) {
+    .pagination-mobile {
+        padding: 0;
+        margin-bottom: 0;
+    }
+    
+    .pagination-mobile .page-btn {
+        width: 38px;
+        height: 38px;
+    }
+    
+    .pagination-mobile .page-info {
+        font-size: 0.8rem;
+        margin: 0 0.5rem;
+    }
+    
+    .load-more-btn {
+        width: 100%;
+        padding: 0.85rem 1rem;
+    }
+    
+    /* App-specific container adjustments */
+    .container.mb-5 {
+        margin-bottom: 65px !important;
+    }
+    
+    nav[aria-label="Product navigation"] {
+        margin-top: 0.5rem !important;
+        margin-bottom: 0.75rem !important;
+    }
 }
