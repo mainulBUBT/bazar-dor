@@ -15,8 +15,6 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
           crossorigin=""/>
-    <!-- Leaflet Geosearch CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.8.0/dist/geosearch.css" />
     <!-- PWA icons -->
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
     <link rel="apple-touch-icon" href="icons/icon-192x192.png">
@@ -44,14 +42,14 @@
             <div class="location-bar bg-white rounded-pill d-flex align-items-center px-3 py-2 mb-2 shadow-sm">
                 <i class="bi bi-geo-alt text-primary me-2"></i>
                 <input type="text" class="form-control border-0 p-0 bg-transparent" id="location-search" placeholder="Search location or use current...">
-                <button class="btn btn-link text-primary p-0 ms-2" id="current-location-btn" title="Use current location">
+                <button class="btn btn-link p-0 ms-2" id="current-location-btn" title="Use current location">
                     <i class="bi bi-crosshair"></i>
                 </button>
             </div>
             
             <!-- Location Loading Spinner -->
             <div id="location-loading" class="text-center py-2 location-loading">
-                <div class="spinner-border spinner-border-sm text-white" role="status">
+                <div class="spinner-border spinner-border-sm text-primary" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>
             </div>
