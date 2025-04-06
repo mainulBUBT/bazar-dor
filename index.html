@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#ffd700">
+    <meta name="theme-color" content="#AB4459">
     <title>Bazar Dor - Local Market Price Directory</title>
     <link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="lib/bootstrap-icons/bootstrap-icons.min.css">
@@ -11,11 +11,17 @@
     <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/banner-slider.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+          crossorigin=""/>
+    <!-- Leaflet Geosearch CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.8.0/dist/geosearch.css" />
     <!-- PWA icons -->
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
     <link rel="apple-touch-icon" href="icons/icon-192x192.png">
 </head>
-<body>
+<body class="bg-light">
     <header class="app-header bg-primary">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center py-2">
@@ -44,7 +50,7 @@
             </div>
             
             <!-- Location Loading Spinner -->
-            <div id="location-loading" class="text-center py-2" style="display: none;">
+            <div id="location-loading" class="text-center py-2 location-loading">
                 <div class="spinner-border spinner-border-sm text-white" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>
@@ -293,15 +299,15 @@
     <!-- Location Warning Modal -->
     <div class="modal fade" id="locationWarningModal" tabindex="-1" aria-labelledby="locationWarningModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" style="border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <div class="modal-content location-modal-content">
                 <div class="modal-body p-0">
                     <div class="text-end p-2">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="text-center px-4 pb-4">
                         <div class="mb-4">
-                            <div class="icon-wrapper mx-auto" style="width: 90px; height: 90px; background-color: var(--primary-color-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(var(--bs-primary-rgb), 0.3);">
-                                <i class="bi bi-geo-alt-fill text-primary" style="font-size: 3rem;"></i>
+                            <div class="icon-wrapper modal-icon-wrapper location-icon-wrapper">
+                                <i class="bi bi-geo-alt-fill text-primary"></i>
                             </div>
                         </div>
                         <h5 class="mb-3 fw-bold">Please Select Your Location</h5>
@@ -322,6 +328,12 @@
     </div>
 
     <script src="lib/bootstrap/bootstrap.bundle.min.js"></script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+            crossorigin=""></script>
+    <!-- Leaflet Geosearch plugin -->
+    <script src="https://unpkg.com/leaflet-geosearch@3.8.0/dist/geosearch.umd.js"></script>
     <script src="js/location.js"></script>
     <script>
         // Register Service Worker

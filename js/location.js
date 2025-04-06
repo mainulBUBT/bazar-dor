@@ -3,13 +3,54 @@ const locationSearch = document.getElementById('location-search');
 const currentLocationBtn = document.getElementById('current-location-btn');
 const locationLoading = document.getElementById('location-loading');
 
-// Constants
-const NOMINATIM_BASE_URL = 'https://nominatim.openstreetmap.org';
+// Initialize Leaflet Geosearch Provider
+const provider = new GeoSearch.OpenStreetMapProvider({
+    params: {
+        // Set appropriate parameters to avoid overusing the API
+        'accept-language': 'en',
+        countrycodes: '',
+        addressdetails: 1, 
+        limit: 5
+    }
+});
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
-    currentLocationBtn.addEventListener('click', getCurrentLocation);
-    locationSearch.addEventListener('input', debounce(handleLocationSearch, 500));
+    // Add event listeners once DOM is fully loaded
+    if (currentLocationBtn) {
+        currentLocationBtn.addEventListener('click', getCurrentLocation);
+    }
+    
+    if (locationSearch) {
+        // Ensure the parent has relative positioning for dropdown
+        let parent = locationSearch.parentNode;
+        if (parent && parent.style.position !== 'relative') {
+            parent.style.position = 'relative';
+        }
+        
+        locationSearch.addEventListener('input', debounce(handleLocationSearch, 500));
+        
+        // Clear dropdown on blur, but delay to allow click events
+        locationSearch.addEventListener('blur', function() {
+            setTimeout(() => {
+                const dropdown = document.getElementById('address-dropdown');
+                if (dropdown) dropdown.remove();
+            }, 200);
+        });
+    }
+    
+    // Check if there's a stored location and display it
+    const storedLocation = localStorage.getItem('userLocation');
+    if (storedLocation && locationSearch) {
+        try {
+            const location = JSON.parse(storedLocation);
+            if (location.address) {
+                locationSearch.value = location.address;
+            }
+        } catch (e) {
+            console.error('Error parsing stored location', e);
+        }
+    }
 });
 
 // Get current location using browser's Geolocation API
@@ -23,19 +64,21 @@ function getCurrentLocation() {
     navigator.geolocation.getCurrentPosition(
         position => {
             const { latitude, longitude } = position.coords;
+            console.log('Got coordinates:', latitude, longitude);
             reverseGeocode(latitude, longitude);
         },
         error => {
             showLoading(false);
             handleGeolocationError(error);
         },
-        { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
 }
 
-// Handle location search input
-// Create and update address dropdown
+// Create and update address dropdown with map icons
 function createAddressDropdown(addresses) {
+    if (!locationSearch) return;
+    
     // Remove existing dropdown if any
     const existingDropdown = document.getElementById('address-dropdown');
     if (existingDropdown) {
@@ -45,33 +88,60 @@ function createAddressDropdown(addresses) {
     const dropdownContainer = document.createElement('div');
     dropdownContainer.id = 'address-dropdown';
     dropdownContainer.className = 'address-dropdown bg-white rounded shadow-sm position-absolute w-100 mt-1';
-    dropdownContainer.style.maxHeight = '200px';
-    dropdownContainer.style.overflowY = 'auto';
-    dropdownContainer.style.zIndex = '1000';
-    dropdownContainer.style.display = 'block';
-
-    // Create a wrapper div for positioning
-    const wrapper = document.createElement('div');
-    wrapper.style.position = 'relative';
-    wrapper.style.width = '100%';
-
-    // Wrap the location search input with the wrapper
+    
+    // Ensure parent has relative positioning
     const parent = locationSearch.parentNode;
-    parent.insertBefore(wrapper, locationSearch);
-    wrapper.appendChild(locationSearch);
-    wrapper.appendChild(dropdownContainer);
+    parent.style.position = 'relative';
+    
+    // Append dropdown directly to the parent
+    parent.appendChild(dropdownContainer);
 
-    addresses.forEach((address, index) => {
+    // Add current location option
+    const currentLocationItem = document.createElement('div');
+    currentLocationItem.className = 'p-2 hover-bg-light cursor-pointer location-dropdown-item d-flex align-items-center current-location-item';
+    
+    const iconSpan = document.createElement('span');
+    iconSpan.className = 'location-icon me-2 d-flex align-items-center justify-content-center';
+    const icon = document.createElement('i');
+    icon.className = 'bi bi-crosshair text-primary';
+    iconSpan.appendChild(icon);
+    
+    const textSpan = document.createElement('span');
+    textSpan.className = 'location-text fw-bold';
+    textSpan.textContent = 'Use Current Location';
+    
+    currentLocationItem.appendChild(iconSpan);
+    currentLocationItem.appendChild(textSpan);
+    currentLocationItem.addEventListener('click', getCurrentLocation);
+    dropdownContainer.appendChild(currentLocationItem);
+    
+    // Add address items
+    addresses.forEach((address) => {
         const item = document.createElement('div');
-        item.className = 'p-2 hover-bg-light cursor-pointer';
-        item.textContent = address.display_name;
+        item.className = 'p-2 hover-bg-light cursor-pointer location-dropdown-item d-flex align-items-center';
+        
+        // Add map icon
+        const iconSpan = document.createElement('span');
+        iconSpan.className = 'location-icon me-2 d-flex align-items-center justify-content-center';
+        const icon = document.createElement('i');
+        icon.className = 'bi bi-geo-alt-fill text-primary';
+        iconSpan.appendChild(icon);
+        
+        // Add text
+        const textSpan = document.createElement('span');
+        textSpan.className = 'location-text';
+        textSpan.textContent = address.label;
+        
+        item.appendChild(iconSpan);
+        item.appendChild(textSpan);
+        
         item.addEventListener('click', () => selectAddress(address));
         dropdownContainer.appendChild(item);
     });
 
-    // Add highlight to first item
-    if (addresses.length > 0) {
-        const firstItem = dropdownContainer.children[0];
+    // Add highlight to first regular item (after current location)
+    if (addresses.length > 0 && dropdownContainer.children.length > 1) {
+        const firstItem = dropdownContainer.children[1];
         if (firstItem) {
             firstItem.classList.add('active');
         }
@@ -80,21 +150,20 @@ function createAddressDropdown(addresses) {
 
 // Handle address selection
 function selectAddress(address) {
-    locationSearch.value = address.display_name;
+    locationSearch.value = address.label;
     locationSearch.blur(); // Remove focus from input
-    storeLocation({
-        lat: parseFloat(address.lat),
-        lng: parseFloat(address.lon),
-        address: address.display_name
-    });
+    
+    const location = {
+        lat: address.y,
+        lng: address.x,
+        address: address.label
+    };
+    
+    storeLocation(location);
     
     // Dispatch a custom event for address selection
     const event = new CustomEvent('addressSelected', {
-        detail: {
-            address: address.display_name,
-            lat: parseFloat(address.lat),
-            lng: parseFloat(address.lon)
-        }
+        detail: location
     });
     document.dispatchEvent(event);
 
@@ -105,7 +174,7 @@ function selectAddress(address) {
     }
 }
 
-// Modify handleLocationSearch function
+// Handle location search using Leaflet Geosearch
 async function handleLocationSearch() {
     const searchTerm = locationSearch.value.trim();
     if (searchTerm.length < 3) {
@@ -116,13 +185,16 @@ async function handleLocationSearch() {
 
     showLoading(true);
     try {
-        const response = await fetch(
-            `${NOMINATIM_BASE_URL}/search?format=json&q=${encodeURIComponent(searchTerm)}`
-        );
-        const data = await response.json();
-
-        if (data && data.length > 0) {
-            createAddressDropdown(data);
+        console.log("Searching for location:", searchTerm);
+        // Use the leaflet-geosearch provider to search for addresses
+        const results = await provider.search({ query: searchTerm });
+        console.log("Search results:", results);
+        
+        if (results && results.length > 0) {
+            createAddressDropdown(results);
+            console.log("Dropdown created with", results.length, "results");
+        } else {
+            console.log("No results found for:", searchTerm);
         }
     } catch (error) {
         showError('Error searching location');
@@ -136,6 +208,10 @@ async function handleLocationSearch() {
 const style = document.createElement('style');
 style.textContent = `
     .address-dropdown {
+        max-height: 200px;
+        overflow-y: auto;
+        z-index: 1000;
+        display: block;
         background: white;
         border: 1px solid #ddd;
         position: absolute;
@@ -143,6 +219,8 @@ style.textContent = `
         left: 0;
         right: 0;
         z-index: 1050;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
     .hover-bg-light:hover {
         background-color: #f8f9fa;
@@ -150,28 +228,74 @@ style.textContent = `
     .cursor-pointer {
         cursor: pointer;
     }
+    .location-dropdown-item {
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        transition: all 0.2s ease;
+    }
+    .location-dropdown-item:last-child {
+        border-bottom: none;
+    }
+    .location-dropdown-item:hover {
+        background-color: rgba(var(--primary-rgb), 0.05) !important;
+    }
+    .location-dropdown-item.active {
+        background-color: rgba(var(--primary-rgb), 0.05);
+    }
+    .location-icon {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+        border-radius: 50%;
+        background-color: rgba(var(--primary-rgb), 0.1);
+    }
+    .location-icon i {
+        font-size: 14px;
+    }
+    .location-text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .current-location-item {
+        background-color: #f8f9fa;
+    }
 `;
 document.head.appendChild(style);
 
-// Reverse geocode coordinates to address
+// Reverse geocode coordinates to address using Leaflet
 async function reverseGeocode(lat, lng) {
     try {
-        const response = await fetch(
-            `${NOMINATIM_BASE_URL}/reverse?format=json&lat=${lat}&lon=${lng}`
-        );
-        const data = await response.json();
-
-        if (data && data.display_name) {
-            locationSearch.value = data.display_name;
+        console.log('Reverse geocoding for:', lat, lng);
+        
+        // Use Leaflet's built-in reverse geocoding through a provider
+        const results = await provider.search({ query: { lat, lon: lng } });
+        console.log('Reverse geocode results:', results);
+        
+        if (results && results.length > 0) {
+            const address = results[0];
+            console.log('Found address:', address);
+            
+            locationSearch.value = address.label;
+            
             storeLocation({
                 lat,
                 lng,
-                address: data.display_name
+                address: address.label
+            });
+        } else {
+            console.log('No address found, using coordinates');
+            
+            // If no results, just store the coordinates
+            locationSearch.value = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+            storeLocation({
+                lat,
+                lng,
+                address: `${lat.toFixed(6)}, ${lng.toFixed(6)}`
             });
         }
     } catch (error) {
+        console.error('Reverse geocoding failed:', error);
         showError('Error getting address');
-        console.error('Reverse geocoding error:', error);
     } finally {
         showLoading(false);
     }
@@ -191,6 +315,8 @@ function showLoading(show) {
 
 // Handle geolocation errors
 function handleGeolocationError(error) {
+    console.error('Geolocation error:', error);
+    
     switch(error.code) {
         case error.PERMISSION_DENIED:
             showError('Location permission denied');

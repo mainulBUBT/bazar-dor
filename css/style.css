@@ -193,6 +193,33 @@ h1, h2, h3, h4, h5, h6, .navbar-brand, .btn {
     margin-bottom: 1rem;
 }
 
+/* Location Dropdown Styling */
+.location-dropdown-item i {
+    color: var(--bs-primary);
+}
+
+.location-dropdown-item.current-location-item i {
+    color: #0d6efd;
+}
+
+.address-dropdown::-webkit-scrollbar {
+    width: 6px;
+}
+
+.address-dropdown::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.address-dropdown::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+.address-dropdown::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+}
+
 /* Make search bar thinner and consistent across all pages */
 #search-bar {
     padding: 0.25rem 0.75rem !important;
@@ -2323,4 +2350,80 @@ body.login-page {
         height: 36px;
         font-size: 1.1rem;
     }
+}
+
+/* Location Loading */
+.location-loading {
+    display: none;
+}
+
+/* Location Modal Content */
+.location-modal-content {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Modal Icon Wrapper */
+.modal-icon-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Location Icon Wrapper */
+.location-icon-wrapper {
+    width: 90px;
+    height: 90px;
+    background-color: var(--primary-color-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
+}
+
+.location-icon-wrapper i {
+    font-size: 3rem;
+}
+
+/* Leaflet specific styles */
+.leaflet-container {
+    height: 100%;
+    width: 100%;
+}
+
+.leaflet-control-geosearch {
+    margin-top: 10px !important;
+}
+
+.leaflet-control-geosearch form {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+}
+
+.leaflet-control-geosearch input {
+    border: none;
+    outline: none;
+    padding: 8px;
+    width: 100%;
+    font-size: 14px;
+}
+
+.leaflet-control-geosearch .results {
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #fff;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 4px 5px rgba(0,0,0,0.2);
+}
+
+.leaflet-control-geosearch .results > * {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.leaflet-control-geosearch .results > *:hover {
+    background-color: #f0f0f0;
 }
