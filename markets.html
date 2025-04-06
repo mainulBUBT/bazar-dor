@@ -62,6 +62,104 @@
         .sort-dropdown .dropdown-item.active {
             background-color: var(--primary-color);
         }
+        
+        /* Modal styling */
+        .modal-content.location-modal-content {
+            border-radius: 20px;
+            overflow: hidden;
+            border: none;
+            box-shadow: 0 10px 30px rgba(138, 54, 71, 0.15);
+        }
+        
+        .icon-wrapper.modal-icon-wrapper.location-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(138, 54, 71, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        
+        .icon-wrapper.modal-icon-wrapper i {
+            font-size: 2.5rem;
+            color: #8a3647;
+        }
+        
+        .modal .btn-primary {
+            background: #8a3647;
+            border-color: #8a3647;
+            box-shadow: 0 4px 12px rgba(138, 54, 71, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .modal .btn-primary:hover {
+            background: #6a2935;
+            border-color: #6a2935;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(138, 54, 71, 0.25);
+        }
+        
+        .modal .btn-outline-primary {
+            color: #8a3647;
+            border-color: #8a3647;
+            transition: all 0.3s ease;
+        }
+        
+        .modal .btn-outline-primary:hover {
+            background-color: rgba(138, 54, 71, 0.1);
+            color: #8a3647;
+            border-color: #8a3647;
+            transform: translateY(-2px);
+        }
+        
+        /* Standardized Toast Styling */
+        .toast-container {
+            z-index: 1080;
+        }
+        
+        .toast {
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+        
+        .toast-body {
+            padding: 0.75rem 1rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .toast .bi {
+            font-size: 1rem;
+        }
+        
+        .toast.bg-success {
+            background-color: var(--success-color, #28a745) !important;
+        }
+        
+        .toast.bg-warning {
+            background-color: var(--warning-color, #ffc107) !important;
+            color: #212529 !important;
+        }
+        
+        .toast.bg-warning .btn-close {
+            filter: none;
+        }
+        
+        .toast.bg-danger {
+            background-color: var(--danger-color, #dc3545) !important;
+        }
+        
+        .toast.bg-primary {
+            background-color: var(--primary-color, #8a3647) !important;
+        }
     </style>
 </head>
 <body class="bg-light">
@@ -528,103 +626,67 @@
 
     <!-- Pagination Container -->
     <div id="pagination-container" class="mb-4"></div>
+    
+    <!-- Standardized Toast for Notifications -->
+    <div class="position-fixed bottom-0 end-0 p-3 toast-container">
+        <div id="appToast" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="bi bi-info-circle me-2" id="toastIcon"></i>
+                    <span id="toastMessage">Notification message</span>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
 
     <script src="lib/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="js/location.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/pagination.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/markets.js"></script>
     <script>
+        // Initialize location modal functionality
         document.addEventListener('DOMContentLoaded', function() {
-            // Handle market detail links
-            const marketDetailLinks = document.querySelectorAll('.market-detail-link');
-            marketDetailLinks.forEach(link => {
-                link.addEventListener('click', function() {
+            // Market detail click handler
+            document.querySelectorAll('.market-card').forEach(card => {
+                card.addEventListener('click', function() {
                     const marketId = this.getAttribute('data-market-id');
                     window.location.href = `products.html?market_id=${marketId}`;
                 });
-                // Add cursor pointer style
-                link.style.cursor = 'pointer';
             });
             
-            // Handle favorite buttons
-            const favoriteButtons = document.querySelectorAll('.favorite-btn');
-            favoriteButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
+            // Market detail link click handler
+            document.querySelectorAll('.market-detail-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Prevent card click event
+                    const marketId = this.getAttribute('data-market-id');
+                    window.location.href = `products.html?market_id=${marketId}`;
+                });
+            });
+            
+            // Favorite button click handler
+            document.querySelectorAll('.favorite-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
                     e.stopPropagation(); // Prevent card click
-                    const icon = this.querySelector('i');
+                    const marketId = this.closest('.market-card').getAttribute('data-market-id');
+                    const isFavorite = this.classList.contains('active');
                     
-                    if (icon.classList.contains('bi-heart')) {
-                        icon.classList.remove('bi-heart');
-                        icon.classList.add('bi-heart-fill');
-                        icon.classList.remove('text-muted');
-                        icon.classList.add('text-danger');
+                    if (isFavorite) {
+                        this.classList.remove('active');
+                        this.querySelector('i').classList.remove('bi-heart-fill');
+                        this.querySelector('i').classList.add('bi-heart');
+                        showToast('Removed from favorites', 'info');
                     } else {
-                        icon.classList.remove('bi-heart-fill');
-                        icon.classList.add('bi-heart');
-                        icon.classList.remove('text-danger');
-                        icon.classList.add('text-muted');
+                        this.classList.add('active');
+                        this.querySelector('i').classList.remove('bi-heart');
+                        this.querySelector('i').classList.add('bi-heart-fill');
+                        showToast('Added to favorites', 'success');
                     }
-                    
-                    const marketCard = this.closest('.market-card');
-                    const marketId = marketCard.getAttribute('data-market-id');
-                    console.log(`Market ${marketId} favorite status changed`);
                 });
             });
         });
     </script>
-    <script src="js/markets.js"></script>
-    <style>
-        /* Modal styling */
-        .modal-content.location-modal-content {
-            border-radius: 20px;
-            overflow: hidden;
-            border: none;
-            box-shadow: 0 10px 30px rgba(138, 54, 71, 0.15);
-        }
-        
-        .icon-wrapper.modal-icon-wrapper.location-icon-wrapper {
-            width: 80px;
-            height: 80px;
-            background-color: rgba(138, 54, 71, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-        }
-        
-        .icon-wrapper.modal-icon-wrapper i {
-            font-size: 2.5rem;
-            color: #8a3647;
-        }
-        
-        .modal .btn-primary {
-            background: #8a3647;
-            border-color: #8a3647;
-            box-shadow: 0 4px 12px rgba(138, 54, 71, 0.2);
-            transition: all 0.3s ease;
-        }
-        
-        .modal .btn-primary:hover {
-            background: #6a2935;
-            border-color: #6a2935;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(138, 54, 71, 0.25);
-        }
-        
-        .modal .btn-outline-primary {
-            color: #8a3647;
-            border-color: #8a3647;
-            transition: all 0.3s ease;
-        }
-        
-        .modal .btn-outline-primary:hover {
-            background-color: rgba(138, 54, 71, 0.1);
-            color: #8a3647;
-            border-color: #8a3647;
-            transform: translateY(-2px);
-        }
-    </style>
 </body>
 </html>
   

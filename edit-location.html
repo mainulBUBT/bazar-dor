@@ -273,14 +273,13 @@
 
     <!-- Success Toast -->
     <div class="position-fixed bottom-0 end-0 p-3 toast-container">
-        <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header bg-success text-white">
-                <i class="bi bi-check-circle me-2"></i>
-                <strong class="me-auto">Success</strong>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                Location updated successfully!
+        <div id="toast" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="bi bi-check-circle me-2"></i>
+                    <span id="toastMessage">Notification message</span>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
         </div>
     </div>
@@ -320,6 +319,7 @@
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
             crossorigin=""></script>
     <script src="js/app.js"></script>
+    <script src="js/toast.js"></script>
     <script>
         // Initialize map variables
         let map;
@@ -822,8 +822,7 @@
                         locationBtn.classList.remove('pulsing');
                         
                         // Show success toast
-                        const successToast = new bootstrap.Toast(document.getElementById('locationSuccessToast'));
-                        successToast.show();
+                        showToast('Successfully found your location! You can now drag the map to adjust if needed.', 'success');
                     },
                     function(error) {
                         // Error - provide more specific user feedback
@@ -891,8 +890,7 @@
             // Here you would validate the form and call your API to update the address
             
             // Show success toast
-            const successToast = new bootstrap.Toast(document.getElementById('successToast'));
-            successToast.show();
+            showToast('Location updated successfully!', 'success');
             
             // Redirect after successful save (after short delay)
             setTimeout(() => {
@@ -1020,8 +1018,7 @@
             locationBtn.classList.add('pulsing');
             
             // Show message to user
-            const toast = new bootstrap.Toast(document.getElementById('retryingToast'));
-            toast.show();
+            showToast('Trying to get your location with different settings...', 'info');
             
             // Try to get current location with different settings
             if (navigator.geolocation) {
@@ -1046,8 +1043,7 @@
                         locationBtn.classList.remove('pulsing');
                         
                         // Show success toast
-                        const successToast = new bootstrap.Toast(document.getElementById('locationSuccessToast'));
-                        successToast.show();
+                        showToast('Successfully found your location! You can now drag the map to adjust if needed.', 'success');
                     },
                     function(error) {
                         // Still failed

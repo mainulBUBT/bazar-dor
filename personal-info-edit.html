@@ -165,21 +165,21 @@
     </nav>
 
     <!-- Success Toast -->
-    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-        <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header bg-success text-white">
-                <i class="bi bi-check-circle me-2"></i>
-                <strong class="me-auto">Success</strong>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                Your profile has been updated successfully!
+    <div class="position-fixed bottom-0 end-0 p-3 toast-container" style="bottom: 70px !important; z-index: 1050;">
+        <div id="toast" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="bi bi-check-circle me-2"></i>
+                    <span id="toastMessage">Notification message</span>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
         </div>
     </div>
 
     <script src="lib/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/toast.js"></script>
     <script>
         // Handle profile image upload
         document.getElementById('profile-pic-upload').addEventListener('change', function(e) {
@@ -189,6 +189,7 @@
                 
                 reader.onload = function(e) {
                     document.querySelector('.rounded-circle').src = e.target.result;
+                    showToast('Profile picture updated', 'success');
                 }
                 
                 reader.readAsDataURL(file);
@@ -198,8 +199,7 @@
         // Handle form submission
         document.getElementById('save-profile-btn').addEventListener('click', function() {
             // Here you would add validation and API call to save the data
-            const successToast = new bootstrap.Toast(document.getElementById('successToast'));
-            successToast.show();
+            showToast('Your profile has been updated successfully!', 'success');
             
             // Redirect after successful save (after short delay)
             setTimeout(() => {

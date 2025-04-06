@@ -2,8 +2,8 @@
 
 /* Reduce card gaps and margins */
 .favorites-list {
-    --bs-gutter-x: 0.2rem;
-    --bs-gutter-y: 0.2rem;
+    --bs-gutter-x: 0.5rem;
+    --bs-gutter-y: 0.3rem;
 }
 
 /* Make card buttons thinner */
@@ -19,7 +19,7 @@
 
 /* Adjust card body padding */
 .favorites-list .card-body {
-    padding: 0.4rem 0.2rem; /* Reduced horizontal padding */
+    padding: 0.3rem 0.5rem; /* Reduced top/bottom padding */
 }
 
 /* Smaller card titles */
@@ -46,11 +46,37 @@
     left: 0 !important;
     margin: 0.5rem !important;
     z-index: 10;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    opacity: 0.9;
+    padding: 0;
+    z-index: 5;
+}
+
+.favorite-btn i {
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+.favorite-btn.active i {
+    color: #dc3545;
+}
+
+.favorite-btn:hover {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+.favorite-btn:active {
+    transform: scale(0.9);
 }
 
 /* Adjust favorite button size in favorites list */
 .favorites-list .favorite-btn {
-    padding: 0.1rem !important;
     margin: 0.2rem !important;
 }
 
@@ -67,7 +93,7 @@
 }
 
 .favorites-list .col-12 {
-    margin-bottom: 0.2rem !important;
+    margin-bottom: 0.1rem !important;
 }
 
 .favorites-list .card {
@@ -123,6 +149,50 @@
     display: none;
 }
 
+/* Snap scrolling for filter pills */
+.snap-scroll {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.snap-scroll .filter-chip {
+    scroll-snap-align: center;
+}
+
+/* Modern Filter Chips */
+.filter-chip {
+    display: flex;
+    align-items: center;
+    padding: 0.4rem 0.8rem;
+    background-color: #f8f9fa;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    flex-shrink: 0;
+}
+
+.filter-chip.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.filter-chip:active {
+    transform: scale(0.95);
+}
+
+.filter-icon {
+    margin-right: 0.3rem;
+    display: inline-flex;
+    align-items: center;
+}
+
+.filter-text {
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
 /* Image fit styles */
 .object-fit-cover {
     object-fit: cover;
@@ -149,6 +219,79 @@
     --bs-btn-active-border-color: var(--primary-color);
 }
 
+/* Touch action improvements */
+.touch-action {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+/* Pagination Fixes */
+#pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+#pagination-container .pagination {
+    margin-bottom: 0;
+}
+
+#pagination-container .page-link {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0.25rem;
+    color: var(--primary-color);
+    border: 1px solid #dee2e6;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+#pagination-container .page-item.active .page-link {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 8px rgba(var(--primary-rgb), 0.2);
+}
+
+#pagination-container .page-item:not(.active) .page-link:hover {
+    background-color: rgba(var(--primary-rgb), 0.1);
+    color: var(--primary-color);
+    border-color: rgba(var(--primary-rgb), 0.2);
+}
+
+/* Updated bottom navigation style */
+.navbar-nav.bottom-nav .nav-link.active {
+    color: var(--primary-color);
+    background-color: #f8e4e8;
+    border-radius: 16px;
+    box-shadow: none;
+    transform: none;
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-top: none;
+}
+
+.navbar-nav.bottom-nav .nav-link.active::before {
+    display: none;
+}
+
+.navbar-nav.bottom-nav .nav-link.active i {
+    color: var(--primary-color);
+    margin-bottom: 2px;
+}
+
+.navbar-nav.bottom-nav .nav-item {
+    display: flex;
+    justify-content: center;
+}
+
 /* Responsive adjustments */
 @media (max-width: 767.98px) {
     .favorites-list .card-body {
@@ -159,4 +302,52 @@
         font-size: 0.7rem;
         height: 22px;
     }
+    
+    #pagination-container .page-link {
+        width: 35px;
+        height: 35px;
+        font-size: 0.875rem;
+        margin: 0 0.15rem;
+    }
+}
+
+/* Add top margin reduction for empty state */
+#empty-favorites {
+    margin-top: 0;
+    padding-top: 1rem;
+}
+
+/* Consistent image heights for cards */
+.card .position-relative {
+    height: 100px !important;
+    overflow: hidden;
+}
+
+.col-4 .position-relative {
+    height: 100% !important;
+}
+
+.position-relative img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Image wrappers to match products.html */
+.product-image-wrapper {
+    height: 140px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 8px 8px 0 0;
+}
+
+.favorites-list .col-4 .position-relative {
+    height: 100%;
+    min-height: 110px;
+    overflow: hidden;
+}
+
+/* Ensure card height consistency */
+.favorites-list .card {
+    height: 100%;
 }

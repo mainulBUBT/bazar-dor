@@ -189,20 +189,20 @@
 
     <!-- Success Toast -->
     <div class="position-fixed bottom-0 end-0 p-3 toast-container">
-        <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header bg-success text-white">
-                <i class="bi bi-check-circle me-2"></i>
-                <strong class="me-auto">Success</strong>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body" id="toast-message">
-                Default address updated successfully!
+        <div id="toast" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="bi bi-check-circle me-2"></i>
+                    <span id="toastMessage">Notification message</span>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
         </div>
     </div>
 
     <script src="lib/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/toast.js"></script>
     <script>
         // Handle delete confirmation
         let locationIdToDelete = null;
@@ -223,10 +223,7 @@
                 addressCard.style.display = 'none';
                 
                 // Show success toast
-                const toastMessage = document.getElementById('toast-message');
-                toastMessage.textContent = 'Address deleted successfully!';
-                const successToast = new bootstrap.Toast(document.getElementById('successToast'));
-                successToast.show();
+                showToast('Address deleted successfully!', 'success');
                 
                 // Hide modal
                 const modal = bootstrap.Modal.getInstance(deleteConfirmModal);
@@ -257,10 +254,7 @@
             titleElement.parentNode.insertBefore(badge, titleElement);
             
             // Show success toast
-            const toastMessage = document.getElementById('toast-message');
-            toastMessage.textContent = 'Default address updated successfully!';
-            const successToast = new bootstrap.Toast(document.getElementById('successToast'));
-            successToast.show();
+            showToast('Default address updated successfully!', 'success');
             
             // Update buttons
             const setDefaultButton = addressCard.querySelector('[onclick^="setAsDefault"]');

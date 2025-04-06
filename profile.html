@@ -256,11 +256,11 @@
 
     <!-- Toast for success messages -->
     <div class="position-fixed bottom-0 end-0 p-3 toast-container">
-        <div id="successToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div id="toast" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
                 <div class="toast-body">
                     <i class="bi bi-check-circle me-2"></i>
-                    <span id="toastMessage">Saved successfully!</span>
+                    <span id="toastMessage">Notification message</span>
                 </div>
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
@@ -269,42 +269,9 @@
 
     <script src="lib/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/toast.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize toast
-            const successToast = new bootstrap.Toast(document.getElementById('successToast'), {
-                delay: 3000
-            });
-            
-            // Function to show success toast with custom message
-            function showSuccessToast(message) {
-                document.getElementById('toastMessage').textContent = message;
-                successToast.show();
-            }
-            
-            // Menu item click handlers
-            const personalInfoLink = document.querySelector('a[href="personal-info.html"]');
-            if (personalInfoLink) {
-                personalInfoLink.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    showSuccessToast('Personal information updated successfully!');
-                    setTimeout(() => {
-                        window.location.href = 'personal-info.html';
-                    }, 1000);
-                });
-            }
-            
-            const savedLocationsLink = document.querySelector('a[href="saved-locations.html"]');
-            if (savedLocationsLink) {
-                savedLocationsLink.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    showSuccessToast('Location saved successfully!');
-                    setTimeout(() => {
-                        window.location.href = 'saved-locations.html';
-                    }, 1000);
-                });
-            }
-            
             // Add click event to confirm logout button - override the onclick attribute for proper flow
             const confirmLogoutBtn = document.getElementById('confirm-logout-btn');
             if (confirmLogoutBtn) {
@@ -320,7 +287,7 @@
                     }
                     
                     // Show success toast for logout
-                    showSuccessToast('Logged out successfully!');
+                    showToast('Logged out successfully!', 'info');
                     
                     // Redirect to login page after a short delay
                     setTimeout(() => {

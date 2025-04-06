@@ -162,22 +162,26 @@
                         <p class="mb-0 fw-medium">Password</p>
                         <small class="text-muted">Last changed 3 months ago</small>
                     </div>
-                    <button class="btn btn-outline-primary btn-sm rounded-pill px-3">Change</button>
+                    <button class="btn btn-outline-danger btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#passwordChangeModal">Change</button>
                 </div>
                 
                 <div class="d-flex justify-content-between align-items-center py-2">
                     <div>
                         <p class="mb-0 fw-medium">Connected Accounts</p>
                         <small class="text-muted">Manage social accounts</small>
+                        <div class="mt-1">
+                            <span class="badge bg-primary me-1"><i class="bi bi-facebook me-1"></i>Connected</span>
+                            <span class="badge bg-secondary me-1"><i class="bi bi-google me-1"></i>Not Connected</span>
+                        </div>
                     </div>
-                    <button class="btn btn-outline-primary btn-sm rounded-pill px-3">Manage</button>
+                    <button class="btn btn-outline-danger btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#connectedAccountsModal">Manage</button>
                 </div>
             </div>
         </div>
 
         <div class="d-grid gap-2 mb-5">
             <button class="btn btn-primary rounded-pill py-2">Save Changes</button>
-            <button class="btn btn-outline-danger rounded-pill py-2">Delete Account</button>
+            <button class="btn btn-outline-danger rounded-pill py-2" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">Delete Account</button>
         </div>
     </div>
 
@@ -212,8 +216,321 @@
         </div>
     </nav>
 
+    <!-- Delete Account Confirmation Modal -->
+    <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bd-modal-content">
+                <div class="modal-body p-0">
+                    <div class="text-end p-2">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="text-center px-4 pb-4">
+                        <div class="mb-4">
+                            <div class="bd-icon-wrapper danger-light">
+                                <i class="bi bi-exclamation-triangle text-danger fs-1"></i>
+                            </div>
+                        </div>
+                        <h5 class="mb-3 fw-bold">Delete Account</h5>
+                        <p class="text-muted mb-4">Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently lost.</p>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="button" class="btn btn-danger py-3 rounded-pill fw-bold" id="confirm-delete-btn">
+                                Delete Account
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary py-2 rounded-pill" data-bs-dismiss="modal">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Change Modal -->
+    <div class="modal fade" id="passwordChangeModal" tabindex="-1" aria-labelledby="passwordChangeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bd-modal-content">
+                <div class="modal-body p-0">
+                    <div class="text-end p-2">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="text-center px-4 pb-4">
+                        <div class="mb-4">
+                            <div class="bd-icon-wrapper primary-light">
+                                <i class="bi bi-shield-lock text-primary fs-1"></i>
+                            </div>
+                        </div>
+                        <h5 class="mb-3 fw-bold">Change Password</h5>
+                        
+                        <form id="password-change-form" class="text-start">
+                            <div class="mb-3">
+                                <label for="currentPassword" class="form-label">Current Password</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="currentPassword" required>
+                                    <button class="btn btn-outline-secondary toggle-password" type="button">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="newPassword" class="form-label">New Password</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="newPassword" required>
+                                    <button class="btn btn-outline-secondary toggle-password" type="button">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="form-text">Password must be at least 8 characters long</div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="confirmPassword" required>
+                                    <button class="btn btn-outline-secondary toggle-password" type="button">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary py-2 rounded-pill fw-bold" id="confirm-password-change">
+                                    Update Password
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary py-2 rounded-pill" data-bs-dismiss="modal">
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Connected Accounts Modal -->
+    <div class="modal fade" id="connectedAccountsModal" tabindex="-1" aria-labelledby="connectedAccountsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bd-modal-content">
+                <div class="modal-body p-0">
+                    <div class="text-end p-2">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="text-center px-4 pb-4">
+                        <div class="mb-4">
+                            <div class="bd-icon-wrapper primary-light">
+                                <i class="bi bi-link-45deg text-primary fs-1"></i>
+                            </div>
+                        </div>
+                        <h5 class="mb-3 fw-bold">Connected Accounts</h5>
+                        <p class="text-muted mb-4">Link your social accounts for easier login and sharing</p>
+                        
+                        <div class="list-group mb-4">
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-3">
+                                        <i class="bi bi-facebook fs-4 text-primary"></i>
+                                    </div>
+                                    <div class="text-start">
+                                        <h6 class="mb-0 fw-medium">Facebook</h6>
+                                        <small class="text-success">Connected</small>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline-danger btn-sm rounded-pill">Disconnect</button>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-3">
+                                        <i class="bi bi-google fs-4 text-danger"></i>
+                                    </div>
+                                    <div class="text-start">
+                                        <h6 class="mb-0 fw-medium">Google</h6>
+                                        <small class="text-muted">Not connected</small>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline-primary btn-sm rounded-pill">Connect</button>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-3">
+                                        <i class="bi bi-twitter fs-4 text-info"></i>
+                                    </div>
+                                    <div class="text-start">
+                                        <h6 class="mb-0 fw-medium">Twitter</h6>
+                                        <small class="text-muted">Not connected</small>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline-primary btn-sm rounded-pill">Connect</button>
+                            </div>
+                        </div>
+                        
+                        <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast container for notifications -->
+    <div class="position-fixed bottom-0 end-0 p-3 toast-container" style="bottom: 70px !important; z-index: 1050;">
+        <div id="toast" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="bi bi-check-circle me-2"></i>
+                    <span id="toastMessage">Notification message</span>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
     <script src="lib/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/toast.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle Save Changes button click
+            const saveButton = document.querySelector('.btn-primary.rounded-pill');
+            if (saveButton) {
+                saveButton.addEventListener('click', function() {
+                    // Show success toast
+                    showToast('Changes saved successfully!', 'success');
+                });
+            }
+            
+            // Handle toggle switches with visual feedback
+            const toggleSwitches = document.querySelectorAll('.form-check-input');
+            toggleSwitches.forEach(switchEl => {
+                switchEl.addEventListener('change', function() {
+                    // No toast notifications for toggles, just log the change
+                    console.log(`Setting ${this.id} ${this.checked ? 'enabled' : 'disabled'}`);
+                });
+            });
+            
+            // Handle security buttons
+            const securityButtons = document.querySelectorAll('.card:last-of-type .btn');
+            securityButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const buttonText = this.textContent.trim();
+                    // We now have modals instead of toast notifications for these actions
+                });
+            });
+            
+            // Handle delete account confirmation
+            document.getElementById('confirm-delete-btn').addEventListener('click', function() {
+                // Here you would call your API to delete the account
+                console.log('Deleting account...');
+                
+                // Show feedback toast
+                showToast('Account deleted successfully', 'success');
+                
+                // Hide modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('deleteAccountModal'));
+                modal.hide();
+                
+                // Redirect to login page after a short delay
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 1500);
+            });
+            
+            // Handle profile picture upload
+            const profilePicUpload = document.getElementById('profile-pic-upload');
+            if (profilePicUpload) {
+                profilePicUpload.addEventListener('change', function() {
+                    if (this.files && this.files[0]) {
+                        showToast('Profile picture updated', 'success');
+                    }
+                });
+            }
+
+            // Password visibility toggle
+            document.querySelectorAll('.toggle-password').forEach(button => {
+                button.addEventListener('click', function() {
+                    const passwordInput = this.previousElementSibling;
+                    const icon = this.querySelector('i');
+                    
+                    // Toggle password visibility
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        icon.classList.remove('bi-eye');
+                        icon.classList.add('bi-eye-slash');
+                    } else {
+                        passwordInput.type = 'password';
+                        icon.classList.remove('bi-eye-slash');
+                        icon.classList.add('bi-eye');
+                    }
+                });
+            });
+            
+            // Handle password change form submission
+            document.getElementById('password-change-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const currentPassword = document.getElementById('currentPassword').value;
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                // Simple validation
+                if (newPassword !== confirmPassword) {
+                    showToast('New passwords do not match', 'error');
+                    return;
+                }
+                
+                if (newPassword.length < 8) {
+                    showToast('Password must be at least 8 characters', 'warning');
+                    return;
+                }
+                
+                // Here you would call your API to update the password
+                console.log('Updating password...');
+                
+                // Show success toast
+                showToast('Password updated successfully', 'success');
+                
+                // Close modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('passwordChangeModal'));
+                modal.hide();
+                
+                // Reset form
+                this.reset();
+            });
+            
+            // Handle connected accounts modal buttons
+            document.querySelectorAll('#connectedAccountsModal .btn-outline-primary, #connectedAccountsModal .btn-outline-danger').forEach(button => {
+                button.addEventListener('click', function() {
+                    const action = this.textContent.trim();
+                    const platform = this.closest('.list-group-item').querySelector('h6').textContent;
+                    
+                    if (action === 'Connect') {
+                        // Simulate connecting to platform
+                        this.textContent = 'Disconnect';
+                        this.classList.remove('btn-outline-primary');
+                        this.classList.add('btn-outline-danger');
+                        this.closest('.list-group-item').querySelector('small').textContent = 'Connected';
+                        this.closest('.list-group-item').querySelector('small').classList.remove('text-muted');
+                        this.closest('.list-group-item').querySelector('small').classList.add('text-success');
+                        
+                        // No toast notification for social connections
+                        console.log(`Connected to ${platform}`);
+                    } else if (action === 'Disconnect') {
+                        // Simulate disconnecting from platform
+                        this.textContent = 'Connect';
+                        this.classList.remove('btn-outline-danger');
+                        this.classList.add('btn-outline-primary');
+                        this.closest('.list-group-item').querySelector('small').textContent = 'Not connected';
+                        this.closest('.list-group-item').querySelector('small').classList.remove('text-success');
+                        this.closest('.list-group-item').querySelector('small').classList.add('text-muted');
+                        
+                        // No toast notification for social disconnections
+                        console.log(`Disconnected from ${platform}`);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html> 

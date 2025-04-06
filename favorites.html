@@ -15,116 +15,6 @@
     <link rel="stylesheet" href="css/favorites.css">
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
     <link rel="apple-touch-icon" href="icons/icon-192x192.png">
-    <style>
-        /* Updated bottom navigation style */
-        .navbar-nav.bottom-nav .nav-link.active {
-            color: var(--primary-color);
-            background-color: #f8e4e8;
-            border-radius: 16px;
-            box-shadow: none;
-            transform: none;
-            width: 90%;
-            margin: 0 auto;
-            padding-top: 0.75rem;
-            padding-bottom: 0.75rem;
-            border-top: none;
-        }
-        
-        .navbar-nav.bottom-nav .nav-link.active::before {
-            display: none;
-        }
-        
-        .navbar-nav.bottom-nav .nav-link.active i {
-            color: var(--primary-color);
-            margin-bottom: 2px;
-        }
-        
-        .navbar-nav.bottom-nav .nav-item {
-            display: flex;
-            justify-content: center;
-        }
-        
-        /* Touch action improvements */
-        .touch-action {
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-        }
-        
-        /* Pagination Fixes */
-        #pagination-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 1.5rem;
-            margin-bottom: 3rem;
-        }
-        
-        #pagination-container .pagination {
-            margin-bottom: 0;
-        }
-        
-        #pagination-container .page-link {
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 0.25rem;
-            color: var(--primary-color);
-            border: 1px solid #dee2e6;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-        
-        #pagination-container .page-item.active .page-link {
-            background-color: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-            box-shadow: 0 4px 8px rgba(var(--primary-rgb), 0.2);
-        }
-        
-        #pagination-container .page-item:not(.active) .page-link:hover {
-            background-color: rgba(var(--primary-rgb), 0.1);
-            color: var(--primary-color);
-            border-color: rgba(var(--primary-rgb), 0.2);
-        }
-        
-        @media (max-width: 575.98px) {
-            #pagination-container .page-link {
-                width: 35px;
-                height: 35px;
-                font-size: 0.875rem;
-                margin: 0 0.15rem;
-            }
-        }
-
-        /* Favorite Button Styling */
-        .favorite-btn {
-            opacity: 0.85;
-            transform: scale(0.9);
-            transition: all 0.2s ease;
-            margin: 8px !important;
-            padding: 0.25rem;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .card:hover .favorite-btn {
-            opacity: 1;
-            transform: scale(1);
-        }
-        
-        .favorite-btn:active {
-            transform: scale(0.85);
-        }
-        
-        .favorite-btn i {
-            font-size: 14px;
-        }
-    </style>
 </head>
 <body class="bg-light">
     <header class="app-header bg-primary">
@@ -156,9 +46,9 @@
         </div>
     </header>
 
-    <div class="container mt-3 mb-5">
+    <div class="container mt-2 mb-5">
         <!-- Modern Filter Chips like products.html -->
-        <div class="filter-container mb-3">
+        <div class="filter-container mb-2">
             <div class="filter-chips d-flex overflow-auto pb-2 hide-scrollbar snap-scroll mx-3">
                 <div class="filter-chip active me-2" data-filter="all">
                     <span class="filter-icon"><i class="bi bi-grid"></i></span>
@@ -176,67 +66,6 @@
         </div>
 
         <!-- Add Mobile Optimization Styles -->
-        <style>
-            /* Hide scrollbars but keep functionality */
-            .hide-scrollbar {
-                -ms-overflow-style: none;
-                scrollbar-width: none;
-            }
-            
-            .hide-scrollbar::-webkit-scrollbar {
-                display: none;
-            }
-            
-            /* Snap scrolling for filter pills */
-            .snap-scroll {
-                scroll-snap-type: x mandatory;
-                -webkit-overflow-scrolling: touch;
-            }
-            
-            .snap-scroll .filter-chip {
-                scroll-snap-align: center;
-            }
-            
-            /* Modern Filter Chips */
-            .filter-chip {
-                display: flex;
-                align-items: center;
-                padding: 0.4rem 0.8rem;
-                background-color: #f8f9fa;
-                border-radius: 2rem;
-                cursor: pointer;
-                transition: all 0.2s ease;
-                white-space: nowrap;
-                border: 1px solid transparent;
-                flex-shrink: 0;
-            }
-            
-            .filter-chip.active {
-                background-color: var(--primary-color);
-                color: white;
-            }
-            
-            .filter-chip:active {
-                transform: scale(0.95);
-            }
-            
-            .filter-icon {
-                margin-right: 0.3rem;
-                display: inline-flex;
-                align-items: center;
-            }
-            
-            .filter-text {
-                font-size: 0.8rem;
-                font-weight: 500;
-            }
-            
-            /* Touch action improvements */
-            .touch-action {
-                -webkit-tap-highlight-color: transparent;
-                touch-action: manipulation;
-            }
-        </style>
 
         <!-- Empty state (shown when no favorites) -->
         <div id="empty-favorites" class="text-center py-5" style="display: none;">
@@ -251,22 +80,22 @@
         </div>
 
         <!-- Favorites List -->
-        <div id="favorites-list" class="row g-1 mb-5 favorites-list">
+        <div id="favorites-list" class="row g-2 mx-0 mb-5 favorites-list">
             <!-- Favorite Market Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-1" data-favorite-type="market">
+            <div class="col-12 col-md-6 col-lg-4 mb-1 d-flex" data-favorite-type="market">
                 <div class="card market-card border-0 shadow-sm rounded-4 h-100" data-market-id="1">
                     <div class="row g-0 h-100">
                         <div class="col-4">
                             <div class="position-relative h-100">
                                 <img src="https://images.unsplash.com/photo-1506484381205-f7945653044d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                                      class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Market Image">
-                                <button class="btn position-absolute top-0 start-0 m-1 rounded-circle bg-white shadow-sm p-1 favorite-btn active">
+                                <button class="btn btn-light btn-sm rounded-circle position-absolute top-0 start-0 m-2 shadow-sm favorite-btn active" title="Remove from favorites">
                                     <i class="bi bi-heart-fill text-danger"></i>
                                 </button>
                             </div>
                         </div>
                         <div class="col-8">
-                            <div class="card-body py-1 px-1 h-100 d-flex flex-column">
+                            <div class="card-body py-2 px-2 h-100 d-flex flex-column">
                                 <div class="d-flex justify-content-between align-items-start mb-1">
                                     <h5 class="card-title mb-0 text-truncate">Mirpur 11 Kacha Bazar</h5>
                                     <span class="badge bg-success small ms-1 flex-shrink-0">Open</span>
@@ -277,7 +106,7 @@
                                     <span class="text-muted"><i class="bi bi-star-fill text-warning me-1"></i>4.5</span>
                                 </div>
                                 <div class="mt-auto pt-1">
-                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 py-0 px-0 d-flex align-items-center justify-content-center touch-action">
+                                    <a href="products.html?market_id=1" class="btn btn-sm btn-primary rounded-pill w-100 py-0 px-0 d-flex align-items-center justify-content-center touch-action">
                                         <i class="bi bi-eye me-1"></i>View Market
                                     </a>
                                 </div>
@@ -288,20 +117,20 @@
             </div>
 
             <!-- Favorite Item Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-1" data-favorite-type="item">
+            <div class="col-12 col-md-6 col-lg-4 mb-1 d-flex" data-favorite-type="item">
                 <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="1">
                     <div class="row g-0 h-100">
                         <div class="col-4">
                             <div class="position-relative h-100">
                                 <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                                      class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Product Image">
-                                <button class="btn position-absolute top-0 start-0 m-1 rounded-circle bg-white shadow-sm p-1 favorite-btn active">
+                                <button class="btn btn-light btn-sm rounded-circle position-absolute top-0 start-0 m-2 shadow-sm favorite-btn active" title="Remove from favorites">
                                     <i class="bi bi-heart-fill text-danger"></i>
                                 </button>
                             </div>
                         </div>
                         <div class="col-8">
-                            <div class="card-body py-1 px-1 h-100 d-flex flex-column">
+                            <div class="card-body py-2 px-2 h-100 d-flex flex-column">
                                 <div class="d-flex justify-content-between align-items-start mb-1">
                                     <h5 class="card-title mb-0 text-truncate">Fresh Tomatoes</h5>
                                     <span class="badge bg-success small ms-1 flex-shrink-0"><i class="bi bi-arrow-down-short"></i>৳10</span>
@@ -326,20 +155,20 @@
             </div>
 
             <!-- Favorite Market Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-1" data-favorite-type="market">
+            <div class="col-12 col-md-6 col-lg-4 mb-1 d-flex" data-favorite-type="market">
                 <div class="card market-card border-0 shadow-sm rounded-4 h-100" data-market-id="2">
                     <div class="row g-0 h-100">
                         <div class="col-4">
                             <div class="position-relative h-100">
                                 <img src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                                      class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Market Image">
-                                <button class="btn position-absolute top-0 start-0 m-1 rounded-circle bg-white shadow-sm p-1 favorite-btn active">
+                                <button class="btn btn-light btn-sm rounded-circle position-absolute top-0 start-0 m-2 shadow-sm favorite-btn active" title="Remove from favorites">
                                     <i class="bi bi-heart-fill text-danger"></i>
                                 </button>
                             </div>
                         </div>
                         <div class="col-8">
-                            <div class="card-body py-1 px-1 h-100 d-flex flex-column">
+                            <div class="card-body py-2 px-2 h-100 d-flex flex-column">
                                 <div class="d-flex justify-content-between align-items-start mb-1">
                                     <h5 class="card-title mb-0 text-truncate">Dhanmondi Farmers Market</h5>
                                     <span class="badge bg-success small ms-1 flex-shrink-0">Open</span>
@@ -350,7 +179,7 @@
                                     <span class="text-muted"><i class="bi bi-star-fill text-warning me-1"></i>4.7</span>
                                 </div>
                                 <div class="mt-auto pt-1">
-                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 py-0 px-0 d-flex align-items-center justify-content-center touch-action">
+                                    <a href="products.html?market_id=2" class="btn btn-sm btn-primary rounded-pill w-100 py-0 px-0 d-flex align-items-center justify-content-center touch-action">
                                         <i class="bi bi-eye me-1"></i>View Market
                                     </a>
                                 </div>
@@ -361,20 +190,20 @@
             </div>
 
             <!-- Favorite Item Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-1" data-favorite-type="item">
+            <div class="col-12 col-md-6 col-lg-4 mb-1 d-flex" data-favorite-type="item">
                 <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="2">
                     <div class="row g-0 h-100">
                         <div class="col-4">
                             <div class="position-relative h-100">
                                 <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                                      class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Product Image">
-                                <button class="btn position-absolute top-0 start-0 m-1 rounded-circle bg-white shadow-sm p-1 favorite-btn active">
+                                <button class="btn btn-light btn-sm rounded-circle position-absolute top-0 start-0 m-2 shadow-sm favorite-btn active" title="Remove from favorites">
                                     <i class="bi bi-heart-fill text-danger"></i>
                                 </button>
                             </div>
                         </div>
                         <div class="col-8">
-                            <div class="card-body py-1 px-1 h-100 d-flex flex-column">
+                            <div class="card-body py-2 px-2 h-100 d-flex flex-column">
                                 <div class="d-flex justify-content-between align-items-start mb-1">
                                     <h5 class="card-title mb-0 text-truncate">Organic Carrots</h5>
                                     <span class="badge bg-danger small ms-1 flex-shrink-0"><i class="bi bi-arrow-up-short"></i>৳5</span>
@@ -399,20 +228,20 @@
             </div>
 
             <!-- Favorite Market Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-1" data-favorite-type="market">
+            <div class="col-12 col-md-6 col-lg-4 mb-1 d-flex" data-favorite-type="market">
                 <div class="card market-card border-0 shadow-sm rounded-4 h-100" data-market-id="3">
                     <div class="row g-0 h-100">
                         <div class="col-4">
                             <div class="position-relative h-100">
                                 <img src="https://images.unsplash.com/photo-1573246123716-6b1782bfc499?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                                      class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Market Image">
-                                <button class="btn position-absolute top-0 start-0 m-1 rounded-circle bg-white shadow-sm p-1 favorite-btn active">
+                                <button class="btn btn-light btn-sm rounded-circle position-absolute top-0 start-0 m-2 shadow-sm favorite-btn active" title="Remove from favorites">
                                     <i class="bi bi-heart-fill text-danger"></i>
                                 </button>
                             </div>
                         </div>
                         <div class="col-8">
-                            <div class="card-body py-1 px-1 h-100 d-flex flex-column">
+                            <div class="card-body py-2 px-2 h-100 d-flex flex-column">
                                 <div class="d-flex justify-content-between align-items-start mb-1">
                                     <h5 class="card-title mb-0 text-truncate">Gulshan Fresh Market</h5>
                                     <span class="badge bg-success small ms-1 flex-shrink-0">Open</span>
@@ -423,7 +252,7 @@
                                     <span class="text-muted"><i class="bi bi-star-fill text-warning me-1"></i>4.2</span>
                                 </div>
                                 <div class="mt-auto pt-1">
-                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 py-0 px-0 d-flex align-items-center justify-content-center touch-action">
+                                    <a href="products.html?market_id=3" class="btn btn-sm btn-primary rounded-pill w-100 py-0 px-0 d-flex align-items-center justify-content-center touch-action">
                                         <i class="bi bi-eye me-1"></i>View Market
                                     </a>
                                 </div>
@@ -434,20 +263,20 @@
             </div>
 
             <!-- Favorite Item Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-1" data-favorite-type="item">
+            <div class="col-12 col-md-6 col-lg-4 mb-1 d-flex" data-favorite-type="item">
                 <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="3">
                     <div class="row g-0 h-100">
                         <div class="col-4">
                             <div class="position-relative h-100">
                                 <img src="https://images.unsplash.com/photo-1550989460-0adf9ea622e2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                                      class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Product Image">
-                                <button class="btn position-absolute top-0 start-0 m-1 rounded-circle bg-white shadow-sm p-1 favorite-btn active">
+                                <button class="btn btn-light btn-sm rounded-circle position-absolute top-0 start-0 m-2 shadow-sm favorite-btn active" title="Remove from favorites">
                                     <i class="bi bi-heart-fill text-danger"></i>
                                 </button>
                             </div>
                         </div>
                         <div class="col-8">
-                            <div class="card-body py-1 px-1 h-100 d-flex flex-column">
+                            <div class="card-body py-2 px-2 h-100 d-flex flex-column">
                                 <div class="d-flex justify-content-between align-items-start mb-1">
                                     <h5 class="card-title mb-0 text-truncate">Fresh Potatoes</h5>
                                     <span class="badge bg-success small ms-1 flex-shrink-0"><i class="bi bi-arrow-down-short"></i>৳8</span>
@@ -472,20 +301,20 @@
             </div>
 
             <!-- Favorite Item Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-1" data-favorite-type="item">
+            <div class="col-12 col-md-6 col-lg-4 mb-1 d-flex" data-favorite-type="item">
                 <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="4">
                     <div class="row g-0 h-100">
                         <div class="col-4">
                             <div class="position-relative h-100">
                                 <img src="https://images.unsplash.com/photo-1587049352851-8d4e89133924?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                                       class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Product Image">
-                                <button class="btn position-absolute top-0 start-0 m-1 rounded-circle bg-white shadow-sm p-1 favorite-btn active">
+                                <button class="btn btn-light btn-sm rounded-circle position-absolute top-0 start-0 m-2 shadow-sm favorite-btn active" title="Remove from favorites">
                                     <i class="bi bi-heart-fill text-danger"></i>
                                 </button>
                             </div>
                         </div>
                         <div class="col-8">
-                            <div class="card-body py-1 px-1 h-100 d-flex flex-column">
+                            <div class="card-body py-2 px-2 h-100 d-flex flex-column">
                                 <div class="d-flex justify-content-between align-items-start mb-1">
                                     <h5 class="card-title mb-0 text-truncate">Premium Rice</h5>
                                     <span class="badge bg-success small ms-1 flex-shrink-0"><i class="bi bi-arrow-down-short"></i>৳15</span>
@@ -510,20 +339,20 @@
             </div>
 
             <!-- Favorite Market Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-1" data-favorite-type="market">
+            <div class="col-12 col-md-6 col-lg-4 mb-1 d-flex" data-favorite-type="market">
                 <div class="card market-card border-0 shadow-sm rounded-4 h-100" data-market-id="4">
                     <div class="row g-0 h-100">
                         <div class="col-4">
                             <div class="position-relative h-100">
                                 <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                                      class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Market Image">
-                                <button class="btn position-absolute top-0 start-0 m-1 rounded-circle bg-white shadow-sm p-1 favorite-btn active">
+                                <button class="btn btn-light btn-sm rounded-circle position-absolute top-0 start-0 m-2 shadow-sm favorite-btn active" title="Remove from favorites">
                                     <i class="bi bi-heart-fill text-danger"></i>
                                 </button>
                             </div>
                         </div>
                         <div class="col-8">
-                            <div class="card-body py-1 px-1 h-100 d-flex flex-column">
+                            <div class="card-body py-2 px-2 h-100 d-flex flex-column">
                                 <div class="d-flex justify-content-between align-items-start mb-1">
                                     <h5 class="card-title mb-0 text-truncate">Banani Organic Market</h5>
                                     <span class="badge bg-danger small ms-1 flex-shrink-0">Closed</span>
@@ -534,7 +363,7 @@
                                     <span class="text-muted"><i class="bi bi-star-fill text-warning me-1"></i>4.8</span>
                                 </div>
                                 <div class="mt-auto pt-1">
-                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 py-0 px-0 d-flex align-items-center justify-content-center touch-action">
+                                    <a href="products.html?market_id=4" class="btn btn-sm btn-primary rounded-pill w-100 py-0 px-0 d-flex align-items-center justify-content-center touch-action">
                                         <i class="bi bi-eye me-1"></i>View Market
                                     </a>
                                 </div>
@@ -545,20 +374,20 @@
             </div>
 
             <!-- Favorite Item Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-1" data-favorite-type="item">
+            <div class="col-12 col-md-6 col-lg-4 mb-1 d-flex" data-favorite-type="item">
                 <div class="card product-card border-0 shadow-sm rounded-4 h-100" data-product-id="5">
                     <div class="row g-0 h-100">
                         <div class="col-4">
                             <div class="position-relative h-100">
                                 <img src="https://images.unsplash.com/photo-1559181567-c3190ca9959b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                                      class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Product Image">
-                                <button class="btn position-absolute top-0 start-0 m-1 rounded-circle bg-white shadow-sm p-1 favorite-btn active">
+                                <button class="btn btn-light btn-sm rounded-circle position-absolute top-0 start-0 m-2 shadow-sm favorite-btn active" title="Remove from favorites">
                                     <i class="bi bi-heart-fill text-danger"></i>
                                 </button>
                             </div>
                         </div>
                         <div class="col-8">
-                            <div class="card-body py-1 px-1 h-100 d-flex flex-column">
+                            <div class="card-body py-2 px-2 h-100 d-flex flex-column">
                                 <div class="d-flex justify-content-between align-items-start mb-1">
                                     <h5 class="card-title mb-0 text-truncate">Fresh Mangoes</h5>
                                     <span class="badge bg-danger small ms-1 flex-shrink-0"><i class="bi bi-arrow-up-short"></i>৳20</span>
@@ -583,20 +412,20 @@
             </div>
 
             <!-- Favorite Market Card -->
-            <div class="col-12 col-md-6 col-lg-4 mb-1" data-favorite-type="market">
+            <div class="col-12 col-md-6 col-lg-4 mb-1 d-flex" data-favorite-type="market">
                 <div class="card market-card border-0 shadow-sm rounded-4 h-100" data-market-id="5">
                     <div class="row g-0 h-100">
                         <div class="col-4">
                             <div class="position-relative h-100">
                                 <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                                      class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Market Image">
-                                <button class="btn position-absolute top-0 start-0 m-1 rounded-circle bg-white shadow-sm p-1 favorite-btn active">
+                                <button class="btn btn-light btn-sm rounded-circle position-absolute top-0 start-0 m-2 shadow-sm favorite-btn active" title="Remove from favorites">
                                     <i class="bi bi-heart-fill text-danger"></i>
                                 </button>
                             </div>
                         </div>
                         <div class="col-8">
-                            <div class="card-body py-1 px-1 h-100 d-flex flex-column">
+                            <div class="card-body py-2 px-2 h-100 d-flex flex-column">
                                 <div class="d-flex justify-content-between align-items-start mb-1">
                                     <h5 class="card-title mb-0 text-truncate">Uttara Fish Market</h5>
                                     <span class="badge bg-success small ms-1 flex-shrink-0">Open</span>
@@ -607,7 +436,7 @@
                                     <span class="text-muted"><i class="bi bi-star-fill text-warning me-1"></i>4.3</span>
                                 </div>
                                 <div class="mt-auto pt-1">
-                                    <a href="#" class="btn btn-sm btn-primary rounded-pill w-100 py-0 px-0 d-flex align-items-center justify-content-center touch-action">
+                                    <a href="products.html?market_id=5" class="btn btn-sm btn-primary rounded-pill w-100 py-0 px-0 d-flex align-items-center justify-content-center touch-action">
                                         <i class="bi bi-eye me-1"></i>View Market
                                     </a>
                                 </div>
@@ -713,6 +542,7 @@
     <!-- JavaScript -->
     <script src="lib/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="js/pagination.js"></script>
+    <script src="js/toast.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Search toggle functionality
@@ -782,6 +612,46 @@
             
             // Initial check for empty favorites
             filterAndSearchItems();
+
+            // Toast container for notifications
+            if (!document.getElementById('toast-container')) {
+                const toastContainer = document.createElement('div');
+                toastContainer.id = 'toast-container';
+                toastContainer.className = 'position-fixed bottom-0 end-0 p-3';
+                toastContainer.style.zIndex = '1050';
+                document.body.appendChild(toastContainer);
+            }
+            
+            // Favorite button click handler
+            document.querySelectorAll('.favorite-btn').forEach(btn => {
+                // Update button appearance to match markets.html
+                btn.classList.remove('bg-white', 'p-1', 'm-1');
+                btn.classList.add('btn-light', 'btn-sm', 'm-2');
+                if (!btn.hasAttribute('title')) {
+                    btn.setAttribute('title', 'Remove from favorites');
+                }
+                
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Prevent card click
+                    const itemId = this.closest('.card').getAttribute('data-market-id') || 
+                                 this.closest('.card').getAttribute('data-product-id');
+                    const isFavorite = this.classList.contains('active');
+                    
+                    if (isFavorite) {
+                        this.classList.remove('active');
+                        this.querySelector('i').classList.remove('bi-heart-fill');
+                        this.querySelector('i').classList.add('bi-heart');
+                        this.setAttribute('title', 'Add to favorites');
+                        showToast('Removed from favorites', 'info');
+                    } else {
+                        this.classList.add('active');
+                        this.querySelector('i').classList.remove('bi-heart');
+                        this.querySelector('i').classList.add('bi-heart-fill');
+                        this.setAttribute('title', 'Remove from favorites');
+                        showToast('Added to favorites', 'success');
+                    }
+                });
+            });
         });
     </script>
 </body>
