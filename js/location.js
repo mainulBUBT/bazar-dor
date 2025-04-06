@@ -14,53 +14,60 @@ const provider = new GeoSearch.OpenStreetMapProvider({
     }
 });
 
+// Create a hidden map container for geocoding
+let geocodingMap = null;
+
+// Initialize Leaflet geocoder when needed
+function initializeGeocoder() {
+    if (geocodingMap) return;
+    
+    // Create a hidden map container
+    const mapContainer = document.createElement('div');
+    mapContainer.style.display = 'none';
+    document.body.appendChild(mapContainer);
+    
+    // Initialize map
+    geocodingMap = L.map(mapContainer, {
+        center: [0, 0],
+        zoom: 1
+    });
+    
+    // Add a tile layer (not visible, but required)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(geocodingMap);
+}
+
+// Format address for better readability
+function formatAddress(data) {
+    if (!data) return '';
+    
+    // If it's a GeoSearchResult, use the label
+    if (data.label) {
+        return data.label;
+    }
+    
+    // Otherwise create a readable version from components
+    const components = [];
+    
+    if (data.name) components.push(data.name);
+    if (data.street) components.push(data.street);
+    if (data.city) components.push(data.city);
+    if (data.state) components.push(data.state);
+    if (data.country) components.push(data.country);
+    
+    return components.length > 0 ? components.join(', ') : 'Unknown location';
+}
+
 // Track current active index for keyboard navigation
 let activeAddressIndex = 0;
 let currentAddresses = [];
 
-// Format address for better readability
-function formatAddress(nominatimData) {
-    if (!nominatimData || !nominatimData.address) {
-        return nominatimData.display_name || '';
-    }
-    
-    const addr = nominatimData.address;
-    const parts = [];
-    
-    // Add road/street name with house number if available
-    if (addr.road || addr.street) {
-        const road = addr.road || addr.street;
-        const houseNumber = addr.house_number ? addr.house_number + ' ' : '';
-        parts.push(houseNumber + road);
-    } else if (addr.neighbourhood || addr.suburb) {
-        parts.push(addr.neighbourhood || addr.suburb);
-    }
-    
-    // Add city/town
-    if (addr.city || addr.town || addr.village) {
-        parts.push(addr.city || addr.town || addr.village);
-    }
-    
-    // Add state/province
-    if (addr.state || addr.province) {
-        parts.push(addr.state || addr.province);
-    }
-    
-    // Add country
-    if (addr.country) {
-        parts.push(addr.country);
-    }
-    
-    // If we couldn't construct a good address, fall back to the display name
-    if (parts.length < 2 && nominatimData.display_name) {
-        return nominatimData.display_name;
-    }
-    
-    return parts.join(', ');
-}
-
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize hidden map for geocoding
+    initializeGeocoder();
+    
     // Check if we have a saved location and display it
     const savedLocation = localStorage.getItem('userLocation');
     if (savedLocation) {
@@ -291,29 +298,42 @@ async function handleLocationSearch() {
             const uniqueResults = removeDuplicateAddresses(results);
             createAddressDropdown(uniqueResults);
         } else {
-            // If no results from provider, try direct Nominatim API
+            // Fallback to Leaflet's geocoding if provider search fails
             try {
-                const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchTerm)}&limit=5&addressdetails=1`);
-                const data = await response.json();
+                // Ensure geocodingMap is initialized
+                initializeGeocoder();
                 
-                if (data && data.length > 0) {
-                    // Convert Nominatim format to provider format
-                    const convertedResults = data.map(item => ({
-                        x: parseFloat(item.lon),
-                        y: parseFloat(item.lat),
-                        label: formatAddress(item),
-                        raw: item
-                    }));
-                    
-                    createAddressDropdown(convertedResults);
-                }
-            } catch (nominatimError) {
-                console.error('Nominatim search error:', nominatimError);
+                // Use Leaflet's geocoding control to search
+                const geocodingControl = L.Control.geocoder({
+                    defaultMarkGeocode: false
+                }).addTo(geocodingMap);
+                
+                geocodingControl.geocode(searchTerm, results => {
+                    if (results && results.length > 0) {
+                        // Convert Leaflet geocoder results to our format
+                        const convertedResults = results.map(result => ({
+                            x: result.center.lng,
+                            y: result.center.lat,
+                            label: result.name,
+                            raw: result
+                        }));
+                        
+                        createAddressDropdown(convertedResults);
+                    } else {
+                        createAddressDropdown([]); // No results found
+                    }
+                    showLoading(false);
+                });
+                return; // Early return as the callback will handle loading state
+            } catch (leafletError) {
+                console.error('Leaflet geocoding error:', leafletError);
+                createAddressDropdown([]); // Show no results
             }
         }
     } catch (error) {
         showError('Error searching location');
         console.error('Location search error:', error);
+        createAddressDropdown([]); // Show no results
     } finally {
         showLoading(false);
     }
@@ -423,48 +443,49 @@ async function reverseGeocode(lat, lng) {
             // Show success toast
             showSuccess('Location updated successfully');
         } else {
-            // If provider search fails, try Nominatim API directly as fallback
-            const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`);
-            const data = await response.json();
-            
-            if (data && data.display_name) {
-                const formattedAddress = formatAddress(data);
-                locationSearch.value = formattedAddress;
-                storeLocation({
-                    lat,
-                    lng,
-                    address: formattedAddress
-                });
-                showSuccess('Location updated successfully');
-            } else {
-                // If still no results, just store the coordinates
-                locationSearch.value = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
-                storeLocation({
-                    lat,
-                    lng,
-                    address: `${lat.toFixed(6)}, ${lng.toFixed(6)}`
-                });
-            }
-        }
-    } catch (error) {
-        console.error('Reverse geocoding error:', error);
-        
-        // As a last resort, try direct Nominatim API call
-        try {
-            const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`);
-            const data = await response.json();
-            
-            if (data && data.display_name) {
-                const formattedAddress = formatAddress(data);
-                locationSearch.value = formattedAddress;
-                storeLocation({
-                    lat,
-                    lng,
-                    address: formattedAddress
-                });
-                showSuccess('Location updated successfully');
-            } else {
-                // If all attempts fail, display coordinates
+            // Fallback to Leaflet's native reverse geocoding
+            try {
+                // Ensure geocoding map is initialized
+                initializeGeocoder();
+                
+                // Use Leaflet's geocoding control
+                const geocoder = L.Control.geocoder({
+                    defaultMarkGeocode: false
+                }).addTo(geocodingMap);
+                
+                // Use reverse method
+                geocoder.options.geocoder.reverse(
+                    L.latLng(lat, lng),
+                    geocodingMap.options.crs.scale(geocodingMap.getZoom()),
+                    results => {
+                        if (results && results.length > 0) {
+                            const result = results[0];
+                            const displayAddress = result.name;
+                            
+                            locationSearch.value = displayAddress;
+                            storeLocation({
+                                lat,
+                                lng,
+                                address: displayAddress
+                            });
+                            
+                            showSuccess('Location updated successfully');
+                        } else {
+                            // If all attempts fail, display coordinates
+                            locationSearch.value = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+                            storeLocation({
+                                lat,
+                                lng,
+                                address: `${lat.toFixed(6)}, ${lng.toFixed(6)}`
+                            });
+                        }
+                        showLoading(false);
+                    }
+                );
+                return; // Early return as callback handles loading state
+            } catch (leafletError) {
+                console.error('Leaflet reverse geocoding error:', leafletError);
+                // Fall back to coordinates
                 locationSearch.value = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
                 storeLocation({
                     lat,
@@ -473,8 +494,52 @@ async function reverseGeocode(lat, lng) {
                 });
                 showError('Could not get address name');
             }
-        } catch (fallbackError) {
-            console.error('Fallback geocoding error:', fallbackError);
+        }
+    } catch (error) {
+        console.error('Reverse geocoding error:', error);
+        
+        // As a last resort, try with Leaflet's native geocoder
+        try {
+            // Ensure geocoding map is initialized
+            initializeGeocoder();
+            
+            const geocoder = L.Control.geocoder({
+                defaultMarkGeocode: false
+            }).addTo(geocodingMap);
+            
+            // Use reverse method
+            geocoder.options.geocoder.reverse(
+                L.latLng(lat, lng),
+                geocodingMap.options.crs.scale(geocodingMap.getZoom()),
+                results => {
+                    if (results && results.length > 0) {
+                        const result = results[0];
+                        const displayAddress = result.name;
+                        
+                        locationSearch.value = displayAddress;
+                        storeLocation({
+                            lat,
+                            lng,
+                            address: displayAddress
+                        });
+                        
+                        showSuccess('Location updated successfully');
+                    } else {
+                        // If all attempts fail, display coordinates
+                        locationSearch.value = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+                        storeLocation({
+                            lat,
+                            lng,
+                            address: `${lat.toFixed(6)}, ${lng.toFixed(6)}`
+                        });
+                        showError('Could not get address name');
+                    }
+                    showLoading(false);
+                }
+            );
+            return; // Early return as callback handles loading state
+        } catch (finalError) {
+            console.error('Final geocoding attempt error:', finalError);
             locationSearch.value = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
             storeLocation({
                 lat,
