@@ -3,21 +3,24 @@ const locationSearch = document.getElementById('location-search');
 const currentLocationBtn = document.getElementById('current-location-btn');
 const locationLoading = document.getElementById('location-loading');
 
-// Initialize Leaflet Geosearch Provider
+// Initialize Leaflet Geosearch Provider with better parameters
 const provider = new GeoSearch.OpenStreetMapProvider({
     params: {
         // Set appropriate parameters to avoid overusing the API
         'accept-language': 'en',
         countrycodes: '',
         addressdetails: 1, 
-        limit: 5
+        limit: 5,
+        // Add more details to get better results
+        'polygon_geojson': 0,
+        'namedetails': 1
     }
 });
 
 // Create a hidden map container for geocoding
 let geocodingMap = null;
 
-// Initialize Leaflet geocoder when needed
+// Initialize multiple geocoder providers for better results
 function initializeGeocoder() {
     if (geocodingMap) return;
     
@@ -52,11 +55,55 @@ function formatAddress(data) {
     
     if (data.name) components.push(data.name);
     if (data.street) components.push(data.street);
-    if (data.city) components.push(data.city);
-    if (data.state) components.push(data.state);
+    if (data.city || data.town || data.village) components.push(data.city || data.town || data.village);
+    if (data.county || data.state) components.push(data.county || data.state);
     if (data.country) components.push(data.country);
     
     return components.length > 0 ? components.join(', ') : 'Unknown location';
+}
+
+// Build a more detailed address string from geocoding results
+function buildDetailedAddress(result) {
+    if (!result) return '';
+    
+    // If it has a formatted name, use it
+    if (result.name && result.name.includes(',')) {
+        return result.name;
+    }
+    
+    // Extract address components
+    const components = [];
+    
+    // For Photon geocoder format
+    if (result.properties) {
+        const props = result.properties;
+        if (props.name) components.push(props.name);
+        if (props.street) components.push(props.housenumber ? `${props.housenumber} ${props.street}` : props.street);
+        if (props.district) components.push(props.district);
+        if (props.city) components.push(props.city);
+        if (props.county) components.push(props.county);
+        if (props.state) components.push(props.state);
+        if (props.country) components.push(props.country);
+    } 
+    // For standard Leaflet geocoder format
+    else {
+        if (result.name) components.push(result.name);
+        if (result.address) {
+            const addr = result.address;
+            if (addr.road || addr.street) components.push(addr.road || addr.street);
+            if (addr.neighbourhood || addr.suburb) components.push(addr.neighbourhood || addr.suburb);
+            if (addr.city || addr.town || addr.village) components.push(addr.city || addr.town || addr.village);
+            if (addr.county || addr.state) components.push(addr.county || addr.state);
+            if (addr.country) components.push(addr.country);
+        }
+    }
+    
+    // If we still don't have enough components, use name
+    if (components.length < 2 && result.name) {
+        return result.name;
+    }
+    
+    return components.join(', ');
 }
 
 // Track current active index for keyboard navigation
@@ -418,11 +465,55 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Reverse geocode coordinates to address using Leaflet
+// Reverse geocode coordinates to address using multiple providers for better results
 async function reverseGeocode(lat, lng) {
     showLoading(true);
+    
     try {
-        // First try using the provider directly for reverse geocoding
+        // First attempt: Use the Photon geocoder (often provides better detail)
+        const photonResponse = await fetch(`https://photon.komoot.io/reverse?lat=${lat}&lon=${lng}&lang=en`);
+        const photonData = await photonResponse.json();
+        
+        if (photonData && photonData.features && photonData.features.length > 0) {
+            const feature = photonData.features[0];
+            const properties = feature.properties;
+            
+            // Build a detailed address from Photon data
+            let detailedAddress = '';
+            const addressParts = [];
+            
+            // Build address from most specific to least specific
+            if (properties.name) addressParts.push(properties.name);
+            if (properties.street) {
+                if (properties.housenumber) {
+                    addressParts.push(`${properties.housenumber} ${properties.street}`);
+                } else {
+                    addressParts.push(properties.street);
+                }
+            }
+            if (properties.district) addressParts.push(properties.district);
+            if (properties.city) addressParts.push(properties.city);
+            if (properties.state) addressParts.push(properties.state);
+            if (properties.country) addressParts.push(properties.country);
+            
+            detailedAddress = addressParts.join(', ');
+            
+            // Use the address if it has enough detail
+            if (addressParts.length >= 2) {
+                locationSearch.value = detailedAddress;
+                storeLocation({
+                    lat,
+                    lng,
+                    address: detailedAddress
+                });
+                
+                showSuccess('Location updated successfully');
+                showLoading(false);
+                return;
+            }
+        }
+        
+        // Second attempt: Use the provider for reverse geocoding
         const results = await provider.search({ 
             query: {
                 lat: lat,
@@ -440,116 +531,141 @@ async function reverseGeocode(lat, lng) {
                 address: address.label
             });
             
-            // Show success toast
             showSuccess('Location updated successfully');
-        } else {
-            // Fallback to Leaflet's native reverse geocoding
-            try {
-                // Ensure geocoding map is initialized
-                initializeGeocoder();
-                
-                // Use Leaflet's geocoding control
-                const geocoder = L.Control.geocoder({
-                    defaultMarkGeocode: false
-                }).addTo(geocodingMap);
-                
-                // Use reverse method
-                geocoder.options.geocoder.reverse(
-                    L.latLng(lat, lng),
-                    geocodingMap.options.crs.scale(geocodingMap.getZoom()),
-                    results => {
-                        if (results && results.length > 0) {
-                            const result = results[0];
-                            const displayAddress = result.name;
-                            
-                            locationSearch.value = displayAddress;
-                            storeLocation({
-                                lat,
-                                lng,
-                                address: displayAddress
-                            });
-                            
-                            showSuccess('Location updated successfully');
-                        } else {
-                            // If all attempts fail, display coordinates
-                            locationSearch.value = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
-                            storeLocation({
-                                lat,
-                                lng,
-                                address: `${lat.toFixed(6)}, ${lng.toFixed(6)}`
-                            });
-                        }
-                        showLoading(false);
-                    }
-                );
-                return; // Early return as callback handles loading state
-            } catch (leafletError) {
-                console.error('Leaflet reverse geocoding error:', leafletError);
-                // Fall back to coordinates
-                locationSearch.value = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
-                storeLocation({
-                    lat,
-                    lng,
-                    address: `${lat.toFixed(6)}, ${lng.toFixed(6)}`
-                });
-                showError('Could not get address name');
-            }
+            showLoading(false);
+            return;
         }
+        
+        // Third attempt: Leaflet's geocoding control
+        // Ensure geocoding map is initialized
+        initializeGeocoder();
+        
+        // Create a custom geocoder with Nominatim for better detail
+        const geocoder = L.Control.Geocoder.nominatim({
+            geocodingQueryParams: {
+                addressdetails: 1,
+                extratags: 1,
+                namedetails: 1
+            }
+        });
+        
+        // Perform reverse geocoding
+        geocoder.reverse(
+            L.latLng(lat, lng),
+            18, // higher zoom level for more detailed results
+            results => {
+                if (results && results.length > 0) {
+                    const result = results[0];
+                    
+                    // Extract detailed address components
+                    let displayAddress = '';
+                    
+                    if (result.html) {
+                        // Some geocoders return formatted HTML
+                        const div = document.createElement('div');
+                        div.innerHTML = result.html;
+                        displayAddress = div.textContent || div.innerText;
+                    } else if (result.name) {
+                        displayAddress = result.name;
+                    }
+                    
+                    // If we have address details, build a more detailed address
+                    if (result.address) {
+                        const addr = result.address;
+                        const parts = [];
+                        
+                        // Build from most specific to least specific
+                        if (addr.road) {
+                            const houseNumber = addr.house_number ? `${addr.house_number} ` : '';
+                            parts.push(houseNumber + addr.road);
+                        }
+                        if (addr.neighbourhood || addr.suburb) parts.push(addr.neighbourhood || addr.suburb);
+                        if (addr.city || addr.town || addr.village) parts.push(addr.city || addr.town || addr.village);
+                        if (addr.county) parts.push(addr.county);
+                        if (addr.state || addr.province) parts.push(addr.state || addr.province);
+                        if (addr.country) parts.push(addr.country);
+                        
+                        if (parts.length >= 2) {
+                            displayAddress = parts.join(', ');
+                        }
+                    }
+                    
+                    locationSearch.value = displayAddress;
+                    storeLocation({
+                        lat,
+                        lng,
+                        address: displayAddress
+                    });
+                    
+                    showSuccess('Location updated successfully');
+                } else {
+                    // If all attempts fail, display coordinates with a message
+                    locationSearch.value = `Location at ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+                    storeLocation({
+                        lat,
+                        lng,
+                        address: `Location at ${lat.toFixed(6)}, ${lng.toFixed(6)}`
+                    });
+                }
+                showLoading(false);
+            }
+        );
     } catch (error) {
         console.error('Reverse geocoding error:', error);
         
-        // As a last resort, try with Leaflet's native geocoder
+        // As a last resort, try with OpenStreetMap Nominatim directly
         try {
-            // Ensure geocoding map is initialized
-            initializeGeocoder();
+            const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1&accept-language=en`);
+            const data = await response.json();
             
-            const geocoder = L.Control.geocoder({
-                defaultMarkGeocode: false
-            }).addTo(geocodingMap);
-            
-            // Use reverse method
-            geocoder.options.geocoder.reverse(
-                L.latLng(lat, lng),
-                geocodingMap.options.crs.scale(geocodingMap.getZoom()),
-                results => {
-                    if (results && results.length > 0) {
-                        const result = results[0];
-                        const displayAddress = result.name;
-                        
-                        locationSearch.value = displayAddress;
-                        storeLocation({
-                            lat,
-                            lng,
-                            address: displayAddress
-                        });
-                        
-                        showSuccess('Location updated successfully');
-                    } else {
-                        // If all attempts fail, display coordinates
-                        locationSearch.value = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
-                        storeLocation({
-                            lat,
-                            lng,
-                            address: `${lat.toFixed(6)}, ${lng.toFixed(6)}`
-                        });
-                        showError('Could not get address name');
-                    }
-                    showLoading(false);
+            if (data && data.display_name) {
+                // Parse address components to create a cleaner display
+                const addr = data.address || {};
+                const parts = [];
+                
+                // Build from most specific to least specific
+                if (addr.road) {
+                    const houseNumber = addr.house_number ? `${addr.house_number} ` : '';
+                    parts.push(houseNumber + addr.road);
                 }
-            );
-            return; // Early return as callback handles loading state
+                if (addr.neighbourhood || addr.suburb) parts.push(addr.neighbourhood || addr.suburb);
+                if (addr.city || addr.town || addr.village) parts.push(addr.city || addr.town || addr.village);
+                if (addr.county) parts.push(addr.county);
+                if (addr.state || addr.province) parts.push(addr.state || addr.province);
+                if (addr.country) parts.push(addr.country);
+                
+                const displayAddress = parts.length >= 2 ? parts.join(', ') : data.display_name;
+                
+                locationSearch.value = displayAddress;
+                storeLocation({
+                    lat,
+                    lng,
+                    address: displayAddress
+                });
+                
+                showSuccess('Location updated successfully');
+            } else {
+                // If everything fails, display coordinates
+                locationSearch.value = `Location at ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+                storeLocation({
+                    lat,
+                    lng,
+                    address: `Location at ${lat.toFixed(6)}, ${lng.toFixed(6)}`
+                });
+                showError('Could not get detailed address');
+            }
         } catch (finalError) {
             console.error('Final geocoding attempt error:', finalError);
-            locationSearch.value = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+            locationSearch.value = `Location at ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
             storeLocation({
                 lat,
                 lng,
-                address: `${lat.toFixed(6)}, ${lng.toFixed(6)}`
+                address: `Location at ${lat.toFixed(6)}, ${lng.toFixed(6)}`
             });
             showError('Could not get address name');
+        } finally {
+            showLoading(false);
         }
-    } finally {
-        showLoading(false);
     }
 }
 

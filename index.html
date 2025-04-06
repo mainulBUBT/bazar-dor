@@ -334,8 +334,133 @@
             crossorigin=""></script>
     <!-- Leaflet Geosearch plugin -->
     <script src="https://unpkg.com/leaflet-geosearch@3.8.0/dist/geosearch.umd.js"></script>
-    <!-- Leaflet Control Geocoder plugin -->
-    <script src="https://unpkg.com/leaflet-control-geocoder@2.4.0/dist/Control.Geocoder.js"></script>
+    <!-- Leaflet Control Geocoder plugin with all providers -->
+    <script src="https://unpkg.com/leaflet-control-geocoder@2.4.0/dist/Control.Geocoder.min.js"></script>
+    <!-- Leaflet Photon geocoder for better results -->
+    <script>
+    // Initialize custom Photon geocoder provider if needed
+    if (typeof L !== 'undefined' && L.Control && L.Control.Geocoder && !L.Control.Geocoder.Photon) {
+        L.Control.Geocoder.Photon = L.Class.extend({
+            options: {
+                serviceUrl: 'https://photon.komoot.io/',
+                reverseUrl: 'https://photon.komoot.io/reverse/',
+                nameProperties: ['name', 'street', 'housenumber', 'city']
+            },
+            
+            initialize: function(options) {
+                L.setOptions(this, options);
+            },
+            
+            geocode: function(query, cb, context) {
+                const params = {
+                    q: query,
+                    limit: 10
+                };
+                
+                if (this.options.lang) {
+                    params.lang = this.options.lang;
+                }
+                
+                fetch(this.options.serviceUrl + 'api?' + new URLSearchParams(params))
+                    .then(response => response.json())
+                    .then(data => {
+                        const results = [];
+                        data.features.forEach(feature => {
+                            const center = L.latLng(
+                                feature.geometry.coordinates[1],
+                                feature.geometry.coordinates[0]
+                            );
+                            
+                            const properties = feature.properties;
+                            const street = properties.street || '';
+                            const housenumber = properties.housenumber || '';
+                            const city = properties.city || '';
+                            const state = properties.state || '';
+                            const country = properties.country || '';
+                            
+                            let name = properties.name || '';
+                            if (!name && street) {
+                                name = housenumber ? housenumber + ' ' + street : street;
+                                if (city) name += ', ' + city;
+                            }
+                            
+                            results.push({
+                                name: name || this._buildAddressString(properties),
+                                center: center,
+                                bbox: L.latLngBounds(center, center),
+                                properties: properties
+                            });
+                        });
+                        
+                        cb.call(context, results);
+                    })
+                    .catch(error => {
+                        console.error('Photon geocoding error:', error);
+                        cb.call(context, []);
+                    });
+            },
+            
+            reverse: function(location, scale, cb, context) {
+                const params = {
+                    lat: location.lat,
+                    lon: location.lng,
+                    limit: 1
+                };
+                
+                if (this.options.lang) {
+                    params.lang = this.options.lang;
+                }
+                
+                fetch(this.options.reverseUrl + '?' + new URLSearchParams(params))
+                    .then(response => response.json())
+                    .then(data => {
+                        const results = [];
+                        if (data.features && data.features.length > 0) {
+                            const feature = data.features[0];
+                            const properties = feature.properties;
+                            const center = L.latLng(
+                                feature.geometry.coordinates[1],
+                                feature.geometry.coordinates[0]
+                            );
+                            
+                            results.push({
+                                name: this._buildAddressString(properties),
+                                center: center,
+                                bbox: L.latLngBounds(center, center),
+                                properties: properties
+                            });
+                        }
+                        
+                        cb.call(context, results);
+                    })
+                    .catch(error => {
+                        console.error('Photon reverse geocoding error:', error);
+                        cb.call(context, []);
+                    });
+            },
+            
+            _buildAddressString: function(properties) {
+                const parts = [];
+                
+                // Build address from most specific to least specific
+                if (properties.name) parts.push(properties.name);
+                if (properties.street) {
+                    if (properties.housenumber) {
+                        parts.push(properties.housenumber + ' ' + properties.street);
+                    } else {
+                        parts.push(properties.street);
+                    }
+                }
+                if (properties.district) parts.push(properties.district);
+                if (properties.city) parts.push(properties.city);
+                if (properties.state) parts.push(properties.state);
+                if (properties.country) parts.push(properties.country);
+                
+                return parts.join(', ');
+            }
+        });
+    }
+    </script>
     <script src="js/location.js"></script>
     <script>
         // Register Service Worker
