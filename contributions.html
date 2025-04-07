@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#3B8C6E">
+    <title>Contributions - Bazar Dor</title>
+    <link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="lib/bootstrap-icons/bootstrap-icons.min.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+</head>
+
+<body class="bg-light">
+    <header class="app-header bg-primary">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center py-2">
+                <button class="btn text-white p-0" onclick="window.location.href='profile.html'">
+                    <i class="bi bi-arrow-left fs-4"></i>
+                </button>
+                <h5 class="text-white mb-0">My Contributions</h5>
+                <div>
+                    <button class="btn text-white p-0" id="filterBtn">
+                        <i class="bi bi-filter fs-4"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mt-3">
+        <!-- Tab Navigation -->
+        <div class="card border-0 shadow-sm mb-3">
+            <div class="card-footer bg-white border-0 pt-2 pb-2">
+                <ul class="nav nav-tabs border-0 equal-tabs market-tabs" id="contributionsTab" role="tablist">
+                    <li class="nav-item flex-fill text-center" role="presentation">
+                        <a class="nav-link horizontal-layout active" id="products-tab" data-bs-toggle="tab" href="#products-tab-pane" role="tab" aria-controls="products-tab-pane" aria-selected="true">
+                            <i class="bi bi-box-seam me-2 text-primary"></i>Products
+                        </a>
+                    </li>
+                    <li class="nav-item flex-fill text-center" role="presentation">
+                        <a class="nav-link horizontal-layout" id="markets-tab" data-bs-toggle="tab" href="#markets-tab-pane" role="tab" aria-controls="markets-tab-pane" aria-selected="false">
+                            <i class="bi bi-shop me-2"></i>Markets
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Add New Buttons -->
+        <div class="mb-3">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h6 class="mb-0 fw-bold">My Contributions</h6>
+                <div class="tab-content" id="add-buttons-content">
+                    <div class="tab-pane fade show active" id="add-product-btn-pane" role="tabpanel" aria-labelledby="products-tab">
+                        <button class="btn btn-sm btn-primary rounded-pill px-3 d-flex align-items-center fw-medium" onclick="window.location.href='add-product.html'">
+                            <i class="bi bi-plus-circle-fill me-2"></i>Add Product
+                        </button>
+                    </div>
+                    <div class="tab-pane fade" id="add-market-btn-pane" role="tabpanel" aria-labelledby="markets-tab">
+                        <button class="btn btn-sm btn-primary rounded-pill px-3 d-flex align-items-center fw-medium" onclick="window.location.href='add-market.html'">
+                            <i class="bi bi-plus-circle-fill me-2"></i>Add Market
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Filter Dropdown -->
+        <div class="filter-container mb-3">
+            <div class="filter-chips d-flex overflow-auto pb-2 hide-scrollbar snap-scroll">
+                <div class="filter-chip active me-2" data-filter="all">
+                    <span class="filter-icon"><i class="bi bi-grid"></i></span>
+                    <span class="filter-text">All</span>
+                </div>
+                <div class="filter-chip me-2" data-filter="approved">
+                    <span class="filter-icon"><i class="bi bi-check-circle"></i></span>
+                    <span class="filter-text">Approved</span>
+                </div>
+                <div class="filter-chip me-2" data-filter="pending">
+                    <span class="filter-icon"><i class="bi bi-clock-history"></i></span>
+                    <span class="filter-text">Pending</span>
+                </div>
+                <div class="filter-chip me-2" data-filter="rejected">
+                    <span class="filter-icon"><i class="bi bi-x-circle"></i></span>
+                    <span class="filter-text">Rejected</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="contributionsTabContent">
+            <!-- Products Tab -->
+            <div class="tab-pane fade show active" id="products-tab-pane" role="tabpanel" aria-labelledby="products-tab">
+                <div class="product-list row g-2 mx-0 mb-3">
+                    <!-- Product Item -->
+                    <div class="col-12 col-md-6 mb-2 px-1">
+                        <div class="card product-item shadow-sm rounded-3 h-100" data-status="approved">
+                            <div class="row g-0">
+                                <div class="col-4">
+                                    <div class="position-relative h-100">
+                                        <img src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?q=80&w=400&auto=format&fit=crop" class="img-fluid rounded-start h-100 object-fit-cover" alt="Product" style="min-height: 120px;">
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="card-body position-relative">
+                                        <span class="badge bg-success position-absolute top-0 end-0 rounded-pill px-3">Approved</span>
+                                        <h5 class="card-title fw-bold">Organic Tomatoes</h5>
+                                        <p class="card-text small text-muted text-truncate">Fresh organic tomatoes from local farm.</p>
+                                        <div class="d-flex justify-content-end mt-2">
+                                            <span class="small text-success"><i class="bi bi-check-circle-fill me-1"></i>Listed on marketplace</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Item -->
+                    <div class="col-12 col-md-6 mb-2 px-1">
+                        <div class="card product-item shadow-sm rounded-3 h-100" data-status="pending">
+                            <div class="row g-0">
+                                <div class="col-4">
+                                    <div class="position-relative h-100">
+                                        <img src="https://images.unsplash.com/photo-1619566636858-adf3ef46400b?q=80&w=400&auto=format&fit=crop" class="img-fluid rounded-start h-100 object-fit-cover" alt="Product" style="min-height: 120px;">
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="card-body position-relative">
+                                        <span class="badge bg-warning text-dark position-absolute top-0 end-0 rounded-pill px-3">Pending</span>
+                                        <h5 class="card-title fw-bold">Handmade Pottery</h5>
+                                        <p class="card-text small text-muted text-truncate">Traditional handmade pottery bowls.</p>
+                                        <div class="d-flex justify-content-end mt-2">
+                                            <button class="btn btn-sm btn-outline-primary rounded-pill me-2"><i class="bi bi-pencil-fill me-1"></i>Edit</button>
+                                            <button class="btn btn-sm btn-outline-danger rounded-pill"><i class="bi bi-trash-fill me-1"></i>Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Item (Rejected example) -->
+                    <div class="col-12 col-md-6 mb-2 px-1">
+                        <div class="card product-item shadow-sm rounded-3 h-100" data-status="rejected">
+                            <div class="row g-0">
+                                <div class="col-4">
+                                    <div class="position-relative h-100">
+                                        <img src="https://images.unsplash.com/photo-1601924638867-3a6de6b7a500?q=80&w=400&auto=format&fit=crop" class="img-fluid rounded-start h-100 object-fit-cover" alt="Product" style="min-height: 120px;">
+                                        <div class="overlay-rejected"></div>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="card-body position-relative">
+                                        <span class="badge bg-danger position-absolute top-0 end-0 rounded-pill px-3">Rejected</span>
+                                        <h5 class="card-title fw-bold">Handcrafted Jewelry</h5>
+                                        <p class="card-text small text-muted text-truncate">Reason: Product photos don't match description</p>
+                                        <div class="d-flex justify-content-end mt-2">
+                                            <button class="btn btn-sm btn-outline-primary rounded-pill me-2"><i class="bi bi-pencil-fill me-1"></i>Edit</button>
+                                            <button class="btn btn-sm btn-outline-danger rounded-pill"><i class="bi bi-trash-fill me-1"></i>Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Item (Another example) -->
+                    <div class="col-12 col-md-6 mb-2 px-1">
+                        <div class="card product-item shadow-sm rounded-3 h-100" data-status="approved">
+                            <div class="row g-0">
+                                <div class="col-4">
+                                    <div class="position-relative h-100">
+                                        <img src="https://images.unsplash.com/photo-1611409922166-e4eb423b0d6e?q=80&w=400&auto=format&fit=crop" class="img-fluid rounded-start h-100 object-fit-cover" alt="Product" style="min-height: 120px;">
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="card-body position-relative">
+                                        <span class="badge bg-success position-absolute top-0 end-0 rounded-pill px-3">Approved</span>
+                                        <h5 class="card-title fw-bold">Fresh Spices</h5>
+                                        <p class="card-text small text-muted text-truncate">Authentic local spice blend.</p>
+                                        <div class="d-flex justify-content-end mt-2">
+                                            <span class="small text-success"><i class="bi bi-check-circle-fill me-1"></i>Listed on marketplace</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Empty State -->
+                    <div class="empty-state text-center d-none">
+                        <div class="my-5">
+                            <i class="bi bi-box-seam text-muted" style="font-size: 3rem;"></i>
+                            <h5 class="mt-3">No Products Found</h5>
+                            <p class="text-muted">You haven't added any products yet.</p>
+                            <button class="btn btn-primary rounded-pill px-4 mt-2" onclick="window.location.href='add-product.html'">
+                                <i class="bi bi-plus-circle me-2"></i>Add New Product
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Markets Tab -->
+            <div class="tab-pane fade" id="markets-tab-pane" role="tabpanel" aria-labelledby="markets-tab">
+                <div class="market-list row g-2 mx-0 mb-3">
+                    <!-- Market Item -->
+                    <div class="col-12 col-md-6 mb-2 px-1">
+                        <div class="card market-item shadow-sm rounded-3 h-100" data-status="approved">
+                            <div class="row g-0">
+                                <div class="col-4">
+                                    <div class="position-relative h-100">
+                                        <img src="https://images.unsplash.com/photo-1543083477-4f785aeafaa9?q=80&w=400&auto=format&fit=crop" class="img-fluid rounded-start h-100 object-fit-cover" alt="Market" style="min-height: 120px;">
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="card-body position-relative">
+                                        <span class="badge bg-success position-absolute top-0 end-0 rounded-pill px-3">Approved</span>
+                                        <h5 class="card-title fw-bold">Downtown Farmers Market</h5>
+                                        <p class="card-text small mb-1"><i class="bi bi-geo-alt-fill text-primary me-1"></i>Central Avenue, Downtown</p>
+                                        <p class="card-text small text-muted text-truncate">Open Wed-Sun, 8am-2pm</p>
+                                        <div class="d-flex justify-content-end mt-2">
+                                            <span class="small text-success"><i class="bi bi-check-circle-fill me-1"></i>Listed on marketplace</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Market Item -->
+                    <div class="col-12 col-md-6 mb-2 px-1">
+                        <div class="card market-item shadow-sm rounded-3 h-100" data-status="pending">
+                            <div class="row g-0">
+                                <div class="col-4">
+                                    <div class="position-relative h-100">
+                                        <img src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=80&w=400&auto=format&fit=crop" class="img-fluid rounded-start h-100 object-fit-cover" alt="Market" style="min-height: 120px;">
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="card-body position-relative">
+                                        <span class="badge bg-warning text-dark position-absolute top-0 end-0 rounded-pill px-3">Pending</span>
+                                        <h5 class="card-title fw-bold">Riverside Craft Market</h5>
+                                        <p class="card-text small mb-1"><i class="bi bi-geo-alt-fill text-primary me-1"></i>Riverside Park, East End</p>
+                                        <p class="card-text small text-muted text-truncate">Open Weekends, 10am-6pm</p>
+                                        <div class="d-flex justify-content-end mt-2">
+                                            <button class="btn btn-sm btn-outline-primary rounded-pill me-2"><i class="bi bi-pencil-fill me-1"></i>Edit</button>
+                                            <button class="btn btn-sm btn-outline-danger rounded-pill"><i class="bi bi-trash-fill me-1"></i>Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Market Item (Rejected) -->
+                    <div class="col-12 col-md-6 mb-2 px-1">
+                        <div class="card market-item shadow-sm rounded-3 h-100" data-status="rejected">
+                            <div class="row g-0">
+                                <div class="col-4">
+                                    <div class="position-relative h-100">
+                                        <img src="https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=400&auto=format&fit=crop" class="img-fluid rounded-start h-100 object-fit-cover" alt="Market" style="min-height: 120px;">
+                                        <div class="overlay-rejected"></div>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="card-body position-relative">
+                                        <span class="badge bg-danger position-absolute top-0 end-0 rounded-pill px-3">Rejected</span>
+                                        <h5 class="card-title fw-bold">Community Artisan Fair</h5>
+                                        <p class="card-text small mb-1"><i class="bi bi-geo-alt-fill text-primary me-1"></i>Community Center, North District</p>
+                                        <p class="card-text small text-muted text-truncate">Reason: Insufficient location verification</p>
+                                        <div class="d-flex justify-content-end mt-2">
+                                            <button class="btn btn-sm btn-outline-primary rounded-pill me-2"><i class="bi bi-pencil-fill me-1"></i>Edit</button>
+                                            <button class="btn btn-sm btn-outline-danger rounded-pill"><i class="bi bi-trash-fill me-1"></i>Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Market Item (Another example) -->
+                    <div class="col-12 col-md-6 mb-2 px-1">
+                        <div class="card market-item shadow-sm rounded-3 h-100" data-status="approved">
+                            <div class="row g-0">
+                                <div class="col-4">
+                                    <div class="position-relative h-100">
+                                        <img src="https://images.unsplash.com/photo-1520956915995-a3da195aadf0?q=80&w=400&auto=format&fit=crop" class="img-fluid rounded-start h-100 object-fit-cover" alt="Market" style="min-height: 120px;">
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="card-body position-relative">
+                                        <span class="badge bg-success position-absolute top-0 end-0 rounded-pill px-3">Approved</span>
+                                        <h5 class="card-title fw-bold">Organic Food Market</h5>
+                                        <p class="card-text small mb-1"><i class="bi bi-geo-alt-fill text-primary me-1"></i>Green Avenue, South District</p>
+                                        <p class="card-text small text-muted text-truncate">Open Daily, 7am-7pm</p>
+                                        <div class="d-flex justify-content-end mt-2">
+                                            <span class="small text-success"><i class="bi bi-check-circle-fill me-1"></i>Listed on marketplace</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Empty State -->
+                    <div class="empty-state text-center d-none">
+                        <div class="my-5">
+                            <i class="bi bi-shop text-muted" style="font-size: 3rem;"></i>
+                            <h5 class="mt-3">No Markets Found</h5>
+                            <p class="text-muted">You haven't added any markets yet.</p>
+                            <button class="btn btn-primary rounded-pill px-4 mt-2" onclick="window.location.href='add-market.html'">
+                                <i class="bi bi-plus-circle me-2"></i>Add New Market
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Single Consolidated Pagination for Both Tabs -->
+        <nav aria-label="Contributions pagination" class="mt-4 mb-3">
+            <div class="pagination-mobile">
+                <div class="page-navigation">
+                    <button id="prev-page" class="page-btn">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <div class="page-info">
+                        <span id="current-page">1</span> of <span id="total-pages">3</span>
+                    </div>
+                    <button id="next-page" class="page-btn">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            <ul class="pagination pagination-sm justify-content-center mt-2">
+                <li class="page-item"><a class="page-link rounded-circle mx-1 shadow-sm active" href="#">1</a></li>
+                <li class="page-item"><a class="page-link rounded-circle mx-1 shadow-sm" href="#">2</a></li>
+                <li class="page-item"><a class="page-link rounded-circle mx-1 shadow-sm" href="#">3</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <nav class="navbar fixed-bottom navbar-dark">
+        <div class="container-fluid justify-content-center p-0">
+            <ul class="navbar-nav flex-row bottom-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">
+                        <i class="bi bi-house"></i>
+                        <span class="nav-label">Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="markets.html">
+                        <i class="bi bi-shop"></i>
+                        <span class="nav-label">Markets</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="favorites.html">
+                        <i class="bi bi-heart"></i>
+                        <span class="nav-label">Favorites</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="profile.html">
+                        <i class="bi bi-person"></i>
+                        <span class="nav-label">Profile</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Toast for success messages -->
+    <div class="position-fixed bottom-0 end-0 p-3 toast-container">
+        <div id="toast" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="bi bi-check-circle me-2"></i>
+                    <span id="toastMessage">Notification message</span>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Custom styling for contributions page */
+        .nav-pills .nav-link.active {
+            background-color: var(--bs-primary);
+            color: white;
+        }
+        
+        .nav-pills .nav-link {
+            color: var(--bs-primary);
+            font-weight: 500;
+        }
+        
+        /* Tab styles from products.html */
+        .equal-tabs {
+            display: flex;
+            width: 100%;
+        }
+        
+        .equal-tabs .nav-item {
+            flex: 1;
+        }
+        
+        .nav-tabs .nav-link {
+            color: #6c757d;
+            border: none;
+            padding: 0.75rem 1rem;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: var(--bs-primary);
+            background-color: transparent;
+            border-bottom: 2px solid var(--bs-primary);
+        }
+        
+        .nav-tabs .nav-link:hover:not(.active) {
+            border-color: transparent;
+            color: var(--bs-primary);
+        }
+        
+        .horizontal-layout {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Filter chips */
+        .filter-chips {
+            display: flex;
+            padding-bottom: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Firefox */
+        }
+        
+        .filter-chips::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Edge */
+        }
+        
+        .hide-scrollbar {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .snap-scroll {
+            scroll-snap-type: x mandatory;
+        }
+        
+        .filter-chip {
+            display: flex;
+            align-items: center;
+            background-color: #f8f9fa;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            white-space: nowrap;
+            scroll-snap-align: start;
+            transition: all 0.2s ease;
+            color: #6c757d;
+            font-weight: 500;
+        }
+        
+        .filter-chip.active {
+            background-color: var(--bs-primary);
+            color: white;
+        }
+        
+        .filter-chip .filter-icon {
+            margin-right: 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        /* Pagination styling */
+        .pagination-mobile {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-navigation {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 50px;
+            padding: 0.25rem 0.5rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+        
+        .page-btn {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            background-color: transparent;
+            color: var(--bs-primary);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .page-btn:hover {
+            background-color: rgba(59, 140, 110, 0.1);
+        }
+        
+        .page-btn:disabled {
+            color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .page-info {
+            margin: 0 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .pagination .page-link {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            color: #6c757d;
+            background-color: white;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+        
+        .pagination .page-link.active {
+            background-color: var(--bs-primary);
+            color: white;
+        }
+        
+        .badge {
+            font-weight: 500;
+        }
+        
+        .card {
+            border: none;
+            overflow: hidden;
+        }
+        
+        .overlay-rejected {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-top-left-radius: 0.5rem;
+            border-bottom-left-radius: 0.5rem;
+        }
+        
+        .empty-state i {
+            opacity: 0.5;
+        }
+        
+        /* Make bottom nav match other pages */
+        .bottom-nav {
+            background-color: white;
+            border-radius: 1.5rem 1.5rem 0 0;
+            box-shadow: 0 -0.5rem 1rem rgba(0, 0, 0, 0.1);
+            padding: 0.75rem 0.5rem;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .bottom-nav .nav-item {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .bottom-nav .nav-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.5rem;
+            color: #B0B7C3;
+            font-size: 0.75rem;
+        }
+        
+        .bottom-nav .nav-link i {
+            font-size: 1.25rem;
+            margin-bottom: 0.15rem;
+        }
+        
+        .bottom-nav .nav-link.active {
+            color: var(--bs-primary);
+        }
+    </style>
+
+    <script src="lib/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/toast.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sync tabs with add buttons
+            const productTab = document.getElementById('products-tab');
+            const marketTab = document.getElementById('markets-tab');
+            const addProductBtn = document.getElementById('add-product-btn-pane');
+            const addMarketBtn = document.getElementById('add-market-btn-pane');
+
+            productTab.addEventListener('shown.bs.tab', function() {
+                addProductBtn.classList.add('show', 'active');
+                addMarketBtn.classList.remove('show', 'active');
+            });
+
+            marketTab.addEventListener('shown.bs.tab', function() {
+                addMarketBtn.classList.add('show', 'active');
+                addProductBtn.classList.remove('show', 'active');
+            });
+
+            // Filter chip functionality
+            const filterChips = document.querySelectorAll('.filter-chip');
+            
+            filterChips.forEach(chip => {
+                chip.addEventListener('click', function() {
+                    // Remove active class from all chips
+                    filterChips.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked chip
+                    this.classList.add('active');
+                    
+                    const filter = this.dataset.filter;
+                    
+                    // Filter products
+                    const productItems = document.querySelectorAll('.product-item');
+                    filterItems(productItems, filter);
+                    
+                    // Filter markets
+                    const marketItems = document.querySelectorAll('.market-item');
+                    filterItems(marketItems, filter);
+                    
+                    // Check if we need to show empty states
+                    toggleEmptyState('.product-list', '.product-item:not(.d-none)', '.product-list .empty-state');
+                    toggleEmptyState('.market-list', '.market-item:not(.d-none)', '.market-list .empty-state');
+                });
+            });
+            
+            function filterItems(items, status) {
+                items.forEach(item => {
+                    if (status === 'all' || item.dataset.status === status) {
+                        item.classList.remove('d-none');
+                    } else {
+                        item.classList.add('d-none');
+                    }
+                });
+            }
+            
+            function toggleEmptyState(listSelector, visibleItemsSelector, emptyStateSelector) {
+                const list = document.querySelector(listSelector);
+                const visibleItems = document.querySelectorAll(visibleItemsSelector);
+                const emptyState = document.querySelector(emptyStateSelector);
+                
+                if (visibleItems.length === 0) {
+                    emptyState.classList.remove('d-none');
+                } else {
+                    emptyState.classList.add('d-none');
+                }
+            }
+        });
+    </script>
+</body>
+
+</html> 
