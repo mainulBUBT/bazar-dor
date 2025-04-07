@@ -40,7 +40,7 @@
     <div class="container mt-4">
         <div class="card border-0 shadow-sm rounded-4 mb-4">
             <div class="card-body p-4">
-                <div id="map-container" class="mb-3">
+                <div id="map-container" class="mb-3 edit-location-leaflet-controls">
                     <div id="map"></div>
                     <div class="map-marker-centered">
                         <i class="bi bi-geo-alt-fill"></i>
@@ -88,14 +88,14 @@
                         <div class="col-6">
                             <label for="visible-latitude" class="form-label small text-muted">Latitude (decimal)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control rounded-start-3" id="visible-latitude" style="min-width: 120px;" value="23.81030000">
+                                <input type="text" class="form-control rounded-start-3 coordinate-input" id="visible-latitude" value="23.81030000">
                                 <span class="input-group-text rounded-end-3 bg-light">°N</span>
                             </div>
                         </div>
                         <div class="col-6">
                             <label for="visible-longitude" class="form-label small text-muted">Longitude (decimal)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control rounded-start-3" id="visible-longitude" style="min-width: 120px;" value="90.41250000">
+                                <input type="text" class="form-control rounded-start-3 coordinate-input" id="visible-longitude" value="90.41250000">
                                 <span class="input-group-text rounded-end-3 bg-light">°E</span>
                             </div>
                         </div>
@@ -373,7 +373,7 @@
         function hideMapLoading() {
             const mapLoading = document.getElementById('map-loading');
             if (mapLoading) {
-                mapLoading.style.display = 'none';
+                mapLoading.classList.add('map-loading-hidden');
             }
         }
         
@@ -451,7 +451,7 @@
                     // Ensure controls are visible
                     const zoomControl = document.querySelector('.leaflet-control-zoom');
                     if (zoomControl) {
-                        zoomControl.style.display = 'block';
+                        zoomControl.classList.add('map-zoom-visible');
                     }
                 }, 500);
             } catch (error) {

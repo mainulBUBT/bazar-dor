@@ -18,17 +18,6 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
           crossorigin=""/>
-    <!-- Additional map style fixes -->
-    <style>
-        .leaflet-control-zoom {
-            z-index: 1000 !important;
-            margin-top: 10px !important;
-            margin-right: 10px !important;
-        }
-        .leaflet-top {
-            z-index: 1000 !important;
-        }
-    </style>
 </head>
 
 <body class="bg-light">
@@ -51,7 +40,7 @@
     <div class="container mt-4">
         <div class="card border-0 shadow-sm rounded-4 mb-4">
             <div class="card-body p-4">
-                <div id="map-container" class="mb-3">
+                <div id="map-container" class="mb-3 add-location-leaflet-controls">
                     <div id="map"></div>
                     <div class="map-marker-centered">
                         <i class="bi bi-geo-alt-fill"></i>
@@ -99,14 +88,14 @@
                         <div class="col-6">
                             <label for="visible-latitude" class="form-label small text-muted">Latitude (decimal)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control rounded-start-3" id="visible-latitude" style="min-width: 120px;" placeholder="23.8103">
+                                <input type="text" class="form-control rounded-start-3 coordinate-input" id="visible-latitude" placeholder="23.8103">
                                 <span class="input-group-text rounded-end-3 bg-light">°N</span>
                             </div>
                         </div>
                         <div class="col-6">
                             <label for="visible-longitude" class="form-label small text-muted">Longitude (decimal)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control rounded-start-3" id="visible-longitude" style="min-width: 120px;" placeholder="90.4125">
+                                <input type="text" class="form-control rounded-start-3 coordinate-input" id="visible-longitude" placeholder="90.4125">
                                 <span class="input-group-text rounded-end-3 bg-light">°E</span>
                             </div>
                         </div>
@@ -336,9 +325,6 @@
                 
                 // Check geolocation permission
                 checkGeolocationPermission();
-                
-                // Ensure map container has proper height
-                document.getElementById('map-container').style.height = '250px';
             } catch (error) {
                 console.error("Error initializing map on DOMContentLoaded: ", error);
             }

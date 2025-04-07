@@ -14,153 +14,6 @@
     <!-- PWA icons -->
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
     <link rel="apple-touch-icon" href="icons/icon-192x192.png">
-    <style>
-        /* Updated bottom navigation style */
-        .navbar-nav.bottom-nav .nav-link.active {
-            color: var(--primary-color);
-            background-color: rgba(138, 54, 71, 0.15);
-            border-radius: 16px;
-            box-shadow: none;
-            transform: none;
-            width: 90%;
-            margin: 0 auto;
-            padding-top: 0.75rem;
-            padding-bottom: 0.75rem;
-            border-top: none;
-        }
-        
-        .navbar-nav.bottom-nav .nav-link.active::before {
-            display: none;
-        }
-        
-        .navbar-nav.bottom-nav .nav-link.active i {
-            color: var(--primary-color);
-            margin-bottom: 2px;
-        }
-        
-        .navbar-nav.bottom-nav .nav-item {
-            display: flex;
-            justify-content: center;
-        }
-        
-        /* Sort dropdown styling */
-        .sort-btn {
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-        }
-        
-        .sort-btn:hover, .sort-btn:focus {
-            background-color: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-        }
-        
-        .sort-dropdown .dropdown-item:hover {
-            background-color: var(--primary-color-light);
-        }
-        
-        .sort-dropdown .dropdown-item.active {
-            background-color: var(--primary-color);
-        }
-        
-        /* Modal styling */
-        .modal-content.location-modal-content {
-            border-radius: 20px;
-            overflow: hidden;
-            border: none;
-            box-shadow: 0 10px 30px rgba(138, 54, 71, 0.15);
-        }
-        
-        .icon-wrapper.modal-icon-wrapper.location-icon-wrapper {
-            width: 80px;
-            height: 80px;
-            background-color: rgba(138, 54, 71, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-        }
-        
-        .icon-wrapper.modal-icon-wrapper i {
-            font-size: 2.5rem;
-            color: #8a3647;
-        }
-        
-        .modal .btn-primary {
-            background: #8a3647;
-            border-color: #8a3647;
-            box-shadow: 0 4px 12px rgba(138, 54, 71, 0.2);
-            transition: all 0.3s ease;
-        }
-        
-        .modal .btn-primary:hover {
-            background: #6a2935;
-            border-color: #6a2935;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(138, 54, 71, 0.25);
-        }
-        
-        .modal .btn-outline-primary {
-            color: #8a3647;
-            border-color: #8a3647;
-            transition: all 0.3s ease;
-        }
-        
-        .modal .btn-outline-primary:hover {
-            background-color: rgba(138, 54, 71, 0.1);
-            color: #8a3647;
-            border-color: #8a3647;
-            transform: translateY(-2px);
-        }
-        
-        /* Standardized Toast Styling */
-        .toast-container {
-            z-index: 1080;
-        }
-        
-        .toast {
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .toast.show {
-            opacity: 1;
-        }
-        
-        .toast-body {
-            padding: 0.75rem 1rem;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-        
-        .toast .bi {
-            font-size: 1rem;
-        }
-        
-        .toast.bg-success {
-            background-color: var(--success-color, #28a745) !important;
-        }
-        
-        .toast.bg-warning {
-            background-color: var(--warning-color, #ffc107) !important;
-            color: #212529 !important;
-        }
-        
-        .toast.bg-warning .btn-close {
-            filter: none;
-        }
-        
-        .toast.bg-danger {
-            background-color: var(--danger-color, #dc3545) !important;
-        }
-        
-        .toast.bg-primary {
-            background-color: var(--primary-color, #8a3647) !important;
-        }
-    </style>
 </head>
 <body class="bg-light">
     <header class="app-header bg-primary">
@@ -195,14 +48,14 @@
             </div>
             
             <!-- Location Loading Spinner -->
-            <div id="location-loading" class="text-center py-2 location-loading" style="display: none;">
+            <div id="location-loading" class="text-center py-2 location-loading">
                 <div class="spinner-border spinner-border-sm text-primary" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>
             </div>
             
             <!-- Search bar (initially hidden) -->
-            <div id="search-bar" class="bg-white rounded-pill d-flex align-items-center px-2 py-1 mb-2 shadow-sm" style="display: none;">
+            <div id="search-bar" class="bg-white rounded-pill d-flex align-items-center px-2 py-1 mb-2 shadow-sm">
                 <i class="bi bi-search text-primary me-1 small"></i>
                 <input type="text" class="form-control border-0 p-0 bg-transparent small header-search-input" id="market-search" placeholder="Search markets...">
                 <button class="btn p-0 location-btn" id="search-close">
@@ -618,8 +471,8 @@
         </div>
 
     <!-- No Markets Found Message -->
-    <div id="no-markets-message" class="text-center py-5" style="display: none;">
-        <i class="bi bi-shop-window text-muted" style="font-size: 3rem;"></i>
+    <div id="no-markets-message" class="text-center py-5">
+        <i class="bi bi-shop-window text-muted"></i>
         <h3 class="mt-3">No Markets Found</h3>
         <p class="text-muted">Try changing your location or search criteria</p>
     </div>

@@ -13,35 +13,6 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
     <link rel="apple-touch-icon" href="icons/icon-192x192.png">
-    <style>
-        /* Updated bottom navigation style */
-        .navbar-nav.bottom-nav .nav-link.active {
-            color: var(--primary-color);
-            background-color: rgba(138, 54, 71, 0.15);
-            border-radius: 16px;
-            box-shadow: none;
-            transform: none;
-            width: 90%;
-            margin: 0 auto;
-            padding-top: 0.75rem;
-            padding-bottom: 0.75rem;
-            border-top: none;
-        }
-        
-        .navbar-nav.bottom-nav .nav-link.active::before {
-            display: none;
-        }
-        
-        .navbar-nav.bottom-nav .nav-link.active i {
-            color: var(--primary-color);
-            margin-bottom: 2px;
-        }
-        
-        .navbar-nav.bottom-nav .nav-item {
-            display: flex;
-            justify-content: center;
-        }
-    </style>
 </head>
 
 <body class="bg-light">
@@ -68,7 +39,7 @@
                     <div class="position-relative">
                         <img src="https://api.dicebear.com/6.x/avataaars/svg?seed=John" class="rounded-circle" width="80" height="80" alt="Profile Picture">
                         <div class="position-absolute bottom-0 end-0">
-                            <label for="profile-pic-upload" class="btn btn-sm btn-primary rounded-circle" style="width: 32px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                            <label for="profile-pic-upload" class="btn btn-sm btn-primary rounded-circle profile-pic-small-btn">
                                 <i class="bi bi-camera"></i>
                             </label>
                             <input type="file" id="profile-pic-upload" class="d-none">
@@ -187,7 +158,7 @@
 
     <nav class="navbar fixed-bottom navbar-dark">
         <div class="container-fluid justify-content-center p-0">
-            <ul class="navbar-nav flex-row bottom-nav">
+            <ul class="navbar-nav flex-row bottom-nav personal-info-bottom-nav">
                 <li class="nav-item mx-0">
                     <a class="nav-link" href="index.html">
                         <i class="bi bi-house"></i>
@@ -374,7 +345,7 @@
     </div>
 
     <!-- Toast container for notifications -->
-    <div class="position-fixed bottom-0 end-0 p-3 toast-container" style="bottom: 70px !important; z-index: 1050;">
+    <div class="position-fixed bottom-0 end-0 p-3 toast-container personal-info-toast-container">
         <div id="toast" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
                 <div class="toast-body">

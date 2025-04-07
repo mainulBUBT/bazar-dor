@@ -3,6 +3,12 @@ const locationSearch = document.getElementById('location-search');
 const currentLocationBtn = document.getElementById('current-location-btn');
 const locationLoading = document.getElementById('location-loading');
 
+// Map related variables
+let map;
+let currentMarker;
+let currentLatLng = { lat: 23.8103, lng: 90.4125 }; // Default to Dhaka, Bangladesh
+let dragHintTimeout;
+
 // Initialize Leaflet Geosearch Provider with better parameters
 const provider = new GeoSearch.OpenStreetMapProvider({
     params: {
@@ -146,7 +152,222 @@ document.addEventListener('DOMContentLoaded', () => {
             if (dropdown) dropdown.remove();
         }
     });
+    
+    // Initialize map if map element exists
+    if (document.getElementById('map')) {
+        try {
+            console.log("Initializing map on DOMContentLoaded...");
+            initMap();
+            
+            // Set up map-specific elements if they exist
+            if (document.getElementById('map-search-input')) {
+                setupMapSearch();
+            }
+            
+            if (document.getElementById('map-current-location')) {
+                document.getElementById('map-current-location').addEventListener('click', getCurrentLocation);
+            }
+            
+            if (document.getElementById('map-fullscreen')) {
+                document.getElementById('map-fullscreen').addEventListener('click', toggleMapFullscreen);
+            }
+            
+            if (document.getElementById('visible-latitude') && document.getElementById('visible-longitude')) {
+                setupCoordinateInputs();
+            }
+            
+            // Check geolocation permission
+            checkGeolocationPermission();
+            
+            // Ensure map container has proper height
+            const mapContainer = document.getElementById('map-container');
+            if (mapContainer && !mapContainer.style.height) {
+                mapContainer.style.height = '250px';
+            }
+        } catch (error) {
+            console.error("Error initializing map on DOMContentLoaded: ", error);
+        }
+    }
 });
+
+// Backup initialization when window fully loads
+window.addEventListener('load', function() {
+    if (document.getElementById('map')) {
+        try {
+            console.log("Window load event fired, checking map...");
+            if (!map || !map._loaded) {
+                console.log("Map not initialized on DOMContentLoaded, initializing now...");
+                initMap();
+            } else {
+                console.log("Map already initialized, forcing resize");
+                map.invalidateSize(true);
+                hideMapLoading();
+            }
+        } catch (error) {
+            console.error("Error initializing map on window load: ", error);
+        }
+    }
+});
+
+// Function to hide map loading overlay
+function hideMapLoading() {
+    const mapLoading = document.getElementById('map-loading');
+    if (mapLoading) {
+        mapLoading.style.display = 'none';
+    }
+}
+
+// Initialize Leaflet map
+function initMap() {
+    // Check if map already exists
+    if (map) {
+        console.log("Map already initialized, resizing...");
+        map.invalidateSize(true);
+        return;
+    }
+    
+    console.log("Creating new map instance...");
+    
+    // Create map instance
+    try {
+        map = L.map('map', {
+            zoomControl: false,  // We'll add zoom control in a better position
+            attributionControl: true
+        }).setView([currentLatLng.lat, currentLatLng.lng], 15);
+        
+        // Add OpenStreetMap tiles (free to use)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 19
+        }).addTo(map);
+        
+        // Add zoom control to top-right
+        L.control.zoom({
+            position: 'topright'
+        }).addTo(map);
+        
+        // Hide loading overlay
+        hideMapLoading();
+        
+        // Show drag hint for a few seconds
+        showDragHint();
+        
+        // Update coordinates when map is dragged
+        map.on('move', function() {
+            const center = map.getCenter();
+            currentLatLng = {
+                lat: center.lat,
+                lng: center.lng
+            };
+            
+            // Update form fields
+            updateCoordinateFields(currentLatLng);
+            
+            // Hide drag hint after user starts moving
+            hideDragHint();
+        });
+        
+        // Debug: log when map is fully loaded
+        map.on('load', function() {
+            console.log("Map fully loaded");
+        });
+        
+        // Force a resize after a short delay to ensure proper rendering
+        setTimeout(function() {
+            map.invalidateSize(true);
+            console.log("Map resized after initialization");
+            hideMapLoading();
+            
+            // Ensure controls are visible
+            const zoomControl = document.querySelector('.leaflet-control-zoom');
+            if (zoomControl) {
+                zoomControl.style.display = 'block';
+            }
+        }, 500);
+        
+        console.log("Map initialized successfully");
+    } catch (error) {
+        console.error("Error creating map: ", error);
+    }
+}
+
+// Show drag hint
+function showDragHint() {
+    const dragHint = document.querySelector('.drag-hint');
+    if (dragHint) {
+        dragHint.classList.remove('fade-out');
+        // Auto-hide after a few seconds
+        dragHintTimeout = setTimeout(() => {
+            hideDragHint();
+        }, 5000);
+    }
+}
+
+// Hide drag hint
+function hideDragHint() {
+    const dragHint = document.querySelector('.drag-hint');
+    if (dragHint) {
+        dragHint.classList.add('fade-out');
+    }
+    
+    // Clear the timeout if it exists
+    if (dragHintTimeout) {
+        clearTimeout(dragHintTimeout);
+    }
+}
+
+// Set up coordinate input fields
+function setupCoordinateInputs() {
+    const latInput = document.getElementById('visible-latitude');
+    const lngInput = document.getElementById('visible-longitude');
+    const hiddenLatInput = document.getElementById('latitude');
+    const hiddenLngInput = document.getElementById('longitude');
+    
+    // Initial values
+    updateCoordinateFields(currentLatLng);
+    
+    // Update map when coordinates change
+    latInput.addEventListener('change', updateMapFromCoordinates);
+    lngInput.addEventListener('change', updateMapFromCoordinates);
+}
+
+// Update coordinate fields from map position
+function updateCoordinateFields(latLng) {
+    const latInput = document.getElementById('visible-latitude');
+    const lngInput = document.getElementById('visible-longitude');
+    const hiddenLatInput = document.getElementById('latitude');
+    const hiddenLngInput = document.getElementById('longitude');
+    
+    if (latInput && lngInput && hiddenLatInput && hiddenLngInput) {
+        // Format to 8 decimal places for display
+        latInput.value = latLng.lat.toFixed(8);
+        lngInput.value = latLng.lng.toFixed(8);
+        
+        // Update hidden fields with full precision
+        hiddenLatInput.value = latLng.lat;
+        hiddenLngInput.value = latLng.lng;
+    }
+}
+
+// Update map position from coordinate fields
+function updateMapFromCoordinates() {
+    const latInput = document.getElementById('visible-latitude');
+    const lngInput = document.getElementById('visible-longitude');
+    
+    if (latInput && lngInput && map) {
+        const lat = parseFloat(latInput.value);
+        const lng = parseFloat(lngInput.value);
+        
+        if (!isNaN(lat) && !isNaN(lng)) {
+            map.setView([lat, lng], map.getZoom());
+            currentLatLng = { lat, lng };
+            
+            // Update hidden fields
+            document.getElementById('latitude').value = lat;
+            document.getElementById('longitude').value = lng;
+        }
+    }
+}
 
 // Handle keyboard navigation in dropdown
 function handleKeyboardNavigation(e) {
@@ -192,25 +413,301 @@ function updateActiveItem(items) {
     });
 }
 
-// Get current location using browser's Geolocation API
+// Get map current location
 function getCurrentLocation() {
+    console.log("Getting current location for map...");
+    
+    // Add pulse effect to button
+    const locationButton = document.getElementById('map-current-location');
+    if (locationButton) {
+        locationButton.classList.add('pulsing');
+    }
+    
+    // Check if geolocation is available
     if (!navigator.geolocation) {
-        showError('Geolocation is not supported by your browser');
+        showLocationError("Geolocation is not supported by your browser.");
         return;
     }
 
-    showLoading(true);
+    // Request current position with options
+    const options = {
+        enableHighAccuracy: true,
+        timeout: 10000,  // 10 seconds
+        maximumAge: 0    // Don't use cached position
+    };
+    
     navigator.geolocation.getCurrentPosition(
-        position => {
-            const { latitude, longitude } = position.coords;
-            reverseGeocode(latitude, longitude);
+        // Success
+        function(position) {
+            console.log("Got position:", position);
+            
+            // Remove pulsing effect
+            if (locationButton) {
+                locationButton.classList.remove('pulsing');
+            }
+            
+            // Update map with current location
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            
+            // Update map
+            if (map) {
+                map.setView([lat, lng], 16);
+                
+                // Set current position
+                currentLatLng = { lat, lng };
+                
+                // Update form fields
+                updateCoordinateFields(currentLatLng);
+                
+                // Show success toast
+                const locationSuccessToast = document.getElementById('locationSuccessToast');
+                if (locationSuccessToast) {
+                    const toast = new bootstrap.Toast(locationSuccessToast);
+                    toast.show();
+                } else {
+                    showSuccess('Successfully found your location!');
+                }
+                
+                // Add marker pulse animation
+                const markerIcon = document.querySelector('.map-marker-centered');
+                if (markerIcon) {
+                    markerIcon.classList.add('marker-pulse');
+                    setTimeout(() => {
+                        markerIcon.classList.remove('marker-pulse');
+                    }, 2000);
+                }
+                
+                // Try to reverse geocode the location
+                mapReverseGeocode(lat, lng);
+            }
         },
-        error => {
-            showLoading(false);
-            handleGeolocationError(error);
+        // Error
+        function(error) {
+            console.error("Geolocation error:", error);
+            
+            // Remove pulsing effect
+            if (locationButton) {
+                locationButton.classList.remove('pulsing');
+            }
+            
+            // Show error message
+            let errorMessage = "Could not get your current location.";
+            
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    errorMessage = "Location access was denied. Please check your browser settings and ensure location access is allowed for this site.";
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    errorMessage = "Location information is unavailable. Please try again or search for your location manually.";
+                    break;
+                case error.TIMEOUT:
+                    errorMessage = "The request to get your location timed out. Please try again or check your connection.";
+                    break;
+                case error.UNKNOWN_ERROR:
+                    errorMessage = "An unknown error occurred while getting your location. Please try again later.";
+                    break;
+            }
+            
+            showLocationError(errorMessage);
         },
-        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+        // Options
+        options
     );
+}
+
+// Show location error modal with message
+function showLocationError(message) {
+    // Update error message
+    const errorMessageElement = document.getElementById('location-error-message');
+    if (errorMessageElement) {
+        errorMessageElement.textContent = message;
+        
+        // Show modal
+        const locationErrorModal = new bootstrap.Modal(document.getElementById('locationErrorModal'));
+        locationErrorModal.show();
+        
+        // Set up retry button
+        document.getElementById('retry-location-btn').addEventListener('click', function() {
+            // Hide modal
+            locationErrorModal.hide();
+            
+            // Show retrying toast
+            const retryingToast = document.getElementById('retryingToast');
+            if (retryingToast) {
+                const toast = new bootstrap.Toast(retryingToast);
+                toast.show();
+            } else {
+                showSuccess('Retrying with different settings...');
+            }
+            
+            // Retry with looser options
+            retryWithLooserOptions();
+        });
+    } else {
+        // Fallback to simple error if modal doesn't exist
+        showError(message);
+    }
+}
+
+// Retry getting location with more permissive options
+function retryWithLooserOptions() {
+    console.log("Retrying with looser options...");
+    
+    if (!navigator.geolocation) {
+        showLocationError("Geolocation is not supported by your browser.");
+        return;
+    }
+    
+    // Check if we're in map context
+    const isMapContext = !!document.getElementById('map');
+    
+    // Less strict options
+    const options = {
+        enableHighAccuracy: false,  // Less accuracy is okay
+        timeout: 15000,             // Longer timeout (15 seconds)
+        maximumAge: 60000           // Allow cached positions up to 1 minute old
+    };
+    
+    navigator.geolocation.getCurrentPosition(
+        // Success handler
+        function(position) {
+            console.log("Got position (retry):", position);
+            
+            // Get coordinates
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            
+            if (isMapContext) {
+                // Update map
+                if (map) {
+                    map.setView([lat, lng], 16);
+                    
+                    // Set current position
+                    currentLatLng = { lat, lng };
+                    
+                    // Update form fields
+                    updateCoordinateFields(currentLatLng);
+                    
+                    // Show success toast
+                    const locationSuccessToast = document.getElementById('locationSuccessToast');
+                    if (locationSuccessToast) {
+                        const toast = new bootstrap.Toast(locationSuccessToast);
+                        toast.show();
+                    } else {
+                        showSuccess('Successfully found your location!');
+                    }
+                    
+                    // Add marker pulse animation
+                    const markerIcon = document.querySelector('.map-marker-centered');
+                    if (markerIcon) {
+                        markerIcon.classList.add('marker-pulse');
+                        setTimeout(() => {
+                            markerIcon.classList.remove('marker-pulse');
+                        }, 2000);
+                    }
+                }
+            }
+            
+            // Use the consolidated reverse geocode function for both contexts
+            reverseGeocode(lat, lng);
+        },
+        // Error handler
+        function(error) {
+            console.error("Geolocation retry error:", error);
+            
+            // Show error message
+            let errorMessage = "Still could not get your location. Please enter it manually.";
+            showLocationError(errorMessage);
+        },
+        // Options
+        options
+    );
+}
+
+// Reverse geocode for map update
+function mapReverseGeocode(lat, lng) {
+    console.log("Reverse geocoding coordinates for map:", lat, lng);
+    
+    // Try to use our existing reverseGeocode function for map
+    if (typeof reverseGeocode === 'function') {
+        // Use the existing function if it exists
+        reverseGeocode(lat, lng, function(address) {
+            if (document.getElementById('address-line-1')) {
+                document.getElementById('address-line-1').value = address;
+            }
+        });
+        return;
+    }
+    
+    // Fallback to showing the detected location modal
+    const locationDetectedModal = document.getElementById('locationDetectedModal');
+    if (locationDetectedModal) {
+        // Show modal
+        const modal = new bootstrap.Modal(locationDetectedModal);
+        modal.show();
+        
+        // Set up use detected location button
+        document.getElementById('use-detected-location').addEventListener('click', function() {
+            // Get the detected address (in a real app this would come from the geocoding API)
+            if (document.getElementById('address-line-1')) {
+                document.getElementById('address-line-1').value = '123 Main Street';
+            }
+            
+            // Hide modal
+            modal.hide();
+        });
+    } else {
+        // Fallback if modal doesn't exist - use OpenStreetMap Nominatim directly
+        fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1&accept-language=en`)
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.display_name && document.getElementById('address-line-1')) {
+                    document.getElementById('address-line-1').value = data.display_name;
+                }
+            })
+            .catch(error => {
+                console.error('Error reverse geocoding:', error);
+            });
+    }
+}
+
+// Toggle map fullscreen
+function toggleMapFullscreen() {
+    const mapContainer = document.getElementById('map-container');
+    
+    if (document.fullscreenElement !== mapContainer) {
+        // Enter fullscreen
+        if (mapContainer.requestFullscreen) {
+            mapContainer.requestFullscreen();
+        } else if (mapContainer.webkitRequestFullscreen) {
+            mapContainer.webkitRequestFullscreen();
+        } else if (mapContainer.msRequestFullscreen) {
+            mapContainer.msRequestFullscreen();
+        }
+        
+        // Change icon
+        document.getElementById('map-fullscreen').innerHTML = '<i class="bi bi-fullscreen-exit"></i>';
+    } else {
+        // Exit fullscreen
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+        
+        // Change icon back
+        document.getElementById('map-fullscreen').innerHTML = '<i class="bi bi-fullscreen"></i>';
+    }
+    
+    // Make sure map resizes correctly
+    setTimeout(() => {
+        if (map) {
+            map.invalidateSize(true);
+        }
+    }, 100);
 }
 
 // Create and update address dropdown
@@ -466,8 +963,13 @@ style.textContent = `
 document.head.appendChild(style);
 
 // Reverse geocode coordinates to address using multiple providers for better results
-async function reverseGeocode(lat, lng) {
+async function reverseGeocode(lat, lng, callback) {
+    // Check if we're in map context
+    const isMapContext = !!document.getElementById('map');
+    
+    if (!isMapContext) {
     showLoading(true);
+    }
     
     try {
         // First attempt: Use the Photon geocoder (often provides better detail)
@@ -500,6 +1002,22 @@ async function reverseGeocode(lat, lng) {
             
             // Use the address if it has enough detail
             if (addressParts.length >= 2) {
+                if (isMapContext) {
+                    // In map context, update address field
+                    const addressInput = document.getElementById('address-line-1');
+                    if (addressInput) {
+                        addressInput.value = detailedAddress;
+                    }
+                    
+                    // Also update the detected location modal if it exists
+                    updateDetectedLocationModal(detailedAddress);
+                    
+                    // Call callback if provided
+                    if (typeof callback === 'function') {
+                        callback(detailedAddress);
+                    }
+                } else {
+                    // In location search context
                 locationSearch.value = detailedAddress;
                 storeLocation({
                     lat,
@@ -508,7 +1026,11 @@ async function reverseGeocode(lat, lng) {
                 });
                 
                 showSuccess('Location updated successfully');
+                }
+                
+                if (!isMapContext) {
                 showLoading(false);
+                }
                 return;
             }
         }
@@ -523,6 +1045,23 @@ async function reverseGeocode(lat, lng) {
         
         if (results && results.length > 0) {
             const address = results[0];
+            
+            if (isMapContext) {
+                // In map context, update address field
+                const addressInput = document.getElementById('address-line-1');
+                if (addressInput) {
+                    addressInput.value = address.label;
+                }
+                
+                // Also update the detected location modal if it exists
+                updateDetectedLocationModal(address.label);
+                
+                // Call callback if provided
+                if (typeof callback === 'function') {
+                    callback(address.label);
+                }
+            } else {
+                // In location search context
             locationSearch.value = address.label;
             
             storeLocation({
@@ -532,7 +1071,11 @@ async function reverseGeocode(lat, lng) {
             });
             
             showSuccess('Location updated successfully');
+            }
+            
+            if (!isMapContext) {
             showLoading(false);
+            }
             return;
         }
         
@@ -590,6 +1133,22 @@ async function reverseGeocode(lat, lng) {
                         }
                     }
                     
+                    if (isMapContext) {
+                        // In map context, update address field
+                        const addressInput = document.getElementById('address-line-1');
+                        if (addressInput) {
+                            addressInput.value = displayAddress;
+                        }
+                        
+                        // Also update the detected location modal if it exists
+                        updateDetectedLocationModal(displayAddress);
+                        
+                        // Call callback if provided
+                        if (typeof callback === 'function') {
+                            callback(displayAddress);
+                        }
+                    } else {
+                        // In location search context
                     locationSearch.value = displayAddress;
                     storeLocation({
                         lat,
@@ -598,16 +1157,39 @@ async function reverseGeocode(lat, lng) {
                     });
                     
                     showSuccess('Location updated successfully');
+                    }
                 } else {
                     // If all attempts fail, display coordinates with a message
-                    locationSearch.value = `Location at ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+                    const coordsStr = `Location at ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+                    
+                    if (isMapContext) {
+                        // In map context, update address field
+                        const addressInput = document.getElementById('address-line-1');
+                        if (addressInput) {
+                            addressInput.value = coordsStr;
+                        }
+                        
+                        // Also update the detected location modal if it exists
+                        updateDetectedLocationModal(coordsStr);
+                        
+                        // Call callback if provided
+                        if (typeof callback === 'function') {
+                            callback(coordsStr);
+                        }
+                    } else {
+                        // In location search context
+                        locationSearch.value = coordsStr;
                     storeLocation({
                         lat,
                         lng,
-                        address: `Location at ${lat.toFixed(6)}, ${lng.toFixed(6)}`
+                            address: coordsStr
                     });
                 }
+                }
+                
+                if (!isMapContext) {
                 showLoading(false);
+                }
             }
         );
     } catch (error) {
@@ -636,6 +1218,22 @@ async function reverseGeocode(lat, lng) {
                 
                 const displayAddress = parts.length >= 2 ? parts.join(', ') : data.display_name;
                 
+                if (isMapContext) {
+                    // In map context, update address field
+                    const addressInput = document.getElementById('address-line-1');
+                    if (addressInput) {
+                        addressInput.value = displayAddress;
+                    }
+                    
+                    // Also update the detected location modal if it exists
+                    updateDetectedLocationModal(displayAddress);
+                    
+                    // Call callback if provided
+                    if (typeof callback === 'function') {
+                        callback(displayAddress);
+                    }
+                } else {
+                    // In location search context
                 locationSearch.value = displayAddress;
                 storeLocation({
                     lat,
@@ -644,29 +1242,99 @@ async function reverseGeocode(lat, lng) {
                 });
                 
                 showSuccess('Location updated successfully');
+                }
             } else {
                 // If everything fails, display coordinates
-                locationSearch.value = `Location at ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+                const coordsStr = `Location at ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+                
+                if (isMapContext) {
+                    // In map context, update address field
+                    const addressInput = document.getElementById('address-line-1');
+                    if (addressInput) {
+                        addressInput.value = coordsStr;
+                    }
+                    
+                    // Also update the detected location modal if it exists
+                    updateDetectedLocationModal(coordsStr);
+                    
+                    // Call callback if provided
+                    if (typeof callback === 'function') {
+                        callback(coordsStr);
+                    }
+                } else {
+                    // In location search context
+                    locationSearch.value = coordsStr;
                 storeLocation({
                     lat,
                     lng,
-                    address: `Location at ${lat.toFixed(6)}, ${lng.toFixed(6)}`
+                        address: coordsStr
                 });
+                    
                 showError('Could not get detailed address');
+                }
             }
         } catch (finalError) {
             console.error('Final geocoding attempt error:', finalError);
-            locationSearch.value = `Location at ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+            const coordsStr = `Location at ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+            
+            if (isMapContext) {
+                // In map context, update address field
+                const addressInput = document.getElementById('address-line-1');
+                if (addressInput) {
+                    addressInput.value = coordsStr;
+                }
+                
+                // Also update the detected location modal if it exists
+                updateDetectedLocationModal(coordsStr);
+                
+                // Call callback if provided
+                if (typeof callback === 'function') {
+                    callback(coordsStr);
+                }
+            } else {
+                // In location search context
+                locationSearch.value = coordsStr;
             storeLocation({
                 lat,
                 lng,
-                address: `Location at ${lat.toFixed(6)}, ${lng.toFixed(6)}`
+                    address: coordsStr
             });
+                
             showError('Could not get address name');
+            }
         } finally {
+            if (!isMapContext) {
             showLoading(false);
+            }
         }
     }
+}
+
+// Helper function to update detected location modal
+function updateDetectedLocationModal(address) {
+    const locationDetectedModal = document.getElementById('locationDetectedModal');
+    if (!locationDetectedModal) return;
+    
+    // Update address text
+    const addressText = locationDetectedModal.querySelector('p.fw-bold');
+    if (addressText) {
+        addressText.textContent = address;
+    }
+    
+    // Show modal
+    const modal = new bootstrap.Modal(locationDetectedModal);
+    modal.show();
+    
+    // Set up use detected location button
+    document.getElementById('use-detected-location').addEventListener('click', function() {
+        // Update address field
+        if (document.getElementById('address-line-1')) {
+            document.getElementById('address-line-1').value = address;
+        }
+        
+        // Hide modal
+        modal.hide();
+    });
 }
 
 // Store location in localStorage
@@ -743,4 +1411,130 @@ function debounce(func, wait) {
         clearTimeout(timeout);
         timeout = setTimeout(later, wait);
     };
+}
+
+// Basic implementation of map search
+function setupMapSearch() {
+    const searchInput = document.getElementById('map-search-input');
+    const clearButton = document.querySelector('.map-search-clear');
+    const resultsContainer = document.getElementById('map-search-results');
+    
+    if (!searchInput || !clearButton || !resultsContainer) return;
+    
+    // Show/hide clear button based on input
+    searchInput.addEventListener('input', function() {
+        if (this.value.length > 0) {
+            clearButton.classList.add('visible');
+        } else {
+            clearButton.classList.remove('visible');
+            resultsContainer.classList.remove('show');
+        }
+    });
+    
+    // Clear search
+    clearButton.addEventListener('click', function() {
+        searchInput.value = '';
+        clearButton.classList.remove('visible');
+        resultsContainer.classList.remove('show');
+        searchInput.focus();
+    });
+    
+    // Search on Enter key
+    searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && this.value.trim().length > 0) {
+            e.preventDefault();
+            performMapSearch(this.value.trim());
+        }
+    });
+}
+
+// Perform search for map interface
+function performMapSearch(query) {
+    console.log("Searching for location:", query);
+    const resultsContainer = document.getElementById('map-search-results');
+    
+    // Show loading
+    resultsContainer.innerHTML = '<div class="p-3 text-center"><div class="spinner-border spinner-border-sm text-primary" role="status"></div> Searching...</div>';
+    resultsContainer.classList.add('show');
+    
+    // Try to use Nominatim directly
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=5&addressdetails=1`)
+        .then(response => response.json())
+        .then(data => {
+            if (data && data.length > 0) {
+                let html = '';
+                data.forEach((place) => {
+                    const name = place.display_name.split(',')[0];
+                    const address = place.display_name.split(',').slice(1).join(',').trim();
+                    
+                    html += `
+                        <div class="map-search-result-item" data-lat="${place.lat}" data-lng="${place.lon}">
+                            <div class="fw-medium">${name}</div>
+                            <div class="small text-muted">${address}</div>
+                        </div>
+                    `;
+                });
+                
+                resultsContainer.innerHTML = html;
+                
+                // Add click events to results
+                document.querySelectorAll('.map-search-result-item').forEach(item => {
+                    item.addEventListener('click', function() {
+                        const lat = parseFloat(this.getAttribute('data-lat'));
+                        const lng = parseFloat(this.getAttribute('data-lng'));
+                        
+                        // Update map
+                        if (map && !isNaN(lat) && !isNaN(lng)) {
+                            map.setView([lat, lng], 16);
+                            currentLatLng = { lat, lng };
+                            updateCoordinateFields(currentLatLng);
+                        }
+                        
+                        // Hide results
+                        resultsContainer.classList.remove('show');
+                        
+                        // Update search input with selected place
+                        document.getElementById('map-search-input').value = this.querySelector('.fw-medium').textContent;
+                        
+                        // Also update address if it exists
+                        const addressInput = document.getElementById('address-line-1');
+                        if (addressInput) {
+                            addressInput.value = this.querySelector('.fw-medium').textContent + ', ' + 
+                                            this.querySelector('.small').textContent;
+                        }
+                    });
+                });
+            } else {
+                resultsContainer.innerHTML = '<div class="p-3 text-center">No results found</div>';
+            }
+        })
+        .catch(error => {
+            console.error('Search error:', error);
+            resultsContainer.innerHTML = '<div class="p-3 text-center text-danger">Error searching for locations</div>';
+        });
+}
+
+// Check geolocation permission
+function checkGeolocationPermission() {
+    if (navigator.permissions && navigator.permissions.query) {
+        navigator.permissions.query({ name: 'geolocation' }).then(result => {
+            console.log("Geolocation permission status:", result.state);
+            
+            // Listen for permission changes
+            result.addEventListener('change', function() {
+                console.log("Geolocation permission changed to:", this.state);
+            });
+            
+            // If permission is already granted, show the current location button with pulse
+            if (result.state === 'granted') {
+                const locationButton = document.getElementById('map-current-location');
+                if (locationButton) {
+                    locationButton.classList.add('pulsing');
+                    setTimeout(() => {
+                        locationButton.classList.remove('pulsing');
+                    }, 3000);
+                }
+            }
+        });
+    }
 }
