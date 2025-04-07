@@ -98,21 +98,24 @@
             <div class="tab-pane fade show active" id="products-tab-pane" role="tabpanel" aria-labelledby="products-tab">
                 <div class="product-list row g-2 mx-0 mb-3">
                     <!-- Product Item -->
-                    <div class="col-12 col-md-6 mb-2 px-1">
-                        <div class="card product-item shadow-sm rounded-3 h-100" data-status="approved">
-                            <div class="row g-0">
+                    <div class="col-12 col-md-6 mb-1 d-flex" data-status="approved">
+                        <div class="card product-item border-0 shadow-sm rounded-4 h-100">
+                            <div class="row g-0 h-100">
                                 <div class="col-4">
                                     <div class="position-relative h-100">
-                                        <img src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?q=80&w=400&auto=format&fit=crop" class="img-fluid rounded-start h-100 object-fit-cover" alt="Product" style="min-height: 120px;">
+                                        <img src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?q=80&w=400&auto=format&fit=crop" 
+                                             class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Product" style="min-height: 120px;">
                                     </div>
                                 </div>
                                 <div class="col-8">
-                                    <div class="card-body position-relative">
-                                        <span class="badge bg-success position-absolute top-0 end-0 rounded-pill px-3">Approved</span>
-                                        <h5 class="card-title fw-bold">Organic Tomatoes</h5>
-                                        <p class="card-text small text-muted text-truncate">Fresh organic tomatoes from local farm.</p>
-                                        <div class="d-flex justify-content-end mt-2">
-                                            <span class="small text-success"><i class="bi bi-check-circle-fill me-1"></i>Listed on marketplace</span>
+                                    <div class="card-body py-2 px-2 h-100 d-flex flex-column">
+                                        <div class="d-flex justify-content-between align-items-start mb-1">
+                                            <h5 class="card-title mb-0 text-truncate fw-bold">Organic Tomatoes</h5>
+                                            <span class="badge bg-success small ms-1 flex-shrink-0">Approved</span>
+                                        </div>
+                                        <p class="card-subtitle text-muted small mb-1 text-truncate">Fresh organic tomatoes from local farm</p>
+                                        <div class="mt-auto pt-1">
+                                            <span class="small text-success d-block text-center"><i class="bi bi-check-circle-fill me-1"></i>Listed on marketplace</span>
                                         </div>
                                     </div>
                                 </div>
@@ -121,22 +124,27 @@
                     </div>
 
                     <!-- Product Item -->
-                    <div class="col-12 col-md-6 mb-2 px-1">
-                        <div class="card product-item shadow-sm rounded-3 h-100" data-status="pending">
-                            <div class="row g-0">
+                    <div class="col-12 col-md-6 mb-1 d-flex" data-status="pending">
+                        <div class="card product-item border-0 shadow-sm rounded-4 h-100">
+                            <div class="row g-0 h-100">
                                 <div class="col-4">
                                     <div class="position-relative h-100">
-                                        <img src="https://images.unsplash.com/photo-1619566636858-adf3ef46400b?q=80&w=400&auto=format&fit=crop" class="img-fluid rounded-start h-100 object-fit-cover" alt="Product" style="min-height: 120px;">
+                                        <img src="https://images.unsplash.com/photo-1619566636858-adf3ef46400b?q=80&w=400&auto=format&fit=crop" 
+                                             class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Product" style="min-height: 120px;">
                                     </div>
                                 </div>
                                 <div class="col-8">
-                                    <div class="card-body position-relative">
-                                        <span class="badge bg-warning text-dark position-absolute top-0 end-0 rounded-pill px-3">Pending</span>
-                                        <h5 class="card-title fw-bold">Handmade Pottery</h5>
-                                        <p class="card-text small text-muted text-truncate">Traditional handmade pottery bowls.</p>
-                                        <div class="d-flex justify-content-end mt-2">
-                                            <button class="btn btn-sm btn-outline-primary rounded-pill me-2"><i class="bi bi-pencil-fill me-1"></i>Edit</button>
-                                            <button class="btn btn-sm btn-outline-danger rounded-pill"><i class="bi bi-trash-fill me-1"></i>Delete</button>
+                                    <div class="card-body py-2 px-2 h-100 d-flex flex-column">
+                                        <div class="d-flex justify-content-between align-items-start mb-1">
+                                            <h5 class="card-title mb-0 text-truncate fw-bold">Handmade Pottery</h5>
+                                            <span class="badge bg-warning text-dark small ms-1 flex-shrink-0">Pending</span>
+                                        </div>
+                                        <p class="card-subtitle text-muted small mb-1 text-truncate">Traditional handmade pottery bowls</p>
+                                        <div class="mt-auto pt-1">
+                                            <div class="d-flex gap-1">
+                                                <button class="btn btn-sm btn-outline-primary rounded-pill flex-grow-1 py-0"><i class="bi bi-pencil-fill me-1"></i>Edit</button>
+                                                <button class="btn btn-sm btn-outline-danger rounded-pill flex-grow-1 py-0"><i class="bi bi-trash-fill me-1"></i>Delete</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -145,23 +153,28 @@
                     </div>
 
                     <!-- Product Item (Rejected example) -->
-                    <div class="col-12 col-md-6 mb-2 px-1">
-                        <div class="card product-item shadow-sm rounded-3 h-100" data-status="rejected">
-                            <div class="row g-0">
+                    <div class="col-12 col-md-6 mb-1 d-flex" data-status="rejected">
+                        <div class="card product-item border-0 shadow-sm rounded-4 h-100">
+                            <div class="row g-0 h-100">
                                 <div class="col-4">
                                     <div class="position-relative h-100">
-                                        <img src="https://images.unsplash.com/photo-1601924638867-3a6de6b7a500?q=80&w=400&auto=format&fit=crop" class="img-fluid rounded-start h-100 object-fit-cover" alt="Product" style="min-height: 120px;">
+                                        <img src="https://images.unsplash.com/photo-1601924638867-3a6de6b7a500?q=80&w=400&auto=format&fit=crop" 
+                                             class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Product" style="min-height: 120px;">
                                         <div class="overlay-rejected"></div>
                                     </div>
                                 </div>
                                 <div class="col-8">
-                                    <div class="card-body position-relative">
-                                        <span class="badge bg-danger position-absolute top-0 end-0 rounded-pill px-3">Rejected</span>
-                                        <h5 class="card-title fw-bold">Handcrafted Jewelry</h5>
-                                        <p class="card-text small text-muted text-truncate">Reason: Product photos don't match description</p>
-                                        <div class="d-flex justify-content-end mt-2">
-                                            <button class="btn btn-sm btn-outline-primary rounded-pill me-2"><i class="bi bi-pencil-fill me-1"></i>Edit</button>
-                                            <button class="btn btn-sm btn-outline-danger rounded-pill"><i class="bi bi-trash-fill me-1"></i>Delete</button>
+                                    <div class="card-body py-2 px-2 h-100 d-flex flex-column">
+                                        <div class="d-flex justify-content-between align-items-start mb-1">
+                                            <h5 class="card-title mb-0 text-truncate fw-bold">Handcrafted Jewelry</h5>
+                                            <span class="badge bg-danger small ms-1 flex-shrink-0">Rejected</span>
+                                        </div>
+                                        <p class="card-subtitle text-muted small mb-1 text-truncate">Product photos don't match description</p>
+                                        <div class="mt-auto pt-1">
+                                            <div class="d-flex gap-1">
+                                                <button class="btn btn-sm btn-outline-primary rounded-pill flex-grow-1 py-0"><i class="bi bi-pencil-fill me-1"></i>Edit</button>
+                                                <button class="btn btn-sm btn-outline-danger rounded-pill flex-grow-1 py-0"><i class="bi bi-trash-fill me-1"></i>Delete</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -170,21 +183,24 @@
                     </div>
 
                     <!-- Product Item (Another example) -->
-                    <div class="col-12 col-md-6 mb-2 px-1">
-                        <div class="card product-item shadow-sm rounded-3 h-100" data-status="approved">
-                            <div class="row g-0">
+                    <div class="col-12 col-md-6 mb-1 d-flex" data-status="approved">
+                        <div class="card product-item border-0 shadow-sm rounded-4 h-100">
+                            <div class="row g-0 h-100">
                                 <div class="col-4">
                                     <div class="position-relative h-100">
-                                        <img src="https://images.unsplash.com/photo-1611409922166-e4eb423b0d6e?q=80&w=400&auto=format&fit=crop" class="img-fluid rounded-start h-100 object-fit-cover" alt="Product" style="min-height: 120px;">
+                                        <img src="https://images.unsplash.com/photo-1611409922166-e4eb423b0d6e?q=80&w=400&auto=format&fit=crop" 
+                                             class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Product" style="min-height: 120px;">
                                     </div>
                                 </div>
                                 <div class="col-8">
-                                    <div class="card-body position-relative">
-                                        <span class="badge bg-success position-absolute top-0 end-0 rounded-pill px-3">Approved</span>
-                                        <h5 class="card-title fw-bold">Fresh Spices</h5>
-                                        <p class="card-text small text-muted text-truncate">Authentic local spice blend.</p>
-                                        <div class="d-flex justify-content-end mt-2">
-                                            <span class="small text-success"><i class="bi bi-check-circle-fill me-1"></i>Listed on marketplace</span>
+                                    <div class="card-body py-2 px-2 h-100 d-flex flex-column">
+                                        <div class="d-flex justify-content-between align-items-start mb-1">
+                                            <h5 class="card-title mb-0 text-truncate fw-bold">Fresh Spices</h5>
+                                            <span class="badge bg-success small ms-1 flex-shrink-0">Approved</span>
+                                        </div>
+                                        <p class="card-subtitle text-muted small mb-1 text-truncate">Authentic local spice blend</p>
+                                        <div class="mt-auto pt-1">
+                                            <span class="small text-success d-block text-center"><i class="bi bi-check-circle-fill me-1"></i>Listed on marketplace</span>
                                         </div>
                                     </div>
                                 </div>
@@ -210,22 +226,28 @@
             <div class="tab-pane fade" id="markets-tab-pane" role="tabpanel" aria-labelledby="markets-tab">
                 <div class="market-list row g-2 mx-0 mb-3">
                     <!-- Market Item -->
-                    <div class="col-12 col-md-6 mb-2 px-1">
-                        <div class="card market-item shadow-sm rounded-3 h-100" data-status="approved">
-                            <div class="row g-0">
+                    <div class="col-12 col-md-6 mb-1 d-flex" data-status="approved">
+                        <div class="card market-item border-0 shadow-sm rounded-4 h-100">
+                            <div class="row g-0 h-100">
                                 <div class="col-4">
                                     <div class="position-relative h-100">
-                                        <img src="https://images.unsplash.com/photo-1543083477-4f785aeafaa9?q=80&w=400&auto=format&fit=crop" class="img-fluid rounded-start h-100 object-fit-cover" alt="Market" style="min-height: 120px;">
+                                        <img src="https://images.unsplash.com/photo-1543083477-4f785aeafaa9?q=80&w=400&auto=format&fit=crop" 
+                                             class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Market" style="min-height: 120px;">
                                     </div>
                                 </div>
                                 <div class="col-8">
-                                    <div class="card-body position-relative">
-                                        <span class="badge bg-success position-absolute top-0 end-0 rounded-pill px-3">Approved</span>
-                                        <h5 class="card-title fw-bold">Downtown Farmers Market</h5>
-                                        <p class="card-text small mb-1"><i class="bi bi-geo-alt-fill text-primary me-1"></i>Central Avenue, Downtown</p>
-                                        <p class="card-text small text-muted text-truncate">Open Wed-Sun, 8am-2pm</p>
-                                        <div class="d-flex justify-content-end mt-2">
-                                            <span class="small text-success"><i class="bi bi-check-circle-fill me-1"></i>Listed on marketplace</span>
+                                    <div class="card-body py-2 px-2 h-100 d-flex flex-column">
+                                        <div class="d-flex justify-content-between align-items-start mb-1">
+                                            <h5 class="card-title mb-0 text-truncate fw-bold">Downtown Farmers Market</h5>
+                                            <span class="badge bg-success small ms-1 flex-shrink-0">Approved</span>
+                                        </div>
+                                        <p class="card-subtitle text-muted small mb-2 text-truncate">Central Avenue, Downtown</p>
+                                        <div class="d-flex justify-content-between small mb-1">
+                                            <span class="text-muted"><i class="bi bi-clock me-1"></i>8am-2pm</span>
+                                            <span class="text-muted">Wed-Sun</span>
+                                        </div>
+                                        <div class="mt-auto pt-1">
+                                            <span class="small text-success d-block text-center"><i class="bi bi-check-circle-fill me-1"></i>Listed on marketplace</span>
                                         </div>
                                     </div>
                                 </div>
@@ -234,23 +256,31 @@
                     </div>
 
                     <!-- Market Item -->
-                    <div class="col-12 col-md-6 mb-2 px-1">
-                        <div class="card market-item shadow-sm rounded-3 h-100" data-status="pending">
-                            <div class="row g-0">
+                    <div class="col-12 col-md-6 mb-1 d-flex" data-status="pending">
+                        <div class="card market-item border-0 shadow-sm rounded-4 h-100">
+                            <div class="row g-0 h-100">
                                 <div class="col-4">
                                     <div class="position-relative h-100">
-                                        <img src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=80&w=400&auto=format&fit=crop" class="img-fluid rounded-start h-100 object-fit-cover" alt="Market" style="min-height: 120px;">
+                                        <img src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=80&w=400&auto=format&fit=crop" 
+                                             class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Market" style="min-height: 120px;">
                                     </div>
                                 </div>
                                 <div class="col-8">
-                                    <div class="card-body position-relative">
-                                        <span class="badge bg-warning text-dark position-absolute top-0 end-0 rounded-pill px-3">Pending</span>
-                                        <h5 class="card-title fw-bold">Riverside Craft Market</h5>
-                                        <p class="card-text small mb-1"><i class="bi bi-geo-alt-fill text-primary me-1"></i>Riverside Park, East End</p>
-                                        <p class="card-text small text-muted text-truncate">Open Weekends, 10am-6pm</p>
-                                        <div class="d-flex justify-content-end mt-2">
-                                            <button class="btn btn-sm btn-outline-primary rounded-pill me-2"><i class="bi bi-pencil-fill me-1"></i>Edit</button>
-                                            <button class="btn btn-sm btn-outline-danger rounded-pill"><i class="bi bi-trash-fill me-1"></i>Delete</button>
+                                    <div class="card-body py-2 px-2 h-100 d-flex flex-column">
+                                        <div class="d-flex justify-content-between align-items-start mb-1">
+                                            <h5 class="card-title mb-0 text-truncate fw-bold">Riverside Craft Market</h5>
+                                            <span class="badge bg-warning text-dark small ms-1 flex-shrink-0">Pending</span>
+                                        </div>
+                                        <p class="card-subtitle text-muted small mb-2 text-truncate">Riverside Park, East End</p>
+                                        <div class="d-flex justify-content-between small mb-1">
+                                            <span class="text-muted"><i class="bi bi-clock me-1"></i>10am-6pm</span>
+                                            <span class="text-muted">Weekends</span>
+                                        </div>
+                                        <div class="mt-auto pt-1">
+                                            <div class="d-flex gap-1">
+                                                <button class="btn btn-sm btn-outline-primary rounded-pill flex-grow-1 py-0"><i class="bi bi-pencil-fill me-1"></i>Edit</button>
+                                                <button class="btn btn-sm btn-outline-danger rounded-pill flex-grow-1 py-0"><i class="bi bi-trash-fill me-1"></i>Delete</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -259,24 +289,29 @@
                     </div>
 
                     <!-- Market Item (Rejected) -->
-                    <div class="col-12 col-md-6 mb-2 px-1">
-                        <div class="card market-item shadow-sm rounded-3 h-100" data-status="rejected">
-                            <div class="row g-0">
+                    <div class="col-12 col-md-6 mb-1 d-flex" data-status="rejected">
+                        <div class="card market-item border-0 shadow-sm rounded-4 h-100">
+                            <div class="row g-0 h-100">
                                 <div class="col-4">
                                     <div class="position-relative h-100">
-                                        <img src="https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=400&auto=format&fit=crop" class="img-fluid rounded-start h-100 object-fit-cover" alt="Market" style="min-height: 120px;">
+                                        <img src="https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=400&auto=format&fit=crop" 
+                                             class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Market" style="min-height: 120px;">
                                         <div class="overlay-rejected"></div>
                                     </div>
                                 </div>
                                 <div class="col-8">
-                                    <div class="card-body position-relative">
-                                        <span class="badge bg-danger position-absolute top-0 end-0 rounded-pill px-3">Rejected</span>
-                                        <h5 class="card-title fw-bold">Community Artisan Fair</h5>
-                                        <p class="card-text small mb-1"><i class="bi bi-geo-alt-fill text-primary me-1"></i>Community Center, North District</p>
-                                        <p class="card-text small text-muted text-truncate">Reason: Insufficient location verification</p>
-                                        <div class="d-flex justify-content-end mt-2">
-                                            <button class="btn btn-sm btn-outline-primary rounded-pill me-2"><i class="bi bi-pencil-fill me-1"></i>Edit</button>
-                                            <button class="btn btn-sm btn-outline-danger rounded-pill"><i class="bi bi-trash-fill me-1"></i>Delete</button>
+                                    <div class="card-body py-2 px-2 h-100 d-flex flex-column">
+                                        <div class="d-flex justify-content-between align-items-start mb-1">
+                                            <h5 class="card-title mb-0 text-truncate fw-bold">Community Artisan Fair</h5>
+                                            <span class="badge bg-danger small ms-1 flex-shrink-0">Rejected</span>
+                                        </div>
+                                        <p class="card-subtitle text-muted small mb-2 text-truncate">Community Center, North District</p>
+                                        <p class="small text-muted mb-1">Insufficient location verification</p>
+                                        <div class="mt-auto pt-1">
+                                            <div class="d-flex gap-1">
+                                                <button class="btn btn-sm btn-outline-primary rounded-pill flex-grow-1 py-0"><i class="bi bi-pencil-fill me-1"></i>Edit</button>
+                                                <button class="btn btn-sm btn-outline-danger rounded-pill flex-grow-1 py-0"><i class="bi bi-trash-fill me-1"></i>Delete</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -285,22 +320,28 @@
                     </div>
                     
                     <!-- Market Item (Another example) -->
-                    <div class="col-12 col-md-6 mb-2 px-1">
-                        <div class="card market-item shadow-sm rounded-3 h-100" data-status="approved">
-                            <div class="row g-0">
+                    <div class="col-12 col-md-6 mb-1 d-flex" data-status="approved">
+                        <div class="card market-item border-0 shadow-sm rounded-4 h-100">
+                            <div class="row g-0 h-100">
                                 <div class="col-4">
                                     <div class="position-relative h-100">
-                                        <img src="https://images.unsplash.com/photo-1520956915995-a3da195aadf0?q=80&w=400&auto=format&fit=crop" class="img-fluid rounded-start h-100 object-fit-cover" alt="Market" style="min-height: 120px;">
+                                        <img src="https://images.unsplash.com/photo-1520956915995-a3da195aadf0?q=80&w=400&auto=format&fit=crop" 
+                                             class="rounded-start-4 h-100 w-100 object-fit-cover" alt="Market" style="min-height: 120px;">
                                     </div>
                                 </div>
                                 <div class="col-8">
-                                    <div class="card-body position-relative">
-                                        <span class="badge bg-success position-absolute top-0 end-0 rounded-pill px-3">Approved</span>
-                                        <h5 class="card-title fw-bold">Organic Food Market</h5>
-                                        <p class="card-text small mb-1"><i class="bi bi-geo-alt-fill text-primary me-1"></i>Green Avenue, South District</p>
-                                        <p class="card-text small text-muted text-truncate">Open Daily, 7am-7pm</p>
-                                        <div class="d-flex justify-content-end mt-2">
-                                            <span class="small text-success"><i class="bi bi-check-circle-fill me-1"></i>Listed on marketplace</span>
+                                    <div class="card-body py-2 px-2 h-100 d-flex flex-column">
+                                        <div class="d-flex justify-content-between align-items-start mb-1">
+                                            <h5 class="card-title mb-0 text-truncate fw-bold">Organic Food Market</h5>
+                                            <span class="badge bg-success small ms-1 flex-shrink-0">Approved</span>
+                                        </div>
+                                        <p class="card-subtitle text-muted small mb-2 text-truncate">Green Avenue, South District</p>
+                                        <div class="d-flex justify-content-between small mb-1">
+                                            <span class="text-muted"><i class="bi bi-clock me-1"></i>7am-7pm</span>
+                                            <span class="text-muted">Daily</span>
+                                        </div>
+                                        <div class="mt-auto pt-1">
+                                            <span class="small text-success d-block text-center"><i class="bi bi-check-circle-fill me-1"></i>Listed on marketplace</span>
                                         </div>
                                     </div>
                                 </div>
@@ -338,11 +379,6 @@
                     </button>
                 </div>
             </div>
-            <ul class="pagination pagination-sm justify-content-center mt-2">
-                <li class="page-item"><a class="page-link rounded-circle mx-1 shadow-sm active" href="#">1</a></li>
-                <li class="page-item"><a class="page-link rounded-circle mx-1 shadow-sm" href="#">2</a></li>
-                <li class="page-item"><a class="page-link rounded-circle mx-1 shadow-sm" href="#">3</a></li>
-            </ul>
         </nav>
     </div>
 
@@ -551,13 +587,39 @@
             color: white;
         }
         
-        .badge {
-            font-weight: 500;
-        }
-        
+        /* Card styles from favorites.html */
         .card {
             border: none;
             overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+        }
+        
+        .card-title {
+            font-size: 0.95rem;
+            line-height: 1.3;
+        }
+        
+        .card-subtitle {
+            font-size: 0.8125rem;
+        }
+        
+        .rounded-4 {
+            border-radius: 0.75rem!important;
+        }
+        
+        .rounded-start-4 {
+            border-top-left-radius: 0.75rem!important;
+            border-bottom-left-radius: 0.75rem!important;
+        }
+        
+        .badge {
+            font-weight: 500;
+            font-size: 0.75rem;
         }
         
         .overlay-rejected {
@@ -567,8 +629,8 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.1);
-            border-top-left-radius: 0.5rem;
-            border-bottom-left-radius: 0.5rem;
+            border-top-left-radius: 0.75rem;
+            border-bottom-left-radius: 0.75rem;
         }
         
         .empty-state i {
@@ -607,6 +669,20 @@
         
         .bottom-nav .nav-link.active {
             color: var(--bs-primary);
+        }
+
+        /* Additional spacing fixes */
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+        }
+        
+        .btn-sm i {
+            font-size: 0.8125rem;
+        }
+        
+        .object-fit-cover {
+            object-fit: cover;
         }
     </style>
 
