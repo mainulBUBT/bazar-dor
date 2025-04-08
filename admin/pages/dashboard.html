@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#8a3647">
+    <title>Bazar Dor - Admin Dashboard</title>
+    <link href="../../lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../lib/bootstrap-icons/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/admin-style.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar-header">
+                <h3>Bazar Dor</h3>
+                <span>Admin Panel</span>
+            </div>
+            <div class="admin-profile">
+                <div class="admin-avatar">
+                    <i class="bi bi-person-circle"></i>
+                </div>
+                <div class="admin-info">
+                    <h6>Admin User</h6>
+                    <p>Administrator</p>
+                </div>
+            </div>
+            <nav class="admin-nav">
+                <ul>
+                    <li class="active">
+                        <a href="dashboard.html">
+                            <i class="bi bi-speedometer2"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="products.html">
+                            <i class="bi bi-box-seam"></i>
+                            <span>Products</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="markets.html">
+                            <i class="bi bi-shop"></i>
+                            <span>Markets</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="categories.html">
+                            <i class="bi bi-tag"></i>
+                            <span>Categories</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="users.html">
+                            <i class="bi bi-people"></i>
+                            <span>Users</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="contributions.html">
+                            <i class="bi bi-graph-up-arrow"></i>
+                            <span>Contributions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="settings.html">
+                            <i class="bi bi-gear"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="admin-sidebar-footer">
+                <a href="../../index.html" class="btn btn-outline-light btn-sm">
+                    <i class="bi bi-box-arrow-left"></i> Back to Site
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Top Header -->
+            <header class="admin-header">
+                <div class="admin-header-left">
+                    <button class="toggle-sidebar-btn">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <h4>Dashboard</h4>
+                </div>
+                <div class="admin-header-right">
+                    <div class="admin-search">
+                        <input type="text" placeholder="Search...">
+                        <i class="bi bi-search"></i>
+                    </div>
+                    <div class="admin-actions">
+                        <a href="#" class="admin-notification">
+                            <i class="bi bi-bell"></i>
+                            <span class="badge">3</span>
+                        </a>
+                        <div class="admin-dropdown">
+                            <button class="admin-dropdown-toggle">
+                                <i class="bi bi-person-circle"></i>
+                                <span>Admin</span>
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="admin-content">
+                <div class="admin-stats">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <div class="stat-card bg-primary text-white">
+                                <div class="stat-card-body">
+                                    <h5>Total Users</h5>
+                                    <h2>2,845</h2>
+                                    <p><i class="bi bi-arrow-up"></i> 12% from last month</p>
+                                </div>
+                                <div class="stat-card-icon">
+                                    <i class="bi bi-people-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card bg-success text-white">
+                                <div class="stat-card-body">
+                                    <h5>Total Markets</h5>
+                                    <h2>347</h2>
+                                    <p><i class="bi bi-arrow-up"></i> 8% from last month</p>
+                                </div>
+                                <div class="stat-card-icon">
+                                    <i class="bi bi-shop"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card bg-info text-white">
+                                <div class="stat-card-body">
+                                    <h5>Products Listed</h5>
+                                    <h2>4,721</h2>
+                                    <p><i class="bi bi-arrow-up"></i> 15% from last month</p>
+                                </div>
+                                <div class="stat-card-icon">
+                                    <i class="bi bi-box-seam"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card bg-warning text-white">
+                                <div class="stat-card-body">
+                                    <h5>Contributions</h5>
+                                    <h2>1,235</h2>
+                                    <p><i class="bi bi-arrow-up"></i> 20% from last month</p>
+                                </div>
+                                <div class="stat-card-icon">
+                                    <i class="bi bi-graph-up-arrow"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-8">
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h5>Recent Activity</h5>
+                                <div class="admin-card-actions">
+                                    <button class="btn btn-sm btn-outline-secondary">
+                                        <i class="bi bi-three-dots"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="admin-card-body">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>User</th>
+                                            <th>Activity</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="avatar">JD</div>
+                                                    <div>John Doe</div>
+                                                </div>
+                                            </td>
+                                            <td>Added price for Apple at Super Market</td>
+                                            <td>2 hours ago</td>
+                                            <td><span class="badge bg-success">Approved</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="avatar">JS</div>
+                                                    <div>Jane Smith</div>
+                                                </div>
+                                            </td>
+                                            <td>Updated location for Central Market</td>
+                                            <td>5 hours ago</td>
+                                            <td><span class="badge bg-primary">Pending</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="avatar">RJ</div>
+                                                    <div>Robert Johnson</div>
+                                                </div>
+                                            </td>
+                                            <td>Added new product Banana</td>
+                                            <td>Yesterday</td>
+                                            <td><span class="badge bg-success">Approved</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="avatar">AB</div>
+                                                    <div>Alice Brown</div>
+                                                </div>
+                                            </td>
+                                            <td>Reported incorrect price for Milk</td>
+                                            <td>Yesterday</td>
+                                            <td><span class="badge bg-danger">Rejected</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="avatar">MW</div>
+                                                    <div>Mike Wilson</div>
+                                                </div>
+                                            </td>
+                                            <td>Added new market Corner Shop</td>
+                                            <td>2 days ago</td>
+                                            <td><span class="badge bg-success">Approved</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="admin-card-footer">
+                                <a href="activities.html" class="btn btn-link">View all activities</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h5>User Types</h5>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="chart-placeholder">
+                                    <div class="pie-chart-placeholder">
+                                        <div class="segment segment-1"></div>
+                                        <div class="segment segment-2"></div>
+                                        <div class="segment segment-3"></div>
+                                    </div>
+                                </div>
+                                <div class="chart-legend">
+                                    <div class="legend-item">
+                                        <span class="legend-color bg-primary"></span>
+                                        <span>Regular Users (65%)</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="legend-color bg-success"></span>
+                                        <span>Contributors (25%)</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="legend-color bg-warning"></span>
+                                        <span>Volunteers (10%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="admin-card mt-3">
+                            <div class="admin-card-header">
+                                <h5>Recent Users</h5>
+                            </div>
+                            <div class="admin-card-body">
+                                <ul class="user-list">
+                                    <li class="user-item">
+                                        <div class="user-avatar">JD</div>
+                                        <div class="user-info">
+                                            <h6>John Doe</h6>
+                                            <p>Registered 2 days ago</p>
+                                        </div>
+                                    </li>
+                                    <li class="user-item">
+                                        <div class="user-avatar">JS</div>
+                                        <div class="user-info">
+                                            <h6>Jane Smith</h6>
+                                            <p>Registered 3 days ago</p>
+                                        </div>
+                                    </li>
+                                    <li class="user-item">
+                                        <div class="user-avatar">RJ</div>
+                                        <div class="user-info">
+                                            <h6>Robert Johnson</h6>
+                                            <p>Registered 5 days ago</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="admin-card-footer">
+                                <a href="users.html" class="btn btn-link">View all users</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../lib/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="../js/admin.js"></script>
+</body>
+</html> 
