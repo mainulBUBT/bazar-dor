@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="../../lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../lib/bootstrap-icons/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="../css/admin-style.css">
 </head>
 <body>
@@ -57,8 +59,19 @@
                                 <a href="add-product.html" class="dropdown-item active">
                                     <i class="bi bi-plus-circle"></i> Add Product
                                 </a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">
+                                <i class="bi bi-tags"></i>
+                                <span>Categories</span>
+                            </a>
+                            <div class="dropdown-menu">
                                 <a href="categories.html" class="dropdown-item">
-                                    <i class="bi bi-tags"></i> Categories
+                                    <i class="bi bi-list-ul"></i> All Categories
+                                </a>
+                                <a href="add-category.html" class="dropdown-item">
+                                    <i class="bi bi-plus-circle"></i> Add Category
                                 </a>
                             </div>
                         </li>
@@ -263,7 +276,7 @@
                                         <tbody id="marketPriceRows">
                                             <tr>
                                                 <td>
-                                                    <select class="form-select">
+                                                    <select class="form-select market-select">
                                                         <option value="">Select Market</option>
                                                         <option>Central Market</option>
                                                         <option>Super Market</option>
@@ -278,17 +291,17 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <input type="date" class="form-control" value="2023-04-09">
+                                                    <input type="date" class="form-control" value="${new Date().toISOString().split('T')[0]}">
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger">
+                                                    <button type="button" class="btn btn-sm btn-outline-danger remove-row">
                                                         <i class="bi bi-trash"></i>
                                                     </button>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <select class="form-select">
+                                                    <select class="form-select market-select">
                                                         <option value="">Select Market</option>
                                                         <option selected>Super Market</option>
                                                         <option>Central Market</option>
@@ -306,7 +319,7 @@
                                                     <input type="date" class="form-control" value="2023-04-09">
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger">
+                                                    <button type="button" class="btn btn-sm btn-outline-danger remove-row">
                                                         <i class="bi bi-trash"></i>
                                                     </button>
                                                 </td>
@@ -416,10 +429,54 @@
     </div>
 
     <script src="../../lib/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="../js/admin.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Select2
+            $(document).ready(function() {
+                // Initialize Select2 for product dropdowns
+                $('#productCategory').select2({
+                    theme: 'bootstrap-5',
+                    placeholder: 'Select Category'
+                });
+                
+                $('#productUnit').select2({
+                    theme: 'bootstrap-5',
+                    placeholder: 'Select Unit'
+                });
+                
+                $('#productVisibility').select2({
+                    theme: 'bootstrap-5',
+                    placeholder: 'Select Visibility'
+                });
+                
+                $('#productStatus').select2({
+                    theme: 'bootstrap-5',
+                    placeholder: 'Select Status'
+                });
+                
+                $('#productCountry').select2({
+                    theme: 'bootstrap-5',
+                    placeholder: 'Select Country'
+                });
+                
+                // Initialize Select2 for existing market selects
+                $('.market-select').select2({
+                    theme: 'bootstrap-5',
+                    placeholder: 'Select Market',
+                    allowClear: true,
+                    dropdownParent: $('#marketPriceRows')
+                });
+                
+                // Add row button click handler
+                $('#addMarketRow').click(function() {
+                    createMarketRow();
+                });
+            });
+
             // Image upload preview
             const productImageInput = document.getElementById('productImage');
             const imagePreview = document.querySelector('.image-preview');
@@ -481,7 +538,7 @@
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td>
-                        <select class="form-select">
+                        <select class="form-select market-select">
                             <option value="">Select Market</option>
                             <option>Central Market</option>
                             <option>Super Market</option>
@@ -496,7 +553,10 @@
                         </div>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-sm btn-danger remove-row">
+                        <input type="date" class="form-control" value="${new Date().toISOString().split('T')[0]}">
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-outline-danger remove-row">
                             <i class="bi bi-trash"></i>
                         </button>
                     </td>
@@ -507,6 +567,14 @@
                 });
                 
                 marketPriceRows.appendChild(tr);
+                
+                // Initialize Select2 for the new market select
+                $(tr).find('.market-select').select2({
+                    theme: 'bootstrap-5',
+                    placeholder: 'Select Market',
+                    allowClear: true,
+                    dropdownParent: $('#marketPriceRows')
+                });
             }
             
             // Add initial row

@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#8a3647">
+    <title>Bazar Dor - Settings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../lib/bootstrap-icons/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/admin-style.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar-header">
+                <h3>Bazar Dor</h3>
+                <span>Admin Panel</span>
+            </div>
+            <div class="admin-profile">
+                <div class="admin-avatar">
+                    <i class="bi bi-person-circle"></i>
+                </div>
+                <div class="admin-info">
+                    <h6>Admin User</h6>
+                    <p>Administrator</p>
+                </div>
+            </div>
+            <nav class="admin-nav">
+                <div class="admin-sidebar-section">
+                    <div class="admin-sidebar-section-title">Main</div>
+                    <ul>
+                        <li>
+                            <a href="dashboard.html">
+                                <i class="bi bi-speedometer2"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="admin-sidebar-section">
+                    <div class="admin-sidebar-section-title">Catalog</div>
+                    <ul>
+                        <li class="dropdown">
+                            <a href="#">
+                                <i class="bi bi-box-seam"></i>
+                                <span>Products</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="products.html" class="dropdown-item">
+                                    <i class="bi bi-list-ul"></i> All Products
+                                </a>
+                                <a href="add-product.html" class="dropdown-item">
+                                    <i class="bi bi-plus-circle"></i> Add Product
+                                </a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">
+                                <i class="bi bi-tags"></i>
+                                <span>Categories</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="categories.html" class="dropdown-item">
+                                    <i class="bi bi-list-ul"></i> All Categories
+                                </a>
+                                <a href="add-category.html" class="dropdown-item">
+                                    <i class="bi bi-plus-circle"></i> Add Category
+                                </a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">
+                                <i class="bi bi-shop"></i>
+                                <span>Markets</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="markets.html" class="dropdown-item">
+                                    <i class="bi bi-list-ul"></i> All Markets
+                                </a>
+                                <a href="add-market.html" class="dropdown-item">
+                                    <i class="bi bi-plus-circle"></i> Add Market
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="admin-sidebar-section">
+                    <div class="admin-sidebar-section-title">Users</div>
+                    <ul>
+                        <li>
+                            <a href="users.html">
+                                <i class="bi bi-people"></i>
+                                <span>Users</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="contributions.html">
+                                <i class="bi bi-graph-up-arrow"></i>
+                                <span>Contributions</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="admin-sidebar-section">
+                    <div class="admin-sidebar-section-title">Configuration</div>
+                    <ul>
+                        <li class="active">
+                            <a href="settings.html">
+                                <i class="bi bi-gear"></i>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="admin-sidebar-section">
+                    <div class="admin-sidebar-section-title">Marketing</div>
+                    <ul>
+                        <li class="dropdown">
+                            <a href="#">
+                                <i class="bi bi-images"></i>
+                                <span>Banners</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="banners.html" class="dropdown-item">
+                                    <i class="bi bi-list-ul"></i> All Banners
+                                </a>
+                                <a href="add-banner.html" class="dropdown-item">
+                                    <i class="bi bi-plus-circle"></i> Add Banner
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="admin-sidebar-section">
+                    <div class="admin-sidebar-section-title">Reports</div>
+                    <ul>
+                        <li>
+                            <a href="market-reports.html">
+                                <i class="bi bi-shop-window"></i>
+                                <span>Market Reports</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="product-reports.html">
+                                <i class="bi bi-box2"></i>
+                                <span>Product Reports</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="price-reports.html">
+                                <i class="bi bi-graph-up"></i>
+                                <span>Price Analytics</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="user-reports.html">
+                                <i class="bi bi-people-fill"></i>
+                                <span>User Analytics</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="admin-sidebar-footer">
+                <a href="../../index.html" class="btn btn-outline-light btn-sm">
+                    <i class="bi bi-box-arrow-left"></i> Back to Site
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Top Header -->
+            <header class="admin-header">
+                <div class="admin-header-left">
+                    <button class="toggle-sidebar-btn">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <h4>Settings</h4>
+                </div>
+                <div class="admin-header-right">
+                    <div class="admin-actions">
+                        <a href="#" class="admin-notification">
+                            <i class="bi bi-bell"></i>
+                            <span class="badge">3</span>
+                        </a>
+                        <div class="admin-dropdown">
+                            <button class="admin-dropdown-toggle">
+                                <i class="bi bi-person-circle"></i>
+                                <span>Admin</span>
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Settings Content -->
+            <div class="admin-content">
+                <!-- Page Header -->
+                <div class="admin-content-header mb-4">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="dashboard.html">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Settings</li>
+                        </ol>
+                    </nav>
+                    <div class="d-flex align-items-center mb-3">
+                        <h5 class="mb-0"><i class="bi bi-gear me-2"></i>System Settings</h5>
+                    </div>
+                </div>
+
+                <!-- Settings Navigation -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="settings-nav">
+                            <button class="settings-nav-item active" data-target="general">
+                                <i class="bi bi-gear"></i> General
+                            </button>
+                            <button class="settings-nav-item" data-target="appearance">
+                                <i class="bi bi-palette"></i> Appearance
+                            </button>
+                            <button class="settings-nav-item" data-target="notifications">
+                                <i class="bi bi-bell"></i> Notifications
+                            </button>
+                            <button class="settings-nav-item" data-target="security">
+                                <i class="bi bi-shield-lock"></i> Security
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Forms -->
+                <form id="settingsForm">
+                    <!-- General Settings -->
+                    <div class="settings-section active" id="general-settings">
+                        <!-- Company Information -->
+                        <div class="admin-card mb-4">
+                            <div class="admin-card-header">
+                                <h6 class="mb-0">Company Information</h6>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="companyName" class="form-label">Company Name</label>
+                                        <input type="text" class="form-control" id="companyName" value="Bazar Dor">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="companyEmail" class="form-label">Company Email</label>
+                                        <input type="email" class="form-control" id="companyEmail" value="contact@bazardor.com">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="companyPhone" class="form-label">Phone Number</label>
+                                        <input type="tel" class="form-control" id="companyPhone" value="+1 234 567 8900">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="companyAddress" class="form-label">Address</label>
+                                        <input type="text" class="form-control" id="companyAddress" value="123 Market Street">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="companyCity" class="form-label">City</label>
+                                        <input type="text" class="form-control" id="companyCity" value="New York">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="companyCountry" class="form-label">Country</label>
+                                        <select class="form-select country-select" id="companyCountry">
+                                            <option value="US" selected>United States</option>
+                                            <option value="CA">Canada</option>
+                                            <option value="GB">United Kingdom</option>
+                                            <option value="AU">Australia</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- General Settings -->
+                        <div class="admin-card mb-4">
+                            <div class="admin-card-header">
+                                <h6 class="mb-0">General Settings</h6>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="timezone" class="form-label">Timezone</label>
+                                        <select class="form-select timezone-select" id="timezone">
+                                            <option value="UTC" selected>UTC</option>
+                                            <option value="EST">Eastern Time (EST)</option>
+                                            <option value="PST">Pacific Time (PST)</option>
+                                            <option value="CET">Central European Time (CET)</option>
+                                            <option value="GMT">Greenwich Mean Time (GMT)</option>
+                                            <option value="IST">Indian Standard Time (IST)</option>
+                                            <option value="JST">Japan Standard Time (JST)</option>
+                                            <option value="AEST">Australian Eastern Time (AEST)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="dateFormat" class="form-label">Date Format</label>
+                                        <select class="form-select date-format-select" id="dateFormat">
+                                            <option value="MM/DD/YYYY" selected>MM/DD/YYYY</option>
+                                            <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+                                            <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                                            <option value="DD.MM.YYYY">DD.MM.YYYY</option>
+                                            <option value="DD/MM/YY">DD/MM/YY</option>
+                                            <option value="MM/DD/YY">MM/DD/YY</option>
+                                            <option value="YY/MM/DD">YY/MM/DD</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="currency" class="form-label">Default Currency</label>
+                                        <select class="form-select currency-select" id="currency">
+                                            <option value="USD" selected>USD ($)</option>
+                                            <option value="EUR">EUR (€)</option>
+                                            <option value="GBP">GBP (£)</option>
+                                            <option value="JPY">JPY (¥)</option>
+                                            <option value="AUD">AUD ($)</option>
+                                            <option value="CAD">CAD ($)</option>
+                                            <option value="CHF">CHF (Fr)</option>
+                                            <option value="CNY">CNY (¥)</option>
+                                            <option value="INR">INR (₹)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="language" class="form-label">Default Language</label>
+                                        <select class="form-select language-select" id="language">
+                                            <option value="en" selected>English</option>
+                                            <option value="es">Spanish</option>
+                                            <option value="fr">French</option>
+                                            <option value="de">German</option>
+                                            <option value="it">Italian</option>
+                                            <option value="pt">Portuguese</option>
+                                            <option value="ru">Russian</option>
+                                            <option value="ja">Japanese</option>
+                                            <option value="zh">Chinese</option>
+                                            <option value="ar">Arabic</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Business Rules -->
+                        <div class="admin-card mb-4">
+                            <div class="admin-card-header">
+                                <h6 class="mb-0">Business Rules</h6>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="priceUpdateFrequency" class="form-label">Price Update Frequency</label>
+                                        <select class="form-select frequency-select" id="priceUpdateFrequency">
+                                            <option value="daily" selected>Daily</option>
+                                            <option value="weekly">Weekly</option>
+                                            <option value="biweekly">Bi-weekly</option>
+                                            <option value="monthly">Monthly</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="marketUpdateFrequency" class="form-label">Market Update Frequency</label>
+                                        <select class="form-select frequency-select" id="marketUpdateFrequency">
+                                            <option value="weekly" selected>Weekly</option>
+                                            <option value="biweekly">Bi-weekly</option>
+                                            <option value="monthly">Monthly</option>
+                                            <option value="quarterly">Quarterly</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="priceChangeThreshold" class="form-label">Price Change Notification Threshold (%)</label>
+                                        <input type="number" class="form-control" id="priceChangeThreshold" value="10" min="0" max="100">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="marketRatingThreshold" class="form-label">Market Rating Threshold</label>
+                                        <select class="form-select rating-select" id="marketRatingThreshold">
+                                            <option value="3" selected>3 Stars</option>
+                                            <option value="3.5">3.5 Stars</option>
+                                            <option value="4">4 Stars</option>
+                                            <option value="4.5">4.5 Stars</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="autoApproveMarkets" checked>
+                                            <label class="form-check-label" for="autoApproveMarkets">Auto-approve New Markets</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="autoApproveProducts" checked>
+                                            <label class="form-check-label" for="autoApproveProducts">Auto-approve New Products</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Appearance Settings -->
+                    <div class="settings-section" id="appearance-settings">
+                        <div class="admin-card mb-4">
+                            <div class="admin-card-header">
+                                <h6 class="mb-0">Appearance Settings</h6>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="primaryColor" class="form-label">Primary Color</label>
+                                        <input type="color" class="form-control form-control-color" id="primaryColor" value="#8a3647">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="secondaryColor" class="form-label">Secondary Color</label>
+                                        <input type="color" class="form-control form-control-color" id="secondaryColor" value="#6c757d">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="themeMode" class="form-label">Theme Mode</label>
+                                        <select class="form-select theme-mode-select" id="themeMode">
+                                            <option value="light" selected>Light</option>
+                                            <option value="dark">Dark</option>
+                                            <option value="system">System Default</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="fontFamily" class="form-label">Font Family</label>
+                                        <select class="form-select font-family-select" id="fontFamily">
+                                            <option value="Inter" selected>Inter</option>
+                                            <option value="Roboto">Roboto</option>
+                                            <option value="Open Sans">Open Sans</option>
+                                            <option value="Poppins">Poppins</option>
+                                            <option value="Montserrat">Montserrat</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notification Settings -->
+                    <div class="settings-section" id="notifications-settings">
+                        <div class="admin-card mb-4">
+                            <div class="admin-card-header">
+                                <h6 class="mb-0">Notification Settings</h6>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
+                                            <label class="form-check-label" for="emailNotifications">Email Notifications</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="priceUpdates" checked>
+                                            <label class="form-check-label" for="priceUpdates">Price Update Notifications</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="newProducts" checked>
+                                            <label class="form-check-label" for="newProducts">New Product Notifications</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="userActivity" checked>
+                                            <label class="form-check-label" for="userActivity">User Activity Notifications</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security Settings -->
+                    <div class="settings-section" id="security-settings">
+                        <div class="admin-card mb-4">
+                            <div class="admin-card-header">
+                                <h6 class="mb-0">Security Settings</h6>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="password" class="form-label">Change Password</label>
+                                        <input type="password" class="form-control" id="password" placeholder="New password">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm new password">
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="twoFactorAuth">
+                                            <label class="form-check-label" for="twoFactorAuth">Two-Factor Authentication</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="sessionTimeout" checked>
+                                            <label class="form-check-label" for="sessionTimeout">Session Timeout (30 minutes)</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Save Button -->
+                    <div class="d-flex justify-content-end mb-5">
+                        <button type="button" class="btn btn-outline-admin me-2" id="resetSettings">
+                            <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
+                        </button>
+                        <button type="submit" class="btn btn-admin">
+                            <i class="bi bi-check-circle me-1"></i>Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../lib/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="../js/admin.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Select2 for all select elements
+            $('select').select2({
+                theme: 'bootstrap-5',
+                width: '100%',
+                dropdownParent: $('.admin-content'),
+                minimumResultsForSearch: 0
+            });
+
+            // Settings navigation
+            const settingsNavItems = document.querySelectorAll('.settings-nav-item');
+            const settingsSections = document.querySelectorAll('.settings-section');
+
+            settingsNavItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const target = this.dataset.target;
+                    
+                    // Update active states
+                    settingsNavItems.forEach(navItem => navItem.classList.remove('active'));
+                    settingsSections.forEach(section => section.classList.remove('active'));
+                    
+                    this.classList.add('active');
+                    document.getElementById(`${target}-settings`).classList.add('active');
+                });
+            });
+
+            // Form submission
+            const settingsForm = document.getElementById('settingsForm');
+            const resetButton = document.getElementById('resetSettings');
+
+            settingsForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // In a real application, this would send the form data to the server
+                // For demo purposes, just show a success message
+                alert('Settings saved successfully!');
+            });
+
+            resetButton.addEventListener('click', function() {
+                if (confirm('Are you sure you want to reset all settings to their default values?')) {
+                    // In a real application, this would reset the form to default values
+                    // For demo purposes, just show a message
+                    alert('Settings have been reset to default values.');
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
