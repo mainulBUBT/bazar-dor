@@ -24,6 +24,119 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Improved sidebar dropdown functionality
+    const dropdownToggles = document.querySelectorAll('.admin-nav .dropdown > a');
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            const parent = this.parentElement;
+            const dropdownMenu = parent.querySelector('.dropdown-menu');
+            
+            // Close all other dropdowns with smooth animation
+            document.querySelectorAll('.admin-nav .dropdown').forEach(dropdown => {
+                if (dropdown !== parent && dropdown.classList.contains('show')) {
+                    dropdown.classList.remove('show');
+                    const menu = dropdown.querySelector('.dropdown-menu');
+                    menu.style.maxHeight = menu.scrollHeight + 'px';
+                    
+                    // Animate closing
+                    setTimeout(() => {
+                        menu.style.maxHeight = '0px';
+                        setTimeout(() => {
+                            menu.style.display = 'none';
+                            menu.style.maxHeight = '';
+                        }, 200);
+                    }, 10);
+                }
+            });
+            
+            // Toggle current dropdown with animation
+            parent.classList.toggle('show');
+            
+            if (parent.classList.contains('show')) {
+                dropdownMenu.style.display = 'block';
+                dropdownMenu.style.maxHeight = '0px';
+                
+                // Trigger reflow for animation
+                dropdownMenu.offsetHeight;
+                
+                // Animate opening
+                dropdownMenu.style.maxHeight = dropdownMenu.scrollHeight + 'px';
+                
+                // Remove the maxHeight property after animation completes
+                setTimeout(() => {
+                    dropdownMenu.style.maxHeight = '';
+                }, 200);
+            } else {
+                dropdownMenu.style.maxHeight = dropdownMenu.scrollHeight + 'px';
+                
+                // Animate closing
+                setTimeout(() => {
+                    dropdownMenu.style.maxHeight = '0px';
+                    setTimeout(() => {
+                        dropdownMenu.style.display = 'none';
+                        dropdownMenu.style.maxHeight = '';
+                    }, 200);
+                }, 10);
+            }
+        });
+    });
+    
+    // Enhanced active page highlighting in sidebar
+    function setActiveSidebarItem() {
+        const currentPath = window.location.pathname;
+        const sidebarLinks = document.querySelectorAll('.admin-nav a');
+        
+        // Find the most specific match
+        let bestMatch = null;
+        let bestMatchLength = 0;
+        
+        sidebarLinks.forEach(link => {
+            const linkPath = link.getAttribute('href');
+            
+            // Skip parent dropdown toggles
+            if (linkPath === '#') return;
+            
+            // Check if the current path contains this link path
+            if (currentPath.includes(linkPath)) {
+                // Find the most specific (longest) match
+                if (linkPath.length > bestMatchLength) {
+                    bestMatch = link;
+                    bestMatchLength = linkPath.length;
+                }
+            }
+        });
+        
+        // Apply active classes to the best match
+        if (bestMatch) {
+            bestMatch.classList.add('active');
+            
+            // Handle dropdown parents if applicable
+            const parentDropdown = bestMatch.closest('.dropdown');
+            if (parentDropdown) {
+                parentDropdown.classList.add('show');
+                const dropdownMenu = parentDropdown.querySelector('.dropdown-menu');
+                if (dropdownMenu) {
+                    dropdownMenu.style.display = 'block';
+                }
+                
+                // Add active class to dropdown item if applicable
+                const dropdownItem = bestMatch.closest('.dropdown-item');
+                if (dropdownItem) {
+                    dropdownItem.classList.add('active');
+                }
+            }
+        }
+    }
+    
+    // Add transition to dropdown menus
+    document.querySelectorAll('.admin-nav .dropdown-menu').forEach(menu => {
+        menu.style.overflow = 'hidden';
+        menu.style.transition = 'max-height 0.2s ease-out';
+    });
+    
+    setActiveSidebarItem();
+    
     // Admin dropdown toggle functionality
     const adminDropdownToggle = document.querySelector('.admin-dropdown-toggle');
     if (adminDropdownToggle) {
@@ -61,11 +174,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     top: 100%;
                     right: 0;
                     background-color: white;
-                    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-                    border-radius: 5px;
+                    box-shadow: 0 3px 15px rgba(0,0,0,0.15);
+                    border-radius: 8px;
                     width: 180px;
                     z-index: 1000;
                     margin-top: 5px;
+                    animation: fadeInDown 0.2s ease-out;
+                    overflow: hidden;
+                }
+                @keyframes fadeInDown {
+                    from {
+                        opacity: 0;
+                        transform: translateY(-10px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
                 }
                 .admin-dropdown-content ul {
                     list-style: none;
@@ -81,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 .admin-dropdown-content a {
                     display: flex;
                     align-items: center;
-                    padding: 10px 15px;
+                    padding: 12px 15px;
                     color: #333;
                     text-decoration: none;
                     transition: background-color 0.2s;

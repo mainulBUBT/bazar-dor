@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#8a3647">
     <title>Bazar Dor - Admin Products</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="../../lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../lib/bootstrap-icons/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../css/admin-style.css">
@@ -27,50 +30,95 @@
                 </div>
             </div>
             <nav class="admin-nav">
-                <ul>
-                    <li>
-                        <a href="dashboard.html">
-                            <i class="bi bi-speedometer2"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="active">
-                        <a href="products.html">
-                            <i class="bi bi-box-seam"></i>
-                            <span>Products</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="markets.html">
-                            <i class="bi bi-shop"></i>
-                            <span>Markets</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="categories.html">
-                            <i class="bi bi-tag"></i>
-                            <span>Categories</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="users.html">
-                            <i class="bi bi-people"></i>
-                            <span>Users</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="contributions.html">
-                            <i class="bi bi-graph-up-arrow"></i>
-                            <span>Contributions</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="settings.html">
-                            <i class="bi bi-gear"></i>
-                            <span>Settings</span>
-                        </a>
-                    </li>
-                </ul>
+                <div class="admin-sidebar-section">
+                    <div class="admin-sidebar-section-title">Main</div>
+                    <ul>
+                        <li>
+                            <a href="dashboard.html">
+                                <i class="bi bi-speedometer2"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="admin-sidebar-section">
+                    <div class="admin-sidebar-section-title">Catalog</div>
+                    <ul>
+                        <li class="dropdown active">
+                            <a href="#">
+                                <i class="bi bi-box-seam"></i>
+                                <span>Products</span>
+                            </a>
+                            <div class="dropdown-menu" style="display: block;">
+                                <a href="products.html" class="dropdown-item active">
+                                    <i class="bi bi-list-ul"></i> All Products
+                                </a>
+                                <a href="add-product.html" class="dropdown-item">
+                                    <i class="bi bi-plus-circle"></i> Add Product
+                                </a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">
+                                <i class="bi bi-tags"></i>
+                                <span>Categories</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="categories.html" class="dropdown-item">
+                                    <i class="bi bi-list-ul"></i> All Categories
+                                </a>
+                                <a href="add-category.html" class="dropdown-item">
+                                    <i class="bi bi-plus-circle"></i> Add Category
+                                </a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">
+                                <i class="bi bi-shop"></i>
+                                <span>Markets</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="markets.html" class="dropdown-item">
+                                    <i class="bi bi-list-ul"></i> All Markets
+                                </a>
+                                <a href="add-market.html" class="dropdown-item">
+                                    <i class="bi bi-plus-circle"></i> Add Market
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="admin-sidebar-section">
+                    <div class="admin-sidebar-section-title">Users</div>
+                    <ul>
+                        <li>
+                            <a href="users.html">
+                                <i class="bi bi-people"></i>
+                                <span>Users</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="contributions.html">
+                                <i class="bi bi-graph-up-arrow"></i>
+                                <span>Contributions</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="admin-sidebar-section">
+                    <div class="admin-sidebar-section-title">Configuration</div>
+                    <ul>
+                        <li>
+                            <a href="settings.html">
+                                <i class="bi bi-gear"></i>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </nav>
             <div class="admin-sidebar-footer">
                 <a href="../../index.html" class="btn btn-outline-light btn-sm">
@@ -90,10 +138,6 @@
                     <h4>Products Management</h4>
                 </div>
                 <div class="admin-header-right">
-                    <div class="admin-search">
-                        <input type="text" placeholder="Search products...">
-                        <i class="bi bi-search"></i>
-                    </div>
                     <div class="admin-actions">
                         <a href="#" class="admin-notification">
                             <i class="bi bi-bell"></i>
@@ -112,100 +156,147 @@
 
             <!-- Products Content -->
             <div class="admin-content">
+                <!-- Page Header -->
                 <div class="admin-content-header">
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h5>Products List</h5>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
-                            <i class="bi bi-plus-circle"></i> Add New Product
-                        </button>
+                        <h5><i class="bi bi-box-seam me-2"></i>Products List</h5>
                     </div>
-                    
-                    <!-- Filters and Search -->
-                    <div class="row mb-4">
-                        <div class="col-md-8">
-                            <div class="d-flex flex-wrap gap-2">
-                                <select class="form-select" style="width: auto;">
-                                    <option selected>All Categories</option>
+                </div>
+                
+                <!-- Make filter card always visible (not collapsible) -->
+                <div class="admin-card mb-4">
+                    <div class="admin-card-header">
+                        <h6 class="mb-0">Filters</h6>
+                    </div>
+                    <div class="admin-card-body">
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <label for="filterCategory" class="form-label">Category</label>
+                                <select class="form-select" id="filterCategory">
+                                    <option value="" selected>All Categories</option>
                                     <option>Fruits</option>
                                     <option>Vegetables</option>
                                     <option>Dairy</option>
                                     <option>Bakery</option>
                                     <option>Meat</option>
                                 </select>
-                                
-                                <select class="form-select" style="width: auto;">
-                                    <option selected>All Markets</option>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="filterMarket" class="form-label">Market</label>
+                                <select class="form-select" id="filterMarket">
+                                    <option value="" selected>All Markets</option>
                                     <option>Central Market</option>
                                     <option>Super Market</option>
                                     <option>Corner Shop</option>
                                     <option>Farmer's Market</option>
                                 </select>
-                                
-                                <select class="form-select" style="width: auto;">
-                                    <option selected>Sort By: Latest</option>
-                                    <option>Price: Low to High</option>
-                                    <option>Price: High to Low</option>
-                                    <option>Name: A to Z</option>
-                                    <option>Name: Z to A</option>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="filterStatus" class="form-label">Status</label>
+                                <select class="form-select" id="filterStatus">
+                                    <option value="" selected>All Status</option>
+                                    <option>Active</option>
+                                    <option>Inactive</option>
+                                    <option>Low Stock</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="filterSort" class="form-label">Sort By</label>
+                                <select class="form-select" id="filterSort">
+                                    <option value="latest" selected>Latest</option>
+                                    <option value="price_low">Price: Low to High</option>
+                                    <option value="price_high">Price: High to Low</option>
+                                    <option value="name_asc">Name: A to Z</option>
+                                    <option value="name_desc">Name: Z to A</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search products...">
-                                <button class="btn btn-outline-secondary" type="button">
-                                    <i class="bi bi-search"></i>
+
+                        <div class="row mt-3">
+                            <div class="col-12 d-flex justify-content-end">
+                                <button class="btn btn-admin" id="applyFiltersBtn">
+                                    <i class="bi bi-funnel"></i> Apply Filters
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Products Table -->
+                <!-- Products Table Card -->
                 <div class="admin-card">
+                    <div class="admin-card-header p-3 border-bottom">
+                        <div class="row g-3 align-items-center">
+                            <div class="col-lg-6">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-transparent border-end-0">
+                                        <i class="bi bi-search"></i>
+                                    </span>
+                                    <input type="text" class="form-control border-start-0" placeholder="Search products..." id="productSearchInput">
+                                    <button class="btn btn-admin" type="button" id="searchButton">
+                                        Search
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 text-lg-end">
+                                <div class="dropdown d-inline-block me-2">
+                                    <button class="btn btn-outline-admin dropdown-toggle" type="button" id="exportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-download me-1"></i>Export
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="exportDropdown">
+                                        <li><a class="dropdown-item" href="#" id="exportCsv"><i class="bi bi-filetype-csv me-2"></i>CSV</a></li>
+                                        <li><a class="dropdown-item" href="#" id="exportPdf"><i class="bi bi-filetype-pdf me-2"></i>PDF</a></li>
+                                    </ul>
+                                </div>
+                                <a href="add-product.html" class="btn btn-admin">
+                                    <i class="bi bi-plus-circle me-1"></i>Add New
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="admin-card-body p-0">
                         <div class="table-responsive">
-                            <table class="admin-table">
+                            <table class="admin-table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>
+                                        <th data-label="Select">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" id="selectAll">
                                             </div>
                                         </th>
-                                        <th>ID</th>
-                                        <th>Image</th>
-                                        <th>Product Name</th>
-                                        <th>Category</th>
-                                        <th>Latest Price</th>
-                                        <th>Markets</th>
-                                        <th>Status</th>
-                                        <th>Actions</th>
+                                        <th data-label="ID">ID</th>
+                                        <th data-label="Image">Image</th>
+                                        <th data-label="Product Name">Product Name</th>
+                                        <th data-label="Category">Category</th>
+                                        <th data-label="Latest Price">Latest Price</th>
+                                        <th data-label="Markets">Markets</th>
+                                        <th data-label="Status">Status</th>
+                                        <th data-label="Actions" class="text-end">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>
+                                        <td data-label="Select">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox">
                                             </div>
                                         </td>
-                                        <td>#P001</td>
-                                        <td>
+                                        <td data-label="ID">#P001</td>
+                                        <td data-label="Image">
                                             <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Apple" class="product-image" width="50" height="50">
                                         </td>
-                                        <td>Apples</td>
-                                        <td>Fruits</td>
-                                        <td>$2.99/kg</td>
-                                        <td>
+                                        <td data-label="Product Name">Apples</td>
+                                        <td data-label="Category">Fruits</td>
+                                        <td data-label="Latest Price">$2.99/kg</td>
+                                        <td data-label="Markets">
                                             <span class="badge bg-secondary">5 markets</span>
                                         </td>
-                                        <td>
+                                        <td data-label="Status">
                                             <span class="badge bg-success">Active</span>
                                         </td>
-                                        <td>
-                                            <div class="action-buttons">
-                                                <button class="btn btn-sm btn-outline-primary" title="Edit">
+                                        <td data-label="Actions">
+                                            <div class="action-buttons justify-content-end">
+                                                <button class="btn btn-sm btn-outline-admin" title="Edit">
                                                     <i class="bi bi-pencil"></i>
                                                 </button>
                                                 <button class="btn btn-sm btn-outline-danger" title="Delete">
@@ -218,27 +309,27 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
+                                        <td data-label="Select">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox">
                                             </div>
                                         </td>
-                                        <td>#P002</td>
-                                        <td>
+                                        <td data-label="ID">#P002</td>
+                                        <td data-label="Image">
                                             <img src="https://images.unsplash.com/photo-1528825871115-3581a5387919?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Banana" class="product-image" width="50" height="50">
                                         </td>
-                                        <td>Bananas</td>
-                                        <td>Fruits</td>
-                                        <td>$1.99/kg</td>
-                                        <td>
+                                        <td data-label="Product Name">Bananas</td>
+                                        <td data-label="Category">Fruits</td>
+                                        <td data-label="Latest Price">$1.99/kg</td>
+                                        <td data-label="Markets">
                                             <span class="badge bg-secondary">3 markets</span>
                                         </td>
-                                        <td>
+                                        <td data-label="Status">
                                             <span class="badge bg-success">Active</span>
                                         </td>
-                                        <td>
-                                            <div class="action-buttons">
-                                                <button class="btn btn-sm btn-outline-primary" title="Edit">
+                                        <td data-label="Actions">
+                                            <div class="action-buttons justify-content-end">
+                                                <button class="btn btn-sm btn-outline-admin" title="Edit">
                                                     <i class="bi bi-pencil"></i>
                                                 </button>
                                                 <button class="btn btn-sm btn-outline-danger" title="Delete">
@@ -251,27 +342,27 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
+                                        <td data-label="Select">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox">
                                             </div>
                                         </td>
-                                        <td>#P003</td>
-                                        <td>
+                                        <td data-label="ID">#P003</td>
+                                        <td data-label="Image">
                                             <img src="https://images.unsplash.com/photo-1589927986089-35812388d1f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Milk" class="product-image" width="50" height="50">
                                         </td>
-                                        <td>Milk</td>
-                                        <td>Dairy</td>
-                                        <td>$3.49/L</td>
-                                        <td>
+                                        <td data-label="Product Name">Milk</td>
+                                        <td data-label="Category">Dairy</td>
+                                        <td data-label="Latest Price">$3.49/L</td>
+                                        <td data-label="Markets">
                                             <span class="badge bg-secondary">4 markets</span>
                                         </td>
-                                        <td>
+                                        <td data-label="Status">
                                             <span class="badge bg-success">Active</span>
                                         </td>
-                                        <td>
-                                            <div class="action-buttons">
-                                                <button class="btn btn-sm btn-outline-primary" title="Edit">
+                                        <td data-label="Actions">
+                                            <div class="action-buttons justify-content-end">
+                                                <button class="btn btn-sm btn-outline-admin" title="Edit">
                                                     <i class="bi bi-pencil"></i>
                                                 </button>
                                                 <button class="btn btn-sm btn-outline-danger" title="Delete">
@@ -284,27 +375,27 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
+                                        <td data-label="Select">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox">
                                             </div>
                                         </td>
-                                        <td>#P004</td>
-                                        <td>
+                                        <td data-label="ID">#P004</td>
+                                        <td data-label="Image">
                                             <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5d47f?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Bread" class="product-image" width="50" height="50">
                                         </td>
-                                        <td>Bread</td>
-                                        <td>Bakery</td>
-                                        <td>$2.50/loaf</td>
-                                        <td>
+                                        <td data-label="Product Name">Bread</td>
+                                        <td data-label="Category">Bakery</td>
+                                        <td data-label="Latest Price">$2.50/loaf</td>
+                                        <td data-label="Markets">
                                             <span class="badge bg-secondary">6 markets</span>
                                         </td>
-                                        <td>
+                                        <td data-label="Status">
                                             <span class="badge bg-warning">Low Stock</span>
                                         </td>
-                                        <td>
-                                            <div class="action-buttons">
-                                                <button class="btn btn-sm btn-outline-primary" title="Edit">
+                                        <td data-label="Actions">
+                                            <div class="action-buttons justify-content-end">
+                                                <button class="btn btn-sm btn-outline-admin" title="Edit">
                                                     <i class="bi bi-pencil"></i>
                                                 </button>
                                                 <button class="btn btn-sm btn-outline-danger" title="Delete">
@@ -317,27 +408,27 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
+                                        <td data-label="Select">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox">
                                             </div>
                                         </td>
-                                        <td>#P005</td>
-                                        <td>
+                                        <td data-label="ID">#P005</td>
+                                        <td data-label="Image">
                                             <img src="https://images.unsplash.com/photo-1587735243615-c03f25aaff15?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Eggs" class="product-image" width="50" height="50">
                                         </td>
-                                        <td>Eggs</td>
-                                        <td>Dairy</td>
-                                        <td>$4.99/dozen</td>
-                                        <td>
+                                        <td data-label="Product Name">Eggs</td>
+                                        <td data-label="Category">Dairy</td>
+                                        <td data-label="Latest Price">$4.99/dozen</td>
+                                        <td data-label="Markets">
                                             <span class="badge bg-secondary">5 markets</span>
                                         </td>
-                                        <td>
+                                        <td data-label="Status">
                                             <span class="badge bg-success">Active</span>
                                         </td>
-                                        <td>
-                                            <div class="action-buttons">
-                                                <button class="btn btn-sm btn-outline-primary" title="Edit">
+                                        <td data-label="Actions">
+                                            <div class="action-buttons justify-content-end">
+                                                <button class="btn btn-sm btn-outline-admin" title="Edit">
                                                     <i class="bi bi-pencil"></i>
                                                 </button>
                                                 <button class="btn btn-sm btn-outline-danger" title="Delete">
@@ -380,129 +471,428 @@
         </main>
     </div>
 
-    <!-- Add Product Modal -->
-    <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addProductModalLabel">Add New Product</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="addProductForm">
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="productName" class="form-label">Product Name</label>
-                                    <input type="text" class="form-control" id="productName" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="productCategory" class="form-label">Category</label>
-                                    <select class="form-select" id="productCategory" required>
-                                        <option value="">Select Category</option>
-                                        <option>Fruits</option>
-                                        <option>Vegetables</option>
-                                        <option>Dairy</option>
-                                        <option>Bakery</option>
-                                        <option>Meat</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="productUnit" class="form-label">Unit</label>
-                                    <select class="form-select" id="productUnit" required>
-                                        <option value="">Select Unit</option>
-                                        <option>kg</option>
-                                        <option>g</option>
-                                        <option>L</option>
-                                        <option>ml</option>
-                                        <option>piece</option>
-                                        <option>dozen</option>
-                                        <option>pack</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="productImage" class="form-label">Product Image</label>
-                                    <input type="file" class="form-control" id="productImage">
-                                    <div class="mt-2">
-                                        <div class="image-preview-container">
-                                            <div class="image-preview">
-                                                <i class="bi bi-image"></i>
-                                                <span>No image selected</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="productStatus" class="form-label">Status</label>
-                                    <select class="form-select" id="productStatus" required>
-                                        <option>Active</option>
-                                        <option>Inactive</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="productDescription" class="form-label">Description</label>
-                            <textarea class="form-control" id="productDescription" rows="3"></textarea>
-                        </div>
-                        <h6>Market Price Information</h6>
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Market</th>
-                                        <th>Price</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="marketPriceRows">
-                                    <tr>
-                                        <td>
-                                            <select class="form-select">
-                                                <option value="">Select Market</option>
-                                                <option>Central Market</option>
-                                                <option>Super Market</option>
-                                                <option>Corner Shop</option>
-                                                <option>Farmer's Market</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <div class="input-group">
-                                                <span class="input-group-text">$</span>
-                                                <input type="number" class="form-control" placeholder="0.00" step="0.01">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-danger">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <button type="button" class="btn btn-sm btn-secondary mb-3">
-                            <i class="bi bi-plus-circle"></i> Add Another Market
-                        </button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Save Product</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script src="../../lib/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="../js/admin.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Product search functionality
+            const productSearchInput = document.getElementById('productSearchInput');
+            const searchButton = document.getElementById('searchButton');
+            const productTable = document.querySelector('.admin-table');
+            const productRows = productTable.querySelectorAll('tbody tr');
+            
+            function performSearch() {
+                const searchTerm = productSearchInput.value.toLowerCase().trim();
+                let matchCount = 0;
+                
+                productRows.forEach(row => {
+                    const productName = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
+                    const productCategory = row.querySelector('td:nth-child(5)').textContent.toLowerCase();
+                    const productId = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                    
+                    if (productName.includes(searchTerm) || productCategory.includes(searchTerm) || productId.includes(searchTerm)) {
+                        row.style.display = '';
+                        matchCount++;
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+                
+                // Visual feedback on search
+                if (searchTerm.length > 0) {
+                    productSearchInput.classList.toggle('border-success', matchCount > 0);
+                    productSearchInput.classList.toggle('border-danger', matchCount === 0);
+                } else {
+                    productSearchInput.classList.remove('border-success', 'border-danger');
+                }
+            }
+            
+            productSearchInput.addEventListener('input', performSearch);
+            
+            // Add event listener for search button
+            searchButton.addEventListener('click', performSearch);
+            
+            // Add event listener for Enter key in search input
+            productSearchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    performSearch();
+                }
+            });
+            
+            // Export functionality - CSV
+            const exportCsvBtn = document.getElementById('exportCsv');
+            
+            exportCsvBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Show loading state
+                const originalText = exportCsvBtn.innerHTML;
+                const exportDropdown = document.getElementById('exportDropdown');
+                exportDropdown.innerHTML = '<i class="bi bi-arrow-clockwise me-1"></i>Exporting...';
+                exportDropdown.disabled = true;
+                
+                // In a real application, this would trigger an AJAX request to generate a CSV file
+                setTimeout(() => {
+                    // Simulate download
+                    const link = document.createElement('a');
+                    link.href = '#';
+                    link.download = 'products_export_' + new Date().toISOString().split('T')[0] + '.csv';
+                    link.click();
+                    
+                    // Restore button state
+                    exportDropdown.innerHTML = '<i class="bi bi-download me-1"></i>Export';
+                    exportDropdown.disabled = false;
+                    
+                    // Show success message (could use a toast component here)
+                    alert('CSV Export complete!');
+                }, 1500);
+            });
+            
+            // Export functionality - PDF
+            const exportPdfBtn = document.getElementById('exportPdf');
+            
+            exportPdfBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Show loading state
+                const originalText = exportPdfBtn.innerHTML;
+                const exportDropdown = document.getElementById('exportDropdown');
+                exportDropdown.innerHTML = '<i class="bi bi-arrow-clockwise me-1"></i>Exporting...';
+                exportDropdown.disabled = true;
+                
+                // In a real application, this would trigger an AJAX request to generate a PDF file
+                setTimeout(() => {
+                    // Simulate download
+                    const link = document.createElement('a');
+                    link.href = '#';
+                    link.download = 'products_export_' + new Date().toISOString().split('T')[0] + '.pdf';
+                    link.click();
+                    
+                    // Restore button state
+                    exportDropdown.innerHTML = '<i class="bi bi-download me-1"></i>Export';
+                    exportDropdown.disabled = false;
+                    
+                    // Show success message (could use a toast component here)
+                    alert('PDF Export complete!');
+                }, 1500);
+            });
+            
+            // Filter functionality
+            const applyFilterBtn = document.getElementById('applyFiltersBtn');
+            
+            applyFilterBtn.addEventListener('click', function() {
+                const category = document.getElementById('filterCategory').value;
+                const market = document.getElementById('filterMarket').value;
+                const status = document.getElementById('filterStatus').value;
+                const sort = document.getElementById('filterSort').value;
+                
+                // In a real application, this would filter the data properly
+                // For demo purposes, just show an alert with the filter criteria
+                let filterCriteria = 'Filtering products with: ';
+                if (category) filterCriteria += `Category=${category}, `;
+                if (market) filterCriteria += `Market=${market}, `;
+                if (status) filterCriteria += `Status=${status}, `;
+                if (sort) filterCriteria += `Sort=${sort}, `;
+                
+                alert(filterCriteria.slice(0, -2));
+                
+                // This would trigger an actual data reload or filter in a real application
+                filterProductTable(category, market, status, sort);
+            });
+            
+            // Function to filter the product table (basic implementation for demo)
+            function filterProductTable(category, market, status, sort) {
+                productRows.forEach(row => {
+                    const rowCategory = row.querySelector('td:nth-child(5)').textContent;
+                    const rowMarkets = row.querySelector('td:nth-child(7)').textContent;
+                    const rowStatus = row.querySelector('td:nth-child(8) .badge').textContent;
+                    
+                    let show = true;
+                    
+                    if (category && category !== 'All Categories' && rowCategory !== category) {
+                        show = false;
+                    }
+                    
+                    if (market && market !== 'All Markets' && !rowMarkets.includes(market)) {
+                        show = false;
+                    }
+                    
+                    if (status && status !== 'All Status' && rowStatus !== status) {
+                        show = false;
+                    }
+                    
+                    // Sorting would normally be handled server-side
+                    // This is just a demo
+                    
+                    row.style.display = show ? '' : 'none';
+                });
+            }
+            
+            // Select all checkbox functionality
+            const selectAllCheckbox = document.getElementById('selectAll');
+            const productCheckboxes = document.querySelectorAll('tbody input[type="checkbox"]');
+            
+            selectAllCheckbox.addEventListener('change', function() {
+                productCheckboxes.forEach(checkbox => {
+                    checkbox.checked = this.checked;
+                });
+            });
+            
+            // Edit, Delete, and View functionalities
+            const editButtons = document.querySelectorAll('.btn-outline-admin');
+            const deleteButtons = document.querySelectorAll('.btn-outline-danger');
+            const viewButtons = document.querySelectorAll('.btn-outline-info');
+            
+            // Edit product functionality
+            editButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const row = this.closest('tr');
+                    const productId = row.querySelector('td:nth-child(2)').textContent;
+                    const productName = row.querySelector('td:nth-child(4)').textContent;
+                    
+                    // In a real application, this would redirect to an edit page or open a modal
+                    // For now, let's make the row editable inline
+                    
+                    // Get elements
+                    const nameCell = row.querySelector('td:nth-child(4)');
+                    const categoryCell = row.querySelector('td:nth-child(5)');
+                    const priceCell = row.querySelector('td:nth-child(6)');
+                    const statusCell = row.querySelector('td:nth-child(8)');
+                    
+                    // Save original values
+                    const originalName = nameCell.textContent;
+                    const originalCategory = categoryCell.textContent;
+                    const originalPrice = priceCell.textContent;
+                    const originalStatus = statusCell.querySelector('.badge').textContent;
+                    
+                    // Switch to editable fields
+                    nameCell.innerHTML = `<input type="text" class="form-control form-control-sm" value="${originalName}">`;
+                    
+                    // Create category select
+                    let categoryOptions = '';
+                    const categories = ['Fruits', 'Vegetables', 'Dairy', 'Bakery', 'Meat'];
+                    categories.forEach(cat => {
+                        const selected = cat === originalCategory ? 'selected' : '';
+                        categoryOptions += `<option ${selected}>${cat}</option>`;
+                    });
+                    categoryCell.innerHTML = `<select class="form-select form-select-sm">${categoryOptions}</select>`;
+                    
+                    // Create price input
+                    const priceParts = originalPrice.match(/\$?([\d.]+)\/([\w]+)/);
+                    let priceValue = '';
+                    let priceUnit = '';
+                    if (priceParts) {
+                        priceValue = priceParts[1];
+                        priceUnit = priceParts[2];
+                    }
+                    priceCell.innerHTML = `<div class="input-group input-group-sm">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control form-control-sm" value="${priceValue}" step="0.01" min="0">
+                        <span class="input-group-text">/${priceUnit}</span>
+                    </div>`;
+                    
+                    // Create status select
+                    let statusOptions = '';
+                    const statuses = ['Active', 'Inactive', 'Low Stock'];
+                    statuses.forEach(status => {
+                        const selected = status === originalStatus ? 'selected' : '';
+                        statusOptions += `<option ${selected}>${status}</option>`;
+                    });
+                    statusCell.innerHTML = `<select class="form-select form-select-sm">
+                        ${statusOptions}
+                    </select>`;
+                    
+                    // Change action buttons
+                    const actionCell = row.querySelector('.action-buttons');
+                    const originalButtons = actionCell.innerHTML;
+                    
+                    actionCell.innerHTML = `
+                        <button class="btn btn-sm btn-admin save-btn" title="Save">
+                            <i class="bi bi-check-lg"></i>
+                        </button>
+                        <button class="btn btn-sm btn-secondary cancel-btn" title="Cancel">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    `;
+                    
+                    // Add event listeners for new buttons
+                    actionCell.querySelector('.save-btn').addEventListener('click', function() {
+                        // In a real application, this would send the data to the server
+                        // For now, just update the row with the new values
+                        
+                        const newName = nameCell.querySelector('input').value;
+                        const newCategory = categoryCell.querySelector('select').value;
+                        const newPrice = priceCell.querySelector('input').value;
+                        const newPriceUnit = priceUnit; // Keep the original unit
+                        const newStatus = statusCell.querySelector('select').value;
+                        
+                        // Update the cells
+                        nameCell.textContent = newName;
+                        categoryCell.textContent = newCategory;
+                        priceCell.textContent = `$${newPrice}/${newPriceUnit}`;
+                        
+                        let badgeClass = 'bg-success';
+                        if (newStatus === 'Inactive') badgeClass = 'bg-danger';
+                        if (newStatus === 'Low Stock') badgeClass = 'bg-warning';
+                        
+                        statusCell.innerHTML = `<span class="badge ${badgeClass}">${newStatus}</span>`;
+                        
+                        // Restore original action buttons
+                        actionCell.innerHTML = originalButtons;
+                        
+                        // Add event listeners back
+                        setupActionButtons(row);
+                        
+                        // Show success message
+                        alert(`Product ${productId} updated successfully!`);
+                    });
+                    
+                    actionCell.querySelector('.cancel-btn').addEventListener('click', function() {
+                        // Restore original values
+                        nameCell.textContent = originalName;
+                        categoryCell.textContent = originalCategory;
+                        priceCell.textContent = originalPrice;
+                        
+                        let badgeClass = 'bg-success';
+                        if (originalStatus === 'Inactive') badgeClass = 'bg-danger';
+                        if (originalStatus === 'Low Stock') badgeClass = 'bg-warning';
+                        
+                        statusCell.innerHTML = `<span class="badge ${badgeClass}">${originalStatus}</span>`;
+                        
+                        // Restore original action buttons
+                        actionCell.innerHTML = originalButtons;
+                        
+                        // Add event listeners back
+                        setupActionButtons(row);
+                    });
+                });
+            });
+            
+            // Delete product functionality
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const row = this.closest('tr');
+                    const productId = row.querySelector('td:nth-child(2)').textContent;
+                    const productName = row.querySelector('td:nth-child(4)').textContent;
+                    
+                    if (confirm(`Are you sure you want to delete product ${productName} (${productId})?`)) {
+                        // In a real application, this would send a delete request to the server
+                        // For demo purposes, just remove the row with an animation
+                        row.style.backgroundColor = '#ffdddd';
+                        row.style.transition = 'opacity 0.5s ease';
+                        
+                        setTimeout(() => {
+                            row.style.opacity = '0';
+                            setTimeout(() => {
+                                row.remove();
+                                alert(`Product ${productId} deleted successfully!`);
+                            }, 500);
+                        }, 300);
+                    }
+                });
+            });
+            
+            // View product functionality
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const row = this.closest('tr');
+                    const productId = row.querySelector('td:nth-child(2)').textContent;
+                    const productName = row.querySelector('td:nth-child(4)').textContent;
+                    const productCategory = row.querySelector('td:nth-child(5)').textContent;
+                    const productPrice = row.querySelector('td:nth-child(6)').textContent;
+                    const productMarkets = row.querySelector('td:nth-child(7)').textContent.trim();
+                    const productStatus = row.querySelector('td:nth-child(8) .badge').textContent;
+                    const productImage = row.querySelector('td:nth-child(3) img').src;
+                    
+                    // In a real application, this would redirect to a product detail page
+                    // For demo purposes, just show an alert with product details
+                    alert(`Product Details:
+ID: ${productId}
+Name: ${productName}
+Category: ${productCategory}
+Price: ${productPrice}
+Markets: ${productMarkets}
+Status: ${productStatus}
+                    `);
+                });
+            });
+            
+            // Helper function to re-setup action buttons after row editing
+            function setupActionButtons(row) {
+                const editBtn = row.querySelector('.btn-outline-admin');
+                const deleteBtn = row.querySelector('.btn-outline-danger');
+                const viewBtn = row.querySelector('.btn-outline-info');
+                
+                if (editBtn) {
+                    editBtn.addEventListener('click', function() {
+                        const thisRow = this.closest('tr');
+                        const productId = thisRow.querySelector('td:nth-child(2)').textContent;
+                        alert(`Edit functionality for ${productId} would be implemented here.`);
+                    });
+                }
+                
+                if (deleteBtn) {
+                    deleteBtn.addEventListener('click', function() {
+                        const thisRow = this.closest('tr');
+                        const productId = thisRow.querySelector('td:nth-child(2)').textContent;
+                        const productName = thisRow.querySelector('td:nth-child(4)').textContent;
+                        
+                        if (confirm(`Are you sure you want to delete product ${productName} (${productId})?`)) {
+                            thisRow.style.backgroundColor = '#ffdddd';
+                            thisRow.style.transition = 'opacity 0.5s ease';
+                            
+                            setTimeout(() => {
+                                thisRow.style.opacity = '0';
+                                setTimeout(() => {
+                                    thisRow.remove();
+                                    alert(`Product ${productId} deleted successfully!`);
+                                }, 500);
+                            }, 300);
+                        }
+                    });
+                }
+                
+                if (viewBtn) {
+                    viewBtn.addEventListener('click', function() {
+                        const thisRow = this.closest('tr');
+                        const productId = thisRow.querySelector('td:nth-child(2)').textContent;
+                        const productName = thisRow.querySelector('td:nth-child(4)').textContent;
+                        alert(`Viewing details for ${productName} (${productId})`);
+                    });
+                }
+            }
+
+            // Add responsive table functionality
+            function handleTableResponsive() {
+                const table = document.querySelector('.admin-table');
+                const tbody = table.querySelector('tbody');
+                const rows = tbody.querySelectorAll('tr');
+
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    cells.forEach(cell => {
+                        const label = cell.getAttribute('data-label');
+                        if (label) {
+                            cell.setAttribute('data-label', label);
+                        }
+                    });
+                });
+            }
+
+            // Call on load and resize
+            handleTableResponsive();
+            window.addEventListener('resize', handleTableResponsive);
+        });
+    </script>
 
     <style>
         .product-image {
             border-radius: 5px;
             object-fit: cover;
+            width: 50px;
+            height: 50px;
         }
         .action-buttons {
             display: flex;
@@ -524,6 +914,187 @@
         .image-preview i {
             font-size: 2rem;
             margin-bottom: 5px;
+        }
+        
+        /* New styles for the products table and buttons */
+        .admin-card-header {
+            background-color: #f8f9fa;
+        }
+        
+        .admin-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .admin-table td {
+            vertical-align: middle;
+        }
+        
+        /* Status badges */
+        .admin-table .badge {
+            font-weight: 500;
+            padding: 0.4rem 0.6rem;
+        }
+        
+        /* Action buttons alignment */
+        .action-buttons.justify-content-end {
+            justify-content: flex-end;
+        }
+        
+        /* Ensure Actions column is wide enough */
+        .admin-table th:last-child,
+        .admin-table td:last-child {
+            min-width: 120px;
+        }
+        
+        /* Pagination styling with admin theme color */
+        .pagination .page-item.active .page-link {
+            background-color: var(--admin-theme-color);
+            border-color: var(--admin-theme-color);
+        }
+        
+        .pagination .page-link {
+            color: var(--admin-theme-color);
+        }
+        
+        .pagination .page-link:hover {
+            color: #fff;
+            background-color: var(--admin-theme-color);
+            border-color: var(--admin-theme-color);
+        }
+        
+        /* Improved responsive table styles */
+        @media (max-width: 767.98px) {
+            .admin-table {
+                font-size: 0.85rem;
+            }
+            
+            .admin-table th, 
+            .admin-table td {
+                padding: 0.5rem;
+            }
+            
+            .action-buttons .btn-sm {
+                padding: 0.2rem 0.4rem;
+                font-size: 0.75rem;
+            }
+            
+            .admin-table th:last-child,
+            .admin-table td:last-child {
+                min-width: 100px;
+            }
+        }
+        
+        /* Very small screens */
+        @media (max-width: 575.98px) {
+            .admin-table {
+                font-size: 0.75rem;
+            }
+            
+            .admin-header h4 {
+                font-size: 1.25rem;
+            }
+            
+            .admin-content-header h5 {
+                font-size: 1rem;
+            }
+            
+            .input-group .btn {
+                padding: 0.375rem 0.5rem;
+            }
+        }
+
+        /* Table Responsive Styles */
+        @media (max-width: 768px) {
+            .admin-table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .admin-table thead {
+                display: none;
+            }
+
+            .admin-table tbody tr {
+                display: block;
+                margin-bottom: 1rem;
+                border: 1px solid var(--border-color);
+                border-radius: 0.5rem;
+                background-color: #fff;
+            }
+
+            .admin-table tbody td {
+                display: block;
+                text-align: right;
+                padding: 0.75rem;
+                border: none;
+                position: relative;
+                padding-left: 50%;
+                min-height: 50px;
+            }
+
+            .admin-table tbody td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0.75rem;
+                width: 45%;
+                padding-right: 1rem;
+                text-align: left;
+                font-weight: 600;
+                color: var(--text-color);
+            }
+
+            .admin-table tbody td:first-child {
+                border-top-left-radius: 0.5rem;
+                border-top-right-radius: 0.5rem;
+            }
+
+            .admin-table tbody td:last-child {
+                border-bottom-left-radius: 0.5rem;
+                border-bottom-right-radius: 0.5rem;
+            }
+
+            .admin-table .action-buttons {
+                justify-content: flex-end;
+                gap: 0.5rem;
+            }
+
+            .admin-table .product-image {
+                width: 40px;
+                height: 40px;
+                object-fit: cover;
+                border-radius: 0.25rem;
+            }
+
+            .admin-table .badge {
+                display: inline-block;
+                margin: 0.25rem 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .admin-table tbody td {
+                padding-left: 40%;
+            }
+
+            .admin-table tbody td::before {
+                width: 35%;
+            }
+
+            .admin-table .action-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .admin-table .action-buttons .btn {
+                padding: 0.25rem 0.5rem;
+                font-size: 0.875rem;
+            }
         }
     </style>
 </body>
