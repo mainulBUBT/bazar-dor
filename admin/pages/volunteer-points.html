@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#8a3647">
+    <title>Bazar Dor - Volunteer Points Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../lib/bootstrap-icons/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/admin-style.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar-header">
+                <h3>Bazar Dor</h3>
+                <span>Admin Panel</span>
+            </div>
+            <div class="admin-profile">
+                <div class="admin-avatar">
+                    <i class="bi bi-person-circle"></i>
+                </div>
+                <div class="admin-info">
+                    <h6>Admin User</h6>
+                    <p>Administrator</p>
+                </div>
+            </div>
+            <nav class="admin-nav">
+                <div class="admin-sidebar-section">
+                    <div class="admin-sidebar-section-title">Main</div>
+                    <ul>
+                        <li>
+                            <a href="dashboard.html">
+                                <i class="bi bi-speedometer2"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="admin-sidebar-section">
+                    <div class="admin-sidebar-section-title">Catalog</div>
+                    <ul>
+                        <li class="dropdown">
+                            <a href="#">
+                                <i class="bi bi-box-seam"></i>
+                                <span>Products</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="products.html" class="dropdown-item">
+                                    <i class="bi bi-list-ul"></i> All Products
+                                </a>
+                                <a href="add-product.html" class="dropdown-item">
+                                    <i class="bi bi-plus-circle"></i> Add Product
+                                </a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">
+                                <i class="bi bi-tags"></i>
+                                <span>Categories</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="categories.html" class="dropdown-item">
+                                    <i class="bi bi-list-ul"></i> All Categories
+                                </a>
+                                <a href="add-category.html" class="dropdown-item">
+                                    <i class="bi bi-plus-circle"></i> Add Category
+                                </a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">
+                                <i class="bi bi-shop"></i>
+                                <span>Markets</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="markets.html" class="dropdown-item">
+                                    <i class="bi bi-list-ul"></i> All Markets
+                                </a>
+                                <a href="add-market.html" class="dropdown-item">
+                                    <i class="bi bi-plus-circle"></i> Add Market
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="admin-sidebar-section">
+                    <div class="admin-sidebar-section-title">Users</div>
+                    <ul>
+                        <li>
+                            <a href="users.html">
+                                <i class="bi bi-people"></i>
+                                <span>Users</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="contributions.html">
+                                <i class="bi bi-graph-up-arrow"></i>
+                                <span>Contributions</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="admin-sidebar-section">
+                    <div class="admin-sidebar-section-title">Volunteer Points</div>
+                    <ul>
+                        <li class="dropdown active">
+                            <a href="#">
+                                <i class="bi bi-award"></i>
+                                <span>Points Management</span>
+                            </a>
+                            <div class="dropdown-menu" style="display: block;">
+                                <a href="volunteer-points.html" class="dropdown-item active">
+                                    <i class="bi bi-plus-minus"></i> Manage Points
+                                </a>
+                                <a href="volunteer-transactions.html" class="dropdown-item">
+                                    <i class="bi bi-list-ul"></i> Transactions
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="volunteer-redemptions.html">
+                                <i class="bi bi-gift"></i>
+                                <span>Redemptions</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="admin-sidebar-section">
+                    <div class="admin-sidebar-section-title">Configuration</div>
+                    <ul>
+                        <li>
+                            <a href="settings.html">
+                                <i class="bi bi-gear"></i>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="admin-sidebar-section">
+                    <div class="admin-sidebar-section-title">Marketing</div>
+                    <ul>
+                        <li class="dropdown">
+                            <a href="#">
+                                <i class="bi bi-images"></i>
+                                <span>Banners</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="banners.html" class="dropdown-item">
+                                    <i class="bi bi-list-ul"></i> All Banners
+                                </a>
+                                <a href="add-banner.html" class="dropdown-item">
+                                    <i class="bi bi-plus-circle"></i> Add Banner
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="admin-sidebar-section">
+                    <div class="admin-sidebar-section-title">Reports</div>
+                    <ul>
+                        <li>
+                            <a href="market-reports.html">
+                                <i class="bi bi-shop-window"></i>
+                                <span>Market Reports</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="product-reports.html">
+                                <i class="bi bi-box2"></i>
+                                <span>Product Reports</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="price-reports.html">
+                                <i class="bi bi-graph-up"></i>
+                                <span>Price Analytics</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="user-reports.html">
+                                <i class="bi bi-people-fill"></i>
+                                <span>User Analytics</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="admin-sidebar-footer">
+                <a href="../../index.html" class="btn btn-outline-light btn-sm">
+                    <i class="bi bi-box-arrow-left"></i> Back to Site
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Top Header -->
+            <header class="admin-header">
+                <div class="admin-header-left">
+                    <button class="toggle-sidebar-btn">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <h4>Volunteer Points Management</h4>
+                </div>
+                <div class="admin-header-right">
+                    <div class="admin-actions">
+                        <a href="#" class="admin-notification">
+                            <i class="bi bi-bell"></i>
+                            <span class="badge">3</span>
+                        </a>
+                        <div class="admin-dropdown">
+                            <button class="admin-dropdown-toggle">
+                                <i class="bi bi-person-circle"></i>
+                                <span>Admin</span>
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Points Management Content -->
+            <div class="admin-content">
+                <!-- Page Header -->
+                <div class="admin-content-header">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5><i class="bi bi-award me-2"></i>Volunteer Points Management</h5>
+                    </div>
+                </div>
+                
+                <!-- Points Management Card -->
+                <div class="admin-card mb-4">
+                    <div class="admin-card-header">
+                        <h6 class="mb-0">Assign or Remove Points</h6>
+                    </div>
+                    <div class="admin-card-body">
+                        <form id="pointsManagementForm">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="userSelect" class="form-label">Select User</label>
+                                    <select class="form-select" id="userSelect" required>
+                                        <option value="" selected disabled>Choose a user...</option>
+                                        <option value="1">John Doe (john@example.com)</option>
+                                        <option value="2">Jane Smith (jane@example.com)</option>
+                                        <option value="3">Robert Johnson (robert@example.com)</option>
+                                        <option value="4">Emily Davis (emily@example.com)</option>
+                                        <option value="5">Michael Wilson (michael@example.com)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="pointsAction" class="form-label">Action</label>
+                                    <select class="form-select" id="pointsAction" required>
+                                        <option value="add" selected>Add Points</option>
+                                        <option value="remove">Remove Points</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="pointsAmount" class="form-label">Points</label>
+                                    <input type="number" class="form-control" id="pointsAmount" min="1" value="1" required>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="pointsReason" class="form-label">Reason</label>
+                                    <select class="form-select" id="pointsReason" required>
+                                        <option value="" selected disabled>Select a reason...</option>
+                                        <option value="market_add">Adding a new market</option>
+                                        <option value="product_add">Adding a product</option>
+                                        <option value="review">High-quality review</option>
+                                        <option value="report">Approved report</option>
+                                        <option value="referral">Referring a friend</option>
+                                        <option value="manual_adjustment">Manual adjustment</option>
+                                        <option value="other">Other (specify in notes)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="pointsNotes" class="form-label">Notes</label>
+                                    <textarea class="form-control" id="pointsNotes" rows="3" placeholder="Additional details about this points transaction"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-12 d-flex justify-content-end">
+                                    <button type="reset" class="btn btn-outline-secondary me-2">
+                                        <i class="bi bi-x-circle"></i> Reset
+                                    </button>
+                                    <button type="submit" class="btn btn-admin">
+                                        <i class="bi bi-check-circle"></i> Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Recent Points Transactions -->
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h6 class="mb-0">Recent Points Transactions</h6>
+                    </div>
+                    <div class="admin-card-body p-0">
+                        <div class="table-responsive">
+                            <table class="admin-table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th data-label="ID">ID</th>
+                                        <th data-label="Date">Date</th>
+                                        <th data-label="User">User</th>
+                                        <th data-label="Action">Action</th>
+                                        <th data-label="Points">Points</th>
+                                        <th data-label="Reason">Reason</th>
+                                        <th data-label="Admin">Admin</th>
+                                        <th data-label="Actions" class="text-end">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td data-label="ID">#T001</td>
+                                        <td data-label="Date">2023-06-15 14:30</td>
+                                        <td data-label="User">John Doe</td>
+                                        <td data-label="Action">
+                                            <span class="badge bg-success">Added</span>
+                                        </td>
+                                        <td data-label="Points">+5</td>
+                                        <td data-label="Reason">Adding a new market</td>
+                                        <td data-label="Admin">Admin User</td>
+                                        <td data-label="Actions">
+                                            <div class="action-buttons justify-content-end">
+                                                <button class="btn btn-sm btn-outline-info" title="View Details">
+                                                    <i class="bi bi-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger" title="Reverse Transaction">
+                                                    <i class="bi bi-arrow-counterclockwise"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="ID">#T002</td>
+                                        <td data-label="Date">2023-06-14 10:15</td>
+                                        <td data-label="User">Jane Smith</td>
+                                        <td data-label="Action">
+                                            <span class="badge bg-success">Added</span>
+                                        </td>
+                                        <td data-label="Points">+4</td>
+                                        <td data-label="Reason">Adding a product</td>
+                                        <td data-label="Admin">Admin User</td>
+                                        <td data-label="Actions">
+                                            <div class="action-buttons justify-content-end">
+                                                <button class="btn btn-sm btn-outline-info" title="View Details">
+                                                    <i class="bi bi-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger" title="Reverse Transaction">
+                                                    <i class="bi bi-arrow-counterclockwise"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="ID">#T003</td>
+                                        <td data-label="Date">2023-06-13 16:45</td>
+                                        <td data-label="User">Robert Johnson</td>
+                                        <td data-label="Action">
+                                            <span class="badge bg-danger">Removed</span>
+                                        </td>
+                                        <td data-label="Points">-2</td>
+                                        <td data-label="Reason">Manual adjustment</td>
+                                        <td data-label="Admin">Admin User</td>
+                                        <td data-label="Actions">
+                                            <div class="action-buttons justify-content-end">
+                                                <button class="btn btn-sm btn-outline-info" title="View Details">
+                                                    <i class="bi bi-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger" title="Reverse Transaction">
+                                                    <i class="bi bi-arrow-counterclockwise"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="ID">#T004</td>
+                                        <td data-label="Date">2023-06-12 09:30</td>
+                                        <td data-label="User">Emily Davis</td>
+                                        <td data-label="Action">
+                                            <span class="badge bg-success">Added</span>
+                                        </td>
+                                        <td data-label="Points">+3</td>
+                                        <td data-label="Reason">Approved report</td>
+                                        <td data-label="Admin">Admin User</td>
+                                        <td data-label="Actions">
+                                            <div class="action-buttons justify-content-end">
+                                                <button class="btn btn-sm btn-outline-info" title="View Details">
+                                                    <i class="bi bi-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger" title="Reverse Transaction">
+                                                    <i class="bi bi-arrow-counterclockwise"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td data-label="ID">#T005</td>
+                                        <td data-label="Date">2023-06-11 14:20</td>
+                                        <td data-label="User">Michael Wilson</td>
+                                        <td data-label="Action">
+                                            <span class="badge bg-success">Added</span>
+                                        </td>
+                                        <td data-label="Points">+2</td>
+                                        <td data-label="Reason">Referring a friend</td>
+                                        <td data-label="Admin">Admin User</td>
+                                        <td data-label="Actions">
+                                            <div class="action-buttons justify-content-end">
+                                                <button class="btn btn-sm btn-outline-info" title="View Details">
+                                                    <i class="bi bi-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger" title="Reverse Transaction">
+                                                    <i class="bi bi-arrow-counterclockwise"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Pagination -->
+                        <div class="admin-pagination">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                                            <i class="bi bi-chevron-left"></i>
+                                        </a>
+                                    </li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">
+                                            <i class="bi bi-chevron-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../lib/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="../js/admin.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form submission handler
+            const pointsManagementForm = document.getElementById('pointsManagementForm');
+            
+            pointsManagementForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const userId = document.getElementById('userSelect').value;
+                const action = document.getElementById('pointsAction').value;
+                const points = document.getElementById('pointsAmount').value;
+                const reason = document.getElementById('pointsReason').value;
+                const notes = document.getElementById('pointsNotes').value;
+                
+                // In a real application, you would send this data to the server
+                console.log('Points transaction:', {
+                    userId,
+                    action,
+                    points,
+                    reason,
+                    notes
+                });
+                
+                // Show success message (in a real app, this would happen after server confirmation)
+                alert('Points transaction submitted successfully!');
+                
+                // Reset the form
+                pointsManagementForm.reset();
+            });
+        });
+    </script>
+</body>
+</html>
