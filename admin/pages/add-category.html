@@ -11,6 +11,8 @@
     <link href="../../lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../lib/bootstrap-icons/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../css/admin-style.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
 </head>
 <body>
     <div class="admin-container">
@@ -223,43 +225,42 @@
                             <h6 class="mb-0">Category Information</h6>
                         </div>
                         <div class="admin-card-body">
-                            <div class="row mb-4">
-                                <div class="col-md-6">
-                                    <label for="categoryName" class="form-label">Category Name <span class="text-danger">*</span></label>
+                            <div class="row mb-3 align-items-center">
+                                <div class="col-md-9">
+                                    <label for="categoryName" class="form-label">Name <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="categoryName" placeholder="Enter category name" required>
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="categorySlug" class="form-label">Category Slug</label>
-                                    <input type="text" class="form-control" id="categorySlug" placeholder="Enter category slug">
-                                    <small class="form-text text-muted">If left empty, it will be generated automatically from the name.</small>
+                                <div class="col-md-3">
+                                    <div class="d-flex align-items-center gap-2 mt-md-4 status-toggle">
+                                        <span class="status-label me-2">Status:</span>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="categoryStatus" checked>
+                                            <span class="toggle-slider"></span>
+                                            <span class="toggle-label">Active</span>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                             
-                            <div class="row mb-4">
-                                <div class="col-md-6">
-                                    <label for="parentCategory" class="form-label">Parent Category</label>
-                                    <select class="form-select" id="parentCategory">
-                                        <option value="" selected>None (Top Level Category)</option>
-                                        <option>Fruits</option>
-                                        <option>Vegetables</option>
-                                        <option>Dairy</option>
-                                        <option>Bakery</option>
-                                        <option>Meat</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="categoryStatus" class="form-label">Status <span class="text-danger">*</span></label>
-                                    <select class="form-select" id="categoryStatus" required>
-                                        <option value="active" selected>Active</option>
-                                        <option value="inactive">Inactive</option>
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-4">
+                            <div class="row mb-3">
                                 <div class="col-md-12">
-                                    <label for="categoryDescription" class="form-label">Description</label>
-                                    <textarea class="form-control" id="categoryDescription" rows="4" placeholder="Enter category description (optional)"></textarea>
+                                    <label for="categorySlug" class="form-label">Slug</label>
+                                    <input type="text" class="form-control" id="categorySlug" placeholder="Auto-generated from name">
+                                    <small class="form-text text-muted">Leave empty to auto-generate from name</small>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <label for="parentCategory" class="form-label">Parent Category</label>
+                                    <select class="form-select category-select" id="parentCategory">
+                                        <option value="" selected>None (Main Category)</option>
+                                        <option value="1">Fruits</option>
+                                        <option value="2">Vegetables</option>
+                                        <option value="3">Dairy</option>
+                                        <option value="4">Bakery</option>
+                                        <option value="5">Meat</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -267,14 +268,14 @@
                     
                     <div class="admin-card mb-4">
                         <div class="admin-card-header">
-                            <h6 class="mb-0">Category Display</h6>
+                            <h6 class="mb-0">Category Icon</h6>
                         </div>
                         <div class="admin-card-body">
-                            <div class="row mb-4">
-                                <div class="col-md-6">
-                                    <label class="form-label">Category Icon</label>
+                            <div class="row">
+                                <div class="col-12">
+                                    <label class="form-label mb-3">Select an icon for this category</label>
                                     <div class="icon-selection">
-                                        <div class="row g-2 mb-3">
+                                        <div class="row g-3">
                                             <div class="col-auto">
                                                 <div class="icon-option active">
                                                     <i class="bi bi-basket2-fill"></i>
@@ -315,78 +316,31 @@
                                                     <i class="bi bi-box"></i>
                                                 </div>
                                             </div>
+                                            <div class="col-auto">
+                                                <div class="icon-option">
+                                                    <i class="bi bi-cart-fill"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="icon-option">
+                                                    <i class="bi bi-shop"></i>
+                                                </div>
+                                            </div>
                                         </div>
                                         <input type="hidden" id="selectedIcon" value="bi-basket2-fill">
-                                        <button type="button" class="btn btn-outline-secondary" id="showMoreIcons">
-                                            Show More Icons
-                                        </button>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="categoryImage" class="form-label">Category Image (Optional)</label>
-                                    <div class="input-group mb-3">
-                                        <input type="file" class="form-control" id="categoryImage" accept="image/*">
-                                        <label class="input-group-text" for="categoryImage">Upload</label>
-                                    </div>
-                                    <div class="image-preview-container mt-2" id="imagePreviewContainer">
-                                        <div class="image-preview">
-                                            <i class="bi bi-image"></i>
-                                            <p class="mb-0">No image selected</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-4">
-                                <div class="col-md-6">
-                                    <label for="displayOrder" class="form-label">Display Order</label>
-                                    <input type="number" class="form-control" id="displayOrder" value="0" min="0">
-                                    <small class="form-text text-muted">Categories are sorted by this order (lower numbers shown first).</small>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="showInMenu" class="form-label">Show in Menu</label>
-                                    <div class="form-check form-switch mt-2">
-                                        <input class="form-check-input" type="checkbox" id="showInMenu" checked>
-                                        <label class="form-check-label" for="showInMenu">Display this category in navigation menus</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="admin-card mb-4">
-                        <div class="admin-card-header">
-                            <h6 class="mb-0">SEO Information</h6>
-                        </div>
-                        <div class="admin-card-body">
-                            <div class="row mb-4">
-                                <div class="col-md-12">
-                                    <label for="metaTitle" class="form-label">Meta Title</label>
-                                    <input type="text" class="form-control" id="metaTitle" placeholder="Enter meta title">
-                                    <small class="form-text text-muted">If left empty, the category name will be used.</small>
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-4">
-                                <div class="col-md-12">
-                                    <label for="metaDescription" class="form-label">Meta Description</label>
-                                    <textarea class="form-control" id="metaDescription" rows="3" placeholder="Enter meta description"></textarea>
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-4">
-                                <div class="col-md-12">
-                                    <label for="metaKeywords" class="form-label">Meta Keywords</label>
-                                    <input type="text" class="form-control" id="metaKeywords" placeholder="Enter keywords separated by commas">
                                 </div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="d-flex justify-content-end gap-2 mb-4">
-                        <button type="button" class="btn btn-outline-secondary" id="cancelBtn">Cancel</button>
-                        <button type="button" class="btn btn-outline-admin" id="saveAsDraftBtn">Save as Draft</button>
-                        <button type="submit" class="btn btn-admin">Save Category</button>
+                        <button type="button" class="btn btn-outline-secondary" id="cancelBtn">
+                            <i class="bi bi-x-lg me-1"></i>Cancel
+                        </button>
+                        <button type="submit" class="btn btn-admin">
+                            <i class="bi bi-save me-1"></i>Save Category
+                        </button>
                     </div>
                 </form>
             </div>
@@ -395,9 +349,30 @@
 
     <script src="../../lib/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="../js/admin.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Select2 with custom options
+            $(document).ready(function() {
+                $('.category-select').select2({
+                    theme: 'bootstrap-5',
+                    width: '100%',
+                    placeholder: 'Select a parent category',
+                    allowClear: true,
+                    dropdownParent: $('#addCategoryForm')
+                });
+            });
+            
+            // Toggle label text based on checkbox state
+            const statusToggle = document.getElementById('categoryStatus');
+            const toggleLabel = document.querySelector('.toggle-label');
+            
+            statusToggle.addEventListener('change', function() {
+                toggleLabel.textContent = this.checked ? 'Active' : 'Inactive';
+            });
+            
             // Handle category name to slug conversion
             const categoryName = document.getElementById('categoryName');
             const categorySlug = document.getElementById('categorySlug');
@@ -428,28 +403,22 @@
                     return;
                 }
                 
-                // In a real application, this would submit the form data to the server
-                // For now, let's just show a success message and redirect
+                // Show success toast
                 showSavingMessage();
                 setTimeout(() => {
-                    alert('Category saved successfully!');
-                    window.location.href = 'categories.html';
-                }, 1500);
+                    showSuccessToast('Category saved successfully!');
+                    setTimeout(() => {
+                        window.location.href = 'categories.html';
+                    }, 1000);
+                }, 800);
             });
             
             function validateForm() {
                 const categoryName = document.getElementById('categoryName').value.trim();
-                const categoryStatus = document.getElementById('categoryStatus').value;
                 
                 if (!categoryName) {
-                    alert('Please enter a category name');
+                    showErrorToast('Please enter a category name');
                     document.getElementById('categoryName').focus();
-                    return false;
-                }
-                
-                if (!categoryStatus) {
-                    alert('Please select a status');
-                    document.getElementById('categoryStatus').focus();
                     return false;
                 }
                 
@@ -466,7 +435,81 @@
                 setTimeout(() => {
                     submitBtn.innerHTML = originalText;
                     submitBtn.disabled = false;
-                }, 1500);
+                }, 800);
+            }
+            
+            function showSuccessToast(message) {
+                const toast = document.createElement('div');
+                toast.className = 'admin-toast success-toast';
+                toast.innerHTML = `
+                    <div class="admin-toast-icon">
+                        <i class="bi bi-check-circle"></i>
+                    </div>
+                    <div class="admin-toast-content">
+                        <div class="admin-toast-title">Success</div>
+                        <div class="admin-toast-message">${message}</div>
+                    </div>
+                    <button class="admin-toast-close">
+                        <i class="bi bi-x"></i>
+                    </button>
+                `;
+                
+                document.body.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.classList.add('show');
+                }, 10);
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    setTimeout(() => {
+                        toast.remove();
+                    }, 300);
+                }, 3000);
+                
+                toast.querySelector('.admin-toast-close').addEventListener('click', () => {
+                    toast.classList.remove('show');
+                    setTimeout(() => {
+                        toast.remove();
+                    }, 300);
+                });
+            }
+            
+            function showErrorToast(message) {
+                const toast = document.createElement('div');
+                toast.className = 'admin-toast error-toast';
+                toast.innerHTML = `
+                    <div class="admin-toast-icon">
+                        <i class="bi bi-exclamation-circle"></i>
+                    </div>
+                    <div class="admin-toast-content">
+                        <div class="admin-toast-title">Error</div>
+                        <div class="admin-toast-message">${message}</div>
+                    </div>
+                    <button class="admin-toast-close">
+                        <i class="bi bi-x"></i>
+                    </button>
+                `;
+                
+                document.body.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.classList.add('show');
+                }, 10);
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    setTimeout(() => {
+                        toast.remove();
+                    }, 300);
+                }, 3000);
+                
+                toast.querySelector('.admin-toast-close').addEventListener('click', () => {
+                    toast.classList.remove('show');
+                    setTimeout(() => {
+                        toast.remove();
+                    }, 300);
+                });
             }
             
             // Handle icon selection
@@ -489,75 +532,11 @@
                 });
             });
             
-            // Handle image preview
-            const categoryImage = document.getElementById('categoryImage');
-            const imagePreviewContainer = document.getElementById('imagePreviewContainer');
-            
-            categoryImage.addEventListener('change', function() {
-                const file = this.files[0];
-                
-                if (file) {
-                    const reader = new FileReader();
-                    
-                    reader.onload = function(e) {
-                        imagePreviewContainer.innerHTML = `
-                            <div class="image-preview-with-image">
-                                <img src="${e.target.result}" alt="Category Image Preview" class="img-fluid">
-                                <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0 m-2" id="removeImage">
-                                    <i class="bi bi-x"></i>
-                                </button>
-                            </div>
-                        `;
-                        
-                        // Add event listener to remove button
-                        document.getElementById('removeImage').addEventListener('click', function() {
-                            categoryImage.value = '';
-                            imagePreviewContainer.innerHTML = `
-                                <div class="image-preview">
-                                    <i class="bi bi-image"></i>
-                                    <p class="mb-0">No image selected</p>
-                                </div>
-                            `;
-                        });
-                    };
-                    
-                    reader.readAsDataURL(file);
-                }
-            });
-            
             // Handle cancel button
             document.getElementById('cancelBtn').addEventListener('click', function() {
                 if (confirm('Are you sure you want to cancel? Any unsaved changes will be lost.')) {
                     window.location.href = 'categories.html';
                 }
-            });
-            
-            // Handle save as draft button
-            document.getElementById('saveAsDraftBtn').addEventListener('click', function() {
-                // In a real application, this would save the form data as a draft
-                // For now, let's just show a success message
-                showSavingDraftMessage();
-                setTimeout(() => {
-                    alert('Category saved as draft!');
-                }, 1500);
-            });
-            
-            function showSavingDraftMessage() {
-                const draftBtn = document.getElementById('saveAsDraftBtn');
-                const originalText = draftBtn.innerHTML;
-                
-                draftBtn.innerHTML = '<i class="bi bi-arrow-clockwise me-1"></i>Saving...';
-                draftBtn.disabled = true;
-                
-                setTimeout(() => {
-                    draftBtn.innerHTML = originalText;
-                    draftBtn.disabled = false;
-                }, 1500);
-            }
-            
-            // Handle show more icons button
-            document.getElementById('showMoreIcons').addEventListener('click', function() {
-                alert('In a real application, this would open a modal with more icons to choose from.');
             });
         });
     </script>
@@ -595,64 +574,194 @@
             border-color: var(--admin-theme-color);
         }
         
-        .image-preview-container {
-            width: 100%;
-            height: 150px;
-            border: 1px dashed #ccc;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        
-        .image-preview {
+        /* Custom Toggle Switch */
+        .status-toggle {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100%;
-            color: #999;
         }
         
-        .image-preview i {
-            font-size: 2rem;
-            margin-bottom: 5px;
+        .status-label {
+            font-weight: 500;
+            color: #495057;
         }
         
-        .image-preview-with-image {
-            width: 100%;
-            height: 100%;
+        .toggle-switch {
             position: relative;
+            display: inline-block;
+            width: 120px;
+            height: 34px;
+            margin-bottom: 0;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: var(--admin-theme-color);
+        }
+
+        input:focus + .toggle-slider {
+            box-shadow: 0 0 1px var(--admin-theme-color);
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(86px);
+        }
+
+        .toggle-label {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-weight: 500;
+            font-size: 14px;
+            width: 100%;
+            text-align: center;
+            pointer-events: none;
         }
         
-        .image-preview-with-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        /* Select2 Custom Styling */
+        .select2-container--bootstrap-5.select2-container--focus .select2-selection,
+        .select2-container--bootstrap-5.select2-container--open .select2-selection {
+            border-color: var(--admin-theme-color) !important;
+            box-shadow: 0 0 0 0.25rem var(--admin-theme-light) !important;
+        }
+        
+        .select2-container--bootstrap-5 .select2-dropdown .select2-results__option--highlighted[aria-selected=true] {
+            background-color: var(--admin-theme-color) !important;
+            color: white !important;
+        }
+        
+        .select2-container--bootstrap-5 .select2-dropdown .select2-results__option--selected {
+            background-color: var(--admin-theme-light) !important;
+            color: var(--admin-theme-color) !important;
+        }
+        
+        /* Toast notifications */
+        .admin-toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            min-width: 300px;
+            max-width: 400px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            padding: 12px 16px;
+            z-index: 9999;
+            transform: translateY(100%);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        
+        .admin-toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .admin-toast-icon {
+            margin-right: 12px;
+            font-size: 20px;
+        }
+        
+        .success-toast .admin-toast-icon i {
+            color: #28a745;
+        }
+        
+        .error-toast .admin-toast-icon i {
+            color: #dc3545;
+        }
+        
+        .admin-toast-content {
+            flex: 1;
+        }
+        
+        .admin-toast-title {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+        
+        .admin-toast-message {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .admin-toast-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #aaa;
+            padding: 0;
+            margin-left: 12px;
+        }
+        
+        .admin-toast-close:hover {
+            color: #666;
+        }
+        
+        /* Form styling improvements */
+        .form-check-input:checked {
+            background-color: var(--admin-theme-color);
+            border-color: var(--admin-theme-color);
         }
         
         /* Responsive styles */
         @media (max-width: 768px) {
             .icon-option {
-                width: 40px;
-                height: 40px;
+                width: 45px;
+                height: 45px;
             }
             
             .icon-option i {
                 font-size: 1.25rem;
             }
             
-            .image-preview-container {
-                height: 120px;
+            .admin-toast {
+                min-width: unset;
+                max-width: 90%;
+                left: 5%;
+                right: 5%;
             }
         }
         
         @media (max-width: 576px) {
             .icon-option {
-                width: 35px;
-                height: 35px;
+                width: 40px;
+                height: 40px;
             }
             
             .icon-option i {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
         }
     </style>

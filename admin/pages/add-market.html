@@ -240,15 +240,42 @@
                             </div>
                             <div class="admin-card-body">
                                 <form id="marketForm">
-                                    <div class="mb-3">
-                                        <label for="marketName" class="form-label">Market Name <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="marketName" required>
+                                    <div class="row mb-3">
+                                        <div class="col-md-8">
+                                            <label for="marketName" class="form-label">Market Name <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="marketName" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="marketSlug" class="form-label">Slug</label>
+                                            <input type="text" class="form-control" id="marketSlug" placeholder="Auto-generated from name">
+                                        </div>
                                     </div>
-                                    
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="marketLatitude" class="form-label">Latitude <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="marketLatitude" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="marketLongitude" class="form-label">Longitude <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="marketLongitude" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="marketAddress" class="form-label">Address <span class="text-danger">*</span></label>
+                                        <textarea class="form-control" id="marketAddress" rows="2" required></textarea>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="marketDescription" class="form-label">Short Description</label>
+                                        <textarea class="form-control" id="marketDescription" rows="3"></textarea>
+                                    </div>
+
                                     <div class="row mb-3">
                                         <div class="col-md-6">
                                             <label for="marketType" class="form-label">Market Type <span class="text-danger">*</span></label>
-                                            <select class="form-select" id="marketType" required>
+                                            <select class="form-select market-select" id="marketType" required>
                                                 <option value="">Select Type</option>
                                                 <option>Retail Market</option>
                                                 <option>Wholesale Market</option>
@@ -256,38 +283,6 @@
                                                 <option>Supermarket</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-6">
-                                            <label for="marketLocation" class="form-label">Location <span class="text-danger">*</span></label>
-                                            <select class="form-select" id="marketLocation" required>
-                                                <option value="">Select Location</option>
-                                                <option>Dhaka</option>
-                                                <option>Chittagong</option>
-                                                <option>Sylhet</option>
-                                                <option>Rajshahi</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <label for="marketAddress" class="form-label">Address <span class="text-danger">*</span></label>
-                                        <textarea class="form-control" id="marketAddress" rows="2" required></textarea>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <label for="marketPhone" class="form-label">Phone Number</label>
-                                            <input type="tel" class="form-control" id="marketPhone">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="marketEmail" class="form-label">Email</label>
-                                            <input type="email" class="form-control" id="marketEmail">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <label for="marketDescription" class="form-label">Description</label>
-                                        <textarea class="form-control" id="marketDescription" rows="4"></textarea>
-                                        <small class="text-muted">Provide a detailed description of the market</small>
                                     </div>
                                 </form>
                             </div>
@@ -397,21 +392,41 @@
                             <div class="admin-card-body">
                                 <div class="mb-3">
                                     <label for="marketStatus" class="form-label">Status</label>
-                                    <select class="form-select" id="marketStatus">
+                                    <select class="form-select market-select" id="marketStatus">
                                         <option value="active" selected>Active</option>
                                         <option value="inactive">Inactive</option>
-                                        <option value="review">Under Review</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="marketVisibility" class="form-label">Visibility</label>
-                                    <select class="form-select" id="marketVisibility">
+                                    <select class="form-select market-select" id="marketVisibility">
                                         <option value="public" selected>Public</option>
                                         <option value="private">Private</option>
                                     </select>
                                 </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Features Card -->
+                        <div class="admin-card mb-4">
+                            <div class="admin-card-header">
+                                <h6 class="mb-0">Market Features</h6>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="nonVegSwitch">
+                                    <label class="form-check-label" for="nonVegSwitch">Non-Veg Items Available</label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="halalSwitch">
+                                    <label class="form-check-label" for="halalSwitch">Halal Items Available</label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="parkingSwitch">
+                                    <label class="form-check-label" for="parkingSwitch">Parking Available</label>
+                                </div>
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="featuredSwitch" checked>
+                                    <input class="form-check-input" type="checkbox" id="featuredSwitch">
                                     <label class="form-check-label" for="featuredSwitch">Featured Market</label>
                                 </div>
                             </div>
@@ -441,31 +456,6 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <!-- Location Info Card -->
-                        <div class="admin-card mb-4">
-                            <div class="admin-card-header">
-                                <h6 class="mb-0">Location Information</h6>
-                            </div>
-                            <div class="admin-card-body">
-                                <div class="mb-3">
-                                    <label for="marketLatitude" class="form-label">Latitude</label>
-                                    <input type="text" class="form-control" id="marketLatitude" placeholder="e.g., 23.8103">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="marketLongitude" class="form-label">Longitude</label>
-                                    <input type="text" class="form-control" id="marketLongitude" placeholder="e.g., 90.4125">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="marketArea" class="form-label">Area</label>
-                                    <input type="text" class="form-control" id="marketArea" placeholder="e.g., Gulshan">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="marketZipCode" class="form-label">ZIP Code</label>
-                                    <input type="text" class="form-control" id="marketZipCode" placeholder="e.g., 1212">
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 
@@ -489,7 +479,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize Select2
             $(document).ready(function() {
-                $('#marketType, #marketLocation, #marketStatus, #marketVisibility').select2({
+                $('.market-select').select2({
                     theme: 'bootstrap-5',
                     width: '100%'
                 });
@@ -515,19 +505,24 @@
                 }
             });
 
-            // Operating hours functionality
-            const closedCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+            // Auto-generate slug from market name
+            const marketName = document.getElementById('marketName');
+            const marketSlug = document.getElementById('marketSlug');
             
-            closedCheckboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    const row = this.closest('tr');
-                    const timeInputs = row.querySelectorAll('input[type="time"]');
-                    
-                    timeInputs.forEach(input => {
-                        input.disabled = this.checked;
-                    });
-                });
+            marketName.addEventListener('input', function() {
+                if (!marketSlug.value || marketSlug.value === generateSlug(marketName.value.trim())) {
+                    marketSlug.value = generateSlug(this.value.trim());
+                }
             });
+            
+            function generateSlug(text) {
+                return text.toLowerCase()
+                    .replace(/\s+/g, '-')           // Replace spaces with -
+                    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+                    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+                    .replace(/^-+/, '')             // Trim - from start of text
+                    .replace(/-+$/, '');            // Trim - from end of text
+            }
 
             // Save market button
             const saveMarketBtn = document.getElementById('saveMarketBtn');
@@ -536,42 +531,60 @@
             function saveMarket() {
                 // Validate form
                 const marketNameInput = document.getElementById('marketName');
-                const marketTypeInput = document.getElementById('marketType');
-                const marketLocationInput = document.getElementById('marketLocation');
+                const marketLatitudeInput = document.getElementById('marketLatitude');
+                const marketLongitudeInput = document.getElementById('marketLongitude');
                 const marketAddressInput = document.getElementById('marketAddress');
+                const marketTypeInput = document.getElementById('marketType');
                 
                 if (!marketNameInput.value.trim()) {
-                    alert('Please enter a market name');
+                    showErrorToast('Please enter a market name');
                     marketNameInput.focus();
                     return;
                 }
                 
-                if (!marketTypeInput.value) {
-                    alert('Please select a market type');
-                    marketTypeInput.focus();
+                if (!marketLatitudeInput.value.trim()) {
+                    showErrorToast('Please enter latitude');
+                    marketLatitudeInput.focus();
                     return;
                 }
                 
-                if (!marketLocationInput.value) {
-                    alert('Please select a location');
-                    marketLocationInput.focus();
+                if (!marketLongitudeInput.value.trim()) {
+                    showErrorToast('Please enter longitude');
+                    marketLongitudeInput.focus();
                     return;
                 }
                 
                 if (!marketAddressInput.value.trim()) {
-                    alert('Please enter a market address');
+                    showErrorToast('Please enter a market address');
                     marketAddressInput.focus();
                     return;
                 }
                 
+                if (!marketTypeInput.value) {
+                    showErrorToast('Please select a market type');
+                    marketTypeInput.focus();
+                    return;
+                }
+                
+                // Show saving message
+                const submitBtn = saveMarketBtnBottom;
+                const originalText = submitBtn.innerHTML;
+                
+                submitBtn.innerHTML = '<i class="bi bi-arrow-clockwise me-1"></i>Saving...';
+                submitBtn.disabled = true;
+                
                 // In a real application, we would collect all form data and send it to the server
                 // For demo purposes, just show success message
-                alert('Market saved successfully!');
-                
-                // In a real app, we would redirect to markets list
                 setTimeout(() => {
-                    window.location.href = 'markets.html';
-                }, 1000);
+                    showSuccessToast('Market saved successfully!');
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    
+                    // In a real app, we would redirect to markets list
+                    setTimeout(() => {
+                        window.location.href = 'markets.html';
+                    }, 1000);
+                }, 800);
             }
             
             saveMarketBtn.addEventListener('click', saveMarket);
@@ -599,13 +612,13 @@
             font-size: 2rem;
             margin-bottom: 5px;
         }
-        .breadcrumb {
-            background-color: transparent;
-            padding: 0;
-            margin-bottom: 1rem;
+        .form-check-input:checked {
+            background-color: var(--admin-theme-color);
+            border-color: var(--admin-theme-color);
         }
-        .breadcrumb-item + .breadcrumb-item::before {
-            content: ">";
+        .form-check-input:focus {
+            border-color: var(--admin-theme-color);
+            box-shadow: 0 0 0 0.25rem var(--admin-theme-light);
         }
     </style>
 </body>
