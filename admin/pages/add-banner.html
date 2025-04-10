@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#8a3647">
+    <title>Bazar Dor - Add New Banner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../lib/bootstrap-icons/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/admin-style.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar-header">
+                <h3>Bazar Dor</h3>
+                <span>Admin Panel</span>
+            </div>
+            <div class="admin-profile">
+                <div class="admin-avatar">
+                    <i class="bi bi-person-circle"></i>
+                </div>
+                <div class="admin-info">
+                    <h6>Admin User</h6>
+                    <p>Administrator</p>
+                </div>
+            </div>
+            <nav class="admin-nav">
+                <div class="admin-sidebar-section">
+                    <div class="admin-sidebar-section-title">Main</div>
+                    <ul>
+                        <li>
+                            <a href="dashboard.html">
+                                <i class="bi bi-speedometer2"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="admin-sidebar-section">
+                    <div class="admin-sidebar-section-title">Catalog</div>
+                    <ul>
+                        <li class="dropdown">
+                            <a href="#">
+                                <i class="bi bi-box-seam"></i>
+                                <span>Products</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="products.html" class="dropdown-item">
+                                    <i class="bi bi-list-ul"></i> All Products
+                                </a>
+                                <a href="add-product.html" class="dropdown-item">
+                                    <i class="bi bi-plus-circle"></i> Add Product
+                                </a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">
+                                <i class="bi bi-tags"></i>
+                                <span>Categories</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="categories.html" class="dropdown-item">
+                                    <i class="bi bi-list-ul"></i> All Categories
+                                </a>
+                                <a href="add-category.html" class="dropdown-item">
+                                    <i class="bi bi-plus-circle"></i> Add Category
+                                </a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">
+                                <i class="bi bi-shop"></i>
+                                <span>Markets</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="markets.html" class="dropdown-item">
+                                    <i class="bi bi-list-ul"></i> All Markets
+                                </a>
+                                <a href="add-market.html" class="dropdown-item">
+                                    <i class="bi bi-plus-circle"></i> Add Market
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="admin-sidebar-section">
+                    <div class="admin-sidebar-section-title">Users</div>
+                    <ul>
+                        <li>
+                            <a href="users.html">
+                                <i class="bi bi-people"></i>
+                                <span>Users</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="contributions.html">
+                                <i class="bi bi-graph-up-arrow"></i>
+                                <span>Contributions</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="admin-sidebar-section">
+                    <div class="admin-sidebar-section-title">Configuration</div>
+                    <ul>
+                        <li>
+                            <a href="settings.html">
+                                <i class="bi bi-gear"></i>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="admin-sidebar-section">
+                    <div class="admin-sidebar-section-title">Marketing</div>
+                    <ul>
+                        <li class="dropdown active">
+                            <a href="#">
+                                <i class="bi bi-images"></i>
+                                <span>Banners</span>
+                            </a>
+                            <div class="dropdown-menu" style="display: block;">
+                                <a href="banners.html" class="dropdown-item">
+                                    <i class="bi bi-list-ul"></i> All Banners
+                                </a>
+                                <a href="add-banner.html" class="dropdown-item active">
+                                    <i class="bi bi-plus-circle"></i> Add Banner
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="admin-sidebar-section">
+                    <div class="admin-sidebar-section-title">Reports</div>
+                    <ul>
+                        <li>
+                            <a href="market-reports.html">
+                                <i class="bi bi-shop-window"></i>
+                                <span>Market Reports</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="product-reports.html">
+                                <i class="bi bi-box2"></i>
+                                <span>Product Reports</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="price-reports.html">
+                                <i class="bi bi-graph-up"></i>
+                                <span>Price Analytics</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="user-reports.html">
+                                <i class="bi bi-people-fill"></i>
+                                <span>User Analytics</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="admin-sidebar-footer">
+                <a href="../../index.html" class="btn btn-outline-light btn-sm">
+                    <i class="bi bi-box-arrow-left"></i> Back to Site
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Top Header -->
+            <header class="admin-header">
+                <div class="admin-header-left">
+                    <button class="toggle-sidebar-btn">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <h4>Add New Banner</h4>
+                </div>
+                <div class="admin-header-right">
+                    <div class="admin-actions">
+                        <a href="#" class="admin-notification">
+                            <i class="bi bi-bell"></i>
+                            <span class="badge">3</span>
+                        </a>
+                        <div class="admin-dropdown">
+                            <button class="admin-dropdown-toggle">
+                                <i class="bi bi-person-circle"></i>
+                                <span>Admin</span>
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Add Banner Content -->
+            <div class="admin-content">
+                <!-- Page Header -->
+                <div class="admin-content-header">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5><i class="bi bi-plus-circle me-2"></i>Add New PWA Banner</h5>
+                        <a href="banners.html" class="btn btn-outline-admin">
+                            <i class="bi bi-arrow-left me-1"></i>Back to Banners
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Add Banner Form Card -->
+                <div class="admin-card mb-4">
+                    <div class="admin-card-header">
+                        <h6>Banner Information</h6>
+                    </div>
+                    <div class="admin-card-body">
+                        <form id="addBannerForm">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="bannerTitle" class="form-label">Banner Title <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="bannerTitle" placeholder="Enter banner title" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="bannerPosition" class="form-label">Position <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" id="bannerPosition" min="1" value="1" required>
+                                    <small class="text-muted">Position determines the order of appearance (1 is first)</small>
+                                </div>
+                            </div>
+                            
+                            <div class="row g-3 mt-2">
+                                <div class="col-md-6">
+                                    <label for="bannerLink" class="form-label">Link URL</label>
+                                    <input type="text" class="form-control" id="bannerLink" placeholder="Enter URL for banner click">
+                                    <small class="text-muted">Leave blank if no link is needed</small>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="bannerStatus" class="form-label">Status <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="bannerStatus" required>
+                                        <option value="active">Active</option>
+                                        <option value="inactive">Inactive</option>
+                                        <option value="scheduled">Scheduled</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row g-3 mt-2">
+                                <div class="col-md-6">
+                                    <label for="bannerStartDate" class="form-label">Start Date</label>
+                                    <input type="date" class="form-control" id="bannerStartDate">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="bannerEndDate" class="form-label">End Date</label>
+                                    <input type="date" class="form-control" id="bannerEndDate">
+                                    <small class="text-muted">Leave blank for no end date</small>
+                                </div>
+                            </div>
+                            
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <label for="bannerDescription" class="form-label">Description</label>
+                                    <textarea class="form-control" id="bannerDescription" rows="3" placeholder="Enter banner description"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Banner Image Upload Card -->
+                <div class="admin-card mb-4">
+                    <div class="admin-card-header">
+                        <h6>Banner Image</h6>
+                    </div>
+                    <div class="admin-card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label for="bannerImage" class="form-label">Upload Banner Image <span class="text-danger">*</span></label>
+                                    <input class="form-control" type="file" id="bannerImage" accept="image/*" required>
+                                    <small class="text-muted">Recommended size: 1200x400px. Max file size: 2MB</small>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">Image for:</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="forMobile" checked>
+                                        <label class="form-check-label" for="forMobile">
+                                            Mobile View
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="forDesktop" checked>
+                                        <label class="form-check-label" for="forDesktop">
+                                            Desktop View
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">Banner Display Settings:</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="fullWidth" checked>
+                                        <label class="form-check-label" for="fullWidth">
+                                            Full Width
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="showOnHome" checked>
+                                        <label class="form-check-label" for="showOnHome">
+                                            Show on Home Page
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="banner-preview-container">
+                                    <label class="form-label">Image Preview</label>
+                                    <div class="banner-preview">
+                                        <div class="text-center p-4 border rounded bg-light" id="imagePreviewPlaceholder">
+                                            <i class="bi bi-image" style="font-size: 3rem; color: #ccc;"></i>
+                                            <p class="mt-2 text-muted">Banner preview will appear here</p>
+                                        </div>
+                                        <img id="imagePreview" class="img-fluid d-none" alt="Banner Preview">
+                                    </div>
+                                    <div class="device-preview-toggle mt-2">
+                                        <button class="btn btn-sm btn-outline-admin active" id="desktopPreviewBtn">
+                                            <i class="bi bi-laptop"></i> Desktop
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-admin" id="mobilePreviewBtn">
+                                            <i class="bi bi-phone"></i> Mobile
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="row mb-4">
+                    <div class="col-12 d-flex justify-content-end">
+                        <button type="button" class="btn btn-secondary me-2" id="cancelBtn">Cancel</button>
+                        <button type="button" class="btn btn-admin" id="saveBannerBtn">Save Banner</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../lib/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="../../lib/jquery/jquery-3.6.0.min.js"></script>
+    <script src="../js/admin.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Image preview functionality
+            const bannerImage = document.getElementById('bannerImage');
+            const imagePreview = document.getElementById('imagePreview');
+            const imagePreviewPlaceholder = document.getElementById('imagePreviewPlaceholder');
+            const desktopPreviewBtn = document.getElementById('desktopPreviewBtn');
+            const mobilePreviewBtn = document.getElementById('mobilePreviewBtn');
+            
+            bannerImage.addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        imagePreview.src = e.target.result;
+                        imagePreview.classList.remove('d-none');
+                        imagePreviewPlaceholder.classList.add('d-none');
+                    }
+                    
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+            
+            // Toggle device preview
+            desktopPreviewBtn.addEventListener('click', function() {
+                if (!imagePreview.classList.contains('d-none')) {
+                    imagePreview.style.maxWidth = '100%';
+                    desktopPreviewBtn.classList.add('active');
+                    mobilePreviewBtn.classList.remove('active');
+                }
+            });
+            
+            mobilePreviewBtn.addEventListener('click', function() {
+                if (!imagePreview.classList.contains('d-none')) {
+                    imagePreview.style.maxWidth = '375px';
+                    mobilePreviewBtn.classList.add('active');
+                    desktopPreviewBtn.classList.remove('active');
+                }
+            });
+            
+            // Handle form submission
+            const addBannerForm = document.getElementById('addBannerForm');
+            const saveBannerBtn = document.getElementById('saveBannerBtn');
+            const cancelBtn = document.getElementById('cancelBtn');
+            
+            saveBannerBtn.addEventListener('click', function() {
+                if (!validateForm()) {
+                    return;
+                }
+                
+                // Show success notification
+                showNotification('Banner saved successfully', 'success');
+                
+                // Reset form
+                setTimeout(() => {
+                    window.location.href = 'banners.html';
+                }, 1500);
+            });
+            
+            cancelBtn.addEventListener('click', function() {
+                window.location.href = 'banners.html';
+            });
+            
+            // Form validation
+            function validateForm() {
+                const requiredFields = document.querySelectorAll('[required]');
+                let isValid = true;
+                
+                requiredFields.forEach(field => {
+                    if (!field.value) {
+                        field.classList.add('is-invalid');
+                        isValid = false;
+                    } else {
+                        field.classList.remove('is-invalid');
+                    }
+                });
+                
+                if (!isValid) {
+                    showNotification('Please fill all required fields', 'danger');
+                }
+                
+                return isValid;
+            }
+            
+            // Helper function for notifications
+            function showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `alert alert-${type} alert-dismissible fade show notification`;
+                notification.innerHTML = `
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                // Position the notification
+                notification.style.position = 'fixed';
+                notification.style.top = '20px';
+                notification.style.right = '20px';
+                notification.style.zIndex = '1050';
+                notification.style.minWidth = '300px';
+                
+                // Auto dismiss after 3 seconds
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 300);
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html> 

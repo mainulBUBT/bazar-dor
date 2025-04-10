@@ -782,4 +782,63 @@
                         // Update the cells
                         nameCell.textContent = newName;
                         categoryCell.textContent = newCategory;
-                        priceCell.textContent = `
+                        priceCell.textContent = `$${newPrice}/${newPriceUnit}`;
+                        statusCell.querySelector('.badge').textContent = newStatus;
+                        
+                        // Change action buttons
+                        const actionCell = row.querySelector('.action-buttons');
+                        const originalButtons = actionCell.innerHTML;
+                        
+                        actionCell.innerHTML = `
+                            <button class="btn btn-sm btn-admin save-btn" title="Save">
+                                <i class="bi bi-check-lg"></i>
+                            </button>
+                            <button class="btn btn-sm btn-secondary cancel-btn" title="Cancel">
+                                <i class="bi bi-x-lg"></i>
+                            </button>
+                        `;
+                        
+                        // Add event listeners for new buttons
+                        actionCell.querySelector('.save-btn').addEventListener('click', function() {
+                            // In a real application, this would send the data to the server
+                            // For now, just update the row with the new values
+                            
+                            const newName = nameCell.querySelector('input').value;
+                            const newCategory = categoryCell.querySelector('select').value;
+                            const newPrice = priceCell.querySelector('input').value;
+                            const newPriceUnit = priceUnit; // Keep the original unit
+                            const newStatus = statusCell.querySelector('select').value;
+                            
+                            // Update the cells
+                            nameCell.textContent = newName;
+                            categoryCell.textContent = newCategory;
+                            priceCell.textContent = `$${newPrice}/${newPriceUnit}`;
+                            statusCell.querySelector('.badge').textContent = newStatus;
+                        });
+                        
+                        actionCell.querySelector('.cancel-btn').addEventListener('click', function() {
+                            // In a real application, this would revert the changes
+                            // For now, just revert the row to its original state
+                            
+                            nameCell.textContent = originalName;
+                            categoryCell.textContent = originalCategory;
+                            priceCell.textContent = originalPrice;
+                            statusCell.querySelector('.badge').textContent = originalStatus;
+                        });
+                    });
+                    
+                    actionCell.querySelector('.cancel-btn').addEventListener('click', function() {
+                        // In a real application, this would revert the changes
+                        // For now, just revert the row to its original state
+                        
+                        nameCell.textContent = originalName;
+                        categoryCell.textContent = originalCategory;
+                        priceCell.textContent = originalPrice;
+                        statusCell.querySelector('.badge').textContent = originalStatus;
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
