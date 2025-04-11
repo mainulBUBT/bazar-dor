@@ -14,211 +14,215 @@
 </head>
 <body>
     <div class="admin-container">
-        <!-- Sidebar -->
-        <aside class="admin-sidebar">
-            <div class="admin-sidebar-header">
-                <h3>Bazar Dor</h3>
-                <span>Admin Panel</span>
+       <!-- Sidebar -->
+       <aside class="admin-sidebar">
+        <div class="admin-sidebar-header">
+            <h3>Bazar Dor</h3>
+            <span>Admin Panel</span>
+        </div>
+        <div class="admin-profile">
+            <div class="admin-avatar">
+                <i class="bi bi-person-circle"></i>
             </div>
-            <div class="admin-profile">
-                <div class="admin-avatar">
-                    <i class="bi bi-person-circle"></i>
-                </div>
-                <div class="admin-info">
-                    <h6>Admin User</h6>
-                    <p>Administrator</p>
-                </div>
+            <div class="admin-info">
+                <h6>Admin User</h6>
+                <p>Administrator</p>
             </div>
-            <nav class="admin-nav">
-                <div class="admin-sidebar-section">
-                    <div class="admin-sidebar-section-title">Main</div>
-                    <ul>
-                        <li>
-                            <a href="dashboard.html">
-                                <i class="bi bi-speedometer2"></i>
-                                <span>Dashboard</span>
+        </div>
+        <nav class="admin-nav">
+            <div class="admin-sidebar-section">
+                <div class="admin-sidebar-section-title">Main</div>
+                <ul>
+                    <li>
+                        <a href="dashboard.html">
+                            <i class="bi bi-speedometer2"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="admin-sidebar-section">
+                <div class="admin-sidebar-section-title">Catalog</div>
+                <ul>
+                    <li>
+                        <a href="units.html">
+                            <i class="bi bi-rulers"></i>
+                            <span>Units</span>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">
+                            <i class="bi bi-tags"></i>
+                            <span>Categories</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="categories.html" class="dropdown-item">
+                                <i class="bi bi-list-ul"></i> All Categories
                             </a>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="admin-sidebar-section">
-                    <div class="admin-sidebar-section-title">Catalog</div>
-                    <ul>
-                        <li class="dropdown">
-                            <a href="#">
-                                <i class="bi bi-box-seam"></i>
-                                <span>Products</span>
+                            <a href="add-category.html" class="dropdown-item">
+                                <i class="bi bi-plus-circle"></i> Add Category
                             </a>
-                            <div class="dropdown-menu">
-                                <a href="products.html" class="dropdown-item">
-                                    <i class="bi bi-list-ul"></i> All Products
-                                </a>
-                                <a href="add-product.html" class="dropdown-item">
-                                    <i class="bi bi-plus-circle"></i> Add Product
-                                </a>
-                            </div>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#">
-                                <i class="bi bi-tags"></i>
-                                <span>Categories</span>
+                        </div>
+                    </li>  
+                    <li class="dropdown">
+                        <a href="#">
+                            <i class="bi bi-box-seam"></i>
+                            <span>Products</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="products.html" class="dropdown-item">
+                                <i class="bi bi-list-ul"></i> All Products
                             </a>
-                            <div class="dropdown-menu">
-                                <a href="categories.html" class="dropdown-item">
-                                    <i class="bi bi-list-ul"></i> All Categories
-                                </a>
-                                <a href="add-category.html" class="dropdown-item">
-                                    <i class="bi bi-plus-circle"></i> Add Category
-                                </a>
-                            </div>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#">
-                                <i class="bi bi-shop"></i>
-                                <span>Markets</span>
+                            <a href="add-product.html" class="dropdown-item">
+                                <i class="bi bi-plus-circle"></i> Add Product
                             </a>
-                            <div class="dropdown-menu">
-                                <a href="markets.html" class="dropdown-item">
-                                    <i class="bi bi-list-ul"></i> All Markets
-                                </a>
-                                <a href="add-market.html" class="dropdown-item">
-                                    <i class="bi bi-plus-circle"></i> Add Market
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="admin-sidebar-section">
-                    <div class="admin-sidebar-section-title">Users</div>
-                    <ul>
-                        <li>
-                            <a href="users.html">
-                                <i class="bi bi-people"></i>
-                                <span>Users</span>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">
+                            <i class="bi bi-shop"></i>
+                            <span>Markets</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="markets.html" class="dropdown-item">
+                                <i class="bi bi-list-ul"></i> All Markets
                             </a>
-                        </li>
-                        <li>
-                            <a href="contributions.html">
-                                <i class="bi bi-graph-up-arrow"></i>
-                                <span>Contributions</span>
+                            <a href="add-market.html" class="dropdown-item">
+                                <i class="bi bi-plus-circle"></i> Add Market
                             </a>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="admin-sidebar-section">
-                    <div class="admin-sidebar-section-title">Volunteer Points</div>
-                    <ul>
-                        <li class="dropdown">
-                            <a href="#">
-                                <i class="bi bi-award"></i>
-                                <span>Points Management</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="admin-sidebar-section">
+                <div class="admin-sidebar-section-title">Users Management</div>
+                <ul>
+                    <li>
+                        <a href="users.html">
+                            <i class="bi bi-people"></i>
+                            <span>Users</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="contributions.html">
+                            <i class="bi bi-graph-up-arrow"></i>
+                            <span>Contributions</span>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">
+                            <i class="bi bi-award"></i>
+                            <span>Points Management</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="volunteer-points.html" class="dropdown-item">
+                                <i class="bi bi-plus-minus"></i> Manage Points
                             </a>
-                            <div class="dropdown-menu">
-                                <a href="volunteer-points.html" class="dropdown-item">
-                                    <i class="bi bi-plus-minus"></i> Manage Points
-                                </a>
-                                <a href="volunteer-transactions.html" class="dropdown-item">
-                                    <i class="bi bi-list-ul"></i> Transactions
-                                </a>
-                            </div>
-                        </li>
-                        <li class="active">
-                            <a href="volunteer-redemptions.html">
-                                <i class="bi bi-gift"></i>
-                                <span>Redemptions</span>
+                            <a href="volunteer-transactions.html" class="dropdown-item">
+                                <i class="bi bi-list-ul"></i> Transactions
                             </a>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="admin-sidebar-section">
-                    <div class="admin-sidebar-section-title">Units & Zones</div>
-                    <ul>
-                        <li>
-                            <a href="units.html">
-                                <i class="bi bi-rulers"></i>
-                                <span>Units</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="zone-management.html">
-                                <i class="bi bi-geo-alt"></i>
-                                <span>Zone Management</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="admin-sidebar-section">
-                    <div class="admin-sidebar-section-title">Configuration</div>
-                    <ul>
-                        <li>
-                            <a href="settings.html">
-                                <i class="bi bi-gear"></i>
-                                <span>Settings</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                        </div>
+                    </li>
+                    <li class="active">
+                        <a href="volunteer-redemptions.html">
+                            <i class="bi bi-gift"></i>
+                            <span>Redemptions</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
 
-                <div class="admin-sidebar-section">
-                    <div class="admin-sidebar-section-title">Marketing</div>
-                    <ul>
-                        <li class="dropdown">
-                            <a href="#">
-                                <i class="bi bi-images"></i>
-                                <span>Banners</span>
+            <div class="admin-sidebar-section">
+                <div class="admin-sidebar-section-title">Marketing</div>
+                <ul>
+                    <li class="dropdown">
+                        <a href="#">
+                            <i class="bi bi-images"></i>
+                            <span>Banners</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="banners.html" class="dropdown-item">
+                                <i class="bi bi-list-ul"></i> All Banners
                             </a>
-                            <div class="dropdown-menu">
-                                <a href="banners.html" class="dropdown-item">
-                                    <i class="bi bi-list-ul"></i> All Banners
-                                </a>
-                                <a href="add-banner.html" class="dropdown-item">
-                                    <i class="bi bi-plus-circle"></i> Add Banner
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="admin-sidebar-section">
-                    <div class="admin-sidebar-section-title">Reports</div>
-                    <ul>
-                        <li>
-                            <a href="market-reports.html">
-                                <i class="bi bi-shop-window"></i>
-                                <span>Market Reports</span>
+                            <a href="add-banner.html" class="dropdown-item">
+                                <i class="bi bi-plus-circle"></i> Add Banner
                             </a>
-                        </li>
-                        <li>
-                            <a href="product-reports.html">
-                                <i class="bi bi-box2"></i>
-                                <span>Product Reports</span>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">
+                            <i class="bi bi-star"></i>
+                            <span>Featured Banners</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="featured-banners.html" class="dropdown-item">
+                                <i class="bi bi-list-ul"></i> All Featured Banners
                             </a>
-                        </li>
-                        <li>
-                            <a href="price-reports.html">
-                                <i class="bi bi-graph-up"></i>
-                                <span>Price Analytics</span>
+                            <a href="add-featured-banner.html" class="dropdown-item">
+                                <i class="bi bi-plus-circle"></i> Add Featured Banner
                             </a>
-                        </li>
-                        <li>
-                            <a href="user-reports.html">
-                                <i class="bi bi-people-fill"></i>
-                                <span>User Analytics</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            <div class="admin-sidebar-footer">
-                <a href="../../index.html" class="btn btn-outline-light btn-sm">
-                    <i class="bi bi-box-arrow-left"></i> Back to Site
-                </a>
+                        </div>
+                    </li>
+                </ul>
             </div>
+
+            <div class="admin-sidebar-section">
+                <div class="admin-sidebar-section-title">Reports</div>
+                <ul>
+                    <li>
+                        <a href="market-reports.html">
+                            <i class="bi bi-shop-window"></i>
+                            <span>Market Reports</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="product-reports.html">
+                            <i class="bi bi-box2"></i>
+                            <span>Product Reports</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="price-reports.html">
+                            <i class="bi bi-graph-up"></i>
+                            <span>Price Analytics</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="user-reports.html">
+                            <i class="bi bi-people-fill"></i>
+                            <span>User Analytics</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="admin-sidebar-section">
+                <div class="admin-sidebar-section-title">Configuration</div>
+                <ul>
+                    <li>
+                        <a href="zone-management.html">
+                            <i class="bi bi-geo-alt"></i>
+                            <span>Zone Management</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="settings.html">
+                            <i class="bi bi-gear"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+
+        </nav>
+        <div class="admin-sidebar-footer">
+            <a href="../../index.html" class="btn btn-outline-light btn-sm">
+                <i class="bi bi-box-arrow-left"></i> Back to Site
+            </a>
+        </div>
         </aside>
 
         <!-- Main Content -->
