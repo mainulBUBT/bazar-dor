@@ -13,6 +13,114 @@
     <link rel="stylesheet" href="../css/admin-style.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
+    <style>
+        /* Custom Toggle Switch Styles */
+        .toggle-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            background-color: #f8f9fa;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .toggle-group-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #6c757d;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .toggle-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem;
+            background-color: #fff;
+            border-radius: 0.375rem;
+            transition: all 0.2s ease;
+        }
+        .toggle-item:hover {
+            background-color: #f8f9fa;
+        }
+        .toggle-label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            color: #495057;
+            margin: 0;
+        }
+        .toggle-label i {
+            font-size: 1.1rem;
+            color: #8a3647;
+        }
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 3rem;
+            height: 1.5rem;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #e9ecef;
+            transition: .4s;
+            border-radius: 1.5rem;
+        }
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 1.1rem;
+            width: 1.1rem;
+            left: 0.2rem;
+            bottom: 0.2rem;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .toggle-slider {
+            background-color: #8a3647;
+        }
+        input:checked + .toggle-slider:before {
+            transform: translateX(1.5rem);
+        }
+        input:focus + .toggle-slider {
+            box-shadow: 0 0 0 0.25rem rgba(138, 54, 71, 0.25);
+        }
+        .toggle-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            padding: 1rem;
+        }
+        .toggle-card {
+            background-color: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+        }
+        .toggle-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .toggle-card-header {
+            padding: 1rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .toggle-card-body {
+            padding: 1rem;
+        }
+    </style>
 </head>
 <body>
     <div class="admin-container">
@@ -282,6 +390,9 @@
                             <button class="settings-nav-item" data-target="notifications">
                                 <i class="bi bi-bell"></i> Notifications
                             </button>
+                            <button class="settings-nav-item" data-target="configuration">
+                                <i class="bi bi-gear-wide-connected"></i> Configuration
+                            </button>
                             <button class="settings-nav-item" data-target="security">
                                 <i class="bi bi-shield-lock"></i> Security
                             </button>
@@ -436,17 +547,76 @@
                                             <option value="4.5">4.5 Stars</option>
                                         </select>
                                     </div>
-                                    <div class="col-12">
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="autoApproveMarkets" checked>
-                                            <label class="form-check-label" for="autoApproveMarkets">Auto-approve New Markets</label>
-                                        </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- General Toggle Settings -->
+                        <div class="toggle-card mb-4">
+                            <div class="admin-card-header">
+                                <h6 class="mb-0">General Settings</h6>
+                            </div>
+                            <div class="toggle-card-body">
+                                <div class="toggle-grid">
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="bi bi-shield-check"></i>
+                                            Auto-approve Markets
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="autoApproveMarkets" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
                                     </div>
-                                    <div class="col-12">
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="autoApproveProducts" checked>
-                                            <label class="form-check-label" for="autoApproveProducts">Auto-approve New Products</label>
-                                        </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="bi bi-box-seam"></i>
+                                            Auto-approve Products
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="autoApproveProducts" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="bi bi-globe"></i>
+                                            Auto-detect Timezone
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="autoDetectTimezone" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="bi bi-translate"></i>
+                                            Auto-translate Content
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="autoTranslate" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="bi bi-currency-exchange"></i>
+                                            Auto-convert Currency
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="autoConvertCurrency" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="bi bi-archive"></i>
+                                            Auto-backup Data
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="autoBackup" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -494,43 +664,273 @@
 
                     <!-- Notification Settings -->
                     <div class="settings-section" id="notifications-settings">
-                        <div class="admin-card mb-4">
+                        <!-- Toggle Settings Card -->
+                        <div class="toggle-card mb-4">
                             <div class="admin-card-header">
                                 <h6 class="mb-0">Notification Settings</h6>
                             </div>
-                            <div class="admin-card-body">
-                                <div class="row g-3">
-                                    <div class="col-12">
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
-                                            <label class="form-check-label" for="emailNotifications">Email Notifications</label>
-                                        </div>
+                            <div class="toggle-card-body">
+                                <div class="toggle-grid">
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="bi bi-envelope"></i>
+                                            Email Notifications
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="emailNotifications" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
                                     </div>
-                                    <div class="col-12">
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="priceUpdates" checked>
-                                            <label class="form-check-label" for="priceUpdates">Price Update Notifications</label>
-                                        </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="bi bi-graph-up"></i>
+                                            Price Updates
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="priceUpdates" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
                                     </div>
-                                    <div class="col-12">
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="newProducts" checked>
-                                            <label class="form-check-label" for="newProducts">New Product Notifications</label>
-                                        </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="bi bi-box-seam"></i>
+                                            New Products
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="newProducts" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
                                     </div>
-                                    <div class="col-12">
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="userActivity" checked>
-                                            <label class="form-check-label" for="userActivity">User Activity Notifications</label>
-                                        </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="bi bi-people"></i>
+                                            User Activity
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="userActivity" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="bi bi-bell"></i>
+                                            Firebase Push
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="enableFirebaseNotifications" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="bi bi-graph-up-arrow"></i>
+                                            Firebase Analytics
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="enableFirebaseAnalytics" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Configuration Settings -->
+                    <div class="settings-section" id="configuration-settings">
+                        <!-- Mail Configuration -->
+                        <div class="admin-card mb-4">
+                            <div class="admin-card-header">
+                                <h6 class="mb-0">Mail Configuration</h6>
+                            </div>
+                            <div class="admin-card-body">
+                                <form id="mailConfigForm">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <div class="alert alert-info">
+                                                <i class="bi bi-info-circle me-2"></i>
+                                                Configure your email server settings for sending notifications and system emails
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="mailDriver" class="form-label">Mail Driver</label>
+                                            <select class="form-select" id="mailDriver" name="mailDriver">
+                                                <option value="smtp" selected>SMTP</option>
+                                                <option value="sendmail">Sendmail</option>
+                                                <option value="mailgun">Mailgun</option>
+                                                <option value="ses">Amazon SES</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="mailHost" class="form-label">Mail Host</label>
+                                            <input type="text" class="form-control" id="mailHost" name="mailHost" placeholder="smtp.mailtrap.io">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="mailPort" class="form-label">Mail Port</label>
+                                            <input type="number" class="form-control" id="mailPort" name="mailPort" placeholder="2525">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="mailUsername" class="form-label">Mail Username</label>
+                                            <input type="text" class="form-control" id="mailUsername" name="mailUsername" placeholder="Your mail username">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="mailPassword" class="form-label">Mail Password</label>
+                                            <input type="password" class="form-control" id="mailPassword" name="mailPassword" placeholder="Your mail password">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="mailEncryption" class="form-label">Mail Encryption</label>
+                                            <select class="form-select" id="mailEncryption" name="mailEncryption">
+                                                <option value="tls" selected>TLS</option>
+                                                <option value="ssl">SSL</option>
+                                                <option value="none">None</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="mailFromAddress" class="form-label">From Address</label>
+                                            <input type="email" class="form-control" id="mailFromAddress" name="mailFromAddress" placeholder="noreply@bazardor.com">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="mailFromName" class="form-label">From Name</label>
+                                            <input type="text" class="form-control" id="mailFromName" name="mailFromName" placeholder="Bazar Dor">
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <button type="button" class="btn btn-outline-admin" id="testMailConnection">
+                                                    <i class="bi bi-envelope-check me-1"></i>Test Mail Connection
+                                                </button>
+                                                <button type="submit" class="btn btn-admin">
+                                                    <i class="bi bi-check-circle me-1"></i>Save Mail Configuration
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Firebase Configuration -->
+                        <div class="admin-card mb-4">
+                            <div class="admin-card-header">
+                                <h6 class="mb-0">Firebase Configuration</h6>
+                            </div>
+                            <div class="admin-card-body">
+                                <form id="firebaseConfigForm">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <div class="alert alert-info">
+                                                <i class="bi bi-info-circle me-2"></i>
+                                                Configure Firebase Cloud Messaging (FCM) settings for push notifications
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="firebaseApiKey" class="form-label">Firebase API Key</label>
+                                            <input type="text" class="form-control" id="firebaseApiKey" name="firebaseApiKey" placeholder="Enter Firebase API Key">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="firebaseProjectId" class="form-label">Firebase Project ID</label>
+                                            <input type="text" class="form-control" id="firebaseProjectId" name="firebaseProjectId" placeholder="Enter Firebase Project ID">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="firebaseMessagingSenderId" class="form-label">Messaging Sender ID</label>
+                                            <input type="text" class="form-control" id="firebaseMessagingSenderId" name="firebaseMessagingSenderId" placeholder="Enter Messaging Sender ID">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="firebaseAppId" class="form-label">Firebase App ID</label>
+                                            <input type="text" class="form-control" id="firebaseAppId" name="firebaseAppId" placeholder="Enter Firebase App ID">
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="firebaseConfig" class="form-label">Firebase Config JSON</label>
+                                            <textarea class="form-control" id="firebaseConfig" name="firebaseConfig" rows="4" placeholder="Paste your Firebase config JSON here"></textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <button type="button" class="btn btn-outline-admin" id="testFirebaseConnection">
+                                                    <i class="bi bi-lightning-charge me-1"></i>Test Firebase Connection
+                                                </button>
+                                                <button type="submit" class="btn btn-admin">
+                                                    <i class="bi bi-check-circle me-1"></i>Save Firebase Configuration
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Security Settings -->
                     <div class="settings-section" id="security-settings">
+                        <!-- Security Toggle Settings -->
+                        <div class="toggle-card mb-4">
+                            <div class="admin-card-header">
+                                <h6 class="mb-0">Security Settings</h6>
+                            </div>
+                            <div class="toggle-card-body">
+                                <div class="toggle-grid">
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="bi bi-shield-lock"></i>
+                                            Two-Factor Authentication
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="twoFactorAuth">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="bi bi-clock"></i>
+                                            Session Timeout
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="sessionTimeout" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="bi bi-key"></i>
+                                            Password Expiration
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="passwordExpiration" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="bi bi-shield-check"></i>
+                                            IP Whitelisting
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="ipWhitelisting">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="bi bi-eye-slash"></i>
+                                            Hide Sensitive Data
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="hideSensitiveData" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="bi bi-file-lock"></i>
+                                            Encrypt Backups
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="encryptBackups" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="admin-card mb-4">
                             <div class="admin-card-header">
                                 <h6 class="mb-0">Security Settings</h6>
@@ -545,31 +945,9 @@
                                         <label for="confirmPassword" class="form-label">Confirm Password</label>
                                         <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm new password">
                                     </div>
-                                    <div class="col-12">
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="twoFactorAuth">
-                                            <label class="form-check-label" for="twoFactorAuth">Two-Factor Authentication</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="sessionTimeout" checked>
-                                            <label class="form-check-label" for="sessionTimeout">Session Timeout (30 minutes)</label>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Save Button -->
-                    <div class="d-flex justify-content-end mb-5">
-                        <button type="button" class="btn btn-outline-admin me-2" id="resetSettings">
-                            <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
-                        </button>
-                        <button type="submit" class="btn btn-admin">
-                            <i class="bi bi-check-circle me-1"></i>Save Changes
-                        </button>
                     </div>
                 </form>
             </div>
