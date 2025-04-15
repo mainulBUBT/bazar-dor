@@ -107,6 +107,130 @@
             width: 20px;
             text-align: center;
         }
+        
+        /* Enhanced responsive table styles */
+        @media (max-width: 991.98px) {
+            .admin-table {
+                display: block;
+                width: 100%;
+            }
+            
+            .admin-table thead {
+                display: none;
+            }
+            
+            .admin-table tbody,
+            .admin-table tr {
+                display: block;
+                width: 100%;
+            }
+            
+            .admin-table td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                text-align: right;
+                padding: 0.75rem 1rem;
+                border-bottom: 1px solid #f0f0f0;
+            }
+            
+            .admin-table td::before {
+                content: attr(data-label);
+                font-weight: 600;
+                margin-right: 1rem;
+                text-align: left;
+            }
+            
+            .admin-table tr {
+                border: 1px solid #f0f0f0;
+                border-radius: 0.5rem;
+                margin-bottom: 1rem;
+                background-color: #fff;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            }
+            
+            .action-buttons {
+                justify-content: flex-end !important;
+                width: auto;
+                margin-left: auto;
+            }
+            
+            /* Handle the checkbox column specially */
+            .admin-table td[data-label="Select"] {
+                justify-content: flex-end;
+            }
+            
+            .admin-table td[data-label="Select"]::before {
+                display: none;
+            }
+            
+            /* Improve pagination on small screens */
+            .admin-card-footer {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .pagination {
+                justify-content: center;
+            }
+        }
+        
+        /* Responsive table improvements */
+        .table-responsive {
+            min-height: 300px;
+        }
+        
+        @media (max-width: 767.98px) {
+            .admin-card-header {
+                flex-direction: column;
+                align-items: stretch !important;
+            }
+            
+            .admin-card-header .input-group {
+                max-width: 100% !important;
+                margin-bottom: 1rem;
+                margin-right: 0 !important;
+            }
+            
+            .units-form .row {
+                flex-direction: column;
+            }
+            
+            .units-form .col-md-2,
+            .units-form .col-md-3,
+            .units-form .col-md-4 {
+                width: 100%;
+                padding: 0;
+            }
+            
+            .admin-card-footer {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .pagination {
+                justify-content: center;
+            }
+        }
+        
+        /* Medium screens adjustments */
+        @media (min-width: 768px) and (max-width: 991.98px) {
+            .admin-card-header {
+                flex-direction: column;
+                align-items: stretch !important;
+            }
+            
+            .admin-card-header .input-group {
+                max-width: 100% !important;
+                margin-bottom: 1rem;
+            }
+            
+            .admin-card-header .dropdown {
+                align-self: flex-end;
+            }
+        }
     </style>
 </head>
 <body>
@@ -388,14 +512,8 @@
                             </select>
                         </div>
                         <div class="col-12 text-end">
-                            <button type="reset" class="btn btn-outline-secondary me-2">
-                                <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
-                            </button>
                             <button type="submit" class="btn btn-admin me-2">
                                 <i class="bi bi-plus-circle me-1"></i>Add Unit
-                            </button>
-                            <button type="button" class="btn btn-outline-admin" data-bs-toggle="modal" data-bs-target="#addUnitModal">
-                                <i class="bi bi-plus-circle me-1"></i>Add New
                             </button>
                         </div>
                     </form>
@@ -403,87 +521,139 @@
                 
                 <!-- Units Table -->
                 <div class="admin-card">
-                    <div class="admin-card-header p-3 border-bottom">
-                        <div class="row g-3 align-items-center">
-                            <div class="col-lg-6">
-                                <div class="input-group">
-                                    <span class="input-group-text bg-transparent border-end-0">
-                                        <i class="bi bi-search"></i>
-                                    </span>
-                                    <input type="text" class="form-control border-start-0" placeholder="Search units..." id="unitSearchInput">
-                                    <button class="btn btn-admin" type="button" id="searchButton">
-                                        Search
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 text-lg-end">
-                                <div class="dropdown d-inline-block">
-                                    <button class="btn btn-outline-admin dropdown-toggle" type="button" id="exportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="bi bi-download me-1"></i>Export
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="exportDropdown">
-                                        <li><a class="dropdown-item" href="#" id="exportCsv"><i class="bi bi-filetype-csv me-2"></i>CSV</a></li>
-                                        <li><a class="dropdown-item" href="#" id="exportPdf"><i class="bi bi-filetype-pdf me-2"></i>PDF</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="table-responsive">
+                        <table class="table" id="unitsTable">
+                            <thead>
+                                <tr class="bg-light">
+                                    <th colspan="8" class="p-3 border-bottom">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <!-- Search Group -->
+                                            <div class="input-group me-3" style="max-width: 350px;">
+                                                <span class="input-group-text bg-transparent border-end-0">
+                                                    <i class="bi bi-search"></i>
+                                                </span>
+                                                <input type="text" class="form-control border-start-0" placeholder="Search units..." id="unitSearchInput">
+                                                <button class="btn btn-admin btn-sm" type="button" id="searchButton">Search</button>
+                                            </div>
+                                            
+                                            <!-- Export Dropdown -->
+                                            <div class="dropdown">
+                                                <button class="btn btn-outline-admin dropdown-toggle" type="button" id="exportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="bi bi-download me-1"></i>Export
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="exportDropdown">
+                                                    <li><a class="dropdown-item" href="#" id="exportCsv"><i class="bi bi-filetype-csv me-2"></i>CSV</a></li>
+                                                    <li><a class="dropdown-item" href="#" id="exportPdf"><i class="bi bi-filetype-pdf me-2"></i>PDF</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th data-label="Select">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="selectAll">
+                                        </div>
+                                    </th>
+                                    <th data-label="ID">ID</th>
+                                    <th data-label="Unit Name">Unit Name</th>
+                                    <th data-label="Symbol">Symbol</th>
+                                    <th data-label="Type">Type</th>
+                                    <th data-label="Status">Status</th>
+                                    <th data-label="Created">Created</th>
+                                    <th data-label="Actions" class="text-end">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td data-label="Select">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox">
+                                        </div>
+                                    </td>
+                                    <td data-label="ID">#U001</td>
+                                    <td data-label="Unit Name">Kilogram</td>
+                                    <td data-label="Symbol">kg</td>
+                                    <td data-label="Type">Weight</td>
+                                    <td data-label="Status">
+                                        <span class="badge bg-success">Active</span>
+                                    </td>
+                                    <td data-label="Created">2023-05-10</td>
+                                    <td data-label="Actions">
+                                        <div class="action-buttons justify-content-end">
+                                            <button class="btn btn-sm btn-outline-admin" title="Edit" data-bs-toggle="modal" data-bs-target="#editUnitModal">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger" title="Delete">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-info" title="View">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Add more sample rows here -->
+                                <tr>
+                                    <td data-label="Select">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox">
+                                        </div>
+                                    </td>
+                                    <td data-label="ID">#U002</td>
+                                    <td data-label="Unit Name">Liter</td>
+                                    <td data-label="Symbol">L</td>
+                                    <td data-label="Type">Volume</td>
+                                    <td data-label="Status">
+                                        <span class="badge bg-success">Active</span>
+                                    </td>
+                                    <td data-label="Created">2023-05-12</td>
+                                    <td data-label="Actions">
+                                        <div class="action-buttons justify-content-end">
+                                            <button class="btn btn-sm btn-outline-admin" title="Edit" data-bs-toggle="modal" data-bs-target="#editUnitModal">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger" title="Delete">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-info" title="View">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Select">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox">
+                                        </div>
+                                    </td>
+                                    <td data-label="ID">#U003</td>
+                                    <td data-label="Unit Name">Piece</td>
+                                    <td data-label="Symbol">pc</td>
+                                    <td data-label="Type">Count</td>
+                                    <td data-label="Status">
+                                        <span class="badge bg-success">Active</span>
+                                    </td>
+                                    <td data-label="Created">2023-05-15</td>
+                                    <td data-label="Actions">
+                                        <div class="action-buttons justify-content-end">
+                                            <button class="btn btn-sm btn-outline-admin" title="Edit" data-bs-toggle="modal" data-bs-target="#editUnitModal">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger" title="Delete">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-info" title="View">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-
-                    <div class="admin-card-body p-0">
-                        <div class="table-responsive">
-                            <table class="admin-table table-hover" id="unitsTable">
-                                <thead>
-                                    <tr>
-                                        <th data-label="Select">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="selectAll">
-                                            </div>
-                                        </th>
-                                        <th data-label="ID">ID</th>
-                                        <th data-label="Unit Name">Unit Name</th>
-                                        <th data-label="Symbol">Symbol</th>
-                                        <th data-label="Type">Type</th>
-                                        <th data-label="Status">Status</th>
-                                        <th data-label="Created">Created</th>
-                                        <th data-label="Actions" class="text-end">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td data-label="Select">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox">
-                                            </div>
-                                        </td>
-                                        <td data-label="ID">#U001</td>
-                                        <td data-label="Unit Name">Kilogram</td>
-                                        <td data-label="Symbol">kg</td>
-                                        <td data-label="Type">Weight</td>
-                                        <td data-label="Status">
-                                            <span class="badge bg-success">Active</span>
-                                        </td>
-                                        <td data-label="Created">2023-05-10</td>
-                                        <td data-label="Actions">
-                                            <div class="action-buttons justify-content-end">
-                                                <button class="btn btn-sm btn-outline-admin" title="Edit" data-bs-toggle="modal" data-bs-target="#editUnitModal">
-                                                    <i class="bi bi-pencil"></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-outline-danger" title="Delete">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-outline-info" title="View">
-                                                    <i class="bi bi-eye"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <!-- Add more sample rows here -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="admin-card-footer d-flex justify-content-between align-items-center">
+                    <div class="card-footer d-flex justify-content-between align-items-center p-3">
                         <div>
                             <span>Showing 1 to 5 of 50 entries</span>
                         </div>
