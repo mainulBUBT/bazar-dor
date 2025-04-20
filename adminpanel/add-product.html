@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Admin Panel for Bazar-dor - Add Product">
+    <meta name="author" content="">
+
+    <title>Bazar-dor Admin - Add Product</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Add custom styles if needed -->
+    <style>
+        .image-preview-container {
+            width: 100%;
+            border: 1px dashed #ccc;
+            border-radius: .35rem;
+            overflow: hidden;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fc;
+        }
+        .image-preview {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #858796;
+            text-align: center;
+        }
+        .image-preview i {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+        .product-tags .badge .remove-tag {
+            cursor: pointer;
+            margin-left: 5px;
+            font-weight: bold;
+        }
+        .product-tags .badge .remove-tag:hover {
+            color: #fff;
+        }
+    </style>
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon">
+                    <i class="fas fa-store"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Bazar-dor Admin</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Catalog
+            </div>
+
+            <!-- Nav Item - Categories -->
+            <li class="nav-item">
+                <a class="nav-link" href="categories.html">
+                    <i class="fas fa-fw fa-tags"></i>
+                    <span>Categories</span></a>
+            </li>
+
+            <!-- Nav Item - Products Collapse Menu -->
+            <li class="nav-item active">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseProducts" aria-expanded="true"
+                    aria-controls="collapseProducts">
+                    <i class="fas fa-fw fa-box-open"></i>
+                    <span>Products</span>
+                </a>
+                <div id="collapseProducts" class="collapse show" aria-labelledby="headingProducts"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Product Actions:</h6>
+                        <a class="collapse-item" href="products.html">All Products</a>
+                        <a class="collapse-item active" href="add-product.html">Add Product</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Add other sidebar items as needed -->
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Search -->
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+                        <!-- Nav Item - Alerts -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+                                <!-- Counter - Alerts -->
+                                <span class="badge badge-danger badge-counter">3+</span>
+                            </a>
+                            <!-- Dropdown - Alerts -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header">
+                                    Alerts Center
+                                </h6>
+                                <!-- Add alert items here -->
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                            </div>
+                        </li>
+
+                        <!-- Nav Item - Messages -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-envelope fa-fw"></i>
+                                <!-- Counter - Messages -->
+                                <span class="badge badge-danger badge-counter">7</span>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="messagesDropdown">
+                                <h6 class="dropdown-header">
+                                    Message Center
+                                </h6>
+                                <!-- Add message items here -->
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                            </div>
+                        </li>
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin User</span>
+                                <img class="img-profile rounded-circle"
+                                    src="img/undraw_profile.svg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Activity Log
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Add New Product</h1>
+                        <div>
+                            <a href="products.html" class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm mr-2">
+                                <i class="fas fa-arrow-left fa-sm text-white-50"></i> Back to Products</a>
+                            <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" id="saveProductBtnTop">
+                                <i class="fas fa-check-circle fa-sm text-white-50"></i> Save Product</button>
+                        </div>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <!-- Main Product Details Column -->
+                        <div class="col-lg-8">
+
+                            <!-- Product Information Card -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Product Information</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form id="productForm">
+                                        <div class="form-group">
+                                            <label for="productName">Product Name <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="productName" required>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="productCategory">Category <span class="text-danger">*</span></label>
+                                                <select class="form-control" id="productCategory" required>
+                                                    <option value="">Select Category</option>
+                                                    <option>Fruits</option>
+                                                    <option>Vegetables</option>
+                                                    <option>Dairy</option>
+                                                    <option>Bakery</option>
+                                                    <option>Meat</option>
+                                                    <option>Seafood</option>
+                                                    <option>Beverages</option>
+                                                    <option>Snacks</option>
+                                                    <option>Other</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="productUnit">Unit <span class="text-danger">*</span></label>
+                                                <select class="form-control" id="productUnit" required>
+                                                    <option value="">Select Unit</option>
+                                                    <option>kg</option>
+                                                    <option>g</option>
+                                                    <option>L</option>
+                                                    <option>ml</option>
+                                                    <option>piece</option>
+                                                    <option>dozen</option>
+                                                    <option>pack</option>
+                                                    <option>bundle</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="productDescription">Description</label>
+                                            <textarea class="form-control" id="productDescription" rows="4"></textarea>
+                                            <small class="form-text text-muted">Provide a detailed description of the product</small>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Tags</label>
+                                            <div class="input-group mb-2">
+                                                <input type="text" class="form-control" id="productTagInput" placeholder="Add a tag and press Enter">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary" type="button" id="addTagBtn">
+                                                        <i class="fas fa-plus"></i> Add
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="product-tags" id="tagContainer">
+                                                <!-- Tags will be added here -->
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Market Pricing Card -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Market Pricing</h6>
+                                    <button class="btn btn-sm btn-primary" id="addMarketPriceBtn">
+                                        <i class="fas fa-plus fa-sm"></i> Add Market Price
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="marketPriceTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Market</th>
+                                                    <th>Price</th>
+                                                    <th>Date</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="marketPriceRows">
+                                                <!-- Market price rows will be added here -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Sidebar Column (Status, Image, etc.) -->
+                        <div class="col-lg-4">
+
+                            <!-- Status Card -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Status & Visibility</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="productStatus">Status</label>
+                                        <select class="form-control" id="productStatus">
+                                            <option value="active" selected>Active</option>
+                                            <option value="inactive">Inactive</option>
+                                            <option value="draft">Draft</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="productVisibility">Visibility</label>
+                                        <select class="form-control" id="productVisibility">
+                                            <option value="public" selected>Public</option>
+                                            <option value="private">Private</option>
+                                        </select>
+                                    </div>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="featuredSwitch" checked>
+                                        <label class="custom-control-label" for="featuredSwitch">Featured Product</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Product Image Card -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Product Image</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="product-image-upload text-center mb-3">
+                                        <div class="image-preview-container mb-3">
+                                            <div class="image-preview" id="imagePreview">
+                                                <i class="fas fa-image"></i>
+                                                <span>No image selected</span>
+                                            </div>
+                                        </div>
+                                        <label for="productImageInput" class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-upload fa-sm"></i> Upload Image
+                                        </label>
+                                        <input type="file" class="d-none" id="productImageInput" accept="image/*">
+                                    </div>
+                                    <div class="small text-muted">
+                                        <p>Recommended size: 800x800px, max file size: 2MB</p>
+                                        <p>Supported formats: JPG, PNG, WEBP</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Additional Info Card -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Additional Information</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="productSKU">SKU</label>
+                                        <input type="text" class="form-control" id="productSKU" placeholder="SKU-001">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="productBarcode">Barcode</label>
+                                        <input type="text" class="form-control" id="productBarcode" placeholder="Optional barcode">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="productBrand">Brand</label>
+                                        <input type="text" class="form-control" id="productBrand" placeholder="Brand name">
+                                    </div>
+                                    <div class="form-group mb-0">
+                                        <label for="productCountry">Country of Origin</label>
+                                        <select class="form-control" id="productCountry">
+                                            <option value="">Select Country</option>
+                                            <option value="local">Local</option>
+                                            <option value="imported">Imported</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Save Button Row -->
+                    <div class="row">
+                        <div class="col-lg-12 d-flex justify-content-end mb-4">
+                            <a href="products.html" class="btn btn-secondary mr-2">Cancel</a>
+                            <button type="button" class="btn btn-primary" id="saveProductBtnBottom">
+                                <i class="fas fa-check-circle"></i> Save Product
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Bazar-dor 2023</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script>
+        $(document).ready(function() {
+
+            // --- Image Preview --- 
+            const productImageInput = document.getElementById('productImageInput');
+            const imagePreview = document.getElementById('imagePreview');
+            
+            productImageInput.addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        imagePreview.innerHTML = `<img src="${e.target.result}" alt="Product Image Preview" style="max-width: 100%; max-height: 150px; object-fit: contain;">`;
+                    }
+                    reader.readAsDataURL(file);
+                } else {
+                    imagePreview.innerHTML = `
+                        <i class="fas fa-image"></i>
+                        <span>No image selected</span>
+                    `;
+                }
+            });
+
+            // --- Tag Management --- 
+            const tagInput = document.getElementById('productTagInput');
+            const tagContainer = document.getElementById('tagContainer');
+            const addTagBtn = document.getElementById('addTagBtn');
+
+            function addTag(tagText) {
+                if (!tagText) return;
+                const tag = document.createElement('span');
+                tag.className = 'badge badge-primary mr-1 mb-1 p-2';
+                tag.innerHTML = `${tagText} <span class="remove-tag" role="button" title="Remove tag">&times;</span>`;
+                
+                tag.querySelector('.remove-tag').addEventListener('click', function() {
+                    tag.remove();
+                });
+                
+                tagContainer.appendChild(tag);
+            }
+
+            addTagBtn.addEventListener('click', function() {
+                const tagText = tagInput.value.trim();
+                addTag(tagText);
+                tagInput.value = '';
+            });
+
+            tagInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault(); // Prevent form submission
+                    const tagText = this.value.trim();
+                    addTag(tagText);
+                    this.value = '';
+                }
+            });
+
+            // Add initial sample tags
+            addTag('Organic');
+            addTag('Fresh');
+
+            // --- Market Price Row Management --- 
+            const addMarketRowBtn = document.getElementById('addMarketPriceBtn');
+            const marketPriceRows = document.getElementById('marketPriceRows');
+            let marketRowCount = 0;
+
+            function createMarketRow() {
+                marketRowCount++;
+                const tr = document.createElement('tr');
+                tr.id = `marketRow-${marketRowCount}`;
+                tr.innerHTML = `
+                    <td>
+                        <select class="form-control market-select" name="market[${marketRowCount}][id]">
+                            <option value="">Select Market</option>
+                            <option value="1">Central Market</option>
+                            <option value="2">Super Market</option>
+                            <option value="3">Corner Shop</option>
+                            <option value="4">Farmer's Market</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="number" class="form-control" name="market[${marketRowCount}][price]" placeholder="0.00" step="0.01">
+                        </div>
+                    </td>
+                    <td>
+                        <input type="date" class="form-control" name="market[${marketRowCount}][date]" value="${new Date().toISOString().split('T')[0]}">
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-danger remove-market-row" data-row-id="${marketRowCount}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                
+                tr.querySelector('.remove-market-row').addEventListener('click', function() {
+                    tr.remove();
+                });
+                
+                marketPriceRows.appendChild(tr);
+            }
+            
+            // Add initial row on page load
+            createMarketRow(); 
+            
+            addMarketRowBtn.addEventListener('click', function() {
+                createMarketRow();
+            });
+
+            // --- Save Product Button Logic --- 
+            function handleSave() {
+                 // Basic Validation Example
+                const productNameInput = document.getElementById('productName');
+                const productCategoryInput = document.getElementById('productCategory');
+                const productUnitInput = document.getElementById('productUnit');
+                let isValid = true;
+
+                if (!productNameInput.value.trim()) {
+                    alert('Please enter a product name.');
+                    productNameInput.focus();
+                    isValid = false;
+                    return; // Stop further processing
+                }
+
+                if (!productCategoryInput.value) {
+                    alert('Please select a category.');
+                    // Consider adding visual feedback like border color
+                    isValid = false;
+                     return;
+                }
+                
+                if (!productUnitInput.value) {
+                    alert('Please select a unit.');
+                    isValid = false;
+                     return;
+                }
+
+                // Add more validation for market prices if needed
+                // e.g., check if

@@ -8,7 +8,7 @@
     <meta name="description" content="Admin Panel for Bazar-dor">
     <meta name="author" content="">
 
-    <title>Bazar-dor Admin - Products</title>
+    <title>Bazar-dor Admin - Units</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -63,7 +63,7 @@
             </div>
 
             <!-- Nav Item - Units -->
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="units.html">
                     <i class="fas fa-fw fa-rulers"></i>
                     <span>Units</span>
@@ -85,14 +85,14 @@
             </li>
 
             <!-- Nav Item - Products -->
-            <li class="nav-item active dropdown">
-                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseProducts" aria-expanded="true" aria-controls="collapseProducts">
+            <li class="nav-item dropdown">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducts" aria-expanded="false" aria-controls="collapseProducts">
                     <i class="fas fa-fw fa-box-open"></i>
                     <span>Products</span>
                 </a>
-                <div id="collapseProducts" class="collapse show" aria-labelledby="headingProducts" data-parent="#accordionSidebar">
+                <div id="collapseProducts" class="collapse" aria-labelledby="headingProducts" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item active" href="products.html">All Products</a>
+                        <a class="collapse-item" href="products.html">All Products</a>
                         <a class="collapse-item" href="add-product.html">Add Product</a>
                     </div>
                 </div>
@@ -336,35 +336,77 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Products</h1>
-                    <p class="mb-4">Manage all your products in one place. Add, edit, or delete products as needed.</p>
+                    <h1 class="h3 mb-2 text-gray-800">Units</h1>
+                    <p class="mb-4">Manage measurement units for products in your catalog.</p>
 
-                    <!-- Product Management Actions -->
+                    <!-- Unit Management Actions -->
                     <div class="mb-4">
-                        <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#addProductModal">
+                        <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#addUnitModal">
                             <span class="icon text-white-50">
                                 <i class="fas fa-plus"></i>
                             </span>
-                            <span class="text">Add New Product</span>
+                            <span class="text">Add New Unit</span>
                         </a>
                         <a href="#" class="btn btn-info btn-icon-split ml-2">
                             <span class="icon text-white-50">
                                 <i class="fas fa-file-import"></i>
                             </span>
-                            <span class="text">Import Products</span>
+                            <span class="text">Import Units</span>
                         </a>
                         <a href="#" class="btn btn-secondary btn-icon-split ml-2">
                             <span class="icon text-white-50">
                                 <i class="fas fa-file-export"></i>
                             </span>
-                            <span class="text">Export Products</span>
+                            <span class="text">Export Units</span>
                         </a>
                     </div>
 
-                    <!-- Products DataTable -->
+                    <!-- Unit Form Card -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Add Unit</h6>
+                        </div>
+                        <div class="card-body">
+                            <form id="unitForm" class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="unitName">Unit Name</label>
+                                    <input type="text" class="form-control" id="unitName" placeholder="Enter unit name">
+                                </div>
+                                <div class="col-md-2 mb-3">
+                                    <label for="unitSymbol">Symbol</label>
+                                    <input type="text" class="form-control" id="unitSymbol" placeholder="e.g. kg">
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="unitType">Type</label>
+                                    <select class="form-control" id="unitType">
+                                        <option selected value="">Select unit type</option>
+                                        <option value="weight">Weight</option>
+                                        <option value="volume">Volume</option>
+                                        <option value="length">Length</option>
+                                        <option value="count">Count</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="unitStatus">Status</label>
+                                    <select class="form-control" id="unitStatus">
+                                        <option value="active" selected>Active</option>
+                                        <option value="inactive">Inactive</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 text-right">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-plus-circle mr-1"></i>Add Unit
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Units DataTable -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">All Products</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">All Units</h6>
                             <div class="dropdown no-arrow">
                                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -373,9 +415,8 @@
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                     aria-labelledby="dropdownMenuLink">
                                     <div class="dropdown-header">Filter By:</div>
-                                    <a class="dropdown-item" href="#">Category</a>
-                                    <a class="dropdown-item" href="#">Price</a>
-                                    <a class="dropdown-item" href="#">Stock Status</a>
+                                    <a class="dropdown-item" href="#">Type</a>
+                                    <a class="dropdown-item" href="#">Status</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">Reset Filters</a>
                                 </div>
@@ -387,195 +428,80 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Image</th>
-                                            <th>Product Name</th>
-                                            <th>Category</th>
-                                            <th>Price</th>
-                                            <th>Stock</th>
+                                            <th>Unit Name</th>
+                                            <th>Symbol</th>
+                                            <th>Type</th>
                                             <th>Status</th>
+                                            <th>Created</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Image</th>
-                                            <th>Product Name</th>
-                                            <th>Category</th>
-                                            <th>Price</th>
-                                            <th>Stock</th>
+                                            <th>Unit Name</th>
+                                            <th>Symbol</th>
+                                            <th>Type</th>
                                             <th>Status</th>
+                                            <th>Created</th>
                                             <th>Actions</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <tr>
-                                            <td>P001</td>
-                                            <td><img src="img/product-placeholder.png" width="50" height="50" alt="Product"></td>
-                                            <td>Smartphone X</td>
-                                            <td>Electronics</td>
-                                            <td>$499.99</td>
-                                            <td>24</td>
+                                            <td>U001</td>
+                                            <td>Kilogram</td>
+                                            <td>kg</td>
+                                            <td>Weight</td>
                                             <td><span class="badge badge-success">Active</span></td>
+                                            <td>2023-05-10</td>
                                             <td>
-                                                <a href="#" class="btn btn-primary btn-circle btn-sm">
+                                                <a href="#" class="btn btn-primary btn-circle btn-sm" data-toggle="modal" data-target="#editUnitModal">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm">
+                                                <a href="#" class="btn btn-danger btn-circle btn-sm delete-unit">
                                                     <i class="fas fa-trash"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-info btn-circle btn-sm view-unit">
+                                                    <i class="fas fa-eye"></i>
                                                 </a>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>P002</td>
-                                            <td><img src="img/product-placeholder.png" width="50" height="50" alt="Product"></td>
-                                            <td>Designer Shirt</td>
-                                            <td>Clothing</td>
-                                            <td>$49.99</td>
-                                            <td>120</td>
+                                            <td>U002</td>
+                                            <td>Liter</td>
+                                            <td>L</td>
+                                            <td>Volume</td>
                                             <td><span class="badge badge-success">Active</span></td>
+                                            <td>2023-05-12</td>
                                             <td>
-                                                <a href="#" class="btn btn-primary btn-circle btn-sm">
+                                                <a href="#" class="btn btn-primary btn-circle btn-sm" data-toggle="modal" data-target="#editUnitModal">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm">
+                                                <a href="#" class="btn btn-danger btn-circle btn-sm delete-unit">
                                                     <i class="fas fa-trash"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-info btn-circle btn-sm view-unit">
+                                                    <i class="fas fa-eye"></i>
                                                 </a>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>P003</td>
-                                            <td><img src="img/product-placeholder.png" width="50" height="50" alt="Product"></td>
-                                            <td>Smart Watch</td>
-                                            <td>Electronics</td>
-                                            <td>$249.99</td>
-                                            <td>42</td>
+                                            <td>U003</td>
+                                            <td>Piece</td>
+                                            <td>pc</td>
+                                            <td>Count</td>
                                             <td><span class="badge badge-success">Active</span></td>
+                                            <td>2023-05-15</td>
                                             <td>
-                                                <a href="#" class="btn btn-primary btn-circle btn-sm">
+                                                <a href="#" class="btn btn-primary btn-circle btn-sm" data-toggle="modal" data-target="#editUnitModal">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm">
+                                                <a href="#" class="btn btn-danger btn-circle btn-sm delete-unit">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>P004</td>
-                                            <td><img src="img/product-placeholder.png" width="50" height="50" alt="Product"></td>
-                                            <td>Coffee Maker</td>
-                                            <td>Home Goods</td>
-                                            <td>$99.99</td>
-                                            <td>18</td>
-                                            <td><span class="badge badge-success">Active</span></td>
-                                            <td>
-                                                <a href="#" class="btn btn-primary btn-circle btn-sm">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>P005</td>
-                                            <td><img src="img/product-placeholder.png" width="50" height="50" alt="Product"></td>
-                                            <td>Bluetooth Speaker</td>
-                                            <td>Electronics</td>
-                                            <td>$49.99</td>
-                                            <td>35</td>
-                                            <td><span class="badge badge-success">Active</span></td>
-                                            <td>
-                                                <a href="#" class="btn btn-primary btn-circle btn-sm">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>P006</td>
-                                            <td><img src="img/product-placeholder.png" width="50" height="50" alt="Product"></td>
-                                            <td>Winter Jacket</td>
-                                            <td>Clothing</td>
-                                            <td>$129.99</td>
-                                            <td>0</td>
-                                            <td><span class="badge badge-danger">Out of Stock</span></td>
-                                            <td>
-                                                <a href="#" class="btn btn-primary btn-circle btn-sm">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>P007</td>
-                                            <td><img src="img/product-placeholder.png" width="50" height="50" alt="Product"></td>
-                                            <td>Desk Lamp</td>
-                                            <td>Home Goods</td>
-                                            <td>$39.99</td>
-                                            <td>52</td>
-                                            <td><span class="badge badge-success">Active</span></td>
-                                            <td>
-                                                <a href="#" class="btn btn-primary btn-circle btn-sm">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>P008</td>
-                                            <td><img src="img/product-placeholder.png" width="50" height="50" alt="Product"></td>
-                                            <td>Tablet Pro</td>
-                                            <td>Electronics</td>
-                                            <td>$349.99</td>
-                                            <td>15</td>
-                                            <td><span class="badge badge-success">Active</span></td>
-                                            <td>
-                                                <a href="#" class="btn btn-primary btn-circle btn-sm">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>P009</td>
-                                            <td><img src="img/product-placeholder.png" width="50" height="50" alt="Product"></td>
-                                            <td>Running Shoes</td>
-                                            <td>Footwear</td>
-                                            <td>$89.99</td>
-                                            <td>28</td>
-                                            <td><span class="badge badge-success">Active</span></td>
-                                            <td>
-                                                <a href="#" class="btn btn-primary btn-circle btn-sm">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>P010</td>
-                                            <td><img src="img/product-placeholder.png" width="50" height="50" alt="Product"></td>
-                                            <td>Kitchen Blender</td>
-                                            <td>Home Goods</td>
-                                            <td>$79.99</td>
-                                            <td>3</td>
-                                            <td><span class="badge badge-warning">Low Stock</span></td>
-                                            <td>
-                                                <a href="#" class="btn btn-primary btn-circle btn-sm">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                    <i class="fas fa-trash"></i>
+                                                <a href="#" class="btn btn-info btn-circle btn-sm view-unit">
+                                                    <i class="fas fa-eye"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -632,69 +558,99 @@
         </div>
     </div>
 
-    <!-- Add Product Modal-->
-    <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel"
+    <!-- Add Unit Modal -->
+    <div class="modal fade" id="addUnitModal" tabindex="-1" role="dialog" aria-labelledby="addUnitModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addProductModalLabel">Add New Product</h5>
+                    <h5 class="modal-title" id="addUnitModalLabel">Add New Unit</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="form-group row">
-                            <div class="col-md-6">
-                                <label for="productName">Product Name</label>
-                                <input type="text" class="form-control" id="productName" placeholder="Enter product name">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="productCategory">Category</label>
-                                <select class="form-control" id="productCategory">
-                                    <option>Electronics</option>
-                                    <option>Clothing</option>
-                                    <option>Home Goods</option>
-                                    <option>Footwear</option>
-                                    <option>Accessories</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-md-4">
-                                <label for="productPrice">Price ($)</label>
-                                <input type="number" class="form-control" id="productPrice" placeholder="0.00">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="productStock">Stock Quantity</label>
-                                <input type="number" class="form-control" id="productStock" placeholder="0">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="productStatus">Status</label>
-                                <select class="form-control" id="productStatus">
-                                    <option>Active</option>
-                                    <option>Inactive</option>
-                                    <option>Draft</option>
-                                </select>
-                            </div>
+                        <div class="form-group">
+                            <label for="modalUnitName">Unit Name</label>
+                            <input type="text" class="form-control" id="modalUnitName" placeholder="Enter unit name">
                         </div>
                         <div class="form-group">
-                            <label for="productDescription">Description</label>
-                            <textarea class="form-control" id="productDescription" rows="3"></textarea>
+                            <label for="modalUnitSymbol">Symbol</label>
+                            <input type="text" class="form-control" id="modalUnitSymbol" placeholder="e.g. kg">
                         </div>
                         <div class="form-group">
-                            <label for="productImage">Product Image</label>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="productImage">
-                                <label class="custom-file-label" for="productImage">Choose file</label>
-                            </div>
+                            <label for="modalUnitType">Type</label>
+                            <select class="form-control" id="modalUnitType">
+                                <option selected value="">Select unit type</option>
+                                <option value="weight">Weight</option>
+                                <option value="volume">Volume</option>
+                                <option value="length">Length</option>
+                                <option value="count">Count</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="modalUnitStatus">Status</label>
+                            <select class="form-control" id="modalUnitStatus">
+                                <option value="active" selected>Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="#">Add Product</a>
+                    <button class="btn btn-primary" type="button" id="saveNewUnit">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Unit Modal -->
+    <div class="modal fade" id="editUnitModal" tabindex="-1" role="dialog" aria-labelledby="editUnitModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUnitModalLabel">Edit Unit</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="editModalUnitName">Unit Name</label>
+                            <input type="text" class="form-control" id="editModalUnitName" value="Kilogram">
+                        </div>
+                        <div class="form-group">
+                            <label for="editModalUnitSymbol">Symbol</label>
+                            <input type="text" class="form-control" id="editModalUnitSymbol" value="kg">
+                        </div>
+                        <div class="form-group">
+                            <label for="editModalUnitType">Type</label>
+                            <select class="form-control" id="editModalUnitType">
+                                <option>Select unit type</option>
+                                <option value="weight" selected>Weight</option>
+                                <option value="volume">Volume</option>
+                                <option value="length">Length</option>
+                                <option value="count">Count</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="editModalUnitStatus">Status</label>
+                            <select class="form-control" id="editModalUnitStatus">
+                                <option value="active" selected>Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" type="button" id="saveEditUnit">Save Changes</button>
                 </div>
             </div>
         </div>
@@ -716,7 +672,170 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <!-- Units Page Script -->
+    <script>
+        $(document).ready(function() {
+            // Initialize DataTable
+            $('#dataTable').DataTable();
+            
+            // Unit Form Submit
+            $('#unitForm').on('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const unitName = $('#unitName').val();
+                const unitSymbol = $('#unitSymbol').val();
+                const unitType = $('#unitType').val();
+                const unitStatus = $('#unitStatus').val();
+                
+                // Validate form
+                if (!unitName || !unitSymbol || !unitType) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Validation Error',
+                        text: 'Please fill all required fields!'
+                    });
+                    return;
+                }
+                
+                // In a real application, this would send data to the server
+                // For demo purposes, we'll just show a success message and clear the form
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Unit Added',
+                    text: `${unitName} has been added successfully!`,
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+                
+                // Clear form
+                $('#unitForm')[0].reset();
+            });
+            
+            // Modal Add Unit
+            $('#saveNewUnit').on('click', function() {
+                // Get modal form values
+                const unitName = $('#modalUnitName').val();
+                const unitSymbol = $('#modalUnitSymbol').val();
+                const unitType = $('#modalUnitType').val();
+                const unitStatus = $('#modalUnitStatus').val();
+                
+                // Validate form
+                if (!unitName || !unitSymbol || !unitType) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Validation Error',
+                        text: 'Please fill all required fields!'
+                    });
+                    return;
+                }
+                
+                // In a real application, this would send data to the server
+                // For demo purposes, we'll just show a success message and close the modal
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Unit Added',
+                    text: `${unitName} has been added successfully!`,
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+                
+                // Close modal
+                $('#addUnitModal').modal('hide');
+            });
+            
+            // Edit Unit
+            $('#saveEditUnit').on('click', function() {
+                // Get modal form values
+                const unitName = $('#editModalUnitName').val();
+                const unitSymbol = $('#editModalUnitSymbol').val();
+                const unitType = $('#editModalUnitType').val();
+                const unitStatus = $('#editModalUnitStatus').val();
+                
+                // Validate form
+                if (!unitName || !unitSymbol || !unitType) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Validation Error',
+                        text: 'Please fill all required fields!'
+                    });
+                    return;
+                }
+                
+                // In a real application, this would send data to the server
+                // For demo purposes, we'll just show a success message and close the modal
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Unit Updated',
+                    text: `${unitName} has been updated successfully!`,
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+                
+                // Close modal
+                $('#editUnitModal').modal('hide');
+            });
+            
+            // Delete Unit
+            $('.delete-unit').on('click', function() {
+                const row = $(this).closest('tr');
+                const unitName = row.find('td:nth-child(2)').text();
+                
+                Swal.fire({
+                    title: 'Delete Unit?',
+                    text: `Are you sure you want to delete ${unitName}?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // In a real application, this would send a delete request to the server
+                        // For demo purposes, we'll just remove the row from the table
+                        row.remove();
+                        
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Deleted!',
+                            text: `${unitName} has been deleted successfully.`,
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                    }
+                });
+            });
+            
+            // View Unit
+            $('.view-unit').on('click', function() {
+                const row = $(this).closest('tr');
+                const unitId = row.find('td:nth-child(1)').text();
+                const unitName = row.find('td:nth-child(2)').text();
+                const unitSymbol = row.find('td:nth-child(3)').text();
+                const unitType = row.find('td:nth-child(4)').text();
+                const unitStatus = row.find('td:nth-child(5) .badge').text();
+                const unitCreated = row.find('td:nth-child(6)').text();
+                
+                Swal.fire({
+                    title: 'Unit Details',
+                    html: `
+                        <div class="text-left">
+                            <p><strong>ID:</strong> ${unitId}</p>
+                            <p><strong>Name:</strong> ${unitName}</p>
+                            <p><strong>Symbol:</strong> ${unitSymbol}</p>
+                            <p><strong>Type:</strong> ${unitType}</p>
+                            <p><strong>Status:</strong> ${unitStatus}</p>
+                            <p><strong>Created:</strong> ${unitCreated}</p>
+                        </div>
+                    `,
+                    confirmButtonText: 'Close',
+                    confirmButtonColor: '#4e73df'
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
