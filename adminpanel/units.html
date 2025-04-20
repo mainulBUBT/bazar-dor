@@ -65,7 +65,7 @@
             <!-- Nav Item - Units -->
             <li class="nav-item active">
                 <a class="nav-link" href="units.html">
-                    <i class="fas fa-fw fa-rulers"></i>
+                    <i class="fas fa-fw fa-ruler-combined"></i>
                     <span>Units</span>
                 </a>
             </li>
@@ -339,28 +339,6 @@
                     <h1 class="h3 mb-2 text-gray-800">Units</h1>
                     <p class="mb-4">Manage measurement units for products in your catalog.</p>
 
-                    <!-- Unit Management Actions -->
-                    <div class="mb-4">
-                        <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#addUnitModal">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-plus"></i>
-                            </span>
-                            <span class="text">Add New Unit</span>
-                        </a>
-                        <a href="#" class="btn btn-info btn-icon-split ml-2">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-file-import"></i>
-                            </span>
-                            <span class="text">Import Units</span>
-                        </a>
-                        <a href="#" class="btn btn-secondary btn-icon-split ml-2">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-file-export"></i>
-                            </span>
-                            <span class="text">Export Units</span>
-                        </a>
-                    </div>
-
                     <!-- Unit Form Card -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -407,18 +385,40 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary">All Units</h6>
-                            <div class="dropdown no-arrow">
-                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                            <div class="d-flex">
+                                <a href="#" class="btn btn-sm btn-success mr-2" data-toggle="modal" data-target="#importUnitModal">
+                                    <i class="fas fa-file-import fa-sm"></i> Import
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                    aria-labelledby="dropdownMenuLink">
-                                    <div class="dropdown-header">Filter By:</div>
-                                    <a class="dropdown-item" href="#">Type</a>
-                                    <a class="dropdown-item" href="#">Status</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Reset Filters</a>
+                                <div class="dropdown mr-2">
+                                    <button class="btn btn-sm btn-info dropdown-toggle" type="button" id="exportDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-file-export fa-sm"></i> Export
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="exportDropdown">
+                                        <a class="dropdown-item" href="#" id="exportCSV">
+                                            <i class="fas fa-file-csv fa-sm fa-fw text-gray-400"></i> CSV
+                                        </a>
+                                        <a class="dropdown-item" href="#" id="exportPDF">
+                                            <i class="fas fa-file-pdf fa-sm fa-fw text-gray-400"></i> PDF
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="filterDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-filter fa-sm"></i> Filter
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="filterDropdown">
+                                        <div class="dropdown-header">Filter By:</div>
+                                        <a class="dropdown-item" href="#" data-filter="type">
+                                            <i class="fas fa-tags fa-sm fa-fw text-gray-400"></i> Type
+                                        </a>
+                                        <a class="dropdown-item" href="#" data-filter="status">
+                                            <i class="fas fa-toggle-on fa-sm fa-fw text-gray-400"></i> Status
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#" id="resetFilters">
+                                            <i class="fas fa-undo fa-sm fa-fw text-gray-400"></i> Reset Filters
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -436,17 +436,6 @@
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Unit Name</th>
-                                            <th>Symbol</th>
-                                            <th>Type</th>
-                                            <th>Status</th>
-                                            <th>Created</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
                                         <tr>
                                             <td>U001</td>
@@ -656,6 +645,59 @@
         </div>
     </div>
 
+    <!-- Import Units Modal -->
+    <div class="modal fade" id="importUnitModal" tabindex="-1" role="dialog" aria-labelledby="importUnitModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="importUnitModalLabel">Import Units</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle mr-1"></i>
+                        Upload a CSV file containing unit data. The file should have the following columns: Unit Name, Symbol, Type, and Status.
+                    </div>
+                    <form>
+                        <div class="form-group">
+                            <label for="importFile">Select File</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="importFile" accept=".csv">
+                                <label class="custom-file-label" for="importFile">Choose file...</label>
+                            </div>
+                            <small class="form-text text-muted">Maximum file size: 2MB</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="importOptions">Import Options</label>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="skipHeader" checked>
+                                <label class="custom-control-label" for="skipHeader">First row is header</label>
+                            </div>
+                            <div class="custom-control custom-checkbox mt-2">
+                                <input type="checkbox" class="custom-control-input" id="updateExisting">
+                                <label class="custom-control-label" for="updateExisting">Update existing units</label>
+                            </div>
+                        </div>
+                        <div class="mt-3 mb-2">
+                            <a href="#" id="downloadTemplate" class="text-primary">
+                                <i class="fas fa-download mr-1"></i> Download template
+                            </a>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-success" type="button" id="startImport">
+                        <i class="fas fa-file-import mr-1"></i> Import
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -833,6 +875,305 @@
                     confirmButtonText: 'Close',
                     confirmButtonColor: '#4e73df'
                 });
+            });
+            
+            // Export functionality
+            $('#exportCSV').on('click', function() {
+                // In a real application, this would be an AJAX call to a server endpoint
+                // that would generate and return a CSV file
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Export Started',
+                    text: 'Your CSV file is being generated and will download shortly.',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+                
+                // Simulate file download (for demo purposes)
+                setTimeout(function() {
+                    const link = document.createElement('a');
+                    link.href = '#';
+                    link.download = 'units-export-' + new Date().toISOString().split('T')[0] + '.csv';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }, 2000);
+            });
+            
+            $('#exportPDF').on('click', function() {
+                // In a real application, this would be an AJAX call to a server endpoint
+                // that would generate and return a PDF file
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Export Started',
+                    text: 'Your PDF file is being generated and will download shortly.',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+                
+                // Simulate file download (for demo purposes)
+                setTimeout(function() {
+                    const link = document.createElement('a');
+                    link.href = '#';
+                    link.download = 'units-export-' + new Date().toISOString().split('T')[0] + '.pdf';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }, 2000);
+            });
+            
+            // Filter functionality
+            let activeFilters = {};
+            
+            $('[data-filter]').on('click', function(e) {
+                e.preventDefault();
+                const filterType = $(this).data('filter');
+                
+                // Build filter options dynamically based on current table data
+                let options = [];
+                if (filterType === 'type') {
+                    // Collect all unique types from the table
+                    const types = new Set();
+                    $('#dataTable tbody tr').each(function() {
+                        const type = $(this).find('td:nth-child(4)').text().trim();
+                        types.add(type);
+                    });
+                    options = Array.from(types);
+                } else if (filterType === 'status') {
+                    options = ['Active', 'Inactive'];
+                }
+                
+                // Build the filter dialog HTML
+                let filterOptionsHtml = '';
+                options.forEach(option => {
+                    filterOptionsHtml += `
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="filter-${filterType}-${option.toLowerCase()}" value="${option}">
+                            <label class="custom-control-label" for="filter-${filterType}-${option.toLowerCase()}">${option}</label>
+                        </div>
+                    `;
+                });
+                
+                Swal.fire({
+                    title: `Filter by ${filterType.charAt(0).toUpperCase() + filterType.slice(1)}`,
+                    html: filterOptionsHtml,
+                    confirmButtonText: 'Apply Filter',
+                    showCancelButton: true,
+                    cancelButtonText: 'Cancel',
+                    focusConfirm: false,
+                    preConfirm: () => {
+                        const selectedOptions = [];
+                        options.forEach(option => {
+                            if ($(`#filter-${filterType}-${option.toLowerCase()}`).is(':checked')) {
+                                selectedOptions.push(option);
+                            }
+                        });
+                        return selectedOptions;
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed && result.value.length > 0) {
+                        activeFilters[filterType] = result.value;
+                        applyFilters();
+                    }
+                });
+            });
+            
+            $('#resetFilters').on('click', function(e) {
+                e.preventDefault();
+                activeFilters = {};
+                applyFilters();
+                
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Filters Reset',
+                    text: 'All filters have been removed.',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            });
+            
+            function applyFilters() {
+                const table = $('#dataTable').DataTable();
+                
+                // Clear any existing filters
+                table.search('').columns().search('').draw();
+                
+                // Apply each active filter
+                if (Object.keys(activeFilters).length === 0) {
+                    // No filters, show all rows
+                    table.search('').columns().search('').draw();
+                } else {
+                    // Custom filtering function
+                    $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+                        let showRow = true;
+                        
+                        // Check type filter
+                        if (activeFilters.type && activeFilters.type.length > 0) {
+                            if (!activeFilters.type.includes(data[3])) {
+                                showRow = false;
+                            }
+                        }
+                        
+                        // Check status filter
+                        if (activeFilters.status && activeFilters.status.length > 0) {
+                            const rowStatus = $(table.row(dataIndex).node()).find('td:nth-child(5) .badge').text();
+                            if (!activeFilters.status.includes(rowStatus)) {
+                                showRow = false;
+                            }
+                        }
+                        
+                        return showRow;
+                    });
+                    
+                    // Redraw the table
+                    table.draw();
+                    
+                    // Remove the custom filter function
+                    $.fn.dataTable.ext.search.pop();
+                }
+            }
+
+            // Import functionality
+            $('#importFile').on('change', function() {
+                const fileName = $(this).val().split('\\').pop();
+                $(this).next('.custom-file-label').html(fileName || 'Choose file...');
+            });
+            
+            $('#downloadTemplate').on('click', function(e) {
+                e.preventDefault();
+                
+                // Create a template CSV file content
+                const csvContent = 'Unit Name,Symbol,Type,Status\nKilogram,kg,Weight,Active\nLiter,L,Volume,Active\nPiece,pc,Count,Active';
+                
+                // Create a blob and download link
+                const blob = new Blob([csvContent], { type: 'text/csv' });
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'units-template.csv';
+                document.body.appendChild(link);
+                link.click();
+                window.URL.revokeObjectURL(url);
+            });
+            
+            $('#startImport').on('click', function() {
+                const fileInput = $('#importFile')[0];
+                if (!fileInput.files || fileInput.files.length === 0) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'No File Selected',
+                        text: 'Please select a CSV file to import.',
+                    });
+                    return;
+                }
+                
+                // In a real application, you would use FormData to submit the file to the server
+                // For demo purposes, we'll just show a success message
+                Swal.fire({
+                    title: 'Importing...',
+                    html: 'Please wait while we import your units.',
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+                
+                // Simulate importing process (3 seconds delay)
+                setTimeout(function() {
+                    // Close import modal
+                    $('#importUnitModal').modal('hide');
+                    
+                    // Show success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Import Completed',
+                        html: `
+                            <div class="text-left">
+                                <p><strong>Units imported:</strong> 3</p>
+                                <p><strong>Units updated:</strong> 0</p>
+                                <p><strong>Errors:</strong> 0</p>
+                            </div>
+                        `,
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        // Reset the file input
+                        $('#importFile').val('').next('.custom-file-label').html('Choose file...');
+                    });
+                    
+                    // Add some sample rows to the DataTable (simulating successful import)
+                    const table = $('#dataTable').DataTable();
+                    
+                    // In a real application, this would be the data received from the server
+                    // For demo, we'll just add some predefined rows
+                    const now = new Date().toISOString().split('T')[0];
+                    
+                    // Check if rows don't already exist
+                    if (table.row(':contains("Ton")').length === 0) {
+                        table.row.add(['U004', 'Ton', 't', 'Weight', '<span class="badge badge-success">Active</span>', now, 
+                            '<a href="#" class="btn btn-primary btn-circle btn-sm" data-toggle="modal" data-target="#editUnitModal"><i class="fas fa-edit"></i></a> ' +
+                            '<a href="#" class="btn btn-danger btn-circle btn-sm delete-unit"><i class="fas fa-trash"></i></a> ' +
+                            '<a href="#" class="btn btn-info btn-circle btn-sm view-unit"><i class="fas fa-eye"></i></a>'
+                        ]).draw();
+                    }
+                    
+                    // Reattach event handlers to the new buttons
+                    $('.delete-unit, .view-unit').off('click');
+                    
+                    // Reattach delete event handler
+                    $('.delete-unit').on('click', function() {
+                        const row = $(this).closest('tr');
+                        const unitName = row.find('td:nth-child(2)').text();
+                        
+                        Swal.fire({
+                            title: 'Delete Unit?',
+                            text: `Are you sure you want to delete ${unitName}?`,
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#d33',
+                            cancelButtonColor: '#3085d6',
+                            confirmButtonText: 'Yes, delete it!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                row.remove();
+                                
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Deleted!',
+                                    text: `${unitName} has been deleted successfully.`,
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                });
+                            }
+                        });
+                    });
+                    
+                    // Reattach view event handler
+                    $('.view-unit').on('click', function() {
+                        const row = $(this).closest('tr');
+                        const unitId = row.find('td:nth-child(1)').text();
+                        const unitName = row.find('td:nth-child(2)').text();
+                        const unitSymbol = row.find('td:nth-child(3)').text();
+                        const unitType = row.find('td:nth-child(4)').text();
+                        const unitStatus = row.find('td:nth-child(5) .badge').text();
+                        const unitCreated = row.find('td:nth-child(6)').text();
+                        
+                        Swal.fire({
+                            title: 'Unit Details',
+                            html: `
+                                <div class="text-left">
+                                    <p><strong>ID:</strong> ${unitId}</p>
+                                    <p><strong>Name:</strong> ${unitName}</p>
+                                    <p><strong>Symbol:</strong> ${unitSymbol}</p>
+                                    <p><strong>Type:</strong> ${unitType}</p>
+                                    <p><strong>Status:</strong> ${unitStatus}</p>
+                                    <p><strong>Created:</strong> ${unitCreated}</p>
+                                </div>
+                            `,
+                            confirmButtonText: 'Close',
+                            confirmButtonColor: '#4e73df'
+                        });
+                    });
+                }, 3000);
             });
         });
     </script>

@@ -76,6 +76,11 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Main
+            </div>
+
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
                 <a class="nav-link" href="index.html">
@@ -91,31 +96,201 @@
                 Catalog
             </div>
 
-            <!-- Nav Item - Categories -->
+            <!-- Nav Item - Units -->
             <li class="nav-item">
-                <a class="nav-link" href="categories.html">
-                    <i class="fas fa-fw fa-tags"></i>
-                    <span>Categories</span></a>
+                <a class="nav-link" href="units.html">
+                    <i class="fas fa-fw fa-ruler-combined"></i>
+                    <span>Units</span>
+                </a>
             </li>
 
-            <!-- Nav Item - Products Collapse Menu -->
-            <li class="nav-item active">
-                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseProducts" aria-expanded="true"
-                    aria-controls="collapseProducts">
+            <!-- Nav Item - Categories -->
+            <li class="nav-item dropdown">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategories" aria-expanded="false" aria-controls="collapseCategories">
+                    <i class="fas fa-fw fa-tags"></i>
+                    <span>Categories</span>
+                </a>
+                <div id="collapseCategories" class="collapse" aria-labelledby="headingCategories" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="categories.html">All Categories</a>
+                        <a class="collapse-item" href="add-category.html">Add Category</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Products -->
+            <li class="nav-item active dropdown">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseProducts" aria-expanded="true" aria-controls="collapseProducts">
                     <i class="fas fa-fw fa-box-open"></i>
                     <span>Products</span>
                 </a>
-                <div id="collapseProducts" class="collapse show" aria-labelledby="headingProducts"
-                    data-parent="#accordionSidebar">
+                <div id="collapseProducts" class="collapse show" aria-labelledby="headingProducts" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Product Actions:</h6>
                         <a class="collapse-item" href="products.html">All Products</a>
                         <a class="collapse-item active" href="add-product.html">Add Product</a>
                     </div>
                 </div>
             </li>
 
-            <!-- Add other sidebar items as needed -->
+            <!-- Nav Item - Markets -->
+            <li class="nav-item dropdown">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMarkets" aria-expanded="false" aria-controls="collapseMarkets">
+                    <i class="fas fa-fw fa-store"></i>
+                    <span>Markets</span>
+                </a>
+                <div id="collapseMarkets" class="collapse" aria-labelledby="headingMarkets" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="markets.html">All Markets</a>
+                        <a class="collapse-item" href="add-market.html">Add Market</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Users Management
+            </div>
+
+            <!-- Nav Item - Users -->
+            <li class="nav-item">
+                <a class="nav-link" href="users.html">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Users</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Contributions -->
+            <li class="nav-item">
+                <a class="nav-link" href="contributions.html">
+                    <i class="fas fa-fw fa-chart-line"></i>
+                    <span>Contributions</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Points Management -->
+            <li class="nav-item dropdown">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePoints" aria-expanded="false" aria-controls="collapsePoints">
+                    <i class="fas fa-fw fa-award"></i>
+                    <span>Points Management</span>
+                </a>
+                <div id="collapsePoints" class="collapse" aria-labelledby="headingPoints" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="volunteer-points.html">Manage Points</a>
+                        <a class="collapse-item" href="volunteer-transactions.html">Transactions</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Redemptions -->
+            <li class="nav-item">
+                <a class="nav-link" href="volunteer-redemptions.html">
+                    <i class="fas fa-fw fa-gift"></i>
+                    <span>Redemptions</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Marketing
+            </div>
+
+            <!-- Nav Item - Banners -->
+            <li class="nav-item dropdown">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBanners" aria-expanded="false" aria-controls="collapseBanners">
+                    <i class="fas fa-fw fa-images"></i>
+                    <span>Banners</span>
+                </a>
+                <div id="collapseBanners" class="collapse" aria-labelledby="headingBanners" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="banners.html">All Banners</a>
+                        <a class="collapse-item" href="add-banner.html">Add Banner</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Featured Banners -->
+            <li class="nav-item dropdown">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFeaturedBanners" aria-expanded="false" aria-controls="collapseFeaturedBanners">
+                    <i class="fas fa-fw fa-star"></i>
+                    <span>Featured Banners</span>
+                </a>
+                <div id="collapseFeaturedBanners" class="collapse" aria-labelledby="headingFeaturedBanners" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="featured-banners.html">All Featured Banners</a>
+                        <a class="collapse-item" href="add-featured-banner.html">Add Featured Banner</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Reports
+            </div>
+
+            <!-- Nav Item - Market Reports -->
+            <li class="nav-item">
+                <a class="nav-link" href="market-reports.html">
+                    <i class="fas fa-fw fa-store-alt"></i>
+                    <span>Market Reports</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Product Reports -->
+            <li class="nav-item">
+                <a class="nav-link" href="product-reports.html">
+                    <i class="fas fa-fw fa-box"></i>
+                    <span>Product Reports</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Price Analytics -->
+            <li class="nav-item">
+                <a class="nav-link" href="price-reports.html">
+                    <i class="fas fa-fw fa-chart-line"></i>
+                    <span>Price Analytics</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - User Analytics -->
+            <li class="nav-item">
+                <a class="nav-link" href="user-reports.html">
+                    <i class="fas fa-fw fa-user-chart"></i>
+                    <span>User Analytics</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Configuration
+            </div>
+
+            <!-- Nav Item - Zone Management -->
+            <li class="nav-item">
+                <a class="nav-link" href="zone-management.html">
+                    <i class="fas fa-fw fa-map-marker-alt"></i>
+                    <span>Zone Management</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Settings -->
+            <li class="nav-item">
+                <a class="nav-link" href="settings.html">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -673,4 +848,21 @@
                 }
 
                 // Add more validation for market prices if needed
-                // e.g., check if
+                // e.g., check if all required market price fields are filled in
+                
+                // If all validation passes, show success message
+                if (isValid) {
+                    alert('Product saved successfully!');
+                    // In a real application, we would submit the form data to the server
+                    // and redirect after successful submission
+                    setTimeout(() => {
+                        window.location.href = 'products.html';
+                    }, 1000);
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

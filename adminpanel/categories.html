@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Admin Panel for Bazar-dor">
+    <meta name="description" content="Admin Panel for Bazar-dor - Categories">
     <meta name="author" content="">
 
     <title>Bazar-dor Admin - Categories</title>
@@ -21,6 +21,24 @@
 
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+    <style>
+        .category-icon {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #eaecf4; /* Light background */
+            color: #4e73df; /* Primary color */
+            border-radius: 8px;
+            font-size: 1.25rem;
+            vertical-align: middle;
+        }
+        .table-responsive {
+            /* Ensure table doesn't overflow card */
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -65,7 +83,7 @@
             <!-- Nav Item - Units -->
             <li class="nav-item">
                 <a class="nav-link" href="units.html">
-                    <i class="fas fa-fw fa-rulers"></i>
+                    <i class="fas fa-fw fa-ruler-combined"></i>
                     <span>Units</span>
                 </a>
             </li>
@@ -337,344 +355,164 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Categories</h1>
-                    <p class="mb-4">Manage product categories and organize your inventory.</p>
+                    <p class="mb-4">Manage product categories for your store.</p>
 
-                    <!-- Content Row -->
-                    <div class="row">
-
-                        <!-- Category Management Card -->
-                        <div class="col-lg-4">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Add/Edit Category</h6>
-                                </div>
-                                <div class="card-body">
-                                    <form>
-                                        <div class="form-group">
-                                            <label for="categoryName">Category Name</label>
-                                            <input type="text" class="form-control" id="categoryName" placeholder="Enter category name">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="categorySlug">Slug</label>
-                                            <input type="text" class="form-control" id="categorySlug" placeholder="category-slug">
-                                            <small class="form-text text-muted">The "slug" is the URL-friendly version of the name.</small>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="parentCategory">Parent Category</label>
-                                            <select class="form-control" id="parentCategory">
-                                                <option value="">None (Top Level)</option>
-                                                <option>Electronics</option>
-                                                <option>Clothing</option>
-                                                <option>Home Goods</option>
-                                                <option>Footwear</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="categoryDescription">Description</label>
-                                            <textarea class="form-control" id="categoryDescription" rows="3"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="categoryImage">Category Image</label>
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="categoryImage">
-                                                <label class="custom-file-label" for="categoryImage">Choose file</label>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary btn-block">Save Category</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Categories List -->
-                        <div class="col-lg-8">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">All Categories</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Category Actions:</div>
-                                            <a class="dropdown-item" href="#">Export Categories</a>
-                                            <a class="dropdown-item" href="#">Import Categories</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Bulk Actions</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered" id="categoriesTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Image</th>
-                                                    <th>Name</th>
-                                                    <th>Slug</th>
-                                                    <th>Parent</th>
-                                                    <th>Products</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td><img src="img/product-placeholder.png" width="40" height="40" alt="Category"></td>
-                                                    <td>Electronics</td>
-                                                    <td>electronics</td>
-                                                    <td>-</td>
-                                                    <td>45</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-primary btn-circle btn-sm">
-                                                            <i class="fas fa-edit"></i>
-                                                        </a>
-                                                        <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                            <i class="fas fa-trash"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td><img src="img/product-placeholder.png" width="40" height="40" alt="Category"></td>
-                                                    <td>Smartphones</td>
-                                                    <td>smartphones</td>
-                                                    <td>Electronics</td>
-                                                    <td>18</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-primary btn-circle btn-sm">
-                                                            <i class="fas fa-edit"></i>
-                                                        </a>
-                                                        <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                            <i class="fas fa-trash"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td><img src="img/product-placeholder.png" width="40" height="40" alt="Category"></td>
-                                                    <td>Laptops</td>
-                                                    <td>laptops</td>
-                                                    <td>Electronics</td>
-                                                    <td>12</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-primary btn-circle btn-sm">
-                                                            <i class="fas fa-edit"></i>
-                                                        </a>
-                                                        <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                            <i class="fas fa-trash"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td><img src="img/product-placeholder.png" width="40" height="40" alt="Category"></td>
-                                                    <td>Clothing</td>
-                                                    <td>clothing</td>
-                                                    <td>-</td>
-                                                    <td>32</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-primary btn-circle btn-sm">
-                                                            <i class="fas fa-edit"></i>
-                                                        </a>
-                                                        <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                            <i class="fas fa-trash"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td><img src="img/product-placeholder.png" width="40" height="40" alt="Category"></td>
-                                                    <td>Men's Wear</td>
-                                                    <td>mens-wear</td>
-                                                    <td>Clothing</td>
-                                                    <td>15</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-primary btn-circle btn-sm">
-                                                            <i class="fas fa-edit"></i>
-                                                        </a>
-                                                        <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                            <i class="fas fa-trash"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>6</td>
-                                                    <td><img src="img/product-placeholder.png" width="40" height="40" alt="Category"></td>
-                                                    <td>Women's Wear</td>
-                                                    <td>womens-wear</td>
-                                                    <td>Clothing</td>
-                                                    <td>17</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-primary btn-circle btn-sm">
-                                                            <i class="fas fa-edit"></i>
-                                                        </a>
-                                                        <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                            <i class="fas fa-trash"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>7</td>
-                                                    <td><img src="img/product-placeholder.png" width="40" height="40" alt="Category"></td>
-                                                    <td>Home Goods</td>
-                                                    <td>home-goods</td>
-                                                    <td>-</td>
-                                                    <td>28</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-primary btn-circle btn-sm">
-                                                            <i class="fas fa-edit"></i>
-                                                        </a>
-                                                        <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                            <i class="fas fa-trash"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>8</td>
-                                                    <td><img src="img/product-placeholder.png" width="40" height="40" alt="Category"></td>
-                                                    <td>Kitchen</td>
-                                                    <td>kitchen</td>
-                                                    <td>Home Goods</td>
-                                                    <td>14</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-primary btn-circle btn-sm">
-                                                            <i class="fas fa-edit"></i>
-                                                        </a>
-                                                        <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                            <i class="fas fa-trash"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>9</td>
-                                                    <td><img src="img/product-placeholder.png" width="40" height="40" alt="Category"></td>
-                                                    <td>Bedroom</td>
-                                                    <td>bedroom</td>
-                                                    <td>Home Goods</td>
-                                                    <td>8</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-primary btn-circle btn-sm">
-                                                            <i class="fas fa-edit"></i>
-                                                        </a>
-                                                        <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                            <i class="fas fa-trash"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>10</td>
-                                                    <td><img src="img/product-placeholder.png" width="40" height="40" alt="Category"></td>
-                                                    <td>Footwear</td>
-                                                    <td>footwear</td>
-                                                    <td>-</td>
-                                                    <td>22</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-primary btn-circle btn-sm">
-                                                            <i class="fas fa-edit"></i>
-                                                        </a>
-                                                        <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                            <i class="fas fa-trash"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Category Hierarchy Card -->
+                    <!-- Categories DataTable -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Category Hierarchy</h6>
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">All Categories</h6>
+                            <div class="d-flex">
+                                <a href="add-category.html" class="btn btn-sm btn-primary mr-2">
+                                    <i class="fas fa-plus fa-sm"></i> Add New Category
+                                </a>
+                                <a href="#" class="btn btn-sm btn-success mr-2" data-toggle="modal" data-target="#importCategoryModal">
+                                    <i class="fas fa-file-import fa-sm"></i> Import
+                                </a>
+                                <div class="dropdown mr-2">
+                                    <button class="btn btn-sm btn-info dropdown-toggle" type="button" id="exportDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-file-export fa-sm"></i> Export
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="exportDropdown">
+                                        <a class="dropdown-item" href="#" id="exportCSV">
+                                            <i class="fas fa-file-csv fa-sm fa-fw text-gray-400 mr-2"></i> CSV
+                                        </a>
+                                        <a class="dropdown-item" href="#" id="exportPDF">
+                                            <i class="fas fa-file-pdf fa-sm fa-fw text-gray-400 mr-2"></i> PDF
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="filterDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-filter fa-sm"></i> Filter
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="filterDropdown">
+                                        <div class="dropdown-header">Filter By:</div>
+                                        <a class="dropdown-item" href="#" data-filter="parent">
+                                            <i class="fas fa-folder-tree fa-sm fa-fw text-gray-400 mr-2"></i> Parent Category
+                                        </a>
+                                        <a class="dropdown-item" href="#" data-filter="status">
+                                            <i class="fas fa-toggle-on fa-sm fa-fw text-gray-400 mr-2"></i> Status
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#" id="resetFilters">
+                                            <i class="fas fa-undo fa-sm fa-fw text-gray-400 mr-2"></i> Reset Filters
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <ul class="list-group">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <i class="fas fa-folder text-primary mr-2"></i> Electronics
-                                                <span class="badge badge-primary badge-pill ml-2">45 products</span>
-                                            </div>
-                                            <div>
-                                                <a href="#" class="btn btn-sm btn-outline-primary mr-1">Add Sub-category</a>
-                                                <a href="#" class="btn btn-sm btn-outline-secondary">View Products</a>
-                                            </div>
-                                        </li>
-                                        <ul class="list-group mt-2 ml-4">
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <div>
-                                                    <i class="fas fa-folder text-info mr-2"></i> Smartphones
-                                                    <span class="badge badge-info badge-pill ml-2">18 products</span>
-                                                </div>
-                                                <div>
-                                                    <a href="#" class="btn btn-sm btn-outline-primary mr-1">Add Sub-category</a>
-                                                    <a href="#" class="btn btn-sm btn-outline-secondary">View Products</a>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <div>
-                                                    <i class="fas fa-folder text-info mr-2"></i> Laptops
-                                                    <span class="badge badge-info badge-pill ml-2">12 products</span>
-                                                </div>
-                                                <div>
-                                                    <a href="#" class="btn btn-sm btn-outline-primary mr-1">Add Sub-category</a>
-                                                    <a href="#" class="btn btn-sm btn-outline-secondary">View Products</a>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <div>
-                                                    <i class="fas fa-folder text-info mr-2"></i> Accessories
-                                                    <span class="badge badge-info badge-pill ml-2">15 products</span>
-                                                </div>
-                                                <div>
-                                                    <a href="#" class="btn btn-sm btn-outline-primary mr-1">Add Sub-category</a>
-                                                    <a href="#" class="btn btn-sm btn-outline-secondary">View Products</a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        
-                                        <li class="list-group-item d-flex justify-content-between align-items-center mt-3">
-                                            <div>
-                                                <i class="fas fa-folder text-primary mr-2"></i> Clothing
-                                                <span class="badge badge-primary badge-pill ml-2">32 products</span>
-                                            </div>
-                                            <div>
-                                                <a href="#" class="btn btn-sm btn-outline-primary mr-1">Add Sub-category</a>
-                                                <a href="#" class="btn btn-sm btn-outline-secondary">View Products</a>
-                                            </div>
-                                        </li>
-                                        <ul class="list-group mt-2 ml-4">
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <div>
-                                                    <i class="fas fa-folder text-info mr-2"></i> Men's Wear
-                                                    <span class="badge badge-info badge-pill ml-2">15 products</span>
-                                                </div>
-                                                <div>
-                                                    <a href="#" class="btn btn-sm btn-outline-primary mr-1">Add Sub-category</a>
-                                                    <a href="#" class="btn btn-sm btn-outline-secondary">View Products</a>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <div>
-                                                    <i class="fas fa-folder text-info mr-2"></i> Women's Wear
-                                                    <span class="badge badge-info badge-pill ml-2">17 products</span>
-                                                </div>
-                                                <div>
-                                                    <a href="#" class="btn btn-sm btn-outline-primary mr-1">Add Sub-category</a>
-                                                    <a href="#" class="btn btn-sm btn-outline-secondary">View Products</a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </ul>
-                                </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Icon</th>
+                                            <th>Category Name</th>
+                                            <th>Parent Category</th>
+                                            <th>Products</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>#C001</td>
+                                            <td><div class="category-icon"><i class="fas fa-carrot"></i></div></td> <!-- Changed icon -->
+                                            <td>Fruits</td>
+                                            <td>-</td>
+                                            <td><span class="badge badge-secondary">42</span></td>
+                                            <td><span class="badge badge-success">Active</span></td>
+                                            <td>
+                                                <a href="#" class="btn btn-primary btn-circle btn-sm" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-danger btn-circle btn-sm delete-category" title="Delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-info btn-circle btn-sm view-category" title="View">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>#C002</td>
+                                            <td><div class="category-icon"><i class="fas fa-lemon"></i></div></td> <!-- Changed icon -->
+                                            <td>Citrus Fruits</td>
+                                            <td>Fruits</td>
+                                            <td><span class="badge badge-secondary">15</span></td>
+                                            <td><span class="badge badge-success">Active</span></td>
+                                            <td>
+                                                <a href="#" class="btn btn-primary btn-circle btn-sm" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-danger btn-circle btn-sm delete-category" title="Delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-info btn-circle btn-sm view-category" title="View">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>#C003</td>
+                                             <td><div class="category-icon"><i class="fas fa-seedling"></i></div></td> <!-- Changed icon -->
+                                            <td>Vegetables</td>
+                                            <td>-</td>
+                                            <td><span class="badge badge-secondary">38</span></td>
+                                            <td><span class="badge badge-success">Active</span></td>
+                                            <td>
+                                                <a href="#" class="btn btn-primary btn-circle btn-sm" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-danger btn-circle btn-sm delete-category" title="Delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-info btn-circle btn-sm view-category" title="View">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>#C004</td>
+                                             <td><div class="category-icon"><i class="fas fa-pepper-hot"></i></div></td> <!-- Changed icon -->
+                                            <td>Root Vegetables</td>
+                                            <td>Vegetables</td>
+                                             <td><span class="badge badge-secondary">12</span></td>
+                                            <td><span class="badge badge-success">Active</span></td>
+                                            <td>
+                                                <a href="#" class="btn btn-primary btn-circle btn-sm" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-danger btn-circle btn-sm delete-category" title="Delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-info btn-circle btn-sm view-category" title="View">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>#C005</td>
+                                             <td><div class="category-icon"><i class="fas fa-cheese"></i></div></td> <!-- Changed icon -->
+                                            <td>Dairy</td>
+                                            <td>-</td>
+                                            <td><span class="badge badge-secondary">25</span></td>
+                                            <td><span class="badge badge-success">Active</span></td>
+                                            <td>
+                                                <a href="#" class="btn btn-primary btn-circle btn-sm" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-danger btn-circle btn-sm delete-category" title="Delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-info btn-circle btn-sm view-category" title="View">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -741,13 +579,388 @@
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Categories Page Script -->
     <script>
-        // Call the dataTables jQuery plugin
         $(document).ready(function() {
-            $('#categoriesTable').DataTable();
+            // Initialize DataTable
+            $('#dataTable').DataTable({
+                // Optional: Add configuration for search, pagination, etc.
+                // For example, disable default search box if using custom one:
+                // searching: false 
+            });
+            
+            // Delete Category Confirmation
+            $('.delete-category').on('click', function(e) {
+                e.preventDefault(); // Prevent default link behavior
+                const row = $(this).closest('tr');
+                const categoryName = row.find('td:nth-child(3)').text(); // Get category name from 3rd column
+                const categoryId = row.find('td:nth-child(1)').text(); // Get category ID from 1st column
+
+                Swal.fire({
+                    title: 'Delete Category?',
+                    text: `Are you sure you want to delete "${categoryName}" (${categoryId})? This might affect associated products.`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#858796', // Use SB Admin 2 gray
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // In a real application, send an AJAX request to delete the category
+                        // For demo: remove row and show success message
+                        $('#dataTable').DataTable().row(row).remove().draw();
+                        
+                        Swal.fire({
+                            title: 'Deleted!',
+                            text: `Category "${categoryName}" has been deleted.`,
+                            icon: 'success',
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                    }
+                });
+            });
+
+            // View Category Details (Example using SweetAlert)
+            $('.view-category').on('click', function(e) {
+                e.preventDefault();
+                 const row = $(this).closest('tr');
+                 const categoryId = row.find('td:nth-child(1)').text();
+                 const iconHtml = row.find('td:nth-child(2)').html(); // Get icon HTML
+                 const categoryName = row.find('td:nth-child(3)').text();
+                 const parentCategory = row.find('td:nth-child(4)').text();
+                 const productsCount = row.find('td:nth-child(5) .badge').text();
+                 const statusHtml = row.find('td:nth-child(6)').html(); // Get status badge HTML
+
+                 Swal.fire({
+                     title: 'Category Details',
+                     html: `
+                         <div class="text-left">
+                             <p><strong>ID:</strong> ${categoryId}</p>
+                             <p><strong>Icon:</strong> ${iconHtml}</p>
+                             <p><strong>Name:</strong> ${categoryName}</p>
+                             <p><strong>Parent:</strong> ${parentCategory === '-' ? 'None' : parentCategory}</p>
+                             <p><strong>Products:</strong> ${productsCount}</p>
+                             <p><strong>Status:</strong> ${statusHtml}</p>
+                         </div>
+                     `,
+                     confirmButtonText: 'Close',
+                     confirmButtonColor: '#4e73df' // SB Admin 2 primary color
+                 });
+             });
+
+             // Optional: Add custom search functionality if needed
+             // $('#categorySearchInput').on('keyup', function() {
+             //    $('#dataTable').DataTable().search(this.value).draw();
+             // });
+            
+             // Export functionality
+            $('#exportCSV').on('click', function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Export Started',
+                    text: 'Your CSV file is being generated.',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+                // In real app, trigger server-side CSV generation
+            });
+            
+            $('#exportPDF').on('click', function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Export Started',
+                    text: 'Your PDF file is being generated.',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+                // In real app, trigger server-side PDF generation
+            });
+
+            // Filter functionality
+            let activeCategoryFilters = {};
+            
+            $('[data-filter]').on('click', function(e) {
+                e.preventDefault();
+                const filterType = $(this).data('filter');
+                const table = $('#dataTable').DataTable();
+                let options = [];
+
+                if (filterType === 'parent') {
+                    const parentCategories = new Set();
+                    table.column(3).data().each(function(d) { // Column index 3 for Parent Category
+                        parentCategories.add(d === '-' ? 'None' : d);
+                    });
+                    options = Array.from(parentCategories);
+                } else if (filterType === 'status') {
+                    // Extract unique statuses from the badge HTML
+                    const statuses = new Set();
+                    table.column(5).nodes().each(function(node) {
+                         const statusText = $(node).find('.badge').text();
+                         if(statusText) statuses.add(statusText);
+                    });
+                     options = Array.from(statuses);
+                     if (!options.includes('Active')) options.push('Active'); // Ensure common statuses are present
+                     if (!options.includes('Inactive')) options.push('Inactive');
+                }
+
+                let filterOptionsHtml = '';
+                options.forEach(option => {
+                    const optionId = `filter-${filterType}-${option.toLowerCase().replace(/[^a-z0-9]/g, '-')}`;
+                    filterOptionsHtml += `
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="${optionId}" value="${option}">
+                            <label class="custom-control-label" for="${optionId}">${option}</label>
+                        </div>
+                    `;
+                });
+
+                Swal.fire({
+                    title: `Filter by ${filterType.charAt(0).toUpperCase() + filterType.slice(1)}`,
+                    html: `<div class="text-left">${filterOptionsHtml}</div>`,
+                    confirmButtonText: 'Apply Filter',
+                    showCancelButton: true,
+                    cancelButtonText: 'Cancel',
+                    focusConfirm: false,
+                    preConfirm: () => {
+                        const selectedOptions = [];
+                        options.forEach(option => {
+                             const optionId = `filter-${filterType}-${option.toLowerCase().replace(/[^a-z0-9]/g, '-')}`;
+                            if ($(`#${optionId}`).is(':checked')) {
+                                selectedOptions.push(option);
+                            }
+                        });
+                        return selectedOptions;
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed && result.value.length > 0) {
+                        activeCategoryFilters[filterType] = result.value;
+                        applyCategoryFilters();
+                    } else if (result.isConfirmed && result.value.length === 0) {
+                         // If confirmed with no selections, remove this filter
+                        delete activeCategoryFilters[filterType];
+                        applyCategoryFilters();
+                    }
+                });
+            });
+
+            $('#resetFilters').on('click', function(e) {
+                e.preventDefault();
+                activeCategoryFilters = {};
+                applyCategoryFilters();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Filters Reset',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            });
+
+            function applyCategoryFilters() {
+                const table = $('#dataTable').DataTable();
+                
+                // Remove previous custom filter function before applying new one
+                 $.fn.dataTable.ext.search.pop();
+
+                if (Object.keys(activeCategoryFilters).length === 0) {
+                    table.search('').columns().search('').draw(); // Clear all filters
+                } else {
+                    $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+                        let showRow = true;
+                        
+                        // Check Parent Category filter (column index 3)
+                        if (activeCategoryFilters.parent && activeCategoryFilters.parent.length > 0) {
+                            const parentVal = data[3] === '-' ? 'None' : data[3];
+                            if (!activeCategoryFilters.parent.includes(parentVal)) {
+                                showRow = false;
+                            }
+                        }
+                        
+                        // Check Status filter (column index 5)
+                        if (showRow && activeCategoryFilters.status && activeCategoryFilters.status.length > 0) {
+                             const statusText = $(table.column(5).nodes()[dataIndex]).find('.badge').text(); 
+                            if (!activeCategoryFilters.status.includes(statusText)) {
+                                showRow = false;
+                            }
+                        }
+                        
+                        return showRow;
+                    });
+                    table.draw();
+                }
+            }
+
+             // Import functionality
+             $('#importFile').on('change', function() {
+                 const fileName = $(this).val().split('\\').pop();
+                 $(this).next('.custom-file-label').html(fileName || 'Choose file...');
+             });
+             
+             $('#downloadTemplate').on('click', function(e) {
+                 e.preventDefault();
+                 const csvContent = 'Category Name,Parent Category,Status,Icon\nFruits,-,Active,fas fa-carrot\nVegetables,-,Active,fas fa-seedling\nCitrus Fruits,Fruits,Active,fas fa-lemon';
+                 const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                 const link = document.createElement('a');
+                 const url = URL.createObjectURL(blob);
+                 link.setAttribute('href', url);
+                 link.setAttribute('download', 'categories-template.csv');
+                 link.style.visibility = 'hidden';
+                 document.body.appendChild(link);
+                 link.click();
+                 document.body.removeChild(link);
+             });
+             
+             $('#startImport').on('click', function() {
+                 const fileInput = $('#importFile')[0];
+                 if (!fileInput.files || fileInput.files.length === 0) {
+                     Swal.fire({ icon: 'error', title: 'No File Selected', text: 'Please select a CSV file.' });
+                     return;
+                 }
+                 
+                 Swal.fire({
+                     title: 'Importing...',
+                     text: 'Please wait while categories are imported.',
+                     timerProgressBar: true,
+                     allowOutsideClick: false,
+                     didOpen: () => { Swal.showLoading(); }
+                 });
+                 
+                 // Simulate import process
+                 setTimeout(() => {
+                     $('#importCategoryModal').modal('hide');
+                     Swal.fire({
+                         icon: 'success',
+                         title: 'Import Complete',
+                         html: '<div class="text-left"><p><strong>Categories processed:</strong> 5</p><p><strong>Added:</strong> 2</p><p><strong>Updated:</strong> 1</p><p><strong>Errors:</strong> 2</p></div>',
+                         confirmButtonText: 'OK'
+                     }).then(() => {
+                         $('#importFile').val('').next('.custom-file-label').html('Choose file...');
+                         // Optionally: Refresh table data here
+                         // Example: $('#dataTable').DataTable().ajax.reload(); 
+                         // For demo, we just add a sample row to show effect
+                         const table = $('#dataTable').DataTable();
+                          const newCategory = ['#C006', '<div class="category-icon"><i class="fas fa-bread-slice"></i></div>', 'Bakery', '-', '<span class="badge badge-secondary">18</span>', '<span class="badge badge-success">Active</span>', '<a href="#" class="btn btn-primary btn-circle btn-sm" title="Edit"><i class="fas fa-edit"></i></a> <a href="#" class="btn btn-danger btn-circle btn-sm delete-category" title="Delete"><i class="fas fa-trash"></i></a> <a href="#" class="btn btn-info btn-circle btn-sm view-category" title="View"><i class="fas fa-eye"></i></a>'];
+                          // Check if row exists before adding
+                         if (table.rows().data().toArray().flat().indexOf('#C006') === -1) {
+                              table.row.add(newCategory).draw();
+                              // Re-attach event listeners if necessary
+                              reattachEventListeners();
+                         }
+                     });
+                 }, 2500);
+             });
+
+             // Function to re-attach event listeners (needed after adding rows)
+             function reattachEventListeners() {
+                  // Re-bind delete confirmation
+                 $('.delete-category').off('click').on('click', function(e) {
+                     e.preventDefault();
+                     const row = $(this).closest('tr');
+                     const categoryName = row.find('td:nth-child(3)').text();
+                     const categoryId = row.find('td:nth-child(1)').text();
+
+                     Swal.fire({
+                         title: 'Delete Category?',
+                         text: `Are you sure you want to delete "${categoryName}" (${categoryId})? This might affect associated products.`,
+                         icon: 'warning',
+                         showCancelButton: true,
+                         confirmButtonColor: '#d33',
+                         cancelButtonColor: '#858796',
+                         confirmButtonText: 'Yes, delete it!'
+                     }).then((result) => {
+                         if (result.isConfirmed) {
+                             $('#dataTable').DataTable().row(row).remove().draw();
+                             Swal.fire({ title: 'Deleted!', text: `Category "${categoryName}" has been deleted.`, icon: 'success', timer: 2000, showConfirmButton: false });
+                         }
+                     });
+                 });
+
+                 // Re-bind view details
+                 $('.view-category').off('click').on('click', function(e) {
+                     e.preventDefault();
+                     const row = $(this).closest('tr');
+                     const categoryId = row.find('td:nth-child(1)').text();
+                     const iconHtml = row.find('td:nth-child(2)').html(); 
+                     const categoryName = row.find('td:nth-child(3)').text();
+                     const parentCategory = row.find('td:nth-child(4)').text();
+                     const productsCount = row.find('td:nth-child(5) .badge').text();
+                     const statusHtml = row.find('td:nth-child(6)').html();
+
+                     Swal.fire({
+                         title: 'Category Details',
+                         html: `<div class="text-left"><p><strong>ID:</strong> ${categoryId}</p><p><strong>Icon:</strong> ${iconHtml}</p><p><strong>Name:</strong> ${categoryName}</p><p><strong>Parent:</strong> ${parentCategory === '-' ? 'None' : parentCategory}</p><p><strong>Products:</strong> ${productsCount}</p><p><strong>Status:</strong> ${statusHtml}</p></div>`,
+                         confirmButtonText: 'Close',
+                         confirmButtonColor: '#4e73df'
+                     });
+                 });
+                 // Re-attach edit button handler if needed
+                  $('[title="Edit"]').off('click').on('click', function(e) {
+                       e.preventDefault();
+                       // Add edit logic here - e.g., redirect to edit page or open edit modal
+                       alert('Edit button clicked for row - implement edit logic');
+                   });
+             }
+
+             // Initial attachment of event listeners
+             reattachEventListeners();
+             
         });
     </script>
 
+    <!-- Import Category Modal -->
+    <div class="modal fade" id="importCategoryModal" tabindex="-1" role="dialog" aria-labelledby="importCategoryModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="importCategoryModalLabel">Import Categories</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle mr-1"></i>
+                        Upload a CSV file. Required columns: Category Name, Parent Category (leave blank for top-level), Status (Active/Inactive), Icon (Font Awesome class, e.g., fas fa-tag).
+                    </div>
+                    <form>
+                        <div class="form-group">
+                            <label for="importFile">Select CSV File</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="importFile" accept=".csv">
+                                <label class="custom-file-label" for="importFile">Choose file...</label>
+                            </div>
+                            <small class="form-text text-muted">Max file size: 2MB</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="importOptions">Import Options</label>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="skipHeader" checked>
+                                <label class="custom-control-label" for="skipHeader">First row is header</label>
+                            </div>
+                            <div class="custom-control custom-checkbox mt-2">
+                                <input type="checkbox" class="custom-control-input" id="updateExisting">
+                                <label class="custom-control-label" for="updateExisting">Update existing categories by Name</label>
+                            </div>
+                        </div>
+                        <div class="mt-3 mb-2">
+                            <a href="#" id="downloadTemplate" class="text-primary">
+                                <i class="fas fa-download mr-1"></i> Download template
+                            </a>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-success" type="button" id="startImport">
+                        <i class="fas fa-file-import mr-1"></i> Start Import
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
-</html>
+</html> 
