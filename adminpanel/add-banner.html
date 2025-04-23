@@ -2,13 +2,14 @@
 <html lang="en">
 
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Admin Panel for Bazar-dor - Add Category">
+    <meta name="description" content="Admin Panel for Bazar-dor - Add Banner">
     <meta name="author" content="">
 
-    <title>Bazar-dor Admin - Add Category</title>
+    <title>Bazar-dor Admin - Add Banner</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -19,77 +20,41 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
-    <!-- Select2 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
+    <!-- Add any required libraries like Select2 if needed -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" /> -->
 
-    <!-- Custom styles for icon selection -->
     <style>
-        .icon-selection {
-            margin-bottom: 1rem;
-        }
-        
-        .icon-option {
-            display: inline-flex;
+        .image-preview-container {
+            border: 1px dashed #e3e6f0;
+            border-radius: .35rem;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 50px;
-            height: 50px;
+            min-height: 200px;
             background-color: #f8f9fc;
-            border: 1px solid #e3e6f0;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            margin: 4px;
+            cursor: pointer; /* Indicate it's clickable */
         }
-        
-        .icon-option i {
-            font-size: 1.5rem;
-            color: #4e73df; /* Primary color */
+        .image-preview {
+            text-align: center;
+            color: #858796;
+            width: 100%;
         }
-        
-        .icon-option:hover {
-            background-color: #eaecf4;
+        .image-preview i {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 0.5rem;
         }
-        
-        .icon-option.active {
-            background-color: #4e73df;
-            border-color: #2e59d9;
+        .image-preview img {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: .2rem;
+            margin-top: 1rem;
         }
-        
-        .icon-option.active i {
-            color: #fff;
-        }
-        
-        /* Adjust Select2 to match SB Admin 2 style */
-        .select2-container--default .select2-selection--single {
-            height: calc(1.5em + .75rem + 2px);
-            padding: .375rem .75rem;
-            border: 1px solid #d1d3e2;
-            border-radius: .35rem;
-        }
-        .select2-container--default .select2-selection--single .select2-selection__rendered {
-            line-height: 1.5em;
-            padding-left: 0;
-        }
-        .select2-container--default .select2-selection--single .select2-selection__arrow {
-            height: calc(1.5em + .75rem);
-            right: 0.5rem;
-        }
-        .select2-dropdown {
-            border: 1px solid #d1d3e2;
-            border-radius: .35rem;
-        }
-        .select2-container--default .select2-search--dropdown .select2-search__field {
-            border: 1px solid #d1d3e2;
-            border-radius: .35rem;
-        }
-        .select2-results__option--highlighted[aria-selected] {
-            background-color: #4e73df !important; 
-            color: white !important;
-        }
-
     </style>
+
 </head>
 
 <body id="page-top">
@@ -140,15 +105,15 @@
             </li>
 
             <!-- Nav Item - Categories -->
-            <li class="nav-item active dropdown">
-                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseCategories" aria-expanded="true" aria-controls="collapseCategories">
+            <li class="nav-item dropdown">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategories" aria-expanded="false" aria-controls="collapseCategories">
                     <i class="fas fa-fw fa-tags"></i>
                     <span>Categories</span>
                 </a>
-                <div id="collapseCategories" class="collapse show" aria-labelledby="headingCategories" data-parent="#accordionSidebar">
+                <div id="collapseCategories" class="collapse" aria-labelledby="headingCategories" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="categories.html">All Categories</a>
-                        <a class="collapse-item active" href="add-category.html">Add Category</a>
+                        <a class="collapse-item" href="add-category.html">Add Category</a>
                     </div>
                 </div>
             </li>
@@ -206,14 +171,15 @@
             </li>
 
             <!-- Nav Item - Points Management -->
-            <li class="nav-item">
+            <li class="nav-item dropdown">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePoints" aria-expanded="false" aria-controls="collapsePoints">
                     <i class="fas fa-fw fa-award"></i>
                     <span>Points Management</span>
                 </a>
                 <div id="collapsePoints" class="collapse" aria-labelledby="headingPoints" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="manage-points.html">Manage Points</a>
+                        <a class="collapse-item" href="volunteer-points.html">Manage Points</a>
+                        <a class="collapse-item" href="volunteer-transactions.html">Transactions</a>
                     </div>
                 </div>
             </li>
@@ -235,15 +201,15 @@
             </div>
 
             <!-- Nav Item - Banners -->
-            <li class="nav-item dropdown">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBanners" aria-expanded="false" aria-controls="collapseBanners">
+            <li class="nav-item active dropdown">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseBanners" aria-expanded="true" aria-controls="collapseBanners">
                     <i class="fas fa-fw fa-images"></i>
                     <span>Banners</span>
                 </a>
-                <div id="collapseBanners" class="collapse" aria-labelledby="headingBanners" data-parent="#accordionSidebar">
+                <div id="collapseBanners" class="collapse show" aria-labelledby="headingBanners" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="banners.html">All Banners</a>
-                        <a class="collapse-item" href="add-banner.html">Add Banner</a>
+                        <a class="collapse-item active" href="add-banner.html">Add Banner</a>
                     </div>
                 </div>
             </li>
@@ -267,53 +233,13 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Reports
-            </div>
-
-            <!-- Nav Item - Market Reports -->
-            <li class="nav-item">
-                <a class="nav-link" href="market-reports.html">
-                    <i class="fas fa-fw fa-store-alt"></i>
-                    <span>Market Reports</span>
-                </a>
-            </li>
-
-            <!-- Nav Item - Product Reports -->
-            <li class="nav-item">
-                <a class="nav-link" href="product-reports.html">
-                    <i class="fas fa-fw fa-box"></i>
-                    <span>Product Reports</span>
-                </a>
-            </li>
-
-            <!-- Nav Item - Price Analytics -->
-            <li class="nav-item">
-                <a class="nav-link" href="price-reports.html">
-                    <i class="fas fa-fw fa-chart-line"></i>
-                    <span>Price Analytics</span>
-                </a>
-            </li>
-
-            <!-- Nav Item - User Analytics -->
-            <li class="nav-item">
-                <a class="nav-link" href="user-reports.html">
-                    <i class="fas fa-fw fa-user-chart"></i>
-                    <span>User Analytics</span>
-                </a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Configuration
+                Settings
             </div>
 
             <!-- Nav Item - Zone Management -->
             <li class="nav-item">
                 <a class="nav-link" href="zone-management.html">
-                    <i class="fas fa-fw fa-map-marker-alt"></i>
+                    <i class="fas fa-fw fa-map-marked-alt"></i>
                     <span>Zone Management</span>
                 </a>
             </li>
@@ -368,6 +294,61 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+                        <!-- Nav Item - Alerts -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+                                <!-- Counter - Alerts -->
+                                <span class="badge badge-danger badge-counter">3+</span>
+                            </a>
+                            <!-- Dropdown - Alerts -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header">
+                                    Alerts Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-primary">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 12, 2023</div>
+                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                            </div>
+                        </li>
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -387,6 +368,10 @@
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings
                                 </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Activity Log
+                                </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -405,105 +390,114 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Add New Category</h1>
-                         <a href="categories.html" class="btn btn-sm btn-secondary shadow-sm">
-                             <i class="fas fa-arrow-left fa-sm text-white-50"></i> Back to Categories
-                         </a>
+                        <h1 class="h3 mb-0 text-gray-800">Add New Banner</h1>
+                        <a href="banners.html" class="d-none d-sm-inline-block btn btn-sm btn-outline-secondary shadow-sm"><i
+                                class="fas fa-arrow-left fa-sm text-gray-700"></i> Back to Banners</a>
                     </div>
 
-                    <!-- Add Category Form -->
-                    <form id="addCategoryForm">
+                    <!-- Add Banner Form -->
+                    <form id="addBannerForm">
                         <div class="row">
+                            <!-- Left Column: Banner Details -->
                             <div class="col-lg-8">
-                                <!-- Category Information Card -->
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Category Information</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary">Banner Information</h6>
                                     </div>
                                     <div class="card-body">
-                                        <div class="form-group">
-                                            <label for="categoryName">Name <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="categoryName" placeholder="Enter category name" required>
+                                        <div class="row mb-3">
+                                            <div class="col-md-8">
+                                                <label for="bannerTitle" class="form-label">Banner Title <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="bannerTitle" placeholder="Enter banner title" required>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="bannerPosition" class="form-label">Position <span class="text-danger">*</span></label>
+                                                <input type="number" class="form-control" id="bannerPosition" min="1" value="1" required>
+                                                <small class="text-muted">Order (1 is first)</small>
+                                            </div>
                                         </div>
-                                         <div class="form-group">
-                                            <label for="categorySlug">Slug</label>
-                                            <input type="text" class="form-control" id="categorySlug" placeholder="auto-generated-from-name">
-                                            <small class="form-text text-muted">Leave empty to auto-generate from name.</small>
+
+                                        <div class="mb-3">
+                                            <label for="bannerLink" class="form-label">Link URL</label>
+                                            <input type="url" class="form-control" id="bannerLink" placeholder="https://example.com/offer (optional)">
+                                            <small class="text-muted">Leave blank if no link is needed</small>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="parentCategory">Parent Category</label>
-                                            <select class="form-control" id="parentCategory">
-                                                <option value="" selected>None (Main Category)</option>
-                                                <option value="1">Fruits</option>
-                                                <option value="2">Vegetables</option>
-                                                <option value="3">Dairy</option>
-                                                <option value="4">Bakery</option>
-                                                <option value="5">Meat</option>
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="bannerStartDate" class="form-label">Start Date</label>
+                                                <input type="date" class="form-control" id="bannerStartDate">
+                                                <small class="text-muted">Optional: When the banner becomes active</small>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="bannerEndDate" class="form-label">End Date</label>
+                                                <input type="date" class="form-control" id="bannerEndDate">
+                                                <small class="text-muted">Optional: When the banner expires</small>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="bannerDescription" class="form-label">Description</label>
+                                            <textarea class="form-control" id="bannerDescription" rows="3" placeholder="Internal description (optional)"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Column: Image & Status -->
+                            <div class="col-lg-4">
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Image & Status</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label for="bannerStatus" class="form-label">Status <span class="text-danger">*</span></label>
+                                            <select class="form-control" id="bannerStatus" required>
+                                                <option value="active" selected>Active</option>
+                                                <option value="inactive">Inactive</option>
+                                                <option value="scheduled">Scheduled</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Category Icon Card -->
+                                <!-- Image Upload Card -->
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Category Icon</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary">Banner Image</h6>
                                     </div>
                                     <div class="card-body">
-                                        <label class="form-label mb-2">Select an icon for this category:</label>
-                                        <div class="icon-selection">
-                                            <!-- Font Awesome Icons -->
-                                            <div class="icon-option active" data-icon="fas fa-tag"><i class="fas fa-tag"></i></div>
-                                            <div class="icon-option" data-icon="fas fa-carrot"><i class="fas fa-carrot"></i></div>
-                                            <div class="icon-option" data-icon="fas fa-lemon"><i class="fas fa-lemon"></i></div>
-                                            <div class="icon-option" data-icon="fas fa-seedling"><i class="fas fa-seedling"></i></div>
-                                            <div class="icon-option" data-icon="fas fa-pepper-hot"><i class="fas fa-pepper-hot"></i></div>
-                                            <div class="icon-option" data-icon="fas fa-cheese"><i class="fas fa-cheese"></i></div>
-                                            <div class="icon-option" data-icon="fas fa-bread-slice"><i class="fas fa-bread-slice"></i></div>
-                                            <div class="icon-option" data-icon="fas fa-drumstick-bite"><i class="fas fa-drumstick-bite"></i></div>
-                                            <div class="icon-option" data-icon="fas fa-fish"><i class="fas fa-fish"></i></div>
-                                            <div class="icon-option" data-icon="fas fa-wine-bottle"><i class="fas fa-wine-bottle"></i></div>
-                                            <div class="icon-option" data-icon="fas fa-cookie-bite"><i class="fas fa-cookie-bite"></i></div>
-                                            <div class="icon-option" data-icon="fas fa-box"><i class="fas fa-box"></i></div>
-                                            <div class="icon-option" data-icon="fas fa-shopping-basket"><i class="fas fa-shopping-basket"></i></div>
-                                            <div class="icon-option" data-icon="fas fa-store"><i class="fas fa-store"></i></div>
-                                        </div>
-                                        <input type="hidden" id="selectedIcon" name="selectedIcon" value="fas fa-tag">
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="col-lg-4">
-                                <!-- Status Card -->
-                                <div class="card shadow mb-4">
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Status</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="form-group mb-0">
-                                            <div class="custom-control custom-switch">
-                                                <input type="checkbox" class="custom-control-input" id="categoryStatusSwitch" checked>
-                                                <label class="custom-control-label" for="categoryStatusSwitch">Active</label>
+                                        <div class="mb-3">
+                                            <label for="bannerImage" class="form-label">Upload Image <span class="text-danger">*</span></label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="bannerImage" accept="image/*" required>
+                                                <label class="custom-file-label" for="bannerImage" id="bannerImageLabel">Choose file...</label>
                                             </div>
-                                            <small class="form-text text-muted">Inactive categories will not be visible.</small>
+                                            <small class="text-muted">Recommended: 1200x400px, Max 2MB</small>
+                                        </div>
+
+                                        <div class="image-preview-container mt-3" id="imagePreviewContainer">
+                                            <div class="image-preview" id="imagePreview">
+                                                <i class="fas fa-image"></i>
+                                                <span>Click to Upload or Preview</span>
+                                                <img id="imgPreviewElem" src="#" alt="Image Preview" class="d-none"/>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Action Buttons -->
-                         <div class="row">
-                            <div class="col-lg-12 d-flex justify-content-end mb-4">
-                                <a href="categories.html" class="btn btn-secondary mr-2">
-                                    <i class="fas fa-times"></i> Cancel
-                                </a>
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-save"></i> Save Category
-                                </button>
+                        <div class="row mb-4">
+                            <div class="col-12 d-flex justify-content-end">
+                                <a href="banners.html" class="btn btn-secondary mr-2">Cancel</a>
+                                <button type="submit" class="btn btn-primary" id="saveBannerBtn">Save Banner</button>
                             </div>
                         </div>
                     </form>
+
                 </div>
                 <!-- /.container-fluid -->
 
@@ -514,7 +508,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Bazar-dor 2023</span>
+                        <span>Copyright &copy; Bazar Dor 2024</span>
                     </div>
                 </div>
             </footer>
@@ -561,125 +555,81 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Select2 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    
-    <!-- SweetAlert2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Page level plugins -->
+    <!-- <script src="vendor/chart.js/Chart.min.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
 
     <!-- Page level custom scripts -->
     <script>
         $(document).ready(function() {
-            // Initialize Select2 for Parent Category
-            $('#parentCategory').select2({
-                 placeholder: "Select a parent category",
-                 allowClear: true
-            });
+            // Image Preview Logic
+            $('#bannerImage').on('change', function() {
+                const file = this.files[0];
+                const reader = new FileReader();
+                const $previewElement = $('#imgPreviewElem');
+                const $previewPlaceholder = $('#imagePreview').find('i, span');
+                const $label = $('#bannerImageLabel');
 
-            // Generate Slug from Name
-            const categoryName = document.getElementById('categoryName');
-            const categorySlug = document.getElementById('categorySlug');
-
-            function generateSlug(text) {
-                return text.toString().toLowerCase()
-                    .replace(/\s+/g, '-')           // Replace spaces with -
-                    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-                    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-                    .replace(/^-+/, '')             // Trim - from start of text
-                    .replace(/-+$/, '');            // Trim - from end of text
-            }
-
-            categoryName.addEventListener('input', function() {
-                 // Only auto-update slug if the slug field is empty or matches the generated slug
-                 const currentSlug = categorySlug.value.trim();
-                 const generatedSlug = generateSlug(this.value.trim());
-                 if (!currentSlug || currentSlug === generateSlug(categoryName.value.trim().slice(0, -1))) {
-                     categorySlug.value = generatedSlug;
-                 }
-             });
-             
-             // Status Switch Label Update
-             $('#categoryStatusSwitch').on('change', function() {
-                 const label = $(this).next('.custom-control-label');
-                 if ($(this).is(':checked')) {
-                     label.text('Active');
-                 } else {
-                     label.text('Inactive');
-                 }
-             });
-
-            // Handle icon selection
-            const iconOptions = document.querySelectorAll('.icon-option');
-            const selectedIconInput = document.getElementById('selectedIcon');
-
-            iconOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    // Remove active class from all options
-                    iconOptions.forEach(opt => opt.classList.remove('active'));
-                    // Add active class to clicked option
-                    this.classList.add('active');
-                    // Get the icon class from data attribute
-                    const iconClass = this.dataset.icon;
-                    // Update the hidden input
-                    selectedIconInput.value = iconClass;
-                });
-            });
-
-            // Form Submission
-            $('#addCategoryForm').on('submit', function(e) {
-                e.preventDefault();
-                
-                const categoryNameValue = $('#categoryName').val().trim();
-
-                if (!categoryNameValue) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Validation Error',
-                        text: 'Please enter a category name.'
-                    });
-                    $('#categoryName').focus();
-                    return; 
+                if (file) {
+                    reader.onload = function(e) {
+                        $previewElement.attr('src', e.target.result).removeClass('d-none');
+                        $previewPlaceholder.addClass('d-none');
+                    }
+                    reader.readAsDataURL(file);
+                    $label.text(file.name); // Update label text
+                } else {
+                    $previewElement.attr('src', '#').addClass('d-none');
+                    $previewPlaceholder.removeClass('d-none');
+                    $label.text('Choose file...');
                 }
+            });
 
-                // Get form data (in a real app, use FormData)
-                const formData = {
-                    name: categoryNameValue,
-                    slug: $('#categorySlug').val().trim(),
-                    parent: $('#parentCategory').val(),
-                    status: $('#categoryStatusSwitch').is(':checked') ? 'active' : 'inactive',
-                    icon: $('#selectedIcon').val()
-                };
+            // Trigger file input when preview container is clicked
+            $('#imagePreviewContainer').on('click', function() {
+                $('#bannerImage').click();
+            });
 
-                console.log('Form Data:', formData); // For debugging
+            // Form Submission (Placeholder)
+            $('#addBannerForm').on('submit', function(e) {
+                e.preventDefault(); // Prevent default form submission
+                const $button = $('#saveBannerBtn');
+                const originalHtml = $button.html();
 
-                // Show saving message and redirect (using SweetAlert)
-                 Swal.fire({
-                    title: 'Saving...',
-                    text: 'Please wait while the category is being saved.',
-                    icon: 'info',
-                    allowOutsideClick: false,
-                    didOpen: () => {
-                        Swal.showLoading()
+                // Basic Validation (Example)
+                let isValid = true;
+                $('#addBannerForm [required]').each(function() {
+                    if ($(this).val() === '' || $(this).val() === null) {
+                        isValid = false;
+                        const label = $(this).closest('.mb-3, .col-md-4, .col-md-8').find('label').text() || $(this).attr('id');
+                        alert(`Please fill in the ${label.replace('*','').trim()} field.`); // Replace with better feedback like SweetAlert
+                        $(this).focus();
+                        return false; // Break loop
                     }
                 });
 
-                 // Simulate server request delay
-                 setTimeout(() => {
-                     Swal.fire({
-                         icon: 'success',
-                         title: 'Category Saved',
-                         text: `Category "${formData.name}" has been saved successfully!`,
-                         timer: 2000,
-                         showConfirmButton: false
-                     }).then(() => {
-                         // Redirect to categories page after success
-                         window.location.href = 'categories.html';
-                     });
-                 }, 1500); // Adjust delay as needed
+                if (!isValid) return;
+
+                $button.prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving...');
+
+                // Simulate AJAX save
+                console.log('Simulating banner save...');
+                // Collect form data here (use FormData for file uploads)
+                const formData = new FormData(this);
+                // Log data for now
+                for (var pair of formData.entries()) {
+                    console.log(pair[0]+ ': '+ pair[1]);
+                }
+
+                setTimeout(() => {
+                    $button.prop('disabled', false).html(originalHtml);
+                    alert('Banner added successfully! (Simulation)'); // Replace with success message/redirect
+                    // window.location.href = 'banners.html'; // Optional redirect
+                }, 1500);
             });
         });
     </script>
 
 </body>
 
-</html> 
+</html>

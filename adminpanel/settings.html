@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Admin Panel for Bazar-dor - Settings">
+    <meta name="author" content="">
+
+    <title>Bazar-dor Admin - Settings</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <style>
+        .settings-nav {
+            display: flex;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #e3e6f0;
+        }
+        
+        .settings-nav-item {
+            padding: 0.75rem 1rem;
+            margin-right: 0.25rem;
+            background: none;
+            border: none;
+            color: #6e707e;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        
+        .settings-nav-item:hover {
+            color: #4e73df;
+            border-bottom-color: #4e73df;
+        }
+        
+        .settings-nav-item.active {
+            color: #4e73df;
+            font-weight: 700;
+            border-bottom-color: #4e73df;
+        }
+        
+        .settings-section {
+            display: none;
+        }
+        
+        .settings-section.active {
+            display: block;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: #4e73df;
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+        
+        .toggle-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #ededed;
+        }
+        
+        .toggle-item:last-child {
+            border-bottom: none;
+        }
+        
+        .toggle-label {
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .toggle-label i {
+            margin-right: 0.5rem;
+            color: #4e73df;
+        }
+    </style>
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon">
+                    <i class="fas fa-store"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Bazar-dor Admin</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Main
+            </div>
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Catalog
+            </div>
+
+            <!-- Nav Item - Units -->
+            <li class="nav-item">
+                <a class="nav-link" href="units.html">
+                    <i class="fas fa-fw fa-ruler-combined"></i>
+                    <span>Units</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Categories -->
+            <li class="nav-item dropdown">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategories" aria-expanded="false" aria-controls="collapseCategories">
+                    <i class="fas fa-fw fa-tags"></i>
+                    <span>Categories</span>
+                </a>
+                <div id="collapseCategories" class="collapse" aria-labelledby="headingCategories" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="categories.html">All Categories</a>
+                        <a class="collapse-item" href="add-category.html">Add Category</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Products -->
+            <li class="nav-item dropdown">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducts" aria-expanded="false" aria-controls="collapseProducts">
+                    <i class="fas fa-fw fa-box-open"></i>
+                    <span>Products</span>
+                </a>
+                <div id="collapseProducts" class="collapse" aria-labelledby="headingProducts" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="products.html">All Products</a>
+                        <a class="collapse-item" href="add-product.html">Add Product</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Markets -->
+            <li class="nav-item dropdown">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMarkets" aria-expanded="false" aria-controls="collapseMarkets">
+                    <i class="fas fa-fw fa-store"></i>
+                    <span>Markets</span>
+                </a>
+                <div id="collapseMarkets" class="collapse" aria-labelledby="headingMarkets" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="markets.html">All Markets</a>
+                        <a class="collapse-item" href="add-market.html">Add Market</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Users Management
+            </div>
+
+            <!-- Nav Item - Users -->
+            <li class="nav-item">
+                <a class="nav-link" href="users.html">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Users</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Contributions -->
+            <li class="nav-item">
+                <a class="nav-link" href="contributions.html">
+                    <i class="fas fa-fw fa-chart-line"></i>
+                    <span>Contributions</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Points Management -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePoints" aria-expanded="false" aria-controls="collapsePoints">
+                    <i class="fas fa-fw fa-award"></i>
+                    <span>Points Management</span>
+                </a>
+                <div id="collapsePoints" class="collapse" aria-labelledby="headingPoints" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="manage-points.html">Manage Points</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Redemptions -->
+            <li class="nav-item">
+                <a class="nav-link" href="volunteer-redemptions.html">
+                    <i class="fas fa-fw fa-gift"></i>
+                    <span>Redemptions</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Marketing
+            </div>
+
+            <!-- Nav Item - Banners -->
+            <li class="nav-item dropdown">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBanners" aria-expanded="false" aria-controls="collapseBanners">
+                    <i class="fas fa-fw fa-images"></i>
+                    <span>Banners</span>
+                </a>
+                <div id="collapseBanners" class="collapse" aria-labelledby="headingBanners" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="banners.html">All Banners</a>
+                        <a class="collapse-item" href="add-banner.html">Add Banner</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Featured Banners -->
+            <li class="nav-item dropdown">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFeaturedBanners" aria-expanded="false" aria-controls="collapseFeaturedBanners">
+                    <i class="fas fa-fw fa-star"></i>
+                    <span>Featured Banners</span>
+                </a>
+                <div id="collapseFeaturedBanners" class="collapse" aria-labelledby="headingFeaturedBanners" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="featured-banners.html">All Featured Banners</a>
+                        <a class="collapse-item" href="add-featured-banner.html">Add Featured Banner</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Reports
+            </div>
+
+            <!-- Nav Item - Market Reports -->
+            <li class="nav-item">
+                <a class="nav-link" href="market-reports.html">
+                    <i class="fas fa-fw fa-store-alt"></i>
+                    <span>Market Reports</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Product Reports -->
+            <li class="nav-item">
+                <a class="nav-link" href="product-reports.html">
+                    <i class="fas fa-fw fa-box"></i>
+                    <span>Product Reports</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Price Analytics -->
+            <li class="nav-item">
+                <a class="nav-link" href="price-reports.html">
+                    <i class="fas fa-fw fa-chart-line"></i>
+                    <span>Price Analytics</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - User Analytics -->
+            <li class="nav-item">
+                <a class="nav-link" href="user-reports.html">
+                    <i class="fas fa-fw fa-user-chart"></i>
+                    <span>User Analytics</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Configuration
+            </div>
+
+            <!-- Nav Item - Zone Management -->
+            <li class="nav-item">
+                <a class="nav-link" href="zone-management.html">
+                    <i class="fas fa-fw fa-map-marker-alt"></i>
+                    <span>Zone Management</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Settings -->
+            <li class="nav-item active">
+                <a class="nav-link" href="settings.html">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin User</span>
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Settings</h1>
+                    <p class="mb-4">Configure your system settings for Bazar-dor application.</p>
+
+                    <!-- Settings Navigation -->
+                    <div class="settings-nav">
+                        <button class="settings-nav-item active" data-target="general">
+                            <i class="fas fa-cog mr-1"></i> General
+                        </button>
+                        <button class="settings-nav-item" data-target="appearance">
+                            <i class="fas fa-palette mr-1"></i> Appearance
+                        </button>
+                        <button class="settings-nav-item" data-target="business">
+                            <i class="fas fa-chart-line mr-1"></i> Business Rules
+                        </button>
+                        <button class="settings-nav-item" data-target="notifications">
+                            <i class="fas fa-bell mr-1"></i> Notifications
+                        </button>
+                        <button class="settings-nav-item" data-target="mail">
+                            <i class="fas fa-envelope mr-1"></i> Mail
+                        </button>
+                        <button class="settings-nav-item" data-target="integrations">
+                            <i class="fas fa-plug mr-1"></i> Integrations
+                        </button>
+                        <button class="settings-nav-item" data-target="security">
+                            <i class="fas fa-shield-alt mr-1"></i> Security
+                        </button>
+                        <button class="settings-nav-item" data-target="backup">
+                            <i class="fas fa-database mr-1"></i> Backup & Maintenance
+                        </button>
+                    </div>
+
+                    <!-- Settings Container -->
+                    <div id="settingsContainer">
+                        <!-- General Settings Section -->
+                        <div class="settings-section active" id="general-settings">
+                            <!-- Company Information Card -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Company Information</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="companyName">Company Name</label>
+                                                <input type="text" class="form-control" id="companyName" value="Bazar-dor">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="companyEmail">Company Email</label>
+                                                <input type="email" class="form-control" id="companyEmail" value="contact@bazar-dor.com">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="companyPhone">Phone Number</label>
+                                                <input type="tel" class="form-control" id="companyPhone" value="+880 1234-567890">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="companyAddress">Address</label>
+                                                <input type="text" class="form-control" id="companyAddress" value="123 Market Street">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-4">
+                                                <label for="companyCity">City</label>
+                                                <input type="text" class="form-control" id="companyCity" value="Dhaka">
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="companyState">State/Division</label>
+                                                <select class="form-control" id="companyState">
+                                                    <option selected>Dhaka</option>
+                                                    <option>Chittagong</option>
+                                                    <option>Khulna</option>
+                                                    <option>Rajshahi</option>
+                                                    <option>Barisal</option>
+                                                    <option>Sylhet</option>
+                                                    <option>Rangpur</option>
+                                                    <option>Mymensingh</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="companyCountry">Country</label>
+                                                <select class="form-control" id="companyCountry">
+                                                    <option selected>Bangladesh</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- System Settings Card -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">System Settings</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="timezone">Timezone</label>
+                                                <select class="form-control" id="timezone">
+                                                    <option selected>Asia/Dhaka (GMT+6:00)</option>
+                                                    <option>UTC</option>
+                                                    <option>Asia/Kolkata</option>
+                                                    <option>Asia/Singapore</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="dateFormat">Date Format</label>
+                                                <select class="form-control" id="dateFormat">
+                                                    <option selected>DD/MM/YYYY</option>
+                                                    <option>MM/DD/YYYY</option>
+                                                    <option>YYYY-MM-DD</option>
+                                                    <option>DD.MM.YYYY</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="currency">Default Currency</label>
+                                                <select class="form-control" id="currency">
+                                                    <option selected>BDT (৳)</option>
+                                                    <option>USD ($)</option>
+                                                    <option>EUR (€)</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="language">Default Language</label>
+                                                <select class="form-control" id="language">
+                                                    <option selected>Bengali</option>
+                                                    <option>English</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- General Toggle Settings -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">General Options</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-user-check"></i> Auto-approve new user registrations
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="autoApproveUsers" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-store-alt"></i> Auto-approve market submissions
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="autoApproveMarkets">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-box"></i> Auto-approve product submissions
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="autoApproveProducts">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-globe"></i> Enable multi-language support
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="enableMultiLanguage" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-map-marked-alt"></i> Enable geolocation services
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="enableGeolocation" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Business Rules Section -->
+                        <div class="settings-section" id="business-settings">
+                            <!-- Market Settings Card -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Market Settings</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="marketUpdateFrequency">Market Update Frequency</label>
+                                                <select class="form-control" id="marketUpdateFrequency">
+                                                    <option selected>Weekly</option>
+                                                    <option>Bi-weekly</option>
+                                                    <option>Monthly</option>
+                                                </select>
+                                                <small class="form-text text-muted">How often markets should be updated with new information</small>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="marketVerificationProcess">Market Verification Process</label>
+                                                <select class="form-control" id="marketVerificationProcess">
+                                                    <option selected>Admin Approval</option>
+                                                    <option>Community Voting</option>
+                                                    <option>Hybrid (Admin + Community)</option>
+                                                </select>
+                                                <small class="form-text text-muted">How new market submissions are verified</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="minimumMarketRating">Minimum Market Rating</label>
+                                                <select class="form-control" id="minimumMarketRating">
+                                                    <option>1 Star</option>
+                                                    <option>2 Stars</option>
+                                                    <option selected>3 Stars</option>
+                                                    <option>4 Stars</option>
+                                                </select>
+                                                <small class="form-text text-muted">Minimum rating for a market to be featured</small>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="marketVisibilityRange">Market Visibility Range (km)</label>
+                                                <input type="number" class="form-control" id="marketVisibilityRange" value="10">
+                                                <small class="form-text text-muted">Default radius for market search results</small>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Product Settings Card -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Product Settings</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="priceUpdateFrequency">Price Update Frequency</label>
+                                                <select class="form-control" id="priceUpdateFrequency">
+                                                    <option>Hourly</option>
+                                                    <option selected>Daily</option>
+                                                    <option>Weekly</option>
+                                                </select>
+                                                <small class="form-text text-muted">How often product prices should be updated</small>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="priceChangeThreshold">Price Change Notification Threshold (%)</label>
+                                                <input type="number" class="form-control" id="priceChangeThreshold" value="10">
+                                                <small class="form-text text-muted">Percentage change to trigger price alerts</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="productImageRequirement">Product Image Requirement</label>
+                                                <select class="form-control" id="productImageRequirement">
+                                                    <option>Not Required</option>
+                                                    <option>Optional</option>
+                                                    <option selected>Required</option>
+                                                </select>
+                                                <small class="form-text text-muted">Whether product images are required</small>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="defaultSortOrder">Default Sort Order for Products</label>
+                                                <select class="form-control" id="defaultSortOrder">
+                                                    <option selected>Lowest Price</option>
+                                                    <option>Highest Price</option>
+                                                    <option>Alphabetical</option>
+                                                    <option>Popularity</option>
+                                                </select>
+                                                <small class="form-text text-muted">Default sorting method for product lists</small>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Volunteer and Points Settings Card -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Volunteer & Points Settings</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="pointsForPriceUpdate">Points for Price Update</label>
+                                                <input type="number" class="form-control" id="pointsForPriceUpdate" value="5">
+                                                <small class="form-text text-muted">Points awarded for updating a product price</small>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="pointsForMarketUpdate">Points for Market Update</label>
+                                                <input type="number" class="form-control" id="pointsForMarketUpdate" value="10">
+                                                <small class="form-text text-muted">Points awarded for updating market information</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="pointsForNewProduct">Points for New Product</label>
+                                                <input type="number" class="form-control" id="pointsForNewProduct" value="15">
+                                                <small class="form-text text-muted">Points awarded for adding a new product</small>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="pointsForNewMarket">Points for New Market</label>
+                                                <input type="number" class="form-control" id="pointsForNewMarket" value="25">
+                                                <small class="form-text text-muted">Points awarded for adding a new market</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="volunteerApprovalThreshold">Volunteer Approval Threshold</label>
+                                                <input type="number" class="form-control" id="volunteerApprovalThreshold" value="100">
+                                                <small class="form-text text-muted">Points needed to become an approved volunteer</small>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="pointsExpiryPeriod">Points Expiry Period (days)</label>
+                                                <input type="number" class="form-control" id="pointsExpiryPeriod" value="365">
+                                                <small class="form-text text-muted">Number of days before points expire (0 = never)</small>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Business Rules Toggle Settings -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Business Rules Options</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-money-bill-wave"></i> Show price comparison between markets
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="enablePriceComparison" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-clock"></i> Enable price history tracking
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="enablePriceHistory" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-chart-line"></i> Enable price trend indicators
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="enablePriceTrends" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-star"></i> Enable market ratings
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="enableMarketRatings" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-award"></i> Enable volunteer points system
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="enableVolunteerPoints" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Notifications Settings Section -->
+                        <div class="settings-section" id="notifications-settings">
+                            <!-- User Notifications Card -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">User Notifications</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-envelope"></i> Email notifications
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="enableEmailNotifications" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-bell"></i> Push notifications
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="enablePushNotifications" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-sms"></i> SMS notifications
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="enableSmsNotifications">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-tags"></i> Price drop alerts
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="enablePriceDropAlerts" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-store-alt"></i> New market alerts
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="enableNewMarketAlerts" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Admin Notifications Card -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Admin Notifications</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-user-plus"></i> New user registrations
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="notifyNewUserRegistrations" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-store-alt"></i> New market submissions
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="notifyNewMarketSubmissions" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-box"></i> New product submissions
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="notifyNewProductSubmissions" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-flag"></i> User reports and flags
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="notifyUserReportsFlags" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-exclamation-triangle"></i> System errors and warnings
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="notifySystemErrorsWarnings" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Notification Schedules Card -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Notification Schedules</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="digestFrequency">Notification Digest Frequency</label>
+                                                <select class="form-control" id="digestFrequency">
+                                                    <option>Real-time</option>
+                                                    <option selected>Daily</option>
+                                                    <option>Weekly</option>
+                                                </select>
+                                                <small class="form-text text-muted">How often to send notification digests</small>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="quietHoursStart">Quiet Hours Start</label>
+                                                <input type="time" class="form-control" id="quietHoursStart" value="22:00">
+                                                <small class="form-text text-muted">Start time for quiet hours (no notifications)</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="quietHoursEnd">Quiet Hours End</label>
+                                                <input type="time" class="form-control" id="quietHoursEnd" value="07:00">
+                                                <small class="form-text text-muted">End time for quiet hours</small>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="digestDeliveryTime">Digest Delivery Time</label>
+                                                <input type="time" class="form-control" id="digestDeliveryTime" value="09:00">
+                                                <small class="form-text text-muted">Time to deliver notification digests</small>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Security Settings Section -->
+                        <div class="settings-section" id="security-settings">
+                            <!-- Authentication Settings Card -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Authentication Settings</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-shield-alt"></i> Two-factor authentication
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="enableTwoFactorAuth" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fab fa-google"></i> Google authentication
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="enableGoogleAuth" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fab fa-facebook"></i> Facebook authentication
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="enableFacebookAuth" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-envelope"></i> Email verification required
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="requireEmailVerification" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-mobile-alt"></i> Phone verification required
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="requirePhoneVerification">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Password Policy Card -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Password Policy</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="minPasswordLength">Minimum Password Length</label>
+                                                <input type="number" class="form-control" id="minPasswordLength" value="8">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="passwordExpiration">Password Expiration (days)</label>
+                                                <input type="number" class="form-control" id="passwordExpiration" value="90">
+                                                <small class="form-text text-muted">0 = never expire</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="passwordHistory">Password History Count</label>
+                                                <input type="number" class="form-control" id="passwordHistory" value="5">
+                                                <small class="form-text text-muted">Number of previous passwords that cannot be reused</small>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="maxLoginAttempts">Maximum Login Attempts</label>
+                                                <input type="number" class="form-control" id="maxLoginAttempts" value="5">
+                                            </div>
+                                        </div>
+                                        <div class="toggle-item">
+                                            <label class="toggle-label">
+                                                <i class="fas fa-check-circle"></i> Require uppercase letters
+                                            </label>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="requireUppercase" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="toggle-item">
+                                            <label class="toggle-label">
+                                                <i class="fas fa-check-circle"></i> Require numbers
+                                            </label>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="requireNumbers" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="toggle-item">
+                                            <label class="toggle-label">
+                                                <i class="fas fa-check-circle"></i> Require special characters
+                                            </label>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="requireSpecialChars" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Session Settings Card -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Session Settings</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="sessionTimeout">Session Timeout (minutes)</label>
+                                                <input type="number" class="form-control" id="sessionTimeout" value="30">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="rememberMeDuration">Remember Me Duration (days)</label>
+                                                <input type="number" class="form-control" id="rememberMeDuration" value="30">
+                                            </div>
+                                        </div>
+                                        <div class="toggle-item">
+                                            <label class="toggle-label">
+                                                <i class="fas fa-history"></i> Force re-login after password change
+                                            </label>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="forceReloginAfterPasswordChange" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="toggle-item">
+                                            <label class="toggle-label">
+                                                <i class="fas fa-lock"></i> Enforce session IP consistency
+                                            </label>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="enforceSessionIpConsistency" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Appearance Settings Section -->
+                        <div class="settings-section" id="appearance-settings">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Theme Settings</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="primaryColor">Primary Color</label>
+                                                <input type="color" class="form-control" id="primaryColor" value="#4e73df">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="secondaryColor">Secondary Color</label>
+                                                <input type="color" class="form-control" id="secondaryColor" value="#1cc88a">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="themeMode">Theme Mode</label>
+                                                <select class="form-control" id="themeMode">
+                                                    <option selected>Light</option>
+                                                    <option>Dark</option>
+                                                    <option>System Default</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="fontFamily">Font Family</label>
+                                                <select class="form-control" id="fontFamily">
+                                                    <option selected>Nunito</option>
+                                                    <option>Roboto</option>
+                                                    <option>Open Sans</option>
+                                                    <option>Poppins</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Layout & Content</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-mobile-alt"></i> Enable responsive design
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="enableResponsiveDesign" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-image"></i> Show product images in listings
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="showProductImages" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-map-marked-alt"></i> Show maps on market pages
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="showMapsOnMarketPages" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-arrow-up"></i> Show back to top button
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="showBackToTop" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <label class="toggle-label">
+                                            <i class="fas fa-cookie"></i> Show cookie consent banner
+                                        </label>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="showCookieConsent" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mail Settings Section -->
+                        <div class="settings-section" id="mail-settings">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Mail Configuration</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="mailDriver">Mail Driver</label>
+                                                <select class="form-control" id="mailDriver">
+                                                    <option selected>SMTP</option>
+                                                    <option>Sendmail</option>
+                                                    <option>Mailgun</option>
+                                                    <option>Amazon SES</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="mailHost">Mail Host</label>
+                                                <input type="text" class="form-control" id="mailHost" value="smtp.mailtrap.io">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="mailPort">Mail Port</label>
+                                                <input type="text" class="form-control" id="mailPort" value="2525">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="mailEncryption">Mail Encryption</label>
+                                                <select class="form-control" id="mailEncryption">
+                                                    <option selected>TLS</option>
+                                                    <option>SSL</option>
+                                                    <option>None</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="mailUsername">Mail Username</label>
+                                                <input type="text" class="form-control" id="mailUsername" value="">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="mailPassword">Mail Password</label>
+                                                <input type="password" class="form-control" id="mailPassword" value="">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="mailFromAddress">From Address</label>
+                                                <input type="email" class="form-control" id="mailFromAddress" value="no-reply@bazar-dor.com">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="mailFromName">From Name</label>
+                                                <input type="text" class="form-control" id="mailFromName" value="Bazar-dor">
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-primary" id="testMailConnection">
+                                            <i class="fas fa-paper-plane mr-1"></i> Test Mail Connection
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Email Templates</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="list-group">
+                                        <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                            Welcome Email
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                            Password Reset
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                            Email Verification
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                            Price Alert
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                            New Market Notification
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Integrations Settings Section -->
+                        <div class="settings-section" id="integrations-settings">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Google Integration</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="googleApiKey">Google Maps API Key</label>
+                                            <input type="text" class="form-control" id="googleApiKey" value="">
+                                            <small class="form-text text-muted">Required for maps and geolocation services</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="googleClientId">Google Client ID</label>
+                                            <input type="text" class="form-control" id="googleClientId" value="">
+                                            <small class="form-text text-muted">Required for Google Sign-In</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="googleClientSecret">Google Client Secret</label>
+                                            <input type="password" class="form-control" id="googleClientSecret" value="">
+                                            <small class="form-text text-muted">Required for Google Sign-In</small>
+                                        </div>
+                                        <div class="toggle-item">
+                                            <label class="toggle-label">
+                                                <i class="fab fa-google"></i> Enable Google Login
+                                            </label>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="enableGoogleLogin" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="toggle-item">
+                                            <label class="toggle-label">
+                                                <i class="fas fa-map-marked-alt"></i> Enable Google Maps
+                                            </label>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="enableGoogleMaps" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Social Media Integration</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="facebookAppId">Facebook App ID</label>
+                                            <input type="text" class="form-control" id="facebookAppId" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="facebookAppSecret">Facebook App Secret</label>
+                                            <input type="password" class="form-control" id="facebookAppSecret" value="">
+                                        </div>
+                                        <div class="toggle-item">
+                                            <label class="toggle-label">
+                                                <i class="fab fa-facebook"></i> Enable Facebook Login
+                                            </label>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="enableFacebookLogin" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="toggle-item">
+                                            <label class="toggle-label">
+                                                <i class="fas fa-share-alt"></i> Enable Social Sharing
+                                            </label>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="enableSocialSharing" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Payment Gateway Integration</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-info-circle mr-1"></i>
+                                        Configure payment gateways for volunteer point redemptions and premium features.
+                                    </div>
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="stripePublishableKey">Stripe Publishable Key</label>
+                                            <input type="text" class="form-control" id="stripePublishableKey" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="stripeSecretKey">Stripe Secret Key</label>
+                                            <input type="password" class="form-control" id="stripeSecretKey" value="">
+                                        </div>
+                                        <div class="toggle-item">
+                                            <label class="toggle-label">
+                                                <i class="fab fa-stripe"></i> Enable Stripe Payments
+                                            </label>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="enableStripePayments" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Backup & Maintenance Settings Section -->
+                        <div class="settings-section" id="backup-settings">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Backup Settings</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="backupFrequency">Backup Frequency</label>
+                                                <select class="form-control" id="backupFrequency">
+                                                    <option>Hourly</option>
+                                                    <option selected>Daily</option>
+                                                    <option>Weekly</option>
+                                                    <option>Monthly</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="backupRetention">Backup Retention (days)</label>
+                                                <input type="number" class="form-control" id="backupRetention" value="30">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="backupLocation">Backup Storage Location</label>
+                                            <select class="form-control" id="backupLocation">
+                                                <option selected>Local Storage</option>
+                                                <option>Amazon S3</option>
+                                                <option>Google Cloud Storage</option>
+                                                <option>Dropbox</option>
+                                            </select>
+                                        </div>
+                                        <div class="toggle-item">
+                                            <label class="toggle-label">
+                                                <i class="fas fa-database"></i> Include database in backup
+                                            </label>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="includeDatabase" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="toggle-item">
+                                            <label class="toggle-label">
+                                                <i class="fas fa-images"></i> Include uploaded files in backup
+                                            </label>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="includeUploads" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="toggle-item">
+                                            <label class="toggle-label">
+                                                <i class="fas fa-lock"></i> Encrypt backups
+                                            </label>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="encryptBackups" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="mt-3">
+                                            <button type="button" class="btn btn-primary">
+                                                <i class="fas fa-download mr-1"></i> Backup Now
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Maintenance</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="alert alert-warning">
+                                        <i class="fas fa-exclamation-triangle mr-1"></i>
+                                        Use maintenance options with caution. These operations can affect system performance.
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <div class="card border-left-primary">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Cache Management</h5>
+                                                    <p class="card-text">Clear application cache to refresh system data</p>
+                                                    <button type="button" class="btn btn-primary btn-sm">
+                                                        <i class="fas fa-broom mr-1"></i> Clear Cache
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card border-left-success">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Database Optimization</h5>
+                                                    <p class="card-text">Run database optimization to improve performance</p>
+                                                    <button type="button" class="btn btn-success btn-sm">
+                                                        <i class="fas fa-database mr-1"></i> Optimize Database
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="card border-left-info">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Log Files</h5>
+                                                    <p class="card-text">Manage and clear system log files</p>
+                                                    <button type="button" class="btn btn-info btn-sm">
+                                                        <i class="fas fa-file-alt mr-1"></i> View Logs
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card border-left-danger">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Maintenance Mode</h5>
+                                                    <p class="card-text">Put site in maintenance mode for updates</p>
+                                                    <button type="button" class="btn btn-danger btn-sm">
+                                                        <i class="fas fa-tools mr-1"></i> Enable Maintenance Mode
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Save Settings Button -->
+                    <div class="row mb-4">
+                        <div class="col-lg-12">
+                            <button type="button" class="btn btn-success btn-lg" id="saveSettings">
+                                <i class="fas fa-save mr-1"></i> Save All Settings
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-lg ml-2" id="resetSettings">
+                                <i class="fas fa-undo mr-1"></i> Reset to Defaults
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Bazar-dor 2024</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Add Custom JavaScript -->
+    <script>
+        $(document).ready(function() {
+            // Settings navigation
+            $('.settings-nav-item').click(function() {
+                // Remove active class from all tabs and sections
+                $('.settings-nav-item').removeClass('active');
+                $('.settings-section').removeClass('active');
+                
+                // Add active class to clicked tab
+                $(this).addClass('active');
+                
+                // Get target section and activate it
+                var targetSection = $(this).data('target');
+                $('#' + targetSection + '-settings').addClass('active');
+            });
+            
+            // Toggle switch functionality
+            $('.toggle-switch input[type="checkbox"]').change(function() {
+                var id = $(this).attr('id');
+                var isChecked = $(this).prop('checked');
+                console.log('Setting ' + id + ' changed to ' + isChecked);
+                // In a real app, you'd save this to the server
+            });
+            
+            // Test mail connection
+            $('#testMailConnection').click(function() {
+                alert('Testing mail connection...\nIn a real app, this would send a test email.');
+                // In a real app, you'd make an AJAX call to test the connection
+            });
+            
+            // Save settings
+            $('#saveSettings').click(function() {
+                alert('Settings saved successfully!');
+                // In a real app, you'd collect all form data and save it to the server
+            });
+            
+            // Reset settings
+            $('#resetSettings').click(function() {
+                if (confirm('Are you sure you want to reset all settings to their default values?')) {
+                    alert('Settings have been reset to default values.');
+                    // In a real app, you'd make an AJAX call to reset settings and reload the page
+                }
+            });
+        });
+    </script>
+</body>
+
+</html> 
