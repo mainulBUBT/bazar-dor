@@ -157,6 +157,105 @@
                  </a>
              </li>
 
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Reports
+            </div>
+
+            <!-- Nav Item - Market Reports -->
+            <li class="nav-item">
+                <a class="nav-link" href="market-reports.html">
+                    <i class="fas fa-fw fa-store-alt"></i>
+                    <span>Market Reports</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Product Reports -->
+            <li class="nav-item">
+                <a class="nav-link" href="product-reports.html">
+                    <i class="fas fa-fw fa-box"></i>
+                    <span>Product Reports</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Price Analytics -->
+            <li class="nav-item">
+                <a class="nav-link" href="price-reports.html">
+                    <i class="fas fa-fw fa-chart-line"></i>
+                    <span>Price Analytics</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - User Analytics -->
+            <li class="nav-item">
+                <a class="nav-link" href="user-reports.html">
+                    <i class="fas fa-fw fa-user-chart"></i>
+                    <span>User Analytics</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Marketing
+            </div>
+
+            <!-- Nav Item - Banners -->
+            <li class="nav-item dropdown">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBanners" aria-expanded="false" aria-controls="collapseBanners">
+                    <i class="fas fa-fw fa-images"></i>
+                    <span>Banners</span>
+                </a>
+                <div id="collapseBanners" class="collapse" aria-labelledby="headingBanners" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="banners.html">All Banners</a>
+                        <a class="collapse-item" href="add-banner.html">Add Banner</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Featured Banners -->
+            <li class="nav-item dropdown">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFeaturedBanners" aria-expanded="false" aria-controls="collapseFeaturedBanners">
+                    <i class="fas fa-fw fa-star"></i>
+                    <span>Featured Banners</span>
+                </a>
+                <div id="collapseFeaturedBanners" class="collapse" aria-labelledby="headingFeaturedBanners" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="featured-banners.html">All Featured Banners</a>
+                        <a class="collapse-item" href="add-featured-banner.html">Add Featured Banner</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Configuration
+            </div>
+
+            <!-- Nav Item - Zone Management -->
+            <li class="nav-item">
+                <a class="nav-link" href="zone-management.html">
+                    <i class="fas fa-fw fa-map-marker-alt"></i>
+                    <span>Zone Management</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Settings -->
+            <li class="nav-item">
+                <a class="nav-link" href="settings.html">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -234,74 +333,243 @@
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">Points Management</h1>
 
-                    <!-- Award Points Form -->
+                    <!-- Points Overview Cards -->
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Award Points to User</h6>
-                                </div>
+                        <!-- Total Points in System -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
-                                    <form id="awardPointsForm">
-                                        <div class="form-group">
-                                            <label for="userIdSelect">Select User</label>
-                                            <select class="form-control" id="userIdSelect" required>
-                                                <option value="" disabled selected>Choose a user...</option>
-                                                <!-- Populate with users dynamically -->
-                                                <option value="1">John Doe (@johndoe)</option>
-                                                <option value="2">Jane Smith (@janesmith)</option>
-                                                <option value="3">Mike Johnson (@mikej)</option>
-                                            </select>
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Total Points in System</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">1,250,000</div>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Action</label>
-                                            <div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="pointAction" id="addPointsRadio" value="add" checked>
-                                                    <label class="form-check-label" for="addPointsRadio">Add Points</label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="pointAction" id="removePointsRadio" value="remove">
-                                                    <label class="form-check-label" for="removePointsRadio">Remove Points</label>
-                                                </div>
-                                            </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-coins fa-2x text-gray-300"></i>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="pointsAmount">Points Amount</label>
-                                            <input type="number" class="form-control" id="pointsAmount" placeholder="Enter positive points value" min="0" step="1" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="reasonText">Reason</label>
-                                            <textarea class="form-control" id="reasonText" rows="3" placeholder="Reason for awarding/deducting points (optional)"></textarea>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Submit Points Change</button>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                         <div class="col-lg-6">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">User Points Overview</h6>
-                                </div>
+
+                        <!-- Active Users with Points -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
-                                    <!-- Placeholder for user points summary -->
-                                    <p>Select a user from the dropdown to see their current points balance.</p>
-                                    <h4 id="userPointsDisplay" class="text-center font-weight-bold mt-4" style="display: none;">
-                                        Current Points: <span id="currentUserPoints"></span>
-                                    </h4>
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Active Users with Points</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">215</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-users fa-2x text-gray-300"></i>
+                                        </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Points Awarded Today -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                Points Awarded Today</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">+2,500</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-award fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Points Redeemed Today -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                Points Redeemed Today</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">-1,200</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-exchange-alt fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Point Transactions Table -->
+                    <!-- Points Management Section -->
+                    <div class="row">
+                        <!-- User Points Management -->
+                        <div class="col-xl-8 col-lg-7">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Points Management</h6>
+                                    <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                            aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">Actions:</div>
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#bulkPointsModal">
+                                                <i class="fas fa-users fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Bulk Points Assignment
+                                            </a>
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#pointsSettingsModal">
+                                                <i class="fas fa-cog fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Points Settings
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <form id="awardPointsForm">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="userIdSelect">Select User</label>
+                                                    <select class="form-control" id="userIdSelect" required>
+                                                        <option value="" disabled selected>Choose a user...</option>
+                                                        <option value="1">John Doe (@johndoe)</option>
+                                                        <option value="2">Jane Smith (@janesmith)</option>
+                                                        <option value="3">Mike Johnson (@mikej)</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Action Type</label>
+                                                    <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                                                        <label class="btn btn-outline-success active">
+                                                            <input type="radio" name="pointAction" value="add" checked> Award Points
+                                                        </label>
+                                                        <label class="btn btn-outline-danger">
+                                                            <input type="radio" name="pointAction" value="remove"> Deduct Points
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="pointsAmount">Points Amount</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fas fa-coins"></i></span>
+                                                        </div>
+                                                        <input type="number" class="form-control" id="pointsAmount" 
+                                                            placeholder="Enter points value" min="0" step="1" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="reasonSelect">Reason Category</label>
+                                                    <select class="form-control" id="reasonSelect" required>
+                                                        <option value="" disabled selected>Select reason...</option>
+                                                        <option value="contribution">Contribution Reward</option>
+                                                        <option value="bonus">Bonus Points</option>
+                                                        <option value="correction">Point Correction</option>
+                                                        <option value="penalty">Penalty</option>
+                                                        <option value="other">Other</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="reasonText">Detailed Reason</label>
+                                            <textarea class="form-control" id="reasonText" rows="2" 
+                                                placeholder="Provide detailed reason for points modification"></textarea>
+                                        </div>
+                                        <div class="text-right">
+                                            <button type="reset" class="btn btn-secondary">Reset</button>
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fas fa-check"></i> Submit Points Change
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- User Points Overview -->
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">User Points Summary</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div id="noUserSelected" class="text-center py-4">
+                                        <i class="fas fa-user-circle fa-3x text-gray-300 mb-3"></i>
+                                        <p class="mb-0 text-gray-600">Select a user to view points summary</p>
+                                    </div>
+                                    <div id="userSummary" style="display: none;">
+                                        <div class="text-center mb-4">
+                                            <img class="img-profile rounded-circle mb-2" src="img/undraw_profile.svg" style="width: 80px;">
+                                            <h5 class="mb-0 font-weight-bold" id="selectedUserName">User Name</h5>
+                                            <p class="text-gray-600 small" id="selectedUserHandle">@username</p>
+                                        </div>
+                                        <div class="points-stats">
+                                            <div class="row mb-2">
+                                                <div class="col-7 text-gray-800">Current Balance:</div>
+                                                <div class="col-5 text-right font-weight-bold text-primary" id="currentUserPoints">0</div>
+                                            </div>
+                                            <div class="row mb-2">
+                                                <div class="col-7 text-gray-800">Total Earned:</div>
+                                                <div class="col-5 text-right text-success" id="totalEarnedPoints">0</div>
+                                            </div>
+                                            <div class="row mb-2">
+                                                <div class="col-7 text-gray-800">Total Redeemed:</div>
+                                                <div class="col-5 text-right text-danger" id="totalRedeemedPoints">0</div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="text-center">
+                                            <a href="#" class="btn btn-sm btn-primary mr-2">
+                                                <i class="fas fa-history fa-sm"></i> View History
+                                            </a>
+                                            <a href="#" class="btn btn-sm btn-info">
+                                                <i class="fas fa-file-export fa-sm"></i> Export Data
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Transaction History -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Point Transaction History</h6>
-                             <a href="#" class="btn btn-sm btn-success">
-                                <i class="fas fa-file-export fa-sm"></i> Export History
-                            </a>
+                            <h6 class="m-0 font-weight-bold text-primary">Points Transaction History</h6>
+                            <div class="dropdown no-arrow">
+                                <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="exportDropdown"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-download fa-sm"></i> Export
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                    aria-labelledby="exportDropdown">
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-file-csv fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        CSV
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-file-excel fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Excel
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-file-pdf fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        PDF
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -309,41 +577,150 @@
                                     <thead>
                                         <tr>
                                             <th>Transaction ID</th>
+                                            <th>Date & Time</th>
                                             <th>User</th>
+                                            <th>Type</th>
                                             <th>Points Change</th>
                                             <th>Reason</th>
                                             <th>Admin</th>
-                                            <th>Date</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <!-- Populate with transaction data dynamically -->
                                         <tr>
                                             <td>T001</td>
+                                            <td>2024-02-21 10:00</td>
                                             <td>John Doe (@johndoe)</td>
-                                            <td><span class="badge badge-success">+50</span></td>
+                                            <td><span class="badge badge-success">Award</span></td>
+                                            <td>+50</td>
                                             <td>Contribution Approval (#12345)</td>
                                             <td>Admin User</td>
-                                            <td>2024-02-21 10:00</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-info" title="View Details">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </td>
                                         </tr>
-                                         <tr>
+                                        <tr>
                                             <td>T002</td>
-                                            <td>Jane Smith (@janesmith)</td>
-                                            <td><span class="badge badge-success">+25</span></td>
-                                            <td>Manual Award - Contest Winner</td>
-                                            <td>Admin User</td>
                                             <td>2024-02-21 11:30</td>
+                                            <td>Jane Smith (@janesmith)</td>
+                                            <td><span class="badge badge-success">Award</span></td>
+                                            <td>+25</td>
+                                            <td>Contest Winner Bonus</td>
+                                            <td>Admin User</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-info" title="View Details">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>T003</td>
-                                            <td>Mike Johnson (@mikej)</td>
-                                            <td><span class="badge badge-danger">-10</span></td>
-                                            <td>Point Deduction - Policy Violation</td>
-                                            <td>Admin User</td>
                                             <td>2024-02-20 15:00</td>
+                                            <td>Mike Johnson (@mikej)</td>
+                                            <td><span class="badge badge-danger">Deduction</span></td>
+                                            <td>-10</td>
+                                            <td>Policy Violation</td>
+                                            <td>Admin User</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-info" title="View Details">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bulk Points Assignment Modal -->
+                    <div class="modal fade" id="bulkPointsModal" tabindex="-1" role="dialog" aria-labelledby="bulkPointsModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="bulkPointsModalLabel">Bulk Points Assignment</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="bulkPointsForm">
+                                        <div class="form-group">
+                                            <label>Select Users</label>
+                                            <select class="form-control" multiple>
+                                                <option>John Doe (@johndoe)</option>
+                                                <option>Jane Smith (@janesmith)</option>
+                                                <option>Mike Johnson (@mikej)</option>
+                                            </select>
+                                            <small class="form-text text-muted">Hold Ctrl/Cmd to select multiple users</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Points Action</label>
+                                            <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                                                <label class="btn btn-outline-success active">
+                                                    <input type="radio" name="bulkPointAction" value="add" checked> Award Points
+                                                </label>
+                                                <label class="btn btn-outline-danger">
+                                                    <input type="radio" name="bulkPointAction" value="remove"> Deduct Points
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Points Amount</label>
+                                            <input type="number" class="form-control" min="0" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Reason</label>
+                                            <textarea class="form-control" rows="3"></textarea>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                    <button class="btn btn-primary" type="button">Apply Points</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Points Settings Modal -->
+                    <div class="modal fade" id="pointsSettingsModal" tabindex="-1" role="dialog" aria-labelledby="pointsSettingsModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="pointsSettingsModalLabel">Points Settings</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="pointsSettingsForm">
+                                        <div class="form-group">
+                                            <label>Default Points for New Users</label>
+                                            <input type="number" class="form-control" value="0">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Maximum Points per Transaction</label>
+                                            <input type="number" class="form-control" value="1000">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Minimum Points for Redemption</label>
+                                            <input type="number" class="form-control" value="100">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="allowNegativePoints">
+                                                <label class="custom-control-label" for="allowNegativePoints">Allow Negative Points Balance</label>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                    <button class="btn btn-primary" type="button">Save Changes</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -412,44 +789,98 @@
     <!-- Page specific script -->
     <script>
         $(document).ready(function() {
-            // Initialize DataTable
+            // Initialize DataTable with advanced features
             $('#transactionsTable').DataTable({
-                order: [[5, 'desc']] // Sort by date column descending
+                order: [[1, 'desc']], // Sort by date column descending
+                pageLength: 10,
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'collection',
+                        text: '<i class="fas fa-filter"></i> Filter',
+                        buttons: [
+                            'columnsToggle'
+                        ]
+                    }
+                ]
             });
 
-            // Handle form submission (placeholder)
-            $('#awardPointsForm').submit(function(event) {
-                event.preventDefault();
-                const action = $('input[name="pointAction"]:checked').val();
-                const points = $('#pointsAmount').val();
-                const user = $('#userIdSelect option:selected').text();
-                const reason = $('#reasonText').val();
-
-                // In a real app, send data via AJAX, considering the 'action'
-                alert(`Action: ${action}, Points: ${points}, User: ${user}, Reason: ${reason}\nPoints change submitted successfully! (Placeholder)`);
-
-                // Clear form or update table
-                // Consider resetting the form fields here
-                // $('#awardPointsForm')[0].reset();
-            });
-
-             // Placeholder for fetching/displaying user points
+            // Handle user selection change
             $('#userIdSelect').change(function() {
                 const selectedUserId = $(this).val();
                 if (selectedUserId) {
-                    // Simulate fetching points based on user ID
-                    let points;
-                     switch(selectedUserId) {
-                        case '1': points = 150; break;
-                        case '2': points = 275; break;
-                        case '3': points = 80; break;
-                        default: points = 'N/A';
-                    }
-                    $('#currentUserPoints').text(points);
-                    $('#userPointsDisplay').show();
+                    // Simulate fetching user data
+                    const userData = {
+                        '1': { name: 'John Doe', handle: '@johndoe', points: 150, earned: 200, redeemed: 50 },
+                        '2': { name: 'Jane Smith', handle: '@janesmith', points: 275, earned: 300, redeemed: 25 },
+                        '3': { name: 'Mike Johnson', handle: '@mikej', points: 80, earned: 100, redeemed: 20 }
+                    }[selectedUserId];
+
+                    // Update user summary
+                    $('#noUserSelected').hide();
+                    $('#userSummary').show();
+                    $('#selectedUserName').text(userData.name);
+                    $('#selectedUserHandle').text(userData.handle);
+                    $('#currentUserPoints').text(userData.points);
+                    $('#totalEarnedPoints').text(userData.earned);
+                    $('#totalRedeemedPoints').text(userData.redeemed);
                 } else {
-                     $('#userPointsDisplay').hide();
+                    $('#userSummary').hide();
+                    $('#noUserSelected').show();
                 }
+            });
+
+            // Handle points action radio change
+            $('input[name="pointAction"]').change(function() {
+                const isDeduction = $(this).val() === 'remove';
+                $('#pointsAmount').attr('placeholder', 
+                    isDeduction ? 'Enter points to deduct' : 'Enter points to award');
+                $('#reasonSelect').val(''); // Reset reason on action change
+            });
+
+            // Handle form submission
+            $('#awardPointsForm').submit(function(event) {
+                event.preventDefault();
+                const formData = {
+                    action: $('input[name="pointAction"]:checked').val(),
+                    points: $('#pointsAmount').val(),
+                    user: $('#userIdSelect option:selected').text(),
+                    reasonCategory: $('#reasonSelect').val(),
+                    reasonDetail: $('#reasonText').val()
+                };
+
+                // Validate form
+                if (!formData.reasonCategory) {
+                    alert('Please select a reason category');
+                    return;
+                }
+
+                // Simulate API call
+                console.log('Submitting points change:', formData);
+                
+                // Show success message
+                const actionText = formData.action === 'add' ? 'awarded to' : 'deducted from';
+                alert(`Successfully ${actionText} ${formData.user}: ${formData.points} points`);
+
+                // Reset form
+                this.reset();
+                $('#userSummary').hide();
+                $('#noUserSelected').show();
+            });
+
+            // Initialize tooltips
+            $('[data-toggle="tooltip"]').tooltip();
+
+            // Handle bulk points form
+            $('#bulkPointsForm').submit(function(event) {
+                event.preventDefault();
+                // Add bulk points submission logic here
+            });
+
+            // Handle settings form
+            $('#pointsSettingsForm').submit(function(event) {
+                event.preventDefault();
+                // Add settings submission logic here
             });
         });
     </script>
