@@ -15,6 +15,8 @@
         rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <!-- Custom styles for scrollable sidebar -->
+    <link href="css/custom.css" rel="stylesheet">
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
@@ -141,7 +143,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Points Options:</h6>
                         <a class="collapse-item" href="manage-points.html">Manage Points</a>
-                        <!-- <a class="collapse-item" href="volunteer-transactions.html">Transactions</a> -->
+                        <a class="collapse-item" href="volunteer-redemptions.html">Redemptions</a>
                     </div>
                 </div>
             </li>
@@ -178,7 +180,7 @@
             </li>
 
             <!-- Nav Item - Featured Banners Collapse Menu -->
-            <li class="nav-item active">
+            <li class="nav-item active dropdown">
                 <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseFeaturedBanners"
                     aria-expanded="true" aria-controls="collapseFeaturedBanners">
                     <i class="fas fa-fw fa-star"></i>
@@ -426,8 +428,19 @@
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary">Manage Featured Banners</h6>
+                            <div class="d-flex">
+                                <a href="add-featured-banner.html" class="btn btn-sm btn-primary mr-2">
+                                    <i class="fas fa-plus fa-sm"></i> Add New Featured Banner
+                                </a>
+                                <a href="#" class="btn btn-sm btn-success mr-2">
+                                    <i class="fas fa-download fa-sm"></i> Export
+                                </a>
+                                <a href="#" class="btn btn-sm btn-info">
+                                    <i class="fas fa-filter fa-sm"></i> Filter
+                                </a>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
