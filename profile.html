@@ -32,7 +32,8 @@
         </div>
     </header>
 
-    <div class="bd-profile-header">
+    <!-- Mobile-only profile header -->
+    <div class="bd-profile-header d-block d-lg-none">
         <div class="container">
             <div class="text-center">
                 <div class="position-relative d-inline-block mb-3">
@@ -60,156 +61,201 @@
     </div>
 
     <div class="container">
-        <!-- Stats Cards -->
-        <div class="row g-3 bd-stats-container">
-            <div class="col-3">
-                <div class="bd-stat-card text-center h-100">
-                    <div class="bd-stat-icon bg-danger-light">
-                        <i class="bi bi-heart-fill text-danger"></i>
+        <div class="row">
+            <!-- Left Column - Profile Stats -->
+            <div class="col-12 col-lg-4 mb-4">
+                <!-- Desktop-only profile information -->
+                <div class="d-none d-lg-block mb-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <div class="position-relative d-inline-block mb-3">
+                                    <img src="https://api.dicebear.com/6.x/avataaars/svg?seed=John"
+                                        class="bd-profile-avatar rounded-circle" alt="Profile Picture">
+                                </div>
+                                <h4 class="fw-bold mb-1 text-center w-100">John Doe</h4>
+                                <div class="d-flex justify-content-center mb-2">
+                                    <span class="badge bg-success rounded-pill d-inline-flex align-items-center" style="font-size: 0.65rem; padding: 0.2rem 0.5rem;">
+                                        <i class="bi bi-patch-check-fill me-1"></i>Volunteer
+                                    </span>
+                                </div>
+                                <div class="d-flex flex-column align-items-center justify-content-center">
+                                    <div class="d-flex align-items-center mb-1">
+                                        <i class="bi bi-envelope-fill text-primary me-1 small"></i>
+                                        <p class="mb-0 text-muted">johndoe@example.com</p>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-telephone-fill text-primary me-1 small"></i>
+                                        <p class="mb-0 text-muted">+880 1234567890</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bd-stat-counter">
-                        <h3 class="mb-0 fw-bold">12</h3>
-                        <div class="bd-stat-label">Favorites</div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="row g-3 bd-stats-container">
+                    <div class="col-3 col-lg-6">
+                        <div class="bd-stat-card text-center h-100">
+                            <div class="bd-stat-icon bg-danger-light">
+                                <i class="bi bi-heart-fill text-danger"></i>
+                            </div>
+                            <div class="bd-stat-counter">
+                                <h3 class="mb-0 fw-bold">12</h3>
+                                <div class="bd-stat-label">Favorites</div>
+                            </div>
+                        </div>
                     </div>
+                    <div class="col-3 col-lg-6">
+                        <div class="bd-stat-card text-center h-100">
+                            <div class="bd-stat-icon bg-primary-light">
+                                <i class="bi bi-shop text-primary"></i>
+                            </div>
+                            <div class="bd-stat-counter">
+                                <h3 class="mb-0 fw-bold">5</h3>
+                                <div class="bd-stat-label">Listings</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 col-lg-6">
+                        <div class="bd-stat-card text-center h-100">
+                            <div class="bd-stat-icon bg-warning-light">
+                                <i class="bi bi-star-fill text-warning"></i>
+                            </div>
+                            <div class="bd-stat-counter">
+                                <h3 class="mb-0 fw-bold">3</h3>
+                                <div class="bd-stat-label">Reviews</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 col-lg-6">
+                        <div class="bd-stat-card text-center h-100">
+                            <div class="bd-stat-icon bg-success-light">
+                                <i class="bi bi-award-fill text-success"></i>
+                            </div>
+                            <div class="bd-stat-counter">
+                                <h3 class="mb-0 fw-bold">28</h3>
+                                <div class="bd-stat-label">Points</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sign Out Button for desktop -->
+                <div class="text-center bd-sign-out-container mb-4 d-none d-lg-block mt-4">
+                    <button class="btn btn-outline-danger rounded-pill bd-sign-out-btn" id="logout-btn-desktop" data-bs-toggle="modal" data-bs-target="#logoutConfirmModal">
+                        <i class="bi bi-box-arrow-right me-2"></i>Sign Out
+                    </button>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="bd-stat-card text-center h-100">
-                    <div class="bd-stat-icon bg-primary-light">
-                        <i class="bi bi-shop text-primary"></i>
-                    </div>
-                    <div class="bd-stat-counter">
-                        <h3 class="mb-0 fw-bold">5</h3>
-                        <div class="bd-stat-label">Listings</div>
-                    </div>
+
+            <!-- Right Column - Menu Items -->
+            <div class="col-12 col-lg-8">
+                <!-- Menu Section -->
+                <div class="bd-menu-section d-lg-block mt-lg-4">
+                    <a href="personal-info.html" class="text-decoration-none text-body">
+                        <div class="bd-menu-item d-flex align-items-center">
+                            <div class="bd-menu-icon text-primary me-3">
+                                <i class="bi bi-person-fill"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0 fw-medium">Personal Information</h6>
+                                <small class="text-muted">Update your personal details</small>
+                            </div>
+                            <i class="bi bi-chevron-right text-muted"></i>
+                        </div>
+                    </a>
+
+                    <a href="volunteer-points.html" class="text-decoration-none text-body">
+                        <div class="bd-menu-item d-flex align-items-center">
+                            <div class="bd-menu-icon text-success me-3">
+                                <i class="bi bi-award-fill"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0 fw-medium">Volunteer Points</h6>
+                                <small class="text-muted">View your contributions and rewards</small>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <span class="badge bg-success rounded-pill me-2">28 points</span>
+                                <i class="bi bi-chevron-right text-muted"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="saved-locations.html" class="text-decoration-none text-body">
+                        <div class="bd-menu-item d-flex align-items-center">
+                            <div class="bd-menu-icon text-primary me-3">
+                                <i class="bi bi-geo-alt-fill"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0 fw-medium">Saved Locations</h6>
+                                <small class="text-muted">Manage your addresses</small>
+                            </div>
+                            <i class="bi bi-chevron-right text-muted"></i>
+                        </div>
+                    </a>
+
+                    <a href="contributions.html" class="text-decoration-none text-body">
+                        <div class="bd-menu-item d-flex align-items-center">
+                            <div class="bd-menu-icon text-primary me-3">
+                                <i class="bi bi-grid-fill"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0 fw-medium">Contributions</h6>
+                                <small class="text-muted">Your products and markets</small>
+                            </div>
+                            <i class="bi bi-chevron-right text-muted"></i>
+                        </div>
+                    </a>
+
+                    <a href="notifications.html" class="text-decoration-none text-body">
+                        <div class="bd-menu-item d-flex align-items-center">
+                            <div class="bd-menu-icon text-primary me-3">
+                                <i class="bi bi-bell-fill"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0 fw-medium">Notifications</h6>
+                                <small class="text-muted">Manage your alerts</small>
+                            </div>
+                            <i class="bi bi-chevron-right text-muted"></i>
+                        </div>
+                    </a>
+
+                    <a href="refer-friends.html" class="text-decoration-none text-body">
+                        <div class="bd-menu-item d-flex align-items-center">
+                            <div class="bd-menu-icon text-primary me-3">
+                                <i class="bi bi-people-fill"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0 fw-medium">Invite Friends</h6>
+                                <small class="text-muted">Earn points by inviting friends</small>
+                            </div>
+                            <i class="bi bi-chevron-right text-muted"></i>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="text-decoration-none text-body">
+                        <div class="bd-menu-item d-flex align-items-center">
+                            <div class="bd-menu-icon bg-danger-light text-danger me-3">
+                                <i class="bi bi-shield-lock-fill"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0 fw-medium">Privacy & Security</h6>
+                                <small class="text-muted">Manage app permissions</small>
+                            </div>
+                            <i class="bi bi-chevron-right text-muted"></i>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Sign Out Button for mobile -->
+                <div class="text-center bd-sign-out-container mb-5 d-lg-none">
+                    <button class="btn btn-outline-danger rounded-pill bd-sign-out-btn" id="logout-btn" data-bs-toggle="modal" data-bs-target="#logoutConfirmModal">
+                        <i class="bi bi-box-arrow-right me-2"></i>Sign Out
+                    </button>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="bd-stat-card text-center h-100">
-                    <div class="bd-stat-icon bg-warning-light">
-                        <i class="bi bi-star-fill text-warning"></i>
-                    </div>
-                    <div class="bd-stat-counter">
-                        <h3 class="mb-0 fw-bold">3</h3>
-                        <div class="bd-stat-label">Reviews</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="bd-stat-card text-center h-100">
-                    <div class="bd-stat-icon bg-success-light">
-                        <i class="bi bi-award-fill text-success"></i>
-                    </div>
-                    <div class="bd-stat-counter">
-                        <h3 class="mb-0 fw-bold">28</h3>
-                        <div class="bd-stat-label">Points</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Menu Section -->
-        <div class="bd-menu-section">
-            <a href="personal-info.html" class="text-decoration-none text-body">
-                <div class="bd-menu-item d-flex align-items-center">
-                    <div class="bd-menu-icon text-primary me-3">
-                        <i class="bi bi-person-fill"></i>
-                    </div>
-                    <div class="flex-grow-1">
-                        <h6 class="mb-0 fw-medium">Personal Information</h6>
-                        <small class="text-muted">Update your personal details</small>
-                    </div>
-                    <i class="bi bi-chevron-right text-muted"></i>
-                </div>
-            </a>
-
-            <a href="volunteer-points.html" class="text-decoration-none text-body">
-                <div class="bd-menu-item d-flex align-items-center">
-                    <div class="bd-menu-icon text-success me-3">
-                        <i class="bi bi-award-fill"></i>
-                    </div>
-                    <div class="flex-grow-1">
-                        <h6 class="mb-0 fw-medium">Volunteer Points</h6>
-                        <small class="text-muted">View your contributions and rewards</small>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <span class="badge bg-success rounded-pill me-2">28 points</span>
-                        <i class="bi bi-chevron-right text-muted"></i>
-                    </div>
-                </div>
-            </a>
-
-            <a href="saved-locations.html" class="text-decoration-none text-body">
-                <div class="bd-menu-item d-flex align-items-center">
-                    <div class="bd-menu-icon text-primary me-3">
-                        <i class="bi bi-geo-alt-fill"></i>
-                    </div>
-                    <div class="flex-grow-1">
-                        <h6 class="mb-0 fw-medium">Saved Locations</h6>
-                        <small class="text-muted">Manage your addresses</small>
-                    </div>
-                    <i class="bi bi-chevron-right text-muted"></i>
-                </div>
-            </a>
-
-            <a href="contributions.html" class="text-decoration-none text-body">
-                <div class="bd-menu-item d-flex align-items-center">
-                    <div class="bd-menu-icon text-primary me-3">
-                        <i class="bi bi-grid-fill"></i>
-                    </div>
-                    <div class="flex-grow-1">
-                        <h6 class="mb-0 fw-medium">Contributions</h6>
-                        <small class="text-muted">Your products and markets</small>
-                    </div>
-                    <i class="bi bi-chevron-right text-muted"></i>
-                </div>
-            </a>
-
-            <a href="notifications.html" class="text-decoration-none text-body">
-                <div class="bd-menu-item d-flex align-items-center">
-                    <div class="bd-menu-icon text-primary me-3">
-                        <i class="bi bi-bell-fill"></i>
-                    </div>
-                    <div class="flex-grow-1">
-                        <h6 class="mb-0 fw-medium">Notifications</h6>
-                        <small class="text-muted">Manage your alerts</small>
-                    </div>
-                    <i class="bi bi-chevron-right text-muted"></i>
-                </div>
-            </a>
-
-            <a href="refer-friends.html" class="text-decoration-none text-body">
-                <div class="bd-menu-item d-flex align-items-center">
-                    <div class="bd-menu-icon text-primary me-3">
-                        <i class="bi bi-people-fill"></i>
-                    </div>
-                    <div class="flex-grow-1">
-                        <h6 class="mb-0 fw-medium">Invite Friends</h6>
-                        <small class="text-muted">Earn points by inviting friends</small>
-                    </div>
-                    <i class="bi bi-chevron-right text-muted"></i>
-                </div>
-            </a>
-            
-            <a href="#" class="text-decoration-none text-body">
-                <div class="bd-menu-item d-flex align-items-center">
-                    <div class="bd-menu-icon bg-danger-light text-danger me-3">
-                        <i class="bi bi-shield-lock-fill"></i>
-                    </div>
-                    <div class="flex-grow-1">
-                        <h6 class="mb-0 fw-medium">Privacy & Security</h6>
-                        <small class="text-muted">Manage app permissions</small>
-                    </div>
-                    <i class="bi bi-chevron-right text-muted"></i>
-                </div>
-            </a>
-        </div>
-
-        <!-- Sign Out Button -->
-        <div class="text-center bd-sign-out-container mb-5">
-            <button class="btn btn-outline-danger rounded-pill bd-sign-out-btn" id="logout-btn" data-bs-toggle="modal" data-bs-target="#logoutConfirmModal">
-                <i class="bi bi-box-arrow-right me-2"></i>Sign Out
-            </button>
         </div>
     </div>
 
@@ -246,23 +292,23 @@
 
     <!-- Logout Confirmation Modal -->
     <div class="modal fade" id="logoutConfirmModal" tabindex="-1" aria-labelledby="logoutConfirmModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
             <div class="modal-content bd-modal-content">
                 <div class="modal-body p-0">
-                    <div class="text-end p-2">
+                    <div class="text-end p-1">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="text-center px-4 pb-4">
-                        <div class="mb-4">
-                            <div class="bd-icon-wrapper danger-light">
+                    <div class="text-center px-3 pb-3">
+                        <div class="mb-3">
+                            <div class="bd-icon-wrapper danger-light" style="width: 55px; height: 55px;">
                                 <i class="bi bi-box-arrow-right text-danger"></i>
                             </div>
                         </div>
-                        <h5 class="mb-3 fw-bold">Sign Out</h5>
-                        <p class="text-muted mb-4">Are you sure you want to sign out of your account?</p>
+                        <h5 class="mb-2 fw-bold">Sign Out</h5>
+                        <p class="text-muted mb-3 small">Are you sure you want to sign out of your account?</p>
                         
                         <div class="d-grid gap-2">
-                            <button type="button" class="btn btn-danger py-3 rounded-pill fw-bold" id="confirm-logout-btn" onclick="window.location.href='login.html';">
+                            <button type="button" class="btn btn-danger py-2 rounded-pill fw-bold" id="confirm-logout-btn" onclick="window.location.href='login.html';">
                                 Sign Out
                             </button>
                             <button type="button" class="btn btn-outline-secondary py-2 rounded-pill" data-bs-dismiss="modal">

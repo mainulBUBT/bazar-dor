@@ -33,219 +33,232 @@
     </header>
 
     <div class="container mt-3">
-        <!-- Points Summary Card -->
-        <div class="card border-0 shadow-sm mb-3">
-            <div class="card-body">
-                <div class="d-flex align-items-center justify-content-between mb-3">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0">
-                            <div class="bd-stat-icon bg-success-light">
-                                <i class="bi bi-award-fill text-success fs-4"></i>
+        <div class="row">
+            <!-- Points Summary Card - will take half width on medium screens and up -->
+            <div class="col-12 col-md-6 mb-3">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <div class="bd-stat-icon bg-success-light">
+                                        <i class="bi bi-award-fill text-success fs-4"></i>
+                                    </div>
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-0 fw-medium">Total Points</h6>
+                                    <h3 class="mb-0 fw-bold text-success">28</h3>
+                                </div>
+                            </div>
+                            <div class="tier-info position-relative">
+                                <button class="btn btn-sm p-0 text-primary" type="button" data-bs-toggle="modal" data-bs-target="#tierInfoModal">
+                                    <i class="bi bi-info-circle-fill fs-5"></i>
+                                </button>
                             </div>
                         </div>
-                        <div class="ms-3">
-                            <h6 class="mb-0 fw-medium">Total Points</h6>
-                            <h3 class="mb-0 fw-bold text-success">28</h3>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="d-flex justify-content-between mt-2 mb-3">
+                            <small class="text-muted">Current Tier: Silver</small>
+                            <small class="text-muted">12 points to Gold</small>
+                        </div>
+                        
+                        <div class="d-grid mt-3">
+                            <button class="btn btn-success rounded-pill fw-medium" data-bs-toggle="modal" data-bs-target="#redeemModal">
+                                <i class="bi bi-gift me-2"></i>Redeem Points
+                            </button>
                         </div>
                     </div>
-                    <div class="tier-info position-relative">
-                        <button class="btn btn-sm p-0 text-primary" type="button" data-bs-toggle="modal" data-bs-target="#tierInfoModal">
-                            <i class="bi bi-info-circle-fill fs-5"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="progress" style="height: 8px;">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <div class="d-flex justify-content-between mt-2 mb-3">
-                    <small class="text-muted">Current Tier: Silver</small>
-                    <small class="text-muted">12 points to Gold</small>
-                </div>
-                
-                <div class="d-grid mt-3">
-                    <button class="btn btn-success rounded-pill fw-medium" data-bs-toggle="modal" data-bs-target="#redeemModal">
-                        <i class="bi bi-gift me-2"></i>Redeem Points
-                    </button>
                 </div>
             </div>
-        </div>
 
-        <!-- Points Earning Rules Card -->
-        <div class="card border-0 shadow-sm mb-3">
-            <div class="card-body">
-                <h6 class="fw-bold mb-3">How to Earn Points</h6>
-                <div class="point-rule d-flex align-items-center mb-2">
-                    <div class="point-icon me-3 volunteer-primary-light">
-                        <i class="bi bi-shop text-primary"></i>
-                    </div>
-                    <div class="flex-grow-1">
-                        <p class="mb-0 fw-medium">Adding a new market</p>
-                    </div>
-                    <div class="point-value volunteer-success-light text-success fw-bold px-2 py-1 rounded">
-                        +5 pts
-                    </div>
-                </div>
-                <div class="point-rule d-flex align-items-center mb-2">
-                    <div class="point-icon me-3 volunteer-primary-light">
-                        <i class="bi bi-box-seam text-primary"></i>
-                    </div>
-                    <div class="flex-grow-1">
-                        <p class="mb-0 fw-medium">Adding a product</p>
-                    </div>
-                    <div class="point-value volunteer-success-light text-success fw-bold px-2 py-1 rounded">
-                        +4 pts
-                    </div>
-                </div>
-                <div class="point-rule d-flex align-items-center mb-2">
-                    <div class="point-icon me-3 volunteer-primary-light">
-                        <i class="bi bi-star text-primary"></i>
-                    </div>
-                    <div class="flex-grow-1">
-                        <p class="mb-0 fw-medium">High-quality review</p>
-                    </div>
-                    <div class="point-value volunteer-success-light text-success fw-bold px-2 py-1 rounded">
-                        +2 pts
-                    </div>
-                </div>
-                <div class="point-rule d-flex align-items-center mb-2">
-                    <div class="point-icon me-3 volunteer-primary-light">
-                        <i class="bi bi-flag text-primary"></i>
-                    </div>
-                    <div class="flex-grow-1">
-                        <p class="mb-0 fw-medium">Approved report</p>
-                    </div>
-                    <div class="point-value volunteer-success-light text-success fw-bold px-2 py-1 rounded">
-                        +3 pts
-                    </div>
-                </div>
-                <div class="point-rule d-flex align-items-center">
-                    <div class="point-icon me-3 volunteer-primary-light">
-                        <i class="bi bi-people text-primary"></i>
-                    </div>
-                    <div class="flex-grow-1">
-                        <p class="mb-0 fw-medium">Referring a friend</p>
-                    </div>
-                    <div class="point-value volunteer-success-light text-success fw-bold px-2 py-1 rounded">
-                        +2 pts
+            <!-- Points Earning Rules Card - will take half width on medium screens and up -->
+            <div class="col-12 col-md-6 mb-3">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body">
+                        <h6 class="fw-bold mb-3">How to Earn Points</h6>
+                        <div class="point-rule d-flex align-items-center mb-2">
+                            <div class="point-icon me-3 volunteer-primary-light">
+                                <i class="bi bi-shop text-primary"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 fw-medium">Adding a new market</p>
+                            </div>
+                            <div class="point-value volunteer-success-light text-success fw-bold px-2 py-1 rounded">
+                                +5 pts
+                            </div>
+                        </div>
+                        <div class="point-rule d-flex align-items-center mb-2">
+                            <div class="point-icon me-3 volunteer-primary-light">
+                                <i class="bi bi-box-seam text-primary"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 fw-medium">Adding a product</p>
+                            </div>
+                            <div class="point-value volunteer-success-light text-success fw-bold px-2 py-1 rounded">
+                                +4 pts
+                            </div>
+                        </div>
+                        <div class="point-rule d-flex align-items-center mb-2">
+                            <div class="point-icon me-3 volunteer-primary-light">
+                                <i class="bi bi-star text-primary"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 fw-medium">High-quality review</p>
+                            </div>
+                            <div class="point-value volunteer-success-light text-success fw-bold px-2 py-1 rounded">
+                                +2 pts
+                            </div>
+                        </div>
+                        <div class="point-rule d-flex align-items-center mb-2">
+                            <div class="point-icon me-3 volunteer-primary-light">
+                                <i class="bi bi-flag text-primary"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 fw-medium">Approved report</p>
+                            </div>
+                            <div class="point-value volunteer-success-light text-success fw-bold px-2 py-1 rounded">
+                                +3 pts
+                            </div>
+                        </div>
+                        <div class="point-rule d-flex align-items-center">
+                            <div class="point-icon me-3 volunteer-primary-light">
+                                <i class="bi bi-people text-primary"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 fw-medium">Referring a friend</p>
+                            </div>
+                            <div class="point-value volunteer-success-light text-success fw-bold px-2 py-1 rounded">
+                                +2 pts
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Transaction History -->
+        <!-- Transaction History - Full width on all screens -->
         <div class="card border-0 shadow-sm mb-4">
             <div class="card-body">
                 <h6 class="fw-bold mb-3">Transaction History</h6>
                 
-                <!-- Transaction Item -->
-                <div class="transaction-item d-flex align-items-center mb-3">
-                    <div class="transaction-icon me-3 volunteer-success-light">
-                        <i class="bi bi-shop text-success"></i>
+                <div class="row">
+                    <!-- Transaction items will be in 2 columns on large screens -->
+                    <div class="col-12 col-lg-6">
+                        <!-- Transaction Item -->
+                        <div class="transaction-item d-flex align-items-center mb-3">
+                            <div class="transaction-icon me-3 volunteer-success-light">
+                                <i class="bi bi-shop text-success"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0 fw-medium">Added Downtown Farmers Market</h6>
+                                <small class="text-muted">Mar 28, 2023</small>
+                            </div>
+                            <div class="transaction-points text-success fw-bold">
+                                +5
+                            </div>
+                        </div>
+                        
+                        <!-- Transaction Item -->
+                        <div class="transaction-item d-flex align-items-center mb-3">
+                            <div class="transaction-icon me-3 volunteer-success-light">
+                                <i class="bi bi-box-seam text-success"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0 fw-medium">Added Organic Tomatoes</h6>
+                                <small class="text-muted">Mar 25, 2023</small>
+                            </div>
+                            <div class="transaction-points text-success fw-bold">
+                                +4
+                            </div>
+                        </div>
+                        
+                        <!-- Transaction Item -->
+                        <div class="transaction-item d-flex align-items-center mb-3">
+                            <div class="transaction-icon me-3 volunteer-success-light">
+                                <i class="bi bi-flag text-success"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0 fw-medium">Reported inappropriate content</h6>
+                                <small class="text-muted">Mar 20, 2023</small>
+                            </div>
+                            <div class="transaction-points text-success fw-bold">
+                                +3
+                            </div>
+                        </div>
+                        
+                        <!-- Transaction Item -->
+                        <div class="transaction-item d-flex align-items-center mb-3 mb-lg-0">
+                            <div class="transaction-icon me-3 volunteer-success-light">
+                                <i class="bi bi-star text-success"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0 fw-medium">Review on Riverside Craft Market</h6>
+                                <small class="text-muted">Mar 15, 2023</small>
+                            </div>
+                            <div class="transaction-points text-success fw-bold">
+                                +2
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex-grow-1">
-                        <h6 class="mb-0 fw-medium">Added Downtown Farmers Market</h6>
-                        <small class="text-muted">Mar 28, 2023</small>
-                    </div>
-                    <div class="transaction-points text-success fw-bold">
-                        +5
-                    </div>
-                </div>
-                
-                <!-- Transaction Item -->
-                <div class="transaction-item d-flex align-items-center mb-3">
-                    <div class="transaction-icon me-3 volunteer-success-light">
-                        <i class="bi bi-box-seam text-success"></i>
-                    </div>
-                    <div class="flex-grow-1">
-                        <h6 class="mb-0 fw-medium">Added Organic Tomatoes</h6>
-                        <small class="text-muted">Mar 25, 2023</small>
-                    </div>
-                    <div class="transaction-points text-success fw-bold">
-                        +4
-                    </div>
-                </div>
-                
-                <!-- Transaction Item -->
-                <div class="transaction-item d-flex align-items-center mb-3">
-                    <div class="transaction-icon me-3 volunteer-success-light">
-                        <i class="bi bi-flag text-success"></i>
-                    </div>
-                    <div class="flex-grow-1">
-                        <h6 class="mb-0 fw-medium">Reported inappropriate content</h6>
-                        <small class="text-muted">Mar 20, 2023</small>
-                    </div>
-                    <div class="transaction-points text-success fw-bold">
-                        +3
-                    </div>
-                </div>
-                
-                <!-- Transaction Item -->
-                <div class="transaction-item d-flex align-items-center mb-3">
-                    <div class="transaction-icon me-3 volunteer-success-light">
-                        <i class="bi bi-star text-success"></i>
-                    </div>
-                    <div class="flex-grow-1">
-                        <h6 class="mb-0 fw-medium">Review on Riverside Craft Market</h6>
-                        <small class="text-muted">Mar 15, 2023</small>
-                    </div>
-                    <div class="transaction-points text-success fw-bold">
-                        +2
-                    </div>
-                </div>
-                
-                <!-- Transaction Item -->
-                <div class="transaction-item d-flex align-items-center mb-3">
-                    <div class="transaction-icon me-3 volunteer-success-light">
-                        <i class="bi bi-box-seam text-success"></i>
-                    </div>
-                    <div class="flex-grow-1">
-                        <h6 class="mb-0 fw-medium">Added Fresh Spices product</h6>
-                        <small class="text-muted">Mar 10, 2023</small>
-                    </div>
-                    <div class="transaction-points text-success fw-bold">
-                        +4
-                    </div>
-                </div>
-                
-                <!-- Transaction Item -->
-                <div class="transaction-item d-flex align-items-center mb-3">
-                    <div class="transaction-icon me-3 volunteer-success-light">
-                        <i class="bi bi-people text-success"></i>
-                    </div>
-                    <div class="flex-grow-1">
-                        <h6 class="mb-0 fw-medium">Referred Sarah Johnson</h6>
-                        <small class="text-muted">Mar 5, 2023</small>
-                    </div>
-                    <div class="transaction-points text-success fw-bold">
-                        +2
-                    </div>
-                </div>
-                
-                <!-- Transaction Item -->
-                <div class="transaction-item d-flex align-items-center mb-3">
-                    <div class="transaction-icon me-3 volunteer-success-light">
-                        <i class="bi bi-star text-success"></i>
-                    </div>
-                    <div class="flex-grow-1">
-                        <h6 class="mb-0 fw-medium">Review on Organic Food Market</h6>
-                        <small class="text-muted">Mar 1, 2023</small>
-                    </div>
-                    <div class="transaction-points text-success fw-bold">
-                        +2
-                    </div>
-                </div>
-                
-                <!-- Transaction Item -->
-                <div class="transaction-item d-flex align-items-center">
-                    <div class="transaction-icon me-3 volunteer-success-light">
-                        <i class="bi bi-shop text-success"></i>
-                    </div>
-                    <div class="flex-grow-1">
-                        <h6 class="mb-0 fw-medium">Added Organic Food Market</h6>
-                        <small class="text-muted">Feb 25, 2023</small>
-                    </div>
-                    <div class="transaction-points text-success fw-bold">
-                        +5
+                    
+                    <div class="col-12 col-lg-6">
+                        <!-- Transaction Item -->
+                        <div class="transaction-item d-flex align-items-center mb-3">
+                            <div class="transaction-icon me-3 volunteer-success-light">
+                                <i class="bi bi-box-seam text-success"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0 fw-medium">Added Fresh Spices product</h6>
+                                <small class="text-muted">Mar 10, 2023</small>
+                            </div>
+                            <div class="transaction-points text-success fw-bold">
+                                +4
+                            </div>
+                        </div>
+                        
+                        <!-- Transaction Item -->
+                        <div class="transaction-item d-flex align-items-center mb-3">
+                            <div class="transaction-icon me-3 volunteer-success-light">
+                                <i class="bi bi-people text-success"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0 fw-medium">Referred Sarah Johnson</h6>
+                                <small class="text-muted">Mar 5, 2023</small>
+                            </div>
+                            <div class="transaction-points text-success fw-bold">
+                                +2
+                            </div>
+                        </div>
+                        
+                        <!-- Transaction Item -->
+                        <div class="transaction-item d-flex align-items-center mb-3">
+                            <div class="transaction-icon me-3 volunteer-success-light">
+                                <i class="bi bi-star text-success"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0 fw-medium">Review on Organic Food Market</h6>
+                                <small class="text-muted">Mar 1, 2023</small>
+                            </div>
+                            <div class="transaction-points text-success fw-bold">
+                                +2
+                            </div>
+                        </div>
+                        
+                        <!-- Transaction Item -->
+                        <div class="transaction-item d-flex align-items-center">
+                            <div class="transaction-icon me-3 volunteer-success-light">
+                                <i class="bi bi-shop text-success"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0 fw-medium">Added Organic Food Market</h6>
+                                <small class="text-muted">Feb 25, 2023</small>
+                            </div>
+                            <div class="transaction-points text-success fw-bold">
+                                +5
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -313,22 +326,22 @@
                     <div class="text-end p-2">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="text-center px-4 pb-2">
-                        <div class="mb-4">
-                            <div class="bd-icon-wrapper volunteer-success-light">
+                    <div class="text-center px-3 pb-2">
+                        <div class="mb-3">
+                            <div class="bd-icon-wrapper volunteer-success-light" style="width: 60px; height: 60px;">
                                 <i class="bi bi-award-fill text-success"></i>
                             </div>
                         </div>
-                        <h5 class="mb-3 fw-bold">Volunteer Tiers</h5>
+                        <h5 class="mb-2 fw-bold">Volunteer Tiers</h5>
                     </div>
                     
-                    <div class="px-4 pb-4">
-                        <div class="tier-level d-flex align-items-center p-3 mb-3 rounded bg-light">
+                    <div class="px-3 pb-3">
+                        <div class="tier-level d-flex align-items-center p-2 mb-2 rounded bg-light">
                             <div class="tier-badge me-3">
                                 <i class="bi bi-circle-fill text-secondary"></i>
                             </div>
                             <div class="tier-details flex-grow-1">
-                                <h6 class="mb-1 fw-bold">Bronze Tier</h6>
+                                <h6 class="mb-0 fw-bold">Bronze Tier</h6>
                                 <p class="mb-0 text-muted small">0-15 points</p>
                             </div>
                             <div class="tier-status">
@@ -336,12 +349,12 @@
                             </div>
                         </div>
                         
-                        <div class="tier-level d-flex align-items-center p-3 mb-3 rounded" style="background-color: rgba(108, 117, 125, 0.1);">
+                        <div class="tier-level d-flex align-items-center p-2 mb-2 rounded" style="background-color: rgba(108, 117, 125, 0.1);">
                             <div class="tier-badge me-3">
                                 <i class="bi bi-circle-fill" style="color: #C0C0C0;"></i>
                             </div>
                             <div class="tier-details flex-grow-1">
-                                <h6 class="mb-1 fw-bold">Silver Tier</h6>
+                                <h6 class="mb-0 fw-bold">Silver Tier</h6>
                                 <p class="mb-0 text-muted small">16-40 points</p>
                             </div>
                             <div class="tier-status">
@@ -349,12 +362,12 @@
                             </div>
                         </div>
                         
-                        <div class="tier-level d-flex align-items-center p-3 mb-3 rounded bg-light">
+                        <div class="tier-level d-flex align-items-center p-2 mb-2 rounded bg-light">
                             <div class="tier-badge me-3">
                                 <i class="bi bi-circle-fill" style="color: #FFD700;"></i>
                             </div>
                             <div class="tier-details flex-grow-1">
-                                <h6 class="mb-1 fw-bold">Gold Tier</h6>
+                                <h6 class="mb-0 fw-bold">Gold Tier</h6>
                                 <p class="mb-0 text-muted small">41-75 points</p>
                             </div>
                             <div class="tier-status">
@@ -362,12 +375,12 @@
                             </div>
                         </div>
                         
-                        <div class="tier-level d-flex align-items-center p-3 rounded bg-light">
+                        <div class="tier-level d-flex align-items-center p-2 rounded bg-light">
                             <div class="tier-badge me-3">
                                 <i class="bi bi-gem text-success"></i>
                             </div>
                             <div class="tier-details flex-grow-1">
-                                <h6 class="mb-1 fw-bold">Diamond Tier</h6>
+                                <h6 class="mb-0 fw-bold">Diamond Tier</h6>
                                 <p class="mb-0 text-muted small">76+ points</p>
                             </div>
                             <div class="tier-status">
@@ -385,69 +398,69 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bd-modal-content">
                 <div class="modal-body p-0">
-                    <div class="text-end p-2">
+                    <div class="text-end p-1">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="text-center px-4 pb-2">
-                        <div class="mb-4">
+                    <div class="text-center px-2 pb-1">
+                        <div class="mb-2">
                             <div class="bd-icon-wrapper volunteer-primary-light">
                                 <i class="bi bi-gift text-primary"></i>
                             </div>
                         </div>
-                        <h5 class="mb-3 fw-bold">Redeem Your Points</h5>
-                        <p class="text-muted mb-4">You have <span class="fw-bold text-success">28 points</span> available to redeem</p>
+                        <h5 class="mb-2 fw-bold">Redeem Your Points</h5>
+                        <p class="text-muted mb-3 small">You have <span class="fw-bold text-success">28 points</span> available to redeem</p>
                     </div>
                     
-                    <div class="px-4 pb-4">
-                        <div class="reward-item d-flex align-items-center p-3 mb-3 rounded bg-light">
-                            <div class="reward-icon me-3 volunteer-primary-light rounded-circle p-2">
+                    <div class="px-2 pb-3">
+                        <div class="reward-item d-flex align-items-center p-2 mb-2 rounded bg-light">
+                            <div class="reward-icon me-2 volunteer-primary-light rounded-circle p-1">
                                 <i class="bi bi-shop text-primary"></i>
                             </div>
                             <div class="reward-details flex-grow-1">
-                                <h6 class="mb-1 fw-bold">Featured Listing</h6>
+                                <h6 class="mb-0 fw-bold small">Featured Listing</h6>
                                 <p class="mb-0 text-muted small">Feature your product or market for 1 week</p>
                             </div>
                             <div class="reward-points">
-                                <button class="btn btn-sm btn-primary rounded-pill px-3">15 pts</button>
+                                <button class="btn btn-sm btn-primary rounded-pill px-2">15 pts</button>
                             </div>
                         </div>
                         
-                        <div class="reward-item d-flex align-items-center p-3 mb-3 rounded bg-light">
-                            <div class="reward-icon me-3 volunteer-danger-light rounded-circle p-2">
+                        <div class="reward-item d-flex align-items-center p-2 mb-2 rounded bg-light">
+                            <div class="reward-icon me-2 volunteer-danger-light rounded-circle p-1">
                                 <i class="bi bi-percent text-danger"></i>
                             </div>
                             <div class="reward-details flex-grow-1">
-                                <h6 class="mb-1 fw-bold">10% Marketplace Discount</h6>
+                                <h6 class="mb-0 fw-bold small">10% Marketplace Discount</h6>
                                 <p class="mb-0 text-muted small">One-time discount on your next purchase</p>
                             </div>
                             <div class="reward-points">
-                                <button class="btn btn-sm btn-primary rounded-pill px-3">20 pts</button>
+                                <button class="btn btn-sm btn-primary rounded-pill px-2">20 pts</button>
                             </div>
                         </div>
                         
-                        <div class="reward-item d-flex align-items-center p-3 mb-3 rounded bg-light">
-                            <div class="reward-icon me-3 volunteer-warning-light rounded-circle p-2">
+                        <div class="reward-item d-flex align-items-center p-2 mb-2 rounded bg-light">
+                            <div class="reward-icon me-2 volunteer-warning-light rounded-circle p-1">
                                 <i class="bi bi-star text-warning"></i>
                             </div>
                             <div class="reward-details flex-grow-1">
-                                <h6 class="mb-1 fw-bold">Premium Badge</h6>
+                                <h6 class="mb-0 fw-bold small">Premium Badge</h6>
                                 <p class="mb-0 text-muted small">Special badge for your profile</p>
                             </div>
                             <div class="reward-points">
-                                <button class="btn btn-sm btn-primary rounded-pill px-3">25 pts</button>
+                                <button class="btn btn-sm btn-primary rounded-pill px-2">25 pts</button>
                             </div>
                         </div>
                         
-                        <div class="reward-item d-flex align-items-center p-3 rounded bg-light opacity-50">
-                            <div class="reward-icon me-3 volunteer-success-light rounded-circle p-2">
+                        <div class="reward-item d-flex align-items-center p-2 rounded bg-light opacity-50">
+                            <div class="reward-icon me-2 volunteer-success-light rounded-circle p-1">
                                 <i class="bi bi-trophy text-success"></i>
                             </div>
                             <div class="reward-details flex-grow-1">
-                                <h6 class="mb-1 fw-bold">Exclusive Community Event</h6>
+                                <h6 class="mb-0 fw-bold small">Exclusive Community Event</h6>
                                 <p class="mb-0 text-muted small">Access to invite-only marketplace events</p>
                             </div>
                             <div class="reward-points">
-                                <button class="btn btn-sm btn-secondary rounded-pill px-3" disabled>50 pts</button>
+                                <button class="btn btn-sm btn-secondary rounded-pill px-2" disabled>50 pts</button>
                             </div>
                         </div>
                     </div>
