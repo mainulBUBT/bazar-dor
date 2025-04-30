@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Admin Panel for Bazar-dor">
+    <meta name="author" content="">
+
+    <title>Bazar-dor Admin - Send Push Notification</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon">
+                    <i class="fas fa-store"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Bazar-dor Admin</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Main
+            </div>
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Catalog
+            </div>
+
+            <!-- Nav Item - Units -->
+            <li class="nav-item">
+                <a class="nav-link" href="units.html">
+                    <i class="fas fa-fw fa-ruler-combined"></i>
+                    <span>Units</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Categories -->
+            <li class="nav-item dropdown">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategories" aria-expanded="false" aria-controls="collapseCategories">
+                    <i class="fas fa-fw fa-tags"></i>
+                    <span>Categories</span>
+                </a>
+                <div id="collapseCategories" class="collapse" aria-labelledby="headingCategories" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="categories.html">All Categories</a>
+                        <a class="collapse-item" href="add-category.html">Add Category</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Products -->
+            <li class="nav-item dropdown">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducts" aria-expanded="false" aria-controls="collapseProducts">
+                    <i class="fas fa-fw fa-box-open"></i>
+                    <span>Products</span>
+                </a>
+                <div id="collapseProducts" class="collapse" aria-labelledby="headingProducts" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="products.html">All Products</a>
+                        <a class="collapse-item" href="add-product.html">Add Product</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Markets -->
+            <li class="nav-item dropdown">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMarkets" aria-expanded="false" aria-controls="collapseMarkets">
+                    <i class="fas fa-fw fa-store"></i>
+                    <span>Markets</span>
+                </a>
+                <div id="collapseMarkets" class="collapse" aria-labelledby="headingMarkets" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="markets.html">All Markets</a>
+                        <a class="collapse-item" href="add-market.html">Add Market</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Users Management
+            </div>
+
+            <!-- Nav Item - Users -->
+            <li class="nav-item">
+                <a class="nav-link" href="users.html">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Users</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Contributions -->
+            <li class="nav-item">
+                <a class="nav-link" href="contributions.html">
+                    <i class="fas fa-fw fa-chart-line"></i>
+                    <span>Contributions</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Points Management -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePoints" aria-expanded="false" aria-controls="collapsePoints">
+                    <i class="fas fa-fw fa-award"></i>
+                    <span>Points Management</span>
+                </a>
+                <div id="collapsePoints" class="collapse" aria-labelledby="headingPoints" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="manage-points.html">Manage Points</a>
+                        <a class="collapse-item" href="volunteer-redemptions.html">Redemptions</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Redemptions -->
+            <li class="nav-item">
+                <a class="nav-link" href="volunteer-redemptions.html">
+                    <i class="fas fa-fw fa-gift"></i>
+                    <span>Redemptions</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Marketing
+            </div>
+
+            <!-- Nav Item - Banners -->
+            <li class="nav-item dropdown">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBanners" aria-expanded="false" aria-controls="collapseBanners">
+                    <i class="fas fa-fw fa-images"></i>
+                    <span>Banners</span>
+                </a>
+                <div id="collapseBanners" class="collapse" aria-labelledby="headingBanners" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="banners.html">All Banners</a>
+                        <a class="collapse-item" href="add-banner.html">Add Banner</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Featured Banners -->
+            <li class="nav-item dropdown">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFeaturedBanners" aria-expanded="false" aria-controls="collapseFeaturedBanners">
+                    <i class="fas fa-fw fa-star"></i>
+                    <span>Featured Banners</span>
+                </a>
+                <div id="collapseFeaturedBanners" class="collapse" aria-labelledby="headingFeaturedBanners" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="featured-banners.html">All Featured Banners</a>
+                        <a class="collapse-item" href="add-featured-banner.html">Add Featured Banner</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Push Notifications -->
+            <li class="nav-item dropdown active">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePushNotifications" aria-expanded="true" aria-controls="collapsePushNotifications">
+                    <i class="fas fa-fw fa-bell"></i>
+                    <span>Push Notifications</span>
+                </a>
+                <div id="collapsePushNotifications" class="collapse show" aria-labelledby="headingPushNotifications" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="push-notifications.html">All Notifications</a>
+                        <a class="collapse-item active" href="send-notification.html">Send Notification</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Reports
+            </div>
+
+            <!-- Nav Item - Market Reports -->
+            <li class="nav-item">
+                <a class="nav-link" href="market-reports.html">
+                    <i class="fas fa-fw fa-store-alt"></i>
+                    <span>Market Reports</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Product Reports -->
+            <li class="nav-item">
+                <a class="nav-link" href="product-reports.html">
+                    <i class="fas fa-fw fa-box"></i>
+                    <span>Product Reports</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Price Analytics -->
+            <li class="nav-item">
+                <a class="nav-link" href="price-reports.html">
+                    <i class="fas fa-fw fa-chart-line"></i>
+                    <span>Price Analytics</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - User Analytics -->
+            <li class="nav-item">
+                <a class="nav-link" href="user-reports.html">
+                    <i class="fas fa-fw fa-user-chart"></i>
+                    <span>User Analytics</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Configuration
+            </div>
+
+            <!-- Nav Item - Zone Management -->
+            <li class="nav-item">
+                <a class="nav-link" href="zone-management.html">
+                    <i class="fas fa-fw fa-map-marker-alt"></i>
+                    <span>Zone Management</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Settings -->
+            <li class="nav-item">
+                <a class="nav-link" href="settings.html">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin User</span>
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Send Push Notification</h1>
+                        <a href="push-notifications.html" class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm">
+                            <i class="fas fa-list fa-sm text-white-50"></i> View All Notifications
+                        </a>
+                    </div>
+
+                    <div class="row">
+                        <!-- Notification Compose Form -->
+                        <div class="col-xl-8 col-lg-7">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Compose Notification</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form id="notification-form">
+                                        <div class="form-group">
+                                            <label for="notificationTitle">Notification Title*</label>
+                                            <input type="text" class="form-control" id="notificationTitle" required
+                                                placeholder="Enter a concise title...">
+                                            <small class="form-text text-muted">Maximum 50 characters</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="notificationMessage">Notification Message*</label>
+                                            <textarea class="form-control" id="notificationMessage" rows="3" required
+                                                placeholder="Enter the notification message..."></textarea>
+                                            <small class="form-text text-muted">Maximum 150 characters</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="notificationType">Notification Type</label>
+                                            <select class="form-control" id="notificationType">
+                                                <option value="announcement">Announcement</option>
+                                                <option value="price_alert">Price Alert</option>
+                                                <option value="promotion">Promotion</option>
+                                                <option value="system">System Update</option>
+                                                <option value="report">Report</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="linkAction">Link Action (Optional)</label>
+                                            <select class="form-control" id="linkAction">
+                                                <option value="none">None</option>
+                                                <option value="open_app">Open App</option>
+                                                <option value="open_market">Open Market</option>
+                                                <option value="open_product">Open Product</option>
+                                                <option value="open_category">Open Category</option>
+                                                <option value="open_url">Open URL</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group" id="linkUrlGroup" style="display: none;">
+                                            <label for="linkUrl">URL or Resource ID</label>
+                                            <input type="text" class="form-control" id="linkUrl" 
+                                                placeholder="Enter URL or ID...">
+                                            <small class="form-text text-muted">For markets, products, or categories, enter the ID. For URLs, enter the full URL.</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Add Image (Optional)</label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="notificationImage" accept="image/*">
+                                                <label class="custom-file-label" for="notificationImage">Choose image...</label>
+                                            </div>
+                                            <small class="form-text text-muted">Recommended size: 1080x540px. Max size: 1MB.</small>
+                                        </div>
+                                        <div class="form-group mt-4 mb-2">
+                                            <div class="image-preview-container text-center" style="display: none;">
+                                                <img id="image-preview" src="#" alt="Notification Image Preview" class="img-fluid rounded mb-2" style="max-height: 200px;">
+                                                <button type="button" class="btn btn-sm btn-danger" id="remove-image">Remove Image</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Target & Schedule Form -->
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Target & Schedule</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form id="target-schedule-form">
+                                        <div class="form-group">
+                                            <label for="targetAudience">Target Audience*</label>
+                                            <select class="form-control" id="targetAudience" required>
+                                                <option value="all">All Users</option>
+                                                <option value="premium">Premium Users</option>
+                                                <option value="volunteers">Volunteers</option>
+                                                <option value="inactive">Inactive Users (30+ days)</option>
+                                                <option value="new">New Users (< 7 days)</option>
+                                                <option value="custom">Custom Segment</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group" id="customSegmentGroup" style="display: none;">
+                                            <label for="customSegment">Custom Segment Criteria</label>
+                                            <textarea class="form-control" id="customSegment" rows="2" 
+                                                placeholder="Define your segment criteria..."></textarea>
+                                            <small class="form-text text-muted">Example: Users who viewed Market #123 in last 7 days</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="deliveryOption">Delivery Option</label>
+                                            <select class="form-control" id="deliveryOption">
+                                                <option value="now">Send Now</option>
+                                                <option value="schedule">Schedule for Later</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group" id="scheduleDateGroup" style="display: none;">
+                                            <label for="scheduleDate">Schedule Date</label>
+                                            <input type="date" class="form-control" id="scheduleDate">
+                                        </div>
+                                        <div class="form-group" id="scheduleTimeGroup" style="display: none;">
+                                            <label for="scheduleTime">Schedule Time</label>
+                                            <input type="time" class="form-control" id="scheduleTime">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="priorityLevel">Priority Level</label>
+                                            <select class="form-control" id="priorityLevel">
+                                                <option value="normal">Normal</option>
+                                                <option value="high">High</option>
+                                            </select>
+                                            <small class="form-text text-muted">High priority may trigger a sound even if device is in silent mode.</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="saveAsTemplate">
+                                                <label class="custom-control-label" for="saveAsTemplate">Save as Template</label>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Notification Preview -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Preview</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="notification-preview p-3 bg-light rounded">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <img src="img/bazar-dor-logo.png" alt="App Logo" width="20" height="20" class="mr-2">
+                                            <div>
+                                                <div class="small font-weight-bold">Bazar-dor</div>
+                                                <div class="small text-muted">Just now</div>
+                                            </div>
+                                        </div>
+                                        <h6 class="mb-1 font-weight-bold" id="preview-title">Notification Title</h6>
+                                        <p class="mb-2 small" id="preview-message">Notification message will appear here. Write something to see the preview.</p>
+                                        <div id="preview-image-container" style="display: none;">
+                                            <img id="preview-image" src="#" alt="Notification Image" class="img-fluid rounded mb-1" style="max-height: 100px; width: 100%; object-fit: cover;">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="estimated-reach mt-3">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="small">Estimated reach:</span>
+                                            <span class="small font-weight-bold" id="estimated-reach">0 users</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-grid gap-2 mt-4">
+                                        <button type="button" class="btn btn-primary btn-block" id="send-notification-btn">
+                                            <i class="fas fa-paper-plane mr-1"></i> Send Notification
+                                        </button>
+                                        <button type="button" class="btn btn-secondary btn-block" id="save-draft-btn">
+                                            <i class="fas fa-save mr-1"></i> Save as Draft
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Bazar-dor 2023</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Notification Sent Success Modal -->
+    <div class="modal fade" id="notificationSentModal" tabindex="-1" role="dialog" aria-labelledby="notificationSentModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notificationSentModalLabel">Notification Sent Successfully</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-check-circle text-success fa-4x mb-3"></i>
+                        <h5>Your notification has been sent successfully!</h5>
+                        <p id="sent-notification-stats" class="mb-0">Delivered to <span id="sent-count">0</span> users.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                    <a class="btn btn-primary" href="push-notifications.html">View All Notifications</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script>
+        $(document).ready(function() {
+            // Handle link action change
+            $('#linkAction').change(function() {
+                if ($(this).val() !== 'none') {
+                    $('#linkUrlGroup').show();
+                } else {
+                    $('#linkUrlGroup').hide();
+                }
+            });
+
+            // Handle target audience change
+            $('#targetAudience').change(function() {
+                if ($(this).val() === 'custom') {
+                    $('#customSegmentGroup').show();
+                } else {
+                    $('#customSegmentGroup').hide();
+                }
+                
+                // Update estimated reach
+                updateEstimatedReach();
+            });
+
+            // Handle delivery option change
+            $('#deliveryOption').change(function() {
+                if ($(this).val() === 'schedule') {
+                    $('#scheduleDateGroup').show();
+                    $('#scheduleTimeGroup').show();
+                } else {
+                    $('#scheduleDateGroup').hide();
+                    $('#scheduleTimeGroup').hide();
+                }
+            });
+
+            // Handle image upload
+            $('#notificationImage').change(function(e) {
+                var file = e.target.files[0];
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#image-preview').attr('src', e.target.result);
+                        $('.image-preview-container').show();
+                        $('#preview-image').attr('src', e.target.result);
+                        $('#preview-image-container').show();
+                    }
+                    reader.readAsDataURL(file);
+                    $('.custom-file-label').text(file.name);
+                }
+            });
+
+            // Handle remove image button
+            $('#remove-image').click(function() {
+                $('#notificationImage').val('');
+                $('.custom-file-label').text('Choose image...');
+                $('.image-preview-container').hide();
+                $('#preview-image-container').hide();
+            });
+
+            // Live preview updates
+            $('#notificationTitle').keyup(function() {
+                $('#preview-title').text($(this).val() || 'Notification Title');
+            });
+
+            $('#notificationMessage').keyup(function() {
+                $('#preview-message').text($(this).val() || 'Notification message will appear here. Write something to see the preview.');
+            });
+
+            // Update estimated reach based on target audience
+            function updateEstimatedReach() {
+                var audience = $('#targetAudience').val();
+                var reachCount = 0;
+                
+                switch(audience) {
+                    case 'all':
+                        reachCount = 2567;
+                        break;
+                    case 'premium':
+                        reachCount = 328;
+                        break;
+                    case 'volunteers':
+                        reachCount = 156;
+                        break;
+                    case 'inactive':
+                        reachCount = 543;
+                        break;
+                    case 'new':
+                        reachCount = 78;
+                        break;
+                    case 'custom':
+                        reachCount = '?';
+                        break;
+                }
+                
+                $('#estimated-reach').text(reachCount + (typeof reachCount === 'number' ? ' users' : ''));
+            }
+
+            // Initialize estimated reach
+            updateEstimatedReach();
+
+            // Handle send notification button
+            $('#send-notification-btn').click(function() {
+                // Validate form
+                if (!$('#notificationTitle').val() || !$('#notificationMessage').val()) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+                
+                // Show success modal
+                var targetAudience = $('#targetAudience').val();
+                var reachCount = 0;
+                
+                switch(targetAudience) {
+                    case 'all':
+                        reachCount = 2567;
+                        break;
+                    case 'premium':
+                        reachCount = 328;
+                        break;
+                    case 'volunteers':
+                        reachCount = 156;
+                        break;
+                    case 'inactive':
+                        reachCount = 543;
+                        break;
+                    case 'new':
+                        reachCount = 78;
+                        break;
+                    default:
+                        reachCount = 100;
+                }
+                
+                $('#sent-count').text(reachCount);
+                $('#notificationSentModal').modal('show');
+            });
+            
+            // Firebase Push Notification Integration
+            // This is a placeholder for actual Firebase implementation
+            // You would need to include Firebase SDK and initialize it here
+            // Reference: https://firebase.google.com/docs/cloud-messaging/js/client
+        });
+    </script>
+</body>
+
+</html>
